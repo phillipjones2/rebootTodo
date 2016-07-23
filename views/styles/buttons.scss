@@ -1,0 +1,48 @@
+
+
+button {
+  background: white;
+  font-size: 1.25rem;
+  font-weight: 500;
+  border: 2px solid black;
+  padding: 10px 15px 7px;
+  border-radius: 0px 11px 0px 11px;
+  transition: all .1s;  
+  &:active {
+    background: black;
+    color: white;
+    border-radius: 0;
+  }
+}
+
+.todo-action {
+  margin-right: 10px
+}
+
+.todo {
+  background: $color3;
+  padding: 4vw;
+  margin: 10px;
+}
+
+#todo-container {
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.button-box {
+}
+
+
+.mb-25 {
+  margin-bottom: 25px;
+}
+
+@media (max-width: 525px) {
+  .todo {
+    padding: 20px 8vw;
+  }
+}
+
+
