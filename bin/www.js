@@ -24,7 +24,7 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
+console.log('starting listen')
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
@@ -34,6 +34,7 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
+  console.log('norm')
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {

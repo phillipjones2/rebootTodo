@@ -7,5 +7,6 @@
 - Created [buttons,forms,reset,todos,fonts,type,foot,main,utils,vars] SCSS.
 - Created .gitignore and ignored `node_modules/`
 - Installed [node-sass,node-sass-middleware,pug,nodemon].
-- Set up Sass compilation through Express.
 - Updated stock Express code to ES6.
+- Created `npm run nodemon+sass`.
+- Added Gotham fonts.

@@ -1,0 +1,14 @@
+@font-face {
+  font-family: GothamLight;
+  src: url(../fonts/Gotham-Light.otf); }
+@font-face {
+  font-family: GothamMedium;
+  src: url(../fonts/Gotham-Medium.otf); }
+@font-face {
+  font-family: GothamThin;
+  src: url(../fonts/Gotham-Thin.otf); }
+@font-face {
+  font-family: GothamBold;
+  src: url(../fonts/Gotham-Bold.otf); }
+
+/*# sourceMappingURL=fonts.css.map */

@@ -1,0 +1,21 @@
+html, body, div, section, aside, header, nav,
+footer, ul, li, p, h1, h2, h3, h4, h5, h6, em,
+strong, small, form, input, button, ol {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: GothamLight, sans-serif; }
+  html:focus, html:hover, html:active, body:focus, body:hover, body:active, div:focus, div:hover, div:active, section:focus, section:hover, section:active, aside:focus, aside:hover, aside:active, header:focus, header:hover, header:active, nav:focus, nav:hover, nav:active,
+  footer:focus,
+  footer:hover,
+  footer:active, ul:focus, ul:hover, ul:active, li:focus, li:hover, li:active, p:focus, p:hover, p:active, h1:focus, h1:hover, h1:active, h2:focus, h2:hover, h2:active, h3:focus, h3:hover, h3:active, h4:focus, h4:hover, h4:active, h5:focus, h5:hover, h5:active, h6:focus, h6:hover, h6:active, em:focus, em:hover, em:active,
+  strong:focus,
+  strong:hover,
+  strong:active, small:focus, small:hover, small:active, form:focus, form:hover, form:active, input:focus, input:hover, input:active, button:focus, button:hover, button:active, ol:focus, ol:hover, ol:active {
+    outline: none;
+    text-decoration: none; }
+
+/*# sourceMappingURL=reset.css.map */
