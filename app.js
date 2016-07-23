@@ -9,6 +9,7 @@ const express      = require('express'),
       // sass         = require('node-sass-middleware'),
       routes       = require('./routes/index'),
       users        = require('./routes/users'),
+      styleguide   = require('./routes/styleguide'),
       app          = express();
 
 // Set up Pug compilation.
@@ -26,6 +27,7 @@ app.use(express.static(`${__dirname}/public`));
 
 app.use('/', routes);
 app.use('/users', users);
+// app.use('/styleguide', styleguide);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
