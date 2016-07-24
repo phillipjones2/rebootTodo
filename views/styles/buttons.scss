@@ -43,38 +43,9 @@ button.btn-3 {
   }
 }
 
-#styleguide-button-container-1,
-#styleguide-button-container-2,
-#styleguide-button-container-3  {
-  padding: 25px 100px;
-}
-
-#styleguide-button-container-3 {
-  // padding-bottom: 75px;
-}
-
+// Buttons connected to individual todos.
 .todo-action {
-  margin-right: 10px
-}
-
-.todo {
-  background: $color3;
-  padding: 4vw;
-  margin: 10px;
-}
-
-#todo-container {
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-}
-
-.button-box {
-}
-
-
-.mb-25 {
-  margin-bottom: 25px;
+  margin-right: 10px;
 }
 
 @media (max-width: 525px) {

@@ -104,29 +104,48 @@ button.btn-3 {
     color: white;
     border-radius: 0; }
 
-#styleguide-button-container-1,
-#styleguide-button-container-2,
-#styleguide-button-container-3 {
-  padding: 25px 100px; }
-
 .todo-action {
   margin-right: 10px; }
-
-.todo {
-  background: #f5efed;
-  padding: 4vw;
-  margin: 10px; }
-
-@media (max-width: 768px) {
-  #todo-container {
-    flex-direction: column; } }
-
-.mb-25 {
-  margin-bottom: 25px; }
 
 @media (max-width: 525px) {
   .todo {
     padding: 20px 8vw; } }
+#todo-container {
+  display: flex;
+  width: 90%;
+  max-width: 1200px;
+  flex-wrap: wrap; }
+  @media (max-width: 768px) {
+    #todo-container {
+      flex-direction: column;
+      align-items: center; } }
+
+.todo {
+  background: #f5efed;
+  padding: 4vw;
+  margin: 10px;
+  display: flex;
+  flex-direction: column; }
+  .todo h2 {
+    margin-top: 0; }
+  .todo p {
+    margin-bottom: 15px; }
+  .todo small {
+    margin-top: 10px; }
+
+.todo-button-box {
+  display: flex; }
+
+.x-icon {
+  width: 40px;
+  float: right;
+  position: relative;
+  left: 90%;
+  bottom: 40%;
+  transition: all .5s; }
+  .x-icon:hover {
+    transform: rotateZ(360deg); }
+
 /**********************/
 /* Background classes */
 .bg-black, .bg-0 {
@@ -387,5 +406,10 @@ button.btn-3 {
 #end-pad {
   height: 100px;
   width: 100%; }
+
+#styleguide-button-container-1,
+#styleguide-button-container-2,
+#styleguide-button-container-3 {
+  padding: 25px 100px; }
 
 /*# sourceMappingURL=main.css.map */

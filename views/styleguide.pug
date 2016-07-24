@@ -7,6 +7,11 @@ html
 		script(src="javascripts/styleguide.js" defer)
 	body
 
+		div(class="breaker")
+		//-------------------------------------
+		//-------------------------------------
+		//- COLORS ----------------------------
+
 		div(class="box-col x-center p_50")
 			h2 COLORS
 			p(class="all-8").
@@ -24,8 +29,11 @@ html
 					h1 4
 
 		div(class="breaker")
+		//-------------------------------------
+		//-------------------------------------
+		//- BUTTONS ----------------------------
 
-		div(class="box-col x-center p_50 bg-light-gray")
+		section(class="box-col x-center p_50 bg-light-gray")
 			h2 BUTTONS
 			p(class="all-8").
 				For the sake of diversity, I have created three typs of buttons. The first and second button styles ( .btn-1 and .btn-2 ) are meant to be used on our $color3
@@ -64,7 +72,7 @@ html
 					Use this button to test fonts on our variale background colors.#[br]#[br]
 				button#bg-toggler(class="btn-1") TOGGLE BGS
 
-		div#styleguide-type-container-1(class="box-col x-center bg-light-gray bg-toggle pb_100")
+		section#styleguide-type-container-1(class="box-col x-center bg-light-gray bg-toggle pb_100")
 			h1 This is an H1.
 			h2 This is an H2.
 			h3 This is an H3.
@@ -73,6 +81,50 @@ html
 
 			p(class="all-8 mt_25 font_regular") This is a #[span(class="font_bold") paragraph]. It uses the .font_regular class which makes it the regular (book) weight of Gotham. The Gotham font family has a diverse set of weights available to us, but for this specific use case we will only be using Light, Medium, and Bold.
 
+			p(class="all-8 mt_25 font_medium") This is a #[span(class="font_bold") paragraph]. It uses the .font_medium class which makes it the medium weight of Gotham. The Gotham font family has a diverse set of weights available to us, but for this specific use case we will only be using Light, Medium, and Bold.
+
+			p(class="all-8 mt_25 font_bold") This is a paragraph. It uses the .font_bold class which makes it the bold weight of Gotham. The Gotham font family has a diverse set of weights available to us, but for this specific use case we will only be using Light, Medium, and Bold.
+
 			small(class="all-8 mt_25") This is a small #[span(class="font_bold") paragraph]. The Gotham font family has a diverse set of weights available to us, but for this specific use case we will only be using Light, Medium, and Bold.
+
+
+		div(class="breaker")
+		//-------------------------------------
+		//-------------------------------------
+		//- TODOS ------------------------
+
+		section#styleguide-todos-container-1(class="box-col x-center pt_50 pb_100")
+			h2 TODOS
+
+			div#todo-container
+				div(class="todo xs-11 sm-11 md-5 lg-4 xl-3")
+					img(src="icons/cancel.svg" class="x-icon")
+					h2 Todo One
+					p The Gotham font family has a diverse set of weights available to us.
+					div(class="todo-button-box")
+						button(class="btn-1 todo-action") EDIT
+						button(class="btn-1 todo-action") COMPLETE
+					small: em Created: 12/20/1993
+				
+				div(class="todo xs-11 sm-11 md-5 lg-4 xl-3")
+					img(src="icons/cancel.svg" class="x-icon")
+					h2 Todo One
+					p The Gotham font family has a diverse set of weights available to us.
+					div(class="todo-button-box")
+						button(class="btn-1 todo-action") EDIT
+						button(class="btn-1 todo-action") COMPLETE
+					small: em Created: 12/20/1993
+				
+				div(class="todo xs-11 sm-11 md-5 lg-4 xl-3")
+					img(src="icons/cancel.svg" class="x-icon")
+					h2 Todo One
+					p The Gotham font family has a diverse set of weights available to us.
+					div(class="todo-button-box")
+						button(class="btn-1 todo-action") EDIT
+						button(class="btn-1 todo-action") COMPLETE
+					small: em Created: 12/20/1993
+				
+
+
 
 		div#end-pad

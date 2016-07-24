@@ -35,25 +35,8 @@ button.btn-3 {
     color: white;
     border-radius: 0; }
 
-#styleguide-button-container-1,
-#styleguide-button-container-2,
-#styleguide-button-container-3 {
-  padding: 25px 100px; }
-
 .todo-action {
   margin-right: 10px; }
-
-.todo {
-  background: #f5efed;
-  padding: 4vw;
-  margin: 10px; }
-
-@media (max-width: 768px) {
-  #todo-container {
-    flex-direction: column; } }
-
-.mb-25 {
-  margin-bottom: 25px; }
 
 @media (max-width: 525px) {
   .todo {

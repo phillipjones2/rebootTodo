@@ -1,0 +1,51 @@
+@import 'vars';
+
+
+
+#todo-container {
+	display: flex;
+	// background: $color1;
+	width: 90%;
+	max-width: 1200px;
+	flex-wrap: wrap;
+	// text-align: center;
+	// justify-content: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.todo {
+  background: $color3;
+  padding: 4vw;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+
+	h2 {
+		margin-top: 0;
+	}
+  p {
+  	margin-bottom: 15px;
+  }
+  small {
+  	margin-top: 10px;
+  }
+}
+
+.todo-button-box {
+	display: flex;
+}
+
+.x-icon {
+	width: 40px;
+	float: right;
+	position: relative;
+	left: 90%;
+	bottom:40%;
+	transition: all .5s;
+	&:hover {
+		transform: rotateZ(360deg);
+	}
+}

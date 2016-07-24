@@ -13,4 +13,9 @@
   height: 100px;
   width: 100%; }
 
+#styleguide-button-container-1,
+#styleguide-button-container-2,
+#styleguide-button-container-3 {
+  padding: 25px 100px; }
+
 /*# sourceMappingURL=styleguide.css.map */
