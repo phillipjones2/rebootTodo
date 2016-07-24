@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+const mongoose = require('mongoose'),
+      todoModel = require('../modules/todoModel');
 
 /**
  * Module dependencies.
@@ -24,7 +26,7 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-console.log('starting listen')
+
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
@@ -34,7 +36,6 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  console.log('norm')
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -88,4 +89,18 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  console.log(`listenin on http://localhost:${port}`)
+}
+
+
+
+// mongoose
+function mongooseConnection() {
+  const db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'connection error:'));
+  db.once('open', () => {
+
+
+
+  });
 }

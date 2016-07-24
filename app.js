@@ -5,10 +5,16 @@ const express      = require('express'),
       favicon      = require('serve-favicon'),
       // Morgan logs out HTTP requests.
       logger       = require('morgan'),
+      mongoose     = require('mongoose'),
+      todoModel    = require('./modules/todoModel'),
       bodyParser   = require('body-parser'),
       routes       = require('./routes/routes'),
       users        = require('./routes/users'),
       app          = express();
+
+
+
+
 
 // Set up Pug compilation.
 app.set('views', `${__dirname}/views`);
