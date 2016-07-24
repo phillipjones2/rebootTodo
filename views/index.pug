@@ -1,15 +1,19 @@
 extends layout
 
 block content
-	img#add-button(src="icons/success.svg")
-	//- div#add-todo-modal(class="box-col all-12 x-center")
-	//- 	img#accept-button(src="icons/success.svg")
-	//- 	img#close-button(src="icons/error.svg")
+	p#add-button(src="icons/success.svg" onclick="showModal()") +
 
-	//- 	div(class="box-col all-12 x-center")
-	//- 		h2 Create a todo.
-	//- 		input#add-todo-input(placeholder="todo title")
-	//- 		textarea(placeholder="todo content")
+
+	div#add-todo-modal(class="box-col all-12 x-center hidden")
+		div(class="box-col all-12 x-center")
+			h2 Create a todo.
+			form(method="post")
+				input#add-todo-input(placeholder="todo title" name="title")
+				textarea#add-todo-textarea(placeholder="todo content" name="body")
+				input#accept-button(type="image" src="icons/success.svg" action="/styleguide" onclick="hideModal()")
+			img#close-button(src="icons/error.svg" onclick="hideModal()")
+
+
 
 	nav(class="box-col all-12 fixed pb_15")
 			div(class="box all-12 space-inside y-center")

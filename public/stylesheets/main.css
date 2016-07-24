@@ -147,14 +147,14 @@ nav {
   height: 100vh;
   z-index: 99;
   padding-top: 50px; }
-  #add-todo-modal input {
+  #add-todo-modal input:not(:nth-of-type(2)) {
     width: 70%;
     font-family: GothamLight;
     border: 3px solid black;
     padding: 13px 13px 10px;
     margin-top: 10px;
     margin-bottom: 8px; }
-    #add-todo-modal input::-webkit-input-placeholder {
+    #add-todo-modal input:not(:nth-of-type(2))::-webkit-input-placeholder {
       font-size: 1.6rem; }
   #add-todo-modal textarea {
     width: 70%;
@@ -200,7 +200,7 @@ nav {
   max-width: 1200px;
   margin: 0 auto;
   padding-top: 55px; }
-  @media (max-width: 768px) {
+  @media handheld and (max-width: 768px) {
     #todo-container {
       flex-direction: column;
       align-items: center; } }
@@ -262,6 +262,9 @@ nav {
 
 .hidden {
   display: none; }
+
+.hidden {
+  display: none !important; }
 
 /**********************/
 /* Background classes */

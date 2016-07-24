@@ -7,7 +7,7 @@
 	padding-top: 50px;
 
 
-	input {
+	input:not(:nth-of-type(2)) {
 		width: 70%;
 		font-family: GothamLight;
 		border: 3px solid black;

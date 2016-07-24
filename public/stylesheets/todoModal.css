@@ -4,14 +4,14 @@
   height: 100vh;
   z-index: 99;
   padding-top: 50px; }
-  #add-todo-modal input {
+  #add-todo-modal input:not(:nth-of-type(2)) {
     width: 70%;
     font-family: GothamLight;
     border: 3px solid black;
     padding: 13px 13px 10px;
     margin-top: 10px;
     margin-bottom: 8px; }
-    #add-todo-modal input::-webkit-input-placeholder {
+    #add-todo-modal input:not(:nth-of-type(2))::-webkit-input-placeholder {
       font-size: 1.6rem; }
   #add-todo-modal textarea {
     width: 70%;

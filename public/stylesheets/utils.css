@@ -1,3 +1,6 @@
+.hidden {
+  display: none !important; }
+
 /**********************/
 /* Background classes */
 .bg-black, .bg-0 {
