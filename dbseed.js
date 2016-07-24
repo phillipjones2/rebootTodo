@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'),
-      faker = require('Faker'),
+      faker = require('faker'),
       Todo = require('./modules/todoModel');
 
 var todos = [];
@@ -12,10 +12,13 @@ db.once('open', () => {
   Todo.remove({}, (err) => {
     console.log('Todo collection removed')
     for (let i = 0; i < 8; i ++) {
+
       let todo = new Todo({
         title: faker.lorem.sentence() ,
         body: faker.lorem.sentence()
       });
+
+      console.log(todo);
       todo.save((err, todo) => {
         if (err) return console.error(err);
         

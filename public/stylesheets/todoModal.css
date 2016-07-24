@@ -1,0 +1,53 @@
+#add-todo-modal {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.95);
+  height: 100vh;
+  z-index: 99;
+  padding-top: 50px; }
+  #add-todo-modal input {
+    width: 70%;
+    font-family: GothamLight;
+    border: 3px solid black;
+    padding: 13px 13px 10px;
+    margin-top: 10px;
+    margin-bottom: 8px; }
+    #add-todo-modal input::-webkit-input-placeholder {
+      font-size: 1.6rem; }
+  #add-todo-modal textarea {
+    width: 70%;
+    font-family: GothamLight;
+    border: 3px solid black;
+    padding: 13px 10px 10px;
+    height: 170px;
+    margin-top: 10px; }
+    #add-todo-modal textarea::-webkit-input-placeholder {
+      font-size: 1.6rem; }
+
+#close-button {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  font-size: 3.8rem;
+  border-radius: 40px;
+  width: 60px;
+  height: 60px;
+  z-index: 100; }
+  #close-button p {
+    position: relative;
+    top: 2px; }
+
+#accept-button {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  font-size: 3.8rem;
+  border-radius: 40px;
+  width: 60px;
+  height: 60px;
+  color: white;
+  z-index: 100; }
+  #accept-button p {
+    position: relative;
+    top: 2px; }
+
+/*# sourceMappingURL=todoModal.css.map */

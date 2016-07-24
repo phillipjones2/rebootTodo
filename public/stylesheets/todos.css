@@ -3,7 +3,8 @@
   flex-wrap: wrap;
   width: 90%;
   max-width: 1200px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding-top: 55px; }
   @media (max-width: 768px) {
     #todo-container {
       flex-direction: column;
@@ -26,7 +27,7 @@
 .todo-button-box {
   display: flex; }
 
-@media (max-width: 329px) {
+@media (max-width: 520px) {
   .todo {
     background: #f5efed;
     padding: 15px 25px 10px;

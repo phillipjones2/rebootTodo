@@ -1,33 +1,30 @@
 extends layout
 
 block content
-	h1= title
-	p Welcome to #{title}
+	img#add-button(src="icons/success.svg")
+	//- div#add-todo-modal(class="box-col all-12 x-center")
+	//- 	img#accept-button(src="icons/success.svg")
+	//- 	img#close-button(src="icons/error.svg")
+
+	//- 	div(class="box-col all-12 x-center")
+	//- 		h2 Create a todo.
+	//- 		input#add-todo-input(placeholder="todo title")
+	//- 		textarea(placeholder="todo content")
+
+	nav(class="box-col all-12 fixed pb_15")
+			div(class="box all-12 space-inside y-center")
+				h3 Todo App
+				ul
+					li about
+					li github
 
 	div#todo-container
-		//- each i, todo in todosObj
-		//- 	div(id="todo-#{i}" class="todo"
-		//- 			_span="11 11 5 4 3")
-		//- 		h3 #{todo.title}
-		//- 		p #{todo.body}
-		//- 		div(class="todo-buttonb-box")
-		//- 			button(class="btn-1 todo-action") EDIT
-		//- 			button(class="btn-1 todo-action") COMPLETE
-		//- 		small: em Created: #{todo._createdAt}
-		div(id="todo-0" class="todo"
-			_span="11 11 5 4 3")
-			h3 title
-			p body
-			div(class="todo-button-box")
-				button(class="btn-1 todo-action") EDIT
-				button(class="btn-1 todo-action") COMPLETE
-			small: em Created: 12/12/2012
-		div(id="todo-0" class="todo"
-			_span="11 11 5 4 3")
-			h3 title
-			p body
-			div(class="todo-button-box")
-				button(class="btn-1 todo-action") EDIT
-				button(class="btn-1 todo-action") COMPLETE
-			small: em Created: 12/12/2012
-
+		each todo, i in todosObj
+			- var ii = 'todo-' + i;
+			div(id=ii class="todo" _span="11 11 5 4 3")
+				h3 #{todo.title}
+				p #{todo.body}
+				div(class="todo-button-box")
+					button(class="btn-1 todo-action") EDIT
+					button(class="btn-1 todo-action") COMPLETE
+				small: em Created: #{todo.createdAt}
