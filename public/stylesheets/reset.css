@@ -6,8 +6,7 @@ strong, small, form, input, button, ol {
   outline: none;
   border: none;
   text-decoration: none;
-  box-sizing: border-box;
-  font-family: GothamLight, sans-serif; }
+  box-sizing: border-box; }
   html:focus, html:hover, html:active, body:focus, body:hover, body:active, div:focus, div:hover, div:active, section:focus, section:hover, section:active, aside:focus, aside:hover, aside:active, header:focus, header:hover, header:active, nav:focus, nav:hover, nav:active,
   footer:focus,
   footer:hover,

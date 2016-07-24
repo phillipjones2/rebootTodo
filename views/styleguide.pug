@@ -1,4 +1,78 @@
-extends layout
+doctype html
+html
+	head
+		title Todo Two StyleGuide
+		link(rel='stylesheet', href='stylesheets/main.css')
+		link(rel="stylesheet", href="https://cdn.rawgit.com/colshacol/box/master/box-grid.css")
+		script(src="javascripts/styleguide.js" defer)
+	body
 
-block content
-  button.btn-1 HEYYY
+		div(class="box-col x-center p_50")
+			h2 COLORS
+			p(class="all-8").
+				As per inspiration by the original logo provided by Nicky, I have created most everything to follow a simple, elegant, and flat style. Given that, we have three main colors that are black, white, and a light gray. We also have a light-green "pop" color that doesn't pop so much and a dark gray color at our disposal in case we find it necessary.
+			div(class="box even-space all-10 mt_25")
+				div(class="color-box box x-center y-center bg-0")
+					h1 0
+				div(class="color-box box x-center y-center bg-1")
+					h1 1
+				div(class="color-box box x-center y-center bg-2")
+					h1 2
+				div(class="color-box box x-center y-center bg-3")
+					h1 3
+				div(class="color-box box x-center y-center bg-4")
+					h1 4
+
+		div(class="breaker")
+
+		div(class="box-col x-center p_50 bg-light-gray")
+			h2 BUTTONS
+			p(class="all-8").
+				For the sake of diversity, I have created three typs of buttons. The first and second button styles ( .btn-1 and .btn-2 ) are meant to be used on our $color3
+				background, as they both integrate that color as their background at one point or another in their lifecycles.#[br]#[br]
+				The third style ( .btn-3 ) is more derrived from the original style but works better on a white background and, honestly, isn't as clean.
+
+		div#styleguide-button-container-1(class="box all-12 x-center even-space bg-light-gray")
+			button.btn-1 EDIT
+			button.btn-1 SAVE
+			button.btn-1 REMOVE
+			button.btn-1 COMPLETE
+
+		div#styleguide-button-container-2(class="box all-12 x-center even-space bg-light-gray")
+			button.btn-2 EDIT
+			button.btn-2 SAVE
+			button.btn-2 REMOVE
+			button.btn-2 COMPLETE
+
+		div#styleguide-button-container-3(class="box all-12 x-center even-space bg-white")
+			button.btn-3 EDIT
+			button.btn-3 SAVE
+			button.btn-3 REMOVE
+			button.btn-3 COMPLETE
+
+		div(class="breaker")
+		//-------------------------------------
+		//-------------------------------------
+		//- TYPOGRAPHY ------------------------
+
+		div(class="box-col x-center p_50 bg-light-gray bg-toggle")
+				h2 TYPOGRAPHY
+				p(class="all-8").
+					The Gotham font family has a diverse set of
+					weights available to us, but for this specific
+					use case we will only be using Light, Medium, and Bold.#[br]#[br]
+					Use this button to test fonts on our variale background colors.#[br]#[br]
+				button#bg-toggler(class="btn-1") TOGGLE BGS
+
+		div#styleguide-type-container-1(class="box-col x-center bg-light-gray bg-toggle pb_100")
+			h1 This is an H1.
+			h2 This is an H2.
+			h3 This is an H3.
+			h4 This is an H4.
+			p(class="all-8 mt_25") This is a #[span(class="font_bold") paragraph]. It uses the .font_light class which makes it the light weight of Gotham. The Gotham font family has a diverse set of weights available to us, but for this specific use case we will only be using Light, Medium, and Bold.
+
+			p(class="all-8 mt_25 font_regular") This is a #[span(class="font_bold") paragraph]. It uses the .font_regular class which makes it the regular (book) weight of Gotham. The Gotham font family has a diverse set of weights available to us, but for this specific use case we will only be using Light, Medium, and Bold.
+
+			small(class="all-8 mt_25") This is a small #[span(class="font_bold") paragraph]. The Gotham font family has a diverse set of weights available to us, but for this specific use case we will only be using Light, Medium, and Bold.
+
+		div#end-pad

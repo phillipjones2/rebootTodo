@@ -8,6 +8,7 @@ body {
   color: black; }
 
 h1, h2, h3, h4 {
+  font-family: GothamBold;
   margin: 1.414rem 0 0.5rem;
   font-weight: inherit;
   line-height: 1.2; }
@@ -26,6 +27,6 @@ h4 {
   font-size: 1.414rem; }
 
 small {
-  font-size: 0.707rem; }
+  font-size: 1.414rem; }
 
 /*# sourceMappingURL=type.css.map */

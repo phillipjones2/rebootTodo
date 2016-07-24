@@ -1,0 +1,16 @@
+.color-box {
+  width: 100px;
+  height: 100px; }
+  .color-box:first-of-type, .color-box:nth-of-type(2) {
+    color: white; }
+
+.breaker {
+  height: 5px;
+  background: black;
+  width: 100%; }
+
+#end-pad {
+  height: 100px;
+  width: 100%; }
+
+/*# sourceMappingURL=styleguide.css.map */

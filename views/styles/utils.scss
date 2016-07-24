@@ -1,3 +1,48 @@
+@import 'vars';
+
+/**********************/
+/* Background classes */
+
+.bg-black, .bg-0 {
+	background: $color0;
+}
+
+.bg-dark-gray, .bg-1 {
+	background: $color1;
+}
+
+.bg-green, .bg-2 {
+	background: $color2;
+}
+
+.bg-light-gray, .bg-3 {
+	background: $color3;
+}
+
+.bg-white, .bg-4 {
+	background: $color4;
+}
+
+/***********************/
+/* Font weight classes */
+
+.font_light {
+	font-family: GothamLight, sans-serif;
+}
+
+.font_bold {
+	font-family: GothamBold, sans-serif;
+}
+
+.font_medium {
+	font-family: GothamMedium, sans-serif;
+}
+
+.font_regular {
+	font-family: GothamBook, sans-serif;
+}
+
+
 /*******************/
 /* Display classes */
 

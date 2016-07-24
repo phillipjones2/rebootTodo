@@ -1,3 +1,34 @@
+/**********************/
+/* Background classes */
+.bg-black, .bg-0 {
+  background: black; }
+
+.bg-dark-gray, .bg-1 {
+  background: #393e41; }
+
+.bg-green, .bg-2 {
+  background: #adedd2; }
+
+.bg-light-gray, .bg-3 {
+  background: #f5efed; }
+
+.bg-white, .bg-4 {
+  background: white; }
+
+/***********************/
+/* Font weight classes */
+.font_light {
+  font-family: GothamLight, sans-serif; }
+
+.font_bold {
+  font-family: GothamBold, sans-serif; }
+
+.font_medium {
+  font-family: GothamMedium, sans-serif; }
+
+.font_regular {
+  font-family: GothamBook, sans-serif; }
+
 /*******************/
 /* Display classes */
 .display_block {

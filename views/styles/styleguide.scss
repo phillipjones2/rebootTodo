@@ -1,0 +1,21 @@
+.color-box {
+	width: 100px;
+	height: 100px;
+
+	&:first-of-type, &:nth-of-type(2) {
+		color: white;
+	}
+}
+
+// A black line barrier between sections.
+.breaker {
+	height: 5px;
+	background: black;
+	width: 100%;
+}
+
+// Padding at the end of to document.
+#end-pad {
+	height: 100px;
+	width: 100%;
+}
