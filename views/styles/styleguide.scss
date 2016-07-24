@@ -1,6 +1,7 @@
 .color-box {
 	width: 100px;
 	height: 100px;
+	border: 3px solid black;
 
 	&:first-of-type, &:nth-of-type(2) {
 		color: white;
@@ -24,8 +25,16 @@
 #styleguide-button-container-2,
 #styleguide-button-container-3  {
   padding: 25px 100px;
+
+  &:first-of-type {
+  	padding-top: 0;
+  }
 }
 
 #styleguide-button-container-3 {
   // padding-bottom: 75px;
+}
+
+.sect-head {
+	margin-bottom: 25px;
 }

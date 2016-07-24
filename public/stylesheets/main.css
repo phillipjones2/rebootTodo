@@ -396,7 +396,8 @@ button.btn-3 {
 
 .color-box {
   width: 100px;
-  height: 100px; }
+  height: 100px;
+  border: 3px solid black; }
   .color-box:first-of-type, .color-box:nth-of-type(2) {
     color: white; }
 
@@ -413,5 +414,12 @@ button.btn-3 {
 #styleguide-button-container-2,
 #styleguide-button-container-3 {
   padding: 25px 100px; }
+  #styleguide-button-container-1:first-of-type,
+  #styleguide-button-container-2:first-of-type,
+  #styleguide-button-container-3:first-of-type {
+    padding-top: 0; }
+
+.sect-head {
+  margin-bottom: 25px; }
 
 /*# sourceMappingURL=main.css.map */
