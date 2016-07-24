@@ -16,5 +16,8 @@
     "morgan": "~1.7.0",
     "pug": "^2.0.0-beta4",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "Faker": "^0.7.2"
   }
 }

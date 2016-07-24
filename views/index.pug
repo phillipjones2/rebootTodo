@@ -4,7 +4,6 @@ block content
   h1= title
   p Welcome to #{title}
 
-  for doc in todosObj
-  	div(class="sd")
-  		h1.tiel doc.title
-  		
+  each todo in todosObj
+    h3.title #{todo.title}
+    p.body #{todo.body}

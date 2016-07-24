@@ -97,14 +97,10 @@ function onListening() {
 
 // mongoose
 function mongooseConnection() {
-  mongoose.connect('mongodb://localhost/rebootTodo')
-  const db = mongoose.connection
+  mongoose.connect('mongodb://localhost/rebootTodo');
+  const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', () => {
-    console.log('We Are connected to MongoDB')
-    var newtodo = new Todo({ title: "testing", body: "body" });
-    newtodo.save((err, newtodo) => {
-      if (err) console.error(err);
-    });
+    console.log('We Are connected to MongoDB');
   });
 }
