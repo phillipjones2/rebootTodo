@@ -4,12 +4,10 @@
 
 #todo-container {
 	display: flex;
-	// background: $color1;
 	width: 90%;
 	max-width: 1200px;
 	flex-wrap: wrap;
-	// text-align: center;
-	// justify-content: center;
+	margin: 0 auto;
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
@@ -18,7 +16,8 @@
 
 .todo {
   background: $color3;
-  padding: 4vw;
+  padding: 35px;
+  padding-top: 25px;
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -39,11 +38,11 @@
 }
 
 .x-icon {
-	width: 40px;
+	width: 37px;
 	float: right;
 	position: relative;
-	left: 90%;
-	bottom:40%;
+	left: 92%;
+	bottom: 40%;
 	transition: all .5s;
 	&:hover {
 		transform: rotateZ(360deg);

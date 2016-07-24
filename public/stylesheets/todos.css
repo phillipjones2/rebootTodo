@@ -2,7 +2,8 @@
   display: flex;
   width: 90%;
   max-width: 1200px;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  margin: 0 auto; }
   @media (max-width: 768px) {
     #todo-container {
       flex-direction: column;
@@ -10,7 +11,8 @@
 
 .todo {
   background: #f5efed;
-  padding: 4vw;
+  padding: 35px;
+  padding-top: 25px;
   margin: 10px;
   display: flex;
   flex-direction: column; }
@@ -25,10 +27,10 @@
   display: flex; }
 
 .x-icon {
-  width: 40px;
+  width: 37px;
   float: right;
   position: relative;
-  left: 90%;
+  left: 92%;
   bottom: 40%;
   transition: all .5s; }
   .x-icon:hover {

@@ -5,7 +5,7 @@ html
 		link(rel='stylesheet', href='stylesheets/main.css')
 		link(rel="stylesheet", href="https://cdn.rawgit.com/colshacol/box/master/box-grid.css")
 		script(src="javascripts/styleguide.js" defer)
-	body
+	body(class="box-col")
 
 		div(class="breaker")
 		//-------------------------------------
@@ -96,6 +96,14 @@ html
 		section#styleguide-todos-container-1(class="box-col x-center pt_50 pb_100")
 			h2 TODOS
 
+			//- Each .todo contain five children.
+			//- img - STATIC: .x-icon
+			//- h2 - DYNAMIC: title
+			//- p - DYNAMIC: todo content
+			//- div + 2 * button - STATIC: buttons
+			//- small > em - DYANMIC: todo creation date
+
+
 			div#todo-container
 				div(class="todo xs-11 sm-11 md-5 lg-4 xl-3")
 					img(src="icons/cancel.svg" class="x-icon")
@@ -115,6 +123,15 @@ html
 						button(class="btn-1 todo-action") COMPLETE
 					small: em Created: 12/20/1993
 				
+				div(class="todo xs-11 sm-11 md-5 lg-4 xl-3")
+					img(src="icons/cancel.svg" class="x-icon")
+					h2 Todo One
+					p The Gotham font family has a diverse set of weights available to us.
+					div(class="todo-button-box")
+						button(class="btn-1 todo-action") EDIT
+						button(class="btn-1 todo-action") COMPLETE
+					small: em Created: 12/20/1993
+
 				div(class="todo xs-11 sm-11 md-5 lg-4 xl-3")
 					img(src="icons/cancel.svg" class="x-icon")
 					h2 Todo One
