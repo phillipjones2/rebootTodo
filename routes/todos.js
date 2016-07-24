@@ -3,11 +3,12 @@ const express = require('express'),
      mongoose = require('mongoose'),
          Todo = require('../modules/todoModel');
 
-router.get('/all', (req, res) => {
+router.get('/', (req, res) => {
   Todo.find({
   }, (err, docs) => {
     console.log(docs);
-    res.send(docs);
+    // res.send(docs);
+    res.render('index', { title: 'Express', todosObj: docs });
   });
 });
 
