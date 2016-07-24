@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const mongoose = require('mongoose'),
-      todoModel = require('../modules/todoModel');
+      Todo = require('../modules/todoModel');
 
 /**
  * Module dependencies.
@@ -89,18 +89,22 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-  console.log(`listenin on http://localhost:${port}`)
+  console.log(`listenin on http://localhost:${port}`);
+  mongooseConnection();
 }
 
 
 
 // mongoose
 function mongooseConnection() {
-  const db = mongoose.connection;
+  mongoose.connect('mongodb://localhost/rebootTodo')
+  const db = mongoose.connection
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', () => {
-
-
-
+    console.log('We Are connected to MongoDB')
+    var newtodo = new Todo({ title: "testing", body: "body" });
+    newtodo.save((err, newtodo) => {
+      if (err) console.error(err);
+    });
   });
 }
