@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   }, (err, docs) => {
     console.log(docs);
     // res.send(docs);
-    res.render('index', { title: 'Express', todosObj: docs });
+    res.render('index', { title: 'TodoTwo', todosObj: docs });
   });
 });
 

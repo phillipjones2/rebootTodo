@@ -2,9 +2,9 @@
 
 #todo-container {
 	display: flex;
+  flex-wrap: wrap;
 	width: 90%;
 	max-width: 1200px;
-	flex-wrap: wrap;
 	margin: 0 auto;
   @media (max-width: 768px) {
     flex-direction: column;
@@ -36,23 +36,34 @@
 
 
 
-.todo-mini {
-	background: $color3;
-	padding: 15px 25px 10px;
-	margin: 10px;
-	h3 {
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-  p {
-  	margin-bottom: 15px;
-  }
-  small {
-  	margin-top: 10px;
-  }
+@media (max-width: 329px) {
+  .todo {
+    background: $color3;
+    padding: 15px 25px 10px;
+    margin: 10px;
+    h3 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    p {
+      display: none;
+      margin-bottom: 15px;
+    }
+    small {
+      display: none;
+      margin-top: 10px;
+    }
+    .todo-button-box {
+      display: none;
+    }
 
-  &.complete {
-  	margin-top: 0;
+    &.complete {
+      background: $color2;
+    }
+    &.aborted {
+      background: $color4;
+
+    }
   }
 }
 

@@ -184,9 +184,9 @@ textarea {
 
 #todo-container {
   display: flex;
+  flex-wrap: wrap;
   width: 90%;
   max-width: 1200px;
-  flex-wrap: wrap;
   margin: 0 auto; }
   @media (max-width: 768px) {
     #todo-container {
@@ -210,20 +210,26 @@ textarea {
 .todo-button-box {
   display: flex; }
 
-.todo-mini {
-  background: #f5efed;
-  padding: 15px 25px 10px;
-  margin: 10px; }
-  .todo-mini h3 {
-    margin-top: 10px;
-    margin-bottom: 10px; }
-  .todo-mini p {
-    margin-bottom: 15px; }
-  .todo-mini small {
-    margin-top: 10px; }
-  .todo-mini.complete {
-    margin-top: 0; }
-
+@media (max-width: 329px) {
+  .todo {
+    background: #f5efed;
+    padding: 15px 25px 10px;
+    margin: 10px; }
+    .todo h3 {
+      margin-top: 10px;
+      margin-bottom: 10px; }
+    .todo p {
+      display: none;
+      margin-bottom: 15px; }
+    .todo small {
+      display: none;
+      margin-top: 10px; }
+    .todo .todo-button-box {
+      display: none; }
+    .todo.complete {
+      background: #adedd2; }
+    .todo.aborted {
+      background: white; } }
 .todo-mini-complete-modal {
   background: #adedd2;
   padding: 10px 25px 5px;

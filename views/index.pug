@@ -1,9 +1,33 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	h1= title
+	p Welcome to #{title}
 
-  each todo in todosObj
-    h3.title #{todo.title}
-    p.body #{todo.body}
+	div#todo-container
+		//- each i, todo in todosObj
+		//- 	div(id="todo-#{i}" class="todo"
+		//- 			_span="11 11 5 4 3")
+		//- 		h3 #{todo.title}
+		//- 		p #{todo.body}
+		//- 		div(class="todo-buttonb-box")
+		//- 			button(class="btn-1 todo-action") EDIT
+		//- 			button(class="btn-1 todo-action") COMPLETE
+		//- 		small: em Created: #{todo._createdAt}
+		div(id="todo-0" class="todo"
+			_span="11 11 5 4 3")
+			h3 title
+			p body
+			div(class="todo-button-box")
+				button(class="btn-1 todo-action") EDIT
+				button(class="btn-1 todo-action") COMPLETE
+			small: em Created: 12/12/2012
+		div(id="todo-0" class="todo"
+			_span="11 11 5 4 3")
+			h3 title
+			p body
+			div(class="todo-button-box")
+				button(class="btn-1 todo-action") EDIT
+				button(class="btn-1 todo-action") COMPLETE
+			small: em Created: 12/12/2012
+
