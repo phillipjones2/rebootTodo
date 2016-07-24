@@ -6,7 +6,6 @@ const express      = require('express'),
       logger       = require('morgan'),
       cookieParser = require('cookie-parser'),
       bodyParser   = require('body-parser'),
-      // sass         = require('node-sass-middleware'),
       routes       = require('./routes/index'),
       users        = require('./routes/users'),
       app          = express();

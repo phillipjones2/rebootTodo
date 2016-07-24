@@ -1,5 +1,11 @@
 @import 'vars';
 
+button {
+  margin: 10px;
+  margin-left: 0;
+}
+
+
 button.btn-1 {
   background: black;
   font-size: 1.25rem;
@@ -53,5 +59,3 @@ button.btn-3 {
     padding: 20px 8vw;
   }
 }
-
-

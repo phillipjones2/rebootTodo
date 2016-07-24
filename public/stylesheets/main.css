@@ -19,7 +19,7 @@
   src: url(../fonts/Gotham-Book.otf); }
 html, body, div, section, aside, header, nav,
 footer, ul, li, p, h1, h2, h3, h4, h5, h6, em,
-strong, small, form, input, button, ol {
+strong, small, form, input, button, ol, textarea {
   padding: 0;
   margin: 0;
   outline: none;
@@ -32,7 +32,7 @@ strong, small, form, input, button, ol {
   footer:active, ul:focus, ul:hover, ul:active, li:focus, li:hover, li:active, p:focus, p:hover, p:active, h1:focus, h1:hover, h1:active, h2:focus, h2:hover, h2:active, h3:focus, h3:hover, h3:active, h4:focus, h4:hover, h4:active, h5:focus, h5:hover, h5:active, h6:focus, h6:hover, h6:active, em:focus, em:hover, em:active,
   strong:focus,
   strong:hover,
-  strong:active, small:focus, small:hover, small:active, form:focus, form:hover, form:active, input:focus, input:hover, input:active, button:focus, button:hover, button:active, ol:focus, ol:hover, ol:active {
+  strong:active, small:focus, small:hover, small:active, form:focus, form:hover, form:active, input:focus, input:hover, input:active, button:focus, button:hover, button:active, ol:focus, ol:hover, ol:active, textarea:focus, textarea:hover, textarea:active {
     outline: none;
     text-decoration: none; }
 
@@ -66,6 +66,10 @@ h4 {
 
 small {
   font-size: 1.414rem; }
+
+button {
+  margin: 10px;
+  margin-left: 0; }
 
 button.btn-1 {
   background: black;
@@ -110,6 +114,74 @@ button.btn-3 {
 @media (max-width: 525px) {
   .todo {
     padding: 20px 8vw; } }
+nav {
+  height: 50px;
+  background: white;
+  padding: 10px 10px 0; }
+  nav h3 {
+    margin: 0; }
+  nav ul li {
+    display: inline;
+    margin-left: 20px; }
+
+#add-button {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  font-size: 3.8rem;
+  font-family: GothamBold;
+  border: 3px solid black;
+  border-radius: 40px;
+  width: 60px;
+  height: 60px;
+  background: black;
+  color: white;
+  z-index: 100; }
+  #add-button p {
+    position: relative;
+    top: 2px; }
+
+#close-button {
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+  font-size: 3.8rem;
+  font-family: GothamBold;
+  border: 3px solid black;
+  border-radius: 40px;
+  width: 60px;
+  height: 60px;
+  background: black;
+  color: white;
+  z-index: 100; }
+  #close-button p {
+    position: relative;
+    top: 2px; }
+
+#add-todo-modal {
+  position: fixed;
+  background: white;
+  height: 100vh;
+  z-index: 99;
+  padding-top: 50px; }
+
+input {
+  font-family: GothamLight;
+  border: 3px solid black;
+  padding: 13px 13px 10px;
+  margin-top: 10px; }
+  input::-webkit-input-placeholder {
+    font-size: 1.6rem; }
+
+textarea {
+  font-family: GothamLight;
+  border: 3px solid black;
+  padding: 13px 10px 10px;
+  height: 170px;
+  margin-top: 10px; }
+  textarea::-webkit-input-placeholder {
+    font-size: 1.6rem; }
+
 #todo-container {
   display: flex;
   width: 90%;
@@ -123,13 +195,13 @@ button.btn-3 {
 
 .todo {
   background: #f5efed;
-  padding: 35px;
-  padding-top: 25px;
+  padding: 15px 35px 15px;
   margin: 10px;
   display: flex;
   flex-direction: column; }
-  .todo h2 {
-    margin-top: 0; }
+  .todo h3 {
+    margin-top: 10px;
+    margin-bottom: 10px; }
   .todo p {
     margin-bottom: 15px; }
   .todo small {
@@ -138,15 +210,40 @@ button.btn-3 {
 .todo-button-box {
   display: flex; }
 
-.x-icon {
-  width: 37px;
-  float: right;
+.todo-mini {
+  background: #f5efed;
+  padding: 15px 25px 10px;
+  margin: 10px; }
+  .todo-mini h3 {
+    margin-top: 10px;
+    margin-bottom: 10px; }
+  .todo-mini p {
+    margin-bottom: 15px; }
+  .todo-mini small {
+    margin-top: 10px; }
+  .todo-mini.complete {
+    margin-top: 0; }
+
+.todo-mini-complete-modal {
+  background: #adedd2;
+  padding: 10px 25px 5px;
+  margin: 10px 10px 0px 10px;
   position: relative;
-  left: 92%;
-  bottom: 40%;
-  transition: all .5s; }
-  .x-icon:hover {
-    transform: rotateZ(360deg); }
+  width: 100%; }
+  .todo-mini-complete-modal h3 {
+    margin-top: 10px;
+    margin-bottom: 10px; }
+  .todo-mini-complete-modal p {
+    margin-bottom: 15px; }
+  .todo-mini-complete-modal small {
+    margin-top: 10px; }
+
+.red {
+  background: red;
+  color: red; }
+
+.hidden {
+  display: none; }
 
 /**********************/
 /* Background classes */
@@ -164,6 +261,18 @@ button.btn-3 {
 
 .bg-white, .bg-4 {
   background: white; }
+
+.bg-red, .bg-5 {
+  background: #DBA2A7; }
+
+.wrap {
+  flex-wrap: wrap; }
+
+.font-white {
+  color: white; }
+
+.fixed {
+  position: fixed; }
 
 /***********************/
 /* Font weight classes */
@@ -395,12 +504,15 @@ button.btn-3 {
   opacity: .2; }
 
 .color-box {
-  width: 100px;
-  height: 100px;
-  border: 3px solid black; }
-  .color-box:first-of-type, .color-box:nth-of-type(2) {
-    color: white; }
+  height: 30px;
+  margin: 0 10px; }
+  .color-box:first-of-type {
+    margin-top: 15px; }
 
+@media (max-width: 325px) {
+  .color-box {
+    width: 50px;
+    height: 30px; } }
 .breaker {
   height: 5px;
   background: black;

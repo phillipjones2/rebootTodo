@@ -7,135 +7,145 @@ html
 		script(src="javascripts/styleguide.js" defer)
 	body(class="box-col")
 
-		div(class="breaker")
-		//-------------------------------------
-		//-------------------------------------
-		//- COLORS ----------------------------
+		div#add-button(class="box x-center y-center"): p +
+		//- div#close-button(class="box x-center y-center"): p x
+		//- div#add-todo-modal(class="box-col all-12 x-center")
+		//- 	div(class="box-col all-10 x-center")
+		//- 		h2 Create a todo.
+		//- 		input#add-todo-input(placeholder="todo title")
+		//- 		textarea(placeholder="todo content")
+				//- button#add-todo-button(class="btn-1") SUBMIT
 
-		div(class="box-col x-center p_50")
-			h2.sect-head COLORS
+		nav(class="box-col all-12 fixed pb_15")
+			div(class="box all-12 space-inside y-center")
+				h3 Todo App
+				ul
+					li about
+					li github
+			//- input(class="mt_15" placeholder="create new todo")
 
-			div(class="box even-space all-10 mt_25")
-				div(class="color-box box x-center y-center bg-0")
-				div(class="color-box box x-center y-center bg-1")
-				div(class="color-box box x-center y-center bg-2")
-				div(class="color-box box x-center y-center bg-3")
-				div(class="color-box box x-center y-center bg-4")
+		div(class="pt_50")
+			h2 Todo Styleguide
 
-		div(class="breaker")
-		//-------------------------------------
-		//-------------------------------------
-		//- BUTTONS ----------------------------
+			div(class="breaker")
+			//-------------------------------------
+			//-------------------------------------
+			//- COLORS ----------------------------
 
-		section(class="box-col x-center p_50 bg-light-gray")
-			h2.sect-head BUTTONS
+			div(class="box-col all-12")
 
-		div#styleguide-button-container-1(class="box all-12 x-center even-space bg-light-gray")
-			button.btn-1 EDIT
-			button.btn-1 SAVE
-			button.btn-1 REMOVE
-			button.btn-1 COMPLETE
+				div(class="box wrap even-space all-12")
+					div(class="color-box box bg-0 all-12")
+					div(class="color-box box bg-1 all-12")
+					div(class="color-box box bg-2 all-12")
+					div(class="color-box box bg-3 all-12")
+					div(class="color-box box bg-4 all-12")
 
-		div#styleguide-button-container-2(class="box all-12 x-center even-space bg-light-gray")
-			button.btn-2 EDIT
-			button.btn-2 SAVE
-			button.btn-2 REMOVE
-			button.btn-2 COMPLETE
+			//-------------------------------------
+			//-------------------------------------
+			//- BUTTONS ----------------------------
 
-		div#styleguide-button-container-3(class="box all-12 x-center even-space bg-white")
-			button.btn-3 EDIT
-			button.btn-3 SAVE
-			button.btn-3 REMOVE
-			button.btn-3 COMPLETE
+			//- section(class="box-col x-center bg-light-gray")
 
-		div(class="breaker")
-		//-------------------------------------
-		//-------------------------------------
-		//- TYPOGRAPHY ------------------------
+			//- div#styleguide-button-container-1(class="box all-12 x-center even-space bg-light-gray")
+			//- 	button.btn-3 EDIT
+			//- 	button.btn-1 SAVE
+			//- 	button.btn-1.xs-0 REMOVE
+			//- 	button.btn-2 COMPLETE
 
-		div(class="box-col x-center p_50 bg-light-gray bg-toggle")
-				h2.sect-head TYPOGRAPHY
+			//- div#styleguide-button-container-2(class="box all-12 x-center even-space bg-light-gray")
+			//- 	button.btn-2.xs-0 EDIT
+			//- 	button.btn-2 SAVE
+			//- 	button.btn-2.xs-0 REMOVE
+			//- 	button.btn-2 COMPLETE
 
-				button#bg-toggler(class="btn-1") TOGGLE BGS
+			//- div#styleguide-button-container-3(class="box all-12 x-center even-space bg-white")
+			//- 	button.btn-3.xs-0 EDIT
+			//- 	button.btn-3 SAVE
+			//- 	button.btn-3.xs-0 REMOVE
+			//- 	button.btn-3 COMPLETE
 
-		section#styleguide-type-container-1(class="box-col x-center bg-light-gray bg-toggle pb_100")
-			h1 This is an H1.
-			h2 This is an H2.
-			h3 This is an H3.
-			h4 This is an H4.
-			p(class="all-8 mt_25") This is Gotham Light, our standard body font.
+			//-------------------------------------
+			//-------------------------------------
+			//- TYPOGRAPHY ------------------------
 
-			p(class="all-8 mt_25"): em This is Gotham Light italicized.
+			//- div(class="box-col x-center p_15 bg-light-gray bg-toggle")
 
-			p(class="all-8 mt_25 font_regular") This is Gotham Regular.
+			//- 		button#bg-toggler(class="btn-1") TOGGLE BGS
 
-			p(class="all-8 mt_25 font_regular"): em This is Gotham Regular italicized.
+			//- section#styleguide-type-container-1(class="box-col x-center bg-light-gray bg-toggle pb_100")
+			//- 	h1 This is an H1.
+			//- 	h2 This is an H2.
+			//- 	//- h3 This is an H3.
+			//- 	//- h4 This is an H4.
+			//- 	p(class="all-8 mt_25") This is Gotham Light, our standard body font.
 
-			p(class="all-8 mt_25 font_medium") This is Gotham Medium.
+				//- p(class="all-8 mt_25"): em This is Gotham Light italicized.
 
-			p(class="all-8 mt_25 font_medium"): em This is Gotham Medium italicized.
+				//- p(class="all-8 mt_25 font_regular") This is Gotham Regular.
 
-			p(class="all-8 mt_25 font_bold") This is Gotham Bold.
+				//- p(class="all-8 mt_25 font_regular"): em This is Gotham Regular italicized.
 
-			small(class="all-8 mt_25") This is a Gotham Light small paragraph.
+				//- p(class="all-8 mt_25 font_medium") This is Gotham Medium.
 
-			small(class="all-8 mt_25"): em This is a Gotham Light small italicized.
+				//- p(class="all-8 mt_25 font_medium"): em This is Gotham Medium italicized.
 
+				//- p(class="all-8 mt_25 font_bold") This is Gotham Bold.
 
-		div(class="breaker")
-		//-------------------------------------
-		//-------------------------------------
-		//- TODOS -----------------------------
+				small(class="all-8 mt_25") This is a Gotham Light small paragraph.
 
-		section#styleguide-todos-container-1(class="box-col x-center pt_50 pb_100")
-			h2.sect-head TODOS
+				//- small(class="all-8 mt_25"): em This is a Gotham Light small italicized.
 
-			//- Each .todo contain five children.
-			//- img - STATIC: .x-icon
-			//- h2 - DYNAMIC: title
-			//- p - DYNAMIC: todo content
-			//- div + 2 * button - STATIC: buttons
-			//- small > em - DYANMIC: todo creation date
+			//-------------------------------------
+			//-------------------------------------
+			//- TODOS -----------------------------
 
+			section#styleguide-todos-container-1(class="box-col x-center pt_15 pb_100")
 
-			div#todo-container
-				div(class="todo xs-11 sm-11 md-5 lg-4 xl-3")
-					img(src="icons/cancel.svg" class="x-icon")
-					h2 Todo One
-					p The Gotham font family has a diverse set of weights available to us.
-					div(class="todo-button-box")
-						button(class="btn-1 todo-action") EDIT
-						button(class="btn-1 todo-action") COMPLETE
-					small: em Created: 12/20/1993
-				
-				div(class="todo xs-11 sm-11 md-5 lg-4 xl-3")
-					img(src="icons/cancel.svg" class="x-icon")
-					h2 Todo One
-					p The Gotham font family has a diverse set of weights available to us.
-					div(class="todo-button-box")
-						button(class="btn-1 todo-action") EDIT
-						button(class="btn-1 todo-action") COMPLETE
-					small: em Created: 12/20/1993
-				
-				div(class="todo xs-11 sm-11 md-5 lg-4 xl-3")
-					img(src="icons/cancel.svg" class="x-icon")
-					h2 Todo One
-					p The Gotham font family has a diverse set of weights available to us.
-					div(class="todo-button-box")
-						button(class="btn-1 todo-action") EDIT
-						button(class="btn-1 todo-action") COMPLETE
-					small: em Created: 12/20/1993
-
-				div(class="todo xs-11 sm-11 md-5 lg-4 xl-3")
-					img(src="icons/cancel.svg" class="x-icon")
-					h2 Todo One
-					p The Gotham font family has a diverse set of weights available to us.
-					div(class="todo-button-box")
-						button(class="btn-1 todo-action") EDIT
-						button(class="btn-1 todo-action") COMPLETE
-					small: em Created: 12/20/1993
-				
+				//- Each .todo contain five children.
+				//- img - STATIC: .x-icon
+				//- h2 - DYNAMIC: title
+				//- p - DYNAMIC: todo content
+				//- div + 2 * button - STATIC: buttons
+				//- small > em - DYANMIC: todo creation date
 
 
+				div#todo-container
+					div(class="todo-mini xs-11 sm-11 md-5 lg-4 xl-3")
+		
+						h3 Gotta feed the dog and then call my grandma.
 
-		div#end-pad
+					div(class="todo xs-11 sm-11 md-5 lg-4 xl-3")
+
+						div(class="todo-content")
+							h3(class="") Gotta feed the dog and then call my grandma.
+							p The Gotham font family has a diverse set of weights available to us.
+							div(class="todo-button-box")
+								button(class="btn-1 todo-action") EDIT
+								button(class="btn-2 todo-action") COMPLETE
+							small: em Created: 12/20/1993
+					
+
+					div(class="todo-mini xs-11 sm-11 md-5 lg-4 xl-3 bg-red font-white")
+						h3 Gotta feed the dog and then call my grandma.
+
+
+					div(class="todo xs-11 sm-11 md-5 lg-4 xl-3")
+			
+						div(class="todo-content")
+							h3 Todo One
+							p The Gotham font family has a diverse set of weights available to us.
+							div(class="todo-button-box")
+								button(class="btn-3 todo-action") EDIT
+								button(class="btn-2 todo-action") COMPLETE
+							small: em Created: 12/20/1993
+
+					div(class="todo-mini xs-11 sm-11 md-5 lg-4 xl-3")
+			
+						h3 Feed my dog.
+
+
+					//- div(class="todo-mini-complete-modal xs-11 sm-11 md-5 lg-4 xl-3")
+					//- 	h3(class="font_light") Complete!
+					div(class="todo-mini xs-11 sm-11 md-5 lg-4 xl-3 bg-green")
+						h3 Gotta feed the dog and then call my grandma.

@@ -11,13 +11,13 @@
 
 .todo {
   background: #f5efed;
-  padding: 35px;
-  padding-top: 25px;
+  padding: 15px 35px 15px;
   margin: 10px;
   display: flex;
   flex-direction: column; }
-  .todo h2 {
-    margin-top: 0; }
+  .todo h3 {
+    margin-top: 10px;
+    margin-bottom: 10px; }
   .todo p {
     margin-bottom: 15px; }
   .todo small {
@@ -26,14 +26,39 @@
 .todo-button-box {
   display: flex; }
 
-.x-icon {
-  width: 37px;
-  float: right;
+.todo-mini {
+  background: #f5efed;
+  padding: 15px 25px 10px;
+  margin: 10px; }
+  .todo-mini h3 {
+    margin-top: 10px;
+    margin-bottom: 10px; }
+  .todo-mini p {
+    margin-bottom: 15px; }
+  .todo-mini small {
+    margin-top: 10px; }
+  .todo-mini.complete {
+    margin-top: 0; }
+
+.todo-mini-complete-modal {
+  background: #adedd2;
+  padding: 10px 25px 5px;
+  margin: 10px 10px 0px 10px;
   position: relative;
-  left: 92%;
-  bottom: 40%;
-  transition: all .5s; }
-  .x-icon:hover {
-    transform: rotateZ(360deg); }
+  width: 100%; }
+  .todo-mini-complete-modal h3 {
+    margin-top: 10px;
+    margin-bottom: 10px; }
+  .todo-mini-complete-modal p {
+    margin-bottom: 15px; }
+  .todo-mini-complete-modal small {
+    margin-top: 10px; }
+
+.red {
+  background: red;
+  color: red; }
+
+.hidden {
+  display: none; }
 
 /*# sourceMappingURL=todos.css.map */

@@ -1,10 +1,15 @@
 .color-box {
-	width: 100px;
-	height: 100px;
-	border: 3px solid black;
+	height: 30px;
+	margin: 0 10px;
+	&:first-of-type {
+		margin-top: 15px;
+	}
+}
 
-	&:first-of-type, &:nth-of-type(2) {
-		color: white;
+@media (max-width: 325px) {
+	.color-box {
+		width: 50px;
+		height: 30px;
 	}
 }
 
