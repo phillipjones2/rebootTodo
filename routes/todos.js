@@ -12,5 +12,15 @@ router.get('/', (req, res) => {
   });
 });
 
+router.post('/', (req, res) => {
+  var todo = new Todo({ title: req.body.title, body: req.body.body});
+  todo.save((err, doc) => {
+    if (err) return console.error(err);
+    Todo.find({
+    }, (err, docs) => {
+      res.render('index', { title: 'Express', todosObj: docs });
+    });
+  });
+});
 
 module.exports = router;
