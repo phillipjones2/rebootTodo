@@ -1,12 +1,12 @@
 'use strict';
 
 const express      = require('express'),
-      path         = require('path'),
+      // Serves a favicon.ico file.
       favicon      = require('serve-favicon'),
+      // Morgan logs out HTTP requests.
       logger       = require('morgan'),
-      cookieParser = require('cookie-parser'),
       bodyParser   = require('body-parser'),
-      routes       = require('./routes/index'),
+      routes       = require('./routes/routes'),
       users        = require('./routes/users'),
       app          = express();
 
@@ -15,17 +15,15 @@ app.set('views', `${__dirname}/views`);
 app.set('view engine', 'pug');
 
 // ***** Need to create a favicon. ***** //
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false })); // ???
 app.use(express.static(`${__dirname}/public`));
 
 app.use('/', routes);
 app.use('/users', users);
-// app.use('/styleguide', styleguide);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
