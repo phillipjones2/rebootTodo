@@ -26,9 +26,9 @@ block content
 		each todo, i in todosObj
 			- var ii = 'todo-' + i;
 			div(id=ii class="todo" _span="11 11 5 4 3")
-				h3 #{todo.title}
-				p #{todo.body}
-				div(class="todo-button-box")
-					button(class="btn-1 todo-action") EDIT
-					button(class="btn-1 todo-action") COMPLETE
-				small: em Created: #{todo.createdAt}
+				h3(todo-parent=ii) #{todo.title}
+				p(todo-parent=ii) #{todo.body}
+				div(class="todo-button-box" todo-parent=ii)
+					button(class="btn-1 todo-action" todo-parent=ii) EDIT
+					button(class="btn-1 todo-action" todo-parent=ii) COMPLETE
+				small(todo-parent=ii): em(todo-parent=ii) Created: #{todo.createdAt}

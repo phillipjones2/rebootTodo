@@ -10,48 +10,54 @@ for (var i = 0; i < todosLen; i++) {
 	var todo = todos[i];
 	var touchStartX;
 	var touchStartY;
+
 	todo.addEventListener('touchstart', function(e) {
 		touchStartX = e.touches[0].screenX;
 		touchStartY = e.touches[0].screenY;
 
 	});
+
 	todo.addEventListener('touchend', function(e) {
+		var thisTodo = e.target;
+		if (!e.target.classList.contains('todo')) {
+			var thisParentID = thisTodo.getAttribute('todo-parent');
+			console.log(thisParentID);
+			thisTodo = document.getElementById(thisParentID);
+			console.log(thisTodo);
+		}
+		console.log(e);
+		console.log(thisTodo);
 		var touchEndX = e.changedTouches[0].screenX;
 		var touchEndY = e.changedTouches[0].screenY;
-
 		var thisTodoWidth = todo.scrollWidth;
 		var thisTodoHeight = todo.scrollHeight;
 		var touchXDifference = touchStartX - touchEndX;
-		// console.log(`touch start: ${touchStartX}`);
-		// console.log(`touch end: ${touchEndX}`);
+
 		if (touchXDifference < 0 ) {
-		console.log('LEFT TO RIGHT');
+			var rightSwipe = true;
 		} else {
-		console.log('RIGHT TO LEFT');
+			var leftSwipe = true;
 		};
+
 		var swipeDist = Math.abs(touchXDifference);
-		console.log(`swipe distance: ${swipeDist}`);
+		// console.log(`swipe distance: ${swipeDist}`);
+
 		var swipeWaiver = Math. abs(touchStartY - touchEndY)
-		console.log(`swipe Waiver: ${swipeWaiver}`);
-		if (swipeWaiver > thisTodoHeight) {
-			console.log("doesn't register")
+		// console.log(`swipe Waiver: ${swipeWaiver}`);
+
+		if (swipeWaiver > thisTodoHeight && swipeDist < thisTodoWidth / 2) {
+			return;
+		} else {
+			if (rightSwipe) {
+				// console.log(todo)
+				thisTodo.classList.add('bg-red');
+				thisTodo.classList.remove('bg-green');
+			} else {
+				// console.log(thisTodo)
+				thisTodo.classList.add('bg-green');
+				thisTodo.classList.remove('bg-red');
+			}
 		}
-
-
-
-
-
-
-
-
-		// if (touchXDifference <= (thisTodoWidth / 2)) {
-		// 	console.log(`startx - endx = ${touchStart - touchEnd}`)
-		// 	if (touchXDifference > 0) {
-		// 		console.log('left');
-		// 	} else {
-		// 		console.log('right');
-		// 	}
-		// }
 	});
 }
 

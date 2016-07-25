@@ -37,7 +37,7 @@
 
 
 
-@media (max-width: 520px) {
+@media screen and (max-width: 520px) {
   .todo {
     background: $color3;
     padding: 15px 25px 10px;
