@@ -48,24 +48,6 @@ button.btn-3 {
   }
 }
 
-button[class*="opc"]:active {
-  color: white;
-  background: black;
-}
-
-button.inactive-todo-button {  opacity: .2; }
-
-// Buttons connected to individual todos.
-.todo-action {
-  margin-right: 10px;
-}
-
-@media (max-width: 525px) {
-  .todo {
-    padding: 20px 8vw;
-  }
-}
-
 
 #add-button {
   position: fixed;

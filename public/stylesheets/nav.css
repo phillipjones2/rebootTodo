@@ -1,7 +1,8 @@
 nav {
   height: 50px;
   background: white;
-  padding: 10px 10px 0; }
+  padding: 10px 10px 0;
+  z-index: 90; }
   nav h3 {
     margin: 0; }
   nav ul li {

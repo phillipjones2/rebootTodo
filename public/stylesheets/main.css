@@ -108,19 +108,6 @@ button.btn-3 {
     color: white;
     border-radius: 0; }
 
-button[class*="opc"]:active {
-  color: white;
-  background: black; }
-
-button.inactive-todo-button {
-  opacity: .2; }
-
-.todo-action {
-  margin-right: 10px; }
-
-@media (max-width: 525px) {
-  .todo {
-    padding: 20px 8vw; } }
 #add-button {
   position: fixed;
   bottom: 25px;
@@ -134,7 +121,8 @@ button.inactive-todo-button {
 nav {
   height: 50px;
   background: white;
-  padding: 10px 10px 0; }
+  padding: 10px 10px 0;
+  z-index: 90; }
   nav h3 {
     margin: 0; }
   nav ul li {
@@ -195,52 +183,54 @@ nav {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 55px; }
+  padding-top: 60px; }
   @media handheld and (max-width: 768px) {
     #todo-container {
       flex-direction: column;
       align-items: center; } }
 
-.todo {
+.todo-box {
   background: #f5efed;
   padding: 15px 35px 25px !important;
   margin: 10px;
   display: flex;
   flex-direction: column;
   transition: all .5s; }
-  .todo .todo-content h3 {
+  .todo-box .todo-content h3 {
     margin-top: 10px;
     margin-bottom: 10px;
     transition: all .5s; }
-  .todo .todo-content p {
+  .todo-box .todo-content p {
     margin-bottom: 15px; }
-  .todo .todo-content small {
+  .todo-box .todo-content small {
     margin-top: 10px; }
 
 .todo-button-box {
   display: flex; }
 
 @media (max-width: 520px) {
-  .todo {
+  .todo-box {
     background: #f5efed;
     padding: 15px 25px 10px;
-    margin: 10px;
-    transition: all .5s; }
-    .todo .todo-content.hidden-todo-child {
-      display: none; }
-    .todo .todo-content.shown-todo-child {
-      display: inline; }
-    .todo .todo-content h3 {
+    margin: 10px; }
+    .todo-box .todo-content.hidden-todo-child {
+      display: none;
+      opacity: 0;
+      transition: opacity .5s; }
+    .todo-box .todo-content.shown-todo-child {
+      display: inline;
+      opacity: 1; }
+    .todo-box .todo-content h3 {
       margin-top: 10px;
       margin-bottom: 10px;
       transition: all .5s; }
-    .todo .todo-content p {
+    .todo-box .todo-content p {
       margin-bottom: 15px; }
-    .todo .todo-content small {
+    .todo-box .todo-content small {
       margin-top: 10px; }
-    .todo .todo-content.complete {
+    .todo-box .todo-content.complete {
       background: #adedd2; }
-    .todo .todo-content.aborted {
+    .todo-box .todo-content.aborted {
       background: white; } }
 .todo-mini-complete-modal {
   background: #adedd2;
@@ -256,12 +246,38 @@ nav {
   .todo-mini-complete-modal small {
     margin-top: 10px; }
 
-.red {
-  background: red;
-  color: red; }
+.deleted-todo {
+  background: #EF6F6C; }
 
-.hidden {
-  display: none; }
+.completed-todo {
+  background: #56E39F; }
+
+.close-todo-button-box {
+  position: relative;
+  right: -53px;
+  top: -30px; }
+
+.close-todo-button {
+  position: absolute;
+  right: 0;
+  max-width: 50px;
+  background: white;
+  border-radius: 50px; }
+
+button.inactive-todo-button {
+  opacity: .2; }
+  button.inactive-todo-button:active {
+    color: white;
+    background: black; }
+
+.todo-action {
+  margin-right: 10px; }
+
+@media (max-width: 525px) {
+  .todo {
+    padding: 20px 8vw; } }
+.priority-x {
+  border-top: 6px solid #07A0C3; }
 
 .hidden {
   display: none !important; }

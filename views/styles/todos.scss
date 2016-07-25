@@ -6,14 +6,14 @@
 	width: 90%;
 	max-width: 1200px;
 	margin: 0 auto;
-  padding-top: 55px;
+  padding-top: 60px;
   @media handheld and (max-width: 768px) {
     flex-direction: column;
     align-items: center;
   }
 }
 
-.todo {
+.todo-box {
   background: $color3;
   padding: 15px 35px 25px !important;
   margin: 10px;
@@ -21,12 +21,10 @@
   flex-direction: column;
   transition: all .5s;
   .todo-content {
-  
   	h3 {
   		margin-top: 10px;
   		margin-bottom: 10px;
       transition: all .5s;
-
   	}
     p {
     	margin-bottom: 15px;
@@ -44,17 +42,19 @@
 
 
 @media (max-width: 520px) {
-  .todo {
+  .todo-box {
     background: $color3;
     padding: 15px 25px 10px;
     margin: 10px;
-    transition: all .5s;
     .todo-content {
       &.hidden-todo-child {
         display: none;
+        opacity: 0;
+        transition: opacity .5s;
       }
       &.shown-todo-child {
         display: inline;
+        opacity: 1;
       }
       h3 {
         margin-top: 10px;
@@ -75,7 +75,6 @@
       }
       &.aborted {
         background: $color4;
-
       }
     }
   }
@@ -99,11 +98,47 @@
   }
 }
 
-.red {
-	background: red;
-	color: red;
+.deleted-todo {
+  background: $pale-red;
 }
 
-.hidden {
-	display: none;
+.completed-todo {
+  background: $pale-green;
+}
+
+.close-todo-button-box {
+  position: relative;
+  right: -53px;
+  top: -30px;
+}
+
+.close-todo-button {
+  position: absolute;
+  right: 0;
+  max-width: 50px;
+  background: white;
+  border-radius: 50px;
+}
+
+button.inactive-todo-button {
+  opacity: .2;
+  &:active {
+    color: white;
+    background: black;
+  }
+}
+
+// Buttons connected to individual todos.
+.todo-action {
+  margin-right: 10px;
+}
+
+@media (max-width: 525px) {
+  .todo {
+    padding: 20px 8vw;
+  }
+}
+
+.priority-x {
+  border-top: 6px solid $blue;
 }
