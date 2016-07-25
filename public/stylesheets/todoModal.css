@@ -23,6 +23,14 @@
     #add-todo-modal textarea::-webkit-input-placeholder {
       font-size: 1.6rem; }
 
+#add-todo-priority-button {
+  width: 70%;
+  font-family: GothamBold;
+  text-transform: uppercase;
+  padding: 13px 13px 10px;
+  margin: 10px 0px 8px 0px;
+  text-align: left; }
+
 #close-button {
   position: fixed;
   bottom: 25px;

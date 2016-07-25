@@ -4,17 +4,29 @@ const express = require('express'),
 			fs      = require('fs');
 
 const jsPaths = {
-	main: './public/javascripts/main.js',
+	main     : './public/javascripts/main.js',
+	priority : './public/javascripts/priority.js'
 };
 
+
 /* MAIN.JS FILE REQUEST */
-router.get('/main', function(req, res, next) {
+router.get('/main', (req, res, next) => {
 	babel.transformFile(jsPaths.main, {
 		presets: ['es2015']
 	}, (err, data) => {
 		if (err) console.log(err);
 		res.send(data.code);
-	})
+	});
+});
+
+/* MAIN.JS FILE REQUEST */
+router.get('/priority', (req, res, next) => {
+	babel.transformFile(jsPaths.priority, {
+		presets: ['es2015']
+	}, (err, data) => {
+		if (err) console.log(err);
+		res.send(data.code);
+	});
 });
 
 module.exports = router;

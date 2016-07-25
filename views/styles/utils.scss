@@ -55,14 +55,24 @@
  /**************************/
 /* Priority color classes */
 
-.priority-1 {
+.priority-1 { // Carmine pink
 	border-top: 2px solid $color-Priority-1;
 }
 .priority-2 {
 	border-top: 2px solid $color-Priority-2;
 }
-.priority-3 {
+.priority-3 { // UFP green
 	border-top: 2px solid $color-Priority-3;
+}
+
+.priority-bg-1 { // Carmine pink
+	background: $color-Priority-1;
+}
+.priority-bg-2 {
+	background: $color-Priority-2;
+}
+.priority-bg-3 { // UFP green
+	background: $color-Priority-3;
 }
 
 /***********************/

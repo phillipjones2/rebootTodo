@@ -47,6 +47,15 @@
 .priority-3 {
   border-top: 2px solid #46EA61; }
 
+.priority-bg-1 {
+  background: #E84A4A; }
+
+.priority-bg-2 {
+  background: #FFF359; }
+
+.priority-bg-3 {
+  background: #46EA61; }
+
 /***********************/
 /* Font weight classes */
 .font_light {

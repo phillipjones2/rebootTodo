@@ -9,6 +9,7 @@ block content
 			form(method="post" class="box-col x-center all-12")
 				input#add-todo-input(placeholder="todo title" name="title")
 				textarea#add-todo-textarea(placeholder="todo content" name="body")
+				button#add-todo-priority-button(class="priority-bg-3" type='button') priority: low
 				input#accept-button(type="image" src="icons/plus.svg" action="/styleguide" onclick="hideModal()")
 			img#close-button(src="icons/cancel.svg" onclick="hideModal()")
 
