@@ -5,9 +5,9 @@ const express = require('express'),
 
 // todo index - all todos
 router.get('/', (req, res) => {
-  Todo.find({
-  }, (err, docs) => {
+  Todo.find().sort('priority').exec((err, docs) => {
     // res.send(docs);
+    console.log(docs);
     res.render('index', { title: 'TodoTwo', todosObj: docs });
   });
 });
@@ -26,8 +26,7 @@ router.post('/', (req, res) => {
   var todo = new Todo({ title: req.body.title, body: req.body.body});
   todo.save((err, doc) => {
     if (err) return console.error(err);
-    Todo.find({
-    }, (err, docs) => {
+    Todo.find().sort('priority').exec((err, docs) => {
       res.render('index', { title: 'Express', todosObj: docs });
     });
   });
@@ -42,8 +41,7 @@ router.put('/:todo_id', (req, res) => {
     todo.body = req.body.body;
     todo.save((err, doc) => {
       if (err) return consol.error(err);
-      Todo.find({
-      }, (err, docs) => {
+      Todo.find().sort('priority').exec((err, docs) => {
         res.render('index', { title: 'Express', todosObj: docs });
       });
     });
@@ -55,8 +53,7 @@ router.delete('/:todo_id', (req, res) => {
     if (err)
       res.send(err);
     else {
-      Todo.find({
-      }, (err, docs) => {
+      Todo.find().sort('priority').exec((err, docs) => {
         res.render('index', { title: 'Express', todosObj: docs });
       });
     }
