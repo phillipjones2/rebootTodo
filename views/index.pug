@@ -31,4 +31,4 @@ block content
 				div(class="todo-button-box" todo-parent=ii)
 					button(class="btn-1 todo-action" todo-parent=ii) EDIT
 					button(class="btn-1 todo-action" todo-parent=ii) COMPLETE
-				small(todo-parent=ii): em(todo-parent=ii) Created: #{todo.createdAt}
+				small(todo-parent=ii): em(todo-parent=ii) Created: #{todo.createdAt.getMonth()}/#{todo.createdAt.getDate()}/#{todo.createdAt.getFullYear()}  #{todo.createdAt.getHours()}:#{todo.createdAt.getMinutes()} 
