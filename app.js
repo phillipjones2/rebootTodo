@@ -7,7 +7,7 @@ const express      = require('express'),
       mongoose     = require('mongoose'),
       todoModel    = require('./modules/todoModel'),
       bodyParser   = require('body-parser'),
-      todos        = require('./routes/todos'),
+      todos        = require('./routes/todos').router,
       js           = require('./routes/scripts'),
       app          = express();
 
