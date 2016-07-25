@@ -4,40 +4,43 @@ const addTodoModal = document.getElementById('add-todo-modal'),
 			todosLen = todos.length;
 
 for (let todo of todos) {
-	let	touchStartX,
-			touchStartY;
+	let	touchStartX, touchStartY;
 
-	todo.addEventListener('touchstart', function(e) {
+	todo.addEventListener('touchstart', (e) => {
 		touchStartX = e.touches[0].screenX;
 		touchStartY = e.touches[0].screenY;
 	});
 
-	todo.addEventListener('touchend', function(e) {
-		var thisTodo = e.target;
+	todo.addEventListener('touchend', (e) => {
+		let thisTodo = e.target;
 		if (!e.target.classList.contains('todo')) {
-			var thisParentID = thisTodo.getAttribute('todo-parent');
-			console.log(thisParentID);
+			const thisParentID = thisTodo.getAttribute('todo-parent');
 			thisTodo = document.getElementById(thisParentID);
-			console.log(thisTodo);
 		}
-		console.log(e);
-		console.log(thisTodo);
-		var touchEndX = e.changedTouches[0].screenX;
-		var touchEndY = e.changedTouches[0].screenY;
-		var thisTodoWidth = todo.scrollWidth;
-		var thisTodoHeight = todo.scrollHeight;
-		var touchXDifference = touchStartX - touchEndX;
 
-		if (touchXDifference < 0 ) {
-			var rightSwipe = true;
+		const touchEndX = e.changedTouches[0].screenX,
+					touchEndY = e.changedTouches[0].screenY,
+					todoWidth = todo.scrollWidth,
+					todoHeight = todo.scrollHeight,
+					touchXDifference = touchStartX - touchEndX;
+					
+		let rightSwipe = false, leftSwipe = false;
+
+		if (touchXDifference < 0) {
+			rightSwipe = true;
 		} else {
-			var leftSwipe = true;
+			leftSwipe = true;
 		};
 
-		var swipeDist = Math.abs(touchXDifference);
-		var swipeWaiver = Math. abs(touchStartY - touchEndY)
+		const [distance, wavier] = [
+			Math.abs(touchXDifference),
+			Math. abs(touchStartY - touchEndY)
+		];
 
-		if (swipeWaiver > thisTodoHeight && swipeDist < thisTodoWidth / 2) {
+		const validSwipe = (wavier < todoHeight &&
+											  distance > todoWidth / 2);
+
+		if (!validSwipe) {
 			return;
 		} else {
 			if (rightSwipe) {
@@ -53,7 +56,8 @@ for (let todo of todos) {
 
 // When the + button is clicked, open the new todo modal.
 // When the x button in the modal are clicked, close it.
-var modalCloseButton = document.getElementById('close-button');
-var modalAcceptButton = document.getElementById('accept-button');
+const modalCloseButton = document.getElementById('close-button'),
+			modalAcceptButton = document.getElementById('accept-button');
+
 function hideModal(e) {	addTodoModal.classList.add('hidden') }
 function showModal(e) {	addTodoModal.classList.remove('hidden') }
