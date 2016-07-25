@@ -3,7 +3,8 @@ const mongoose = require('mongoose'),
 
 const todoSchema = new Schema({
   title     : { type: String, required: true },
-  body      : String
+  body      : String,
+  priority  : { type: String, default: 'Medium' }
 },
 {
   timestamps: true
