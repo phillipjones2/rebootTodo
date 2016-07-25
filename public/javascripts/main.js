@@ -40,7 +40,7 @@ for (let todo of todos) {
 
 		const validSwipe = (wavier < todoHeight &&
 											  distance > todoWidth / 2);
-					
+
 		// Determine direction of swipe and set booleans
 		// for use in future conditionals.
 		const rightSwipe = swipeXDifference < 0 ? true : false;
