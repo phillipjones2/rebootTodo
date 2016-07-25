@@ -52,6 +52,19 @@
 	position: fixed;
 }
 
+ /**************************/
+/* Priority color classes */
+
+.priority-1 {
+	border-top: 2px solid $color-Priority-1;
+}
+.priority-2 {
+	border-top: 2px solid $color-Priority-2;
+}
+.priority-3 {
+	border-top: 2px solid $color-Priority-3;
+}
+
 /***********************/
 /* Font weight classes */
 

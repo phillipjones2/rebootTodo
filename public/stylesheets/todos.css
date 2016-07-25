@@ -97,7 +97,5 @@ button.inactive-todo-button {
 @media (max-width: 525px) {
   .todo {
     padding: 20px 8vw; } }
-.priority-x {
-  border-top: 6px solid #07A0C3; }
 
 /*# sourceMappingURL=todos.css.map */
