@@ -34,7 +34,7 @@ block content
 				h3(todo-parent=ii contenteditable="true" spellcheck="false" class="todo-title") #{todo.title}
 
 				div(class="todo-content box-col hidden-todo-child", todo-parent=ii)
-					p(todo-parent=ii contenteditable="true" spellcheck="false" class="todo-body") #{todo.body}
+					p(todo-parent=ii contenteditable="true" spellcheck="false" class="todo-body") #{todo.body} #{todo.priority}
 					div(class="todo-button-box" todo-parent=ii)
 						button(class="btn-1 todo-action inactive-todo-button" todo-parent=ii) SAVE
 						button(class="btn-1 todo-action" todo-parent=ii) COMPLETE
