@@ -40,14 +40,9 @@
   position: fixed;
   bottom: 25px;
   right: 25px;
-  font-size: 3.8rem;
-  border-radius: 40px;
   width: 60px;
   height: 60px;
-  color: white;
-  z-index: 100; }
-  #accept-button p {
-    position: relative;
-    top: 2px; }
+  z-index: 55;
+  margin: 0; }
 
 /*# sourceMappingURL=todoModal.css.map */

@@ -16,16 +16,15 @@
   margin: 10px;
   display: flex;
   flex-direction: column;
-  transition: all 1s; }
-  .todo .todo-content {
-    transition: all 1s; }
-    .todo .todo-content h3 {
-      margin-top: 10px;
-      margin-bottom: 10px; }
-    .todo .todo-content p {
-      margin-bottom: 15px; }
-    .todo .todo-content small {
-      margin-top: 10px; }
+  transition: all .5s; }
+  .todo .todo-content h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    transition: all .5s; }
+  .todo .todo-content p {
+    margin-bottom: 15px; }
+  .todo .todo-content small {
+    margin-top: 10px; }
 
 .todo-button-box {
   display: flex; }
@@ -34,14 +33,16 @@
   .todo {
     background: #f5efed;
     padding: 15px 25px 10px;
-    margin: 10px; }
+    margin: 10px;
+    transition: all .5s; }
     .todo .todo-content.hidden-todo-child {
       display: none; }
     .todo .todo-content.shown-todo-child {
       display: inline; }
     .todo .todo-content h3 {
       margin-top: 10px;
-      margin-bottom: 10px; }
+      margin-bottom: 10px;
+      transition: all .5s; }
     .todo .todo-content p {
       margin-bottom: 15px; }
     .todo .todo-content small {

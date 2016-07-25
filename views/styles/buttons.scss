@@ -5,7 +5,6 @@ button {
   margin-left: 0;
 }
 
-
 button.btn-1 {
   background: black;
   font-size: 1.25rem;
@@ -49,6 +48,13 @@ button.btn-3 {
   }
 }
 
+button[class*="opc"]:active {
+  color: white;
+  background: black;
+}
+
+button.inactive-todo-button {  opacity: .2; }
+
 // Buttons connected to individual todos.
 .todo-action {
   margin-right: 10px;
@@ -58,4 +64,16 @@ button.btn-3 {
   .todo {
     padding: 20px 8vw;
   }
+}
+
+
+#add-button {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  font-size: 3.8rem;
+  font-family: GothamBold;
+  width: 60px;
+  height: 60px;
+  z-index: 55;
 }

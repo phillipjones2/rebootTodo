@@ -39,11 +39,27 @@ button.btn-3 {
     color: white;
     border-radius: 0; }
 
+button[class*="opc"]:active {
+  color: white;
+  background: black; }
+
+button.inactive-todo-button {
+  opacity: .2; }
+
 .todo-action {
   margin-right: 10px; }
 
 @media (max-width: 525px) {
   .todo {
     padding: 20px 8vw; } }
+#add-button {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  font-size: 3.8rem;
+  font-family: GothamBold;
+  width: 60px;
+  height: 60px;
+  z-index: 55; }
 
 /*# sourceMappingURL=buttons.css.map */

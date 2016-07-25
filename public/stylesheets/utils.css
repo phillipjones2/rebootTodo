@@ -15,6 +15,12 @@
 .bg-light-gray, .bg-3 {
   background: #f5efed; }
 
+.bg-pale-green {
+  background: #56E39F; }
+
+.bg-pale-red {
+  background: #EF6F6C; }
+
 .bg-white, .bg-4 {
   background: white; }
 
@@ -258,5 +264,8 @@
 
 .opc_2 {
   opacity: .2; }
+
+.opc_1 {
+  opacity: .1; }
 
 /*# sourceMappingURL=utils.css.map */

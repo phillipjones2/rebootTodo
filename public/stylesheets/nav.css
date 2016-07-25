@@ -6,23 +6,7 @@ nav {
     margin: 0; }
   nav ul li {
     display: inline;
-    margin-left: 20px; }
-
-#add-button {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  font-size: 3.8rem;
-  font-family: GothamBold;
-  border: 3px solid black;
-  border-radius: 40px;
-  width: 60px;
-  height: 60px;
-  background: black;
-  color: white;
-  z-index: 55; }
-  #add-button p {
-    position: relative;
-    top: 2px; }
+    margin-left: 20px;
+    font-size: 1.6rem; }
 
 /*# sourceMappingURL=nav.css.map */

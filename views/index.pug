@@ -1,8 +1,7 @@
 extends layout
 
 block content
-	p#add-button(src="icons/success.svg" onclick="showModal()") +
-
+	img#add-button(src="icons/plus.svg" onclick="showModal()")
 
 	div#add-todo-modal(class="box-col all-12 x-center hidden")
 		div(class="box-col all-12 x-center")
@@ -10,8 +9,8 @@ block content
 			form(method="post")
 				input#add-todo-input(placeholder="todo title" name="title")
 				textarea#add-todo-textarea(placeholder="todo content" name="body")
-				input#accept-button(type="image" src="icons/success.svg" action="/styleguide" onclick="hideModal()")
-			img#close-button(src="icons/error.svg" onclick="hideModal()")
+				input#accept-button(type="image" src="icons/plus.svg" action="/styleguide" onclick="hideModal()")
+			img#close-button(src="icons/cancel.svg" onclick="hideModal()")
 
 
 
@@ -26,10 +25,10 @@ block content
 		each todo, i in todosObj
 			- var ii = 'todo-' + i;
 			div(id=ii, class="todo", _span="11 11 5 4 3")
-				h3(todo-parent=ii contenteditable="true" spellcheck="false") #{todo.title}
+				h3(todo-parent=ii contenteditable="true" spellcheck="false" class="todo-title") #{todo.title}
 				div(class="todo-content box-col hidden-todo-child", todo-parent=ii)
-					p(todo-parent=ii contenteditable="true" spellcheck="false") #{todo.body}
+					p(todo-parent=ii contenteditable="true" spellcheck="false" class="todo-body") #{todo.body}
 					div(class="todo-button-box" todo-parent=ii)
-						button(class="btn-1 todo-action" todo-parent=ii) EDIT
+						button(class="btn-1 todo-action inactive-todo-button" todo-parent=ii) SAVE
 						button(class="btn-1 todo-action" todo-parent=ii) COMPLETE
 					small(todo-parent=ii): em Created: #{todo.createdAt}

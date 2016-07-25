@@ -108,12 +108,29 @@ button.btn-3 {
     color: white;
     border-radius: 0; }
 
+button[class*="opc"]:active {
+  color: white;
+  background: black; }
+
+button.inactive-todo-button {
+  opacity: .2; }
+
 .todo-action {
   margin-right: 10px; }
 
 @media (max-width: 525px) {
   .todo {
     padding: 20px 8vw; } }
+#add-button {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  font-size: 3.8rem;
+  font-family: GothamBold;
+  width: 60px;
+  height: 60px;
+  z-index: 55; }
+
 nav {
   height: 50px;
   background: white;
@@ -122,24 +139,8 @@ nav {
     margin: 0; }
   nav ul li {
     display: inline;
-    margin-left: 20px; }
-
-#add-button {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  font-size: 3.8rem;
-  font-family: GothamBold;
-  border: 3px solid black;
-  border-radius: 40px;
-  width: 60px;
-  height: 60px;
-  background: black;
-  color: white;
-  z-index: 55; }
-  #add-button p {
-    position: relative;
-    top: 2px; }
+    margin-left: 20px;
+    font-size: 1.6rem; }
 
 #add-todo-modal {
   position: fixed;
@@ -183,15 +184,10 @@ nav {
   position: fixed;
   bottom: 25px;
   right: 25px;
-  font-size: 3.8rem;
-  border-radius: 40px;
   width: 60px;
   height: 60px;
-  color: white;
-  z-index: 100; }
-  #accept-button p {
-    position: relative;
-    top: 2px; }
+  z-index: 55;
+  margin: 0; }
 
 #todo-container {
   display: flex;
@@ -211,16 +207,15 @@ nav {
   margin: 10px;
   display: flex;
   flex-direction: column;
-  transition: all 1s; }
-  .todo .todo-content {
-    transition: all 1s; }
-    .todo .todo-content h3 {
-      margin-top: 10px;
-      margin-bottom: 10px; }
-    .todo .todo-content p {
-      margin-bottom: 15px; }
-    .todo .todo-content small {
-      margin-top: 10px; }
+  transition: all .5s; }
+  .todo .todo-content h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    transition: all .5s; }
+  .todo .todo-content p {
+    margin-bottom: 15px; }
+  .todo .todo-content small {
+    margin-top: 10px; }
 
 .todo-button-box {
   display: flex; }
@@ -229,14 +224,16 @@ nav {
   .todo {
     background: #f5efed;
     padding: 15px 25px 10px;
-    margin: 10px; }
+    margin: 10px;
+    transition: all .5s; }
     .todo .todo-content.hidden-todo-child {
       display: none; }
     .todo .todo-content.shown-todo-child {
       display: inline; }
     .todo .todo-content h3 {
       margin-top: 10px;
-      margin-bottom: 10px; }
+      margin-bottom: 10px;
+      transition: all .5s; }
     .todo .todo-content p {
       margin-bottom: 15px; }
     .todo .todo-content small {
@@ -282,6 +279,12 @@ nav {
 
 .bg-light-gray, .bg-3 {
   background: #f5efed; }
+
+.bg-pale-green {
+  background: #56E39F; }
+
+.bg-pale-red {
+  background: #EF6F6C; }
 
 .bg-white, .bg-4 {
   background: white; }
@@ -526,6 +529,9 @@ nav {
 
 .opc_2 {
   opacity: .2; }
+
+.opc_1 {
+  opacity: .1; }
 
 .color-box {
   height: 30px;

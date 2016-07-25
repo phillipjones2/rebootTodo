@@ -1,29 +1,22 @@
 
-const addTodoModal = document.getElementById('add-todo-modal'),
-			todos = document.getElementsByClassName('todo'),
+const	todos = document.getElementsByClassName('todo'),
 			todosLen = todos.length;
 
 for (let todo of todos) {
 	todo.style.height = todo.scrollY;
-
 	let	touchStartX, touchStartY;
 
-	// When touch on todo element begins, store the
-	// starting X and Y coordinates of the swipe.
 	todo.addEventListener('touchstart', (e) => {
+		if (document.body.clientWidth >= 520) { return }
 		touchStartX = e.touches[0].screenX;
 		touchStartY = e.touches[0].screenY;
 	}); // touchstart
 
-	// When touch on todo element ends...
-
 	todo.addEventListener('touchend', (e) => {
-		// - Get the target element of the touch.
+		if (document.body.clientWidth >= 520) { return }
 		let thisTodo = e.target;
 
-		// - If it is not the todo itself, but a child instead...
 		if (!e.target.classList.contains('todo')) {
-			// get the corresponding parent todo div.
 			const thisParentID = thisTodo.getAttribute('todo-parent');
 			thisTodo = document.getElementById(thisParentID);
 		} // if
@@ -35,85 +28,88 @@ for (let todo of todos) {
 					todoHeight = todo.scrollHeight,
 					swipeXDifference = touchStartX - touchEndX;
 
-		// Create absolute values from swipe coordinates.
 		const [distance, wavier] = [
 			Math.abs(swipeXDifference),
 			Math.abs(touchStartY - touchEndY)
 		];
 
-		// If the touch event is an obvious tap, expand the
-		// todo to show all content and close other open todos.
-		if (distance < 10 && wavier < 10) {
-			const todoChildren = document.querySelectorAll(`[todo-parent=${thisParentID}]`);
-
-			const otherTodoChildren = document.querySelectorAll(`:not([todo-parent=${thisParentID}]`)
+		if (distance < 10 && wavier < 10) { // If the user taps a todo...
+			const otherTodoChildren = document.querySelectorAll(`:not([todo-parent=${thisParentID}]`);
 			for (let otherTodoChild of otherTodoChildren) {
 				otherTodoChild.classList.remove('shown-todo-child');
 			}
 
+			const todoChildren = document.querySelectorAll(`[todo-parent=${thisParentID}]`);
 			for (let todoChild of todoChildren) {
 				todoChild.classList.add('shown-todo-child');
 			}
-
 		}
 
 		const validSwipe = (wavier < todoHeight &&
 											  distance > todoWidth / 2);
 
-		// Determine direction of swipe and set booleans
-		// for use in future conditionals.
 		const rightSwipe = swipeXDifference < 0 ? true : false;
 
-		// If the swipe does not meet state change criteria, exit.
-		// Otherwise, check if the swipe was leftward or rightward.
 		if (!validSwipe) return;
 		else {
+			const thisTodoTitle = document.querySelector(`h3[todo-parent=${thisParentID}`);
 			if (rightSwipe) {
-
-				// If the todo is already marked for deletion and
-				// receives another right swipe, un-schedule deletion
-				// and return todo to original state.
-				if (thisTodo.classList.contains('bg-red') && thisTodo.style.opacity == '0.4') {
-					thisTodo.classList.remove('bg-red');
+				if (thisTodo.classList.contains('bg-pale-red') && thisTodo.style.opacity == '0.4') {
+					thisTodo.classList.remove('bg-pale-red');
 					thisTodo.style.opacity = '1';
-				}
+					thisTodoTitle.classList.remove('font-white');
 
-				// If the todo has already received an initial right
-				// swipe for deletion, schedule it for deletion.
-				else if (thisTodo.classList.contains('bg-red')) {
-					console.log('......')
+				}	else if (thisTodo.classList.contains('bg-pale-red')) {
 					thisTodo.style.opacity = '0.4'; // TEMPORARY
+
 				} else {
-					// If the todo is receiving its first deletion swipe,
-					// give it .bg-red and make sure .bg-green is not present.
-					thisTodo.classList.add('bg-red');
-					thisTodo.classList.remove('bg-green');
+					thisTodo.classList.add('bg-pale-red');
+					thisTodo.classList.remove('bg-pale-green');
+					thisTodoTitle.classList.add('font-white');
 				} // else
+
 			} else { // If left swipe...
-				// If the todo is already marked as complete,
-				// remove the completed state.
-				if (thisTodo.classList.contains('bg-green')) {
-					thisTodo.classList.remove('bg-green');
+				if (thisTodo.classList.contains('bg-pale-green')) {
+					thisTodo.classList.remove('bg-pale-green');
+					thisTodoTitle.classList.remove('font-white');
+
 				} else {
 					thisTodo.style.opacity = '1';
-					thisTodo.classList.add('bg-green');
-					thisTodo.classList.remove('bg-red');
+					thisTodo.classList.add('bg-pale-green');
+					thisTodo.classList.remove('bg-pale-red');
+					thisTodoTitle.classList.add('font-white');
 				}
 			} // else
 		} // else
 	}); // touchend
 } // for
 
-
-
-
-
-
+const todoTitles = document.getElementsByClassName('todo-title');
+for (let title of todoTitles) {
+	title.addEventListener('keypress', (e) => {
+		console.log(e);
+		const thisTitleParentID = title.getAttribute('todo-parent');
+		console.log(thisTitleParentID)
+		const saveButton = document.querySelector(`.inactive-todo-button[todo-parent=${thisTitleParentID}]`)
+		console.log(saveButton)
+		saveButton.classList.remove('inactive-todo-button');
+	})
+}
 
 // When the + button is clicked, open the new todo modal.
 // When the x button in the modal are clicked, close it.
-const modalCloseButton = document.getElementById('close-button'),
-			modalAcceptButton = document.getElementById('accept-button');
+// Swap plus icons for variable open and submit functionalities.
+const addTodoModal = document.getElementById('add-todo-modal'),
+			modalCloseButton = document.getElementById('close-button'),
+			modalAcceptButton = document.getElementById('accept-button'),
+			addTodoButton = document.getElementById('add-button');
 
-function hideModal(e) {	addTodoModal.classList.add('hidden') }
-function showModal(e) {	addTodoModal.classList.remove('hidden') }
+function hideModal(e) {
+	addTodoModal.classList.add('hidden');
+	addTodoButton.classList.remove('hidden');
+
+}
+function showModal(e) {
+	addTodoModal.classList.remove('hidden');
+	addTodoButton.classList.add('hidden');
+}
