@@ -1,3 +1,4 @@
+'use strict';
 
 const	todos = getElsByClass('todo-box'),
 			todosLen = todos.length;
@@ -27,8 +28,8 @@ for (let todo of todos) {
 					rightSwipe = (swipeXDifference < 0 ? true : false),
 					validSwipe = (wavier < todoHeight && distance > todoWidth / 2);
 
-		const openTodoHeight = getOpenTodoHeight(thisTodo, thisParentID);
-		handleTodoTap(distance, wavier, todo, thisParentID, openTodoHeight);
+		// const openTodoHeight = getOpenTodoHeight(thisTodo, thisParentID);
+		handleTodoTap(distance, wavier, todo, thisParentID);
 
 		if (!validSwipe) { return }
 
@@ -40,6 +41,7 @@ for (let todo of todos) {
 					thisTodo.classList.remove('deleted-todo');
 					thisTodo.classList.remove('completed-todo');
 					thisTodoTitle.classList.remove('font-white');
+
 				} else {
 					thisTodo.classList.add('deleted-todo');
 					thisTodo.classList.remove('completed-todo');
@@ -62,30 +64,51 @@ for (let todo of todos) {
 } // for
 
 
+//|------------------------------------
+//|------------------------------------
+//|------------------------------------
+//| When a todo title or todo body is focused
+//| and is provided keyboard input...
+const titles = getElsByClass('todo-title'),
+			bodies = getElsByClass('todo-body');
 
-//|------------------------------------
-//|------------------------------------
-//|------------------------------------
-//| When a todo title or todo body is focused and is provided keyboard input.
-const todoTitles = getElsByClass('todo-title'),
-			todoBodies = getElsByClass('todo-body');
-
-for (let title of todoTitles) {
+for (let title of titles) {
 	const thisTodoParentID = title.getAttribute('todo-parent');	
 	const saveButton = getElByQuery(`.inactive-todo-button[todo-parent=${thisTodoParentID}]`);
-	title.addEventListener('keypress', handleTodoKeystrokes(title, saveButton[0]));
+	title.addEventListener('keypress', handleTodoKeystrokes);
 }
 
-for (let body of todoBodies) {
+for (let body of bodies) {
 	const thisTodoParentID = body.getAttribute('todo-parent');
 	const saveButton = getElByQuery(`.inactive-todo-button[todo-parent=${thisTodoParentID}]`);
-	body.addEventListener('keypress', handleTodoKeystrokes(body, saveButton[0]));
+	body.addEventListener('keypress', handleTodoKeystrokes(e, body));
+}
+ 
+function handleTodoKeystrokes(e, el) {
+	const el = e.target,
+				todoTree = getTodoTree(el);
+
+	el.todoTree = getTodoTree(e.target);
+	el.todoTree.keystrokes++;
+	console.log(todoTree.keystrokes);
+	todoTree.saveButton.classList.remove('inactive-todo-button');
+	todoTree.discardButton.classList.remove('inactive-todo-button');
 }
 
-function handleTodoKeystrokes(el, button) {
-	button.classList.remove('inactive-todo-button');
-}
 
+//|------------------------------------
+//|------------------------------------
+//|------------------------------------
+//|
+
+
+
+
+//|------------------------------------
+//|------------------------------------
+//|------------------------------------
+//| When a save button is clicked...
+//|
 
 
 
@@ -110,7 +133,7 @@ function validateTargetAsTodo(e) {
 //|------------------------------------
 //| If touch event was an apparent tap on a todo, close all other
 //| open todos and open the one that was tapped.
-function handleTodoTap(distance, wavier, todo, todoParentID, openTodoHeight) {
+function handleTodoTap(distance, wavier, todo, todoParentID) {
 	if (distance < 10 && wavier < 10) {
 		const otherTodoChildren = getElsByQuery(`:not([todo-parent=${todoParentID}]`),
 					otherTodoCloseButtons = getElsByQuery(`img[todo-parent]:not([todo-parent=${todoParentID}])`),
@@ -131,23 +154,6 @@ function handleTodoTap(distance, wavier, todo, todoParentID, openTodoHeight) {
 
 		todoCloseButton.classList.remove('hidden');
 	}
-};
-
-
-
-//|------------------------------------
-//|------------------------------------
-//|------------------------------------
-//|
-//|
-function getOpenTodoHeight(todo, parentID) {
-	const thisTodoContent = getElByQuery(`.todo-content[todo-parent=${parentID}`),
-				thisTodoContentHeight = thisTodoContent.clientHeight,
-				thisTodoClosedHeight = todo.clientHeight,
-				thisTodoOpenHeight = thisTodoContentHeight + thisTodoClosedHeight;
-
-	return thisTodoOpenHeight;
-	// console.log(thisTodoContentHeight)
 };
 
 
@@ -184,22 +190,65 @@ function closeTodo(e) {
 	}
 }
 
-function getElById(id) {
-	return document.getElementById(id);
+function getElById(id, parent) {
+	if (parent) { return parent.getElementById(id) }
+	else { return document.getElementById(id) }
 };
 
-function getElsByClass(className) {
-	return document.getElementsByClassName(className);
+function getElsByClass(className, parent) {
+	if (parent) { return parent.getElementsByClassName(className) }
+	else { return document.getElementsByClassName(className) }
 };
 
-function getElByQuery(query) {
-	return document.querySelector(query);
+function getElByQuery(query, parent) {
+	if (parent) { return parent.querySelector(query) }
+	else { return document.querySelector(query) }
 };
 
-function getElsByQuery(query) {
-	return document.querySelectorAll(query);
+function getElsByQuery(query, parent) {
+	if (parent) { return parent.querySelectorAll(query) }
+	else { return document.querySelectorAll(query) }
 };
 
-function getElsByTag(tag) {
-	return document.getElementsByTagName(tag);
+function getElsByTag(tag, parent) {
+	if (parent) { return parent.getElementsByTagName(tag) }
+	else { return document.getElementsByTagName(tag) }
+};
+
+function addClasses(el, classesArray) {
+	classesArray.forEach((_class, i) => {
+		el.classList.add(_class);
+	});
+};
+
+function removeClasses(el, classArray) {
+	classesArray.forEach((_class, i) => {
+		el.classList.remove(_class)
+	});
+};
+
+function getTodoTree(el) {
+	const todoID = el.getAttribute('todo-parent') || el.getAttribute('id'),
+				parent = getElById(todoID),
+				children = getElsByQuery('[todo-parent]', parent),
+				title = getElByQuery('h3', parent),
+				body = getElByQuery('.todo-body', parent),
+				saveButton = getElByQuery('.todo-save-button', parent),
+				discardButton = getElByQuery('.todo-discard-button', parent),
+				completeButton = getElByQuery('.todo-complete-button', parent),
+				date = getElByQuery('.todo-date', parent),
+				closeButton = getElByQuery('.todo-close-button', parent),
+				keystrokes = 0;
+
+	return {
+		parent,
+		children,
+		title,
+		body,
+		saveButton,
+		discardButton,
+		completeButton,
+		date,
+		keystrokes,
+	}
 };

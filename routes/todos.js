@@ -7,20 +7,20 @@ const express = require('express'),
 router.get('/', (req, res) => {
   Todo.find({
   }, (err, docs) => {
-    console.log(docs);
+    // console.log(docs);
     // res.send(docs);
     res.render('index', { title: 'TodoTwo', todosObj: docs });
   });
 });
 
 // todo show - one todo -response is json
-router.get('/:todo_id', (req, res) => {
-  Todo.findById(req.params.todo_id, (err, todo) => {
-    if (err)
-      res.send(err);
-    res.send(todo);
-  });
-});
+// router.get('/:todo_id', (req, res) => {
+//   Todo.findById(req.params.todo_id, (err, todo) => {
+//     if (err)
+//       res.send(err);
+//     res.send(todo);
+//   });
+// });
 
 // create todo
 router.post('/', (req, res) => {

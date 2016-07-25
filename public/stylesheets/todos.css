@@ -29,7 +29,7 @@
 .todo-button-box {
   display: flex; }
 
-@media (max-width: 520px) {
+@media (max-width: 768px) {
   .todo-box {
     background: #f5efed;
     padding: 15px 25px 10px;
