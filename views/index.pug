@@ -25,18 +25,40 @@ block content
 		each todo, i in todosObj
 			- var ii = 'todo-' + i;
 
-			div(id=ii, class="todo-box priority-x", _span="11 11 5 4 3")
+			div(id=ii,
+					class="todo-box priority-x",
+					_span="11 11 5 4 3")
 
-				div(class="close-todo-button-box" todo-parent=ii)
-					img(src="icons/cancel.svg", todo-parent=ii, onclick="closeTodo(event)",
+				div(class="close-todo-button-box", todo-parent=ii)
+					img(src="icons/cancel.svg",
+							todo-parent=ii,
+							onclick="closeTodo(event)",
 							class="close-todo-button hidden")
 
-				h3(todo-parent=ii contenteditable="true" spellcheck="false" class="todo-title") #{todo.title}
+				h3(todo-parent=ii contenteditable="true"
+					 spellcheck="false",
+					 class="todo-title").
+					#{todo.title}
+
+				div(class="todo-content box-col hidden-todo-child",
+						todo-parent=ii)
+
+					p(todo-parent=ii contenteditable="true"
+						spellcheck="false"
+						class="todo-body").
+						#{todo.body}
+
+					div(class="todo-button-box box wrap" todo-parent=ii)
+						button(class="btn-1 todo-save-button inactive-todo-button" todo-parent=ii) SAVE
+
+						button(class="btn-1 todo-complete-button" todo-parent=ii) COMPLETE
 
 				div(class="todo-content box-col hidden-todo-child", todo-parent=ii)
 					p(todo-parent=ii contenteditable="true" spellcheck="false" class="todo-body") #{todo.body} #{todo.priority}
 					div(class="todo-button-box" todo-parent=ii)
 						button(class="btn-1 todo-action inactive-todo-button" todo-parent=ii) SAVE
 						button(class="btn-1 todo-action" todo-parent=ii) COMPLETE
+						button(class="btn-1 todo-discard-button inactive-todo-button", todo-parent=ii) DISCARD
 
-					small(todo-parent=ii): em #{todo.formatedCreate}
+					small(todo-parent=ii, class="todo-date")
+						em #{todo.formattedDate}
