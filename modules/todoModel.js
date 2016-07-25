@@ -2,9 +2,11 @@ const mongoose = require('mongoose'),
       Schema = mongoose.Schema;
 
 const todoSchema = new Schema({
-  title     : { type: String, required: true },
-  body      : String,
-  priority  : { type: String, default: 'Medium' }
+  title          : { type: String, required: true },
+  body           : String,
+  priority       : { type: Number, default: 3 },
+  formatedCreate : String,
+  formatedUpdate : String
 },
 {
   timestamps: true
