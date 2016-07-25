@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express'),
+			router = express.Router();
 
 /* HOME PAGE REQUEST */
 router.get('/', function(req, res, next) {

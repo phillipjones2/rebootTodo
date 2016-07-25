@@ -1,20 +1,15 @@
 
-var modalCloseButton = document.getElementById('close-button');
-var modalAcceptButton = document.getElementById('accept-button');
-var addTodoModal = document.getElementById('add-todo-modal');
-var todos = document.getElementsByClassName('todo');
+const addTodoModal = document.getElementById('add-todo-modal'),
+			todos = document.getElementsByClassName('todo'),
+			todosLen = todos.length;
 
-var todosLen = todos.length;
-
-for (var i = 0; i < todosLen; i++) {
-	var todo = todos[i];
-	var touchStartX;
-	var touchStartY;
+for (let todo of todos) {
+	let	touchStartX,
+			touchStartY;
 
 	todo.addEventListener('touchstart', function(e) {
 		touchStartX = e.touches[0].screenX;
 		touchStartY = e.touches[0].screenY;
-
 	});
 
 	todo.addEventListener('touchend', function(e) {
@@ -40,20 +35,15 @@ for (var i = 0; i < todosLen; i++) {
 		};
 
 		var swipeDist = Math.abs(touchXDifference);
-		// console.log(`swipe distance: ${swipeDist}`);
-
 		var swipeWaiver = Math. abs(touchStartY - touchEndY)
-		// console.log(`swipe Waiver: ${swipeWaiver}`);
 
 		if (swipeWaiver > thisTodoHeight && swipeDist < thisTodoWidth / 2) {
 			return;
 		} else {
 			if (rightSwipe) {
-				// console.log(todo)
 				thisTodo.classList.add('bg-red');
 				thisTodo.classList.remove('bg-green');
 			} else {
-				// console.log(thisTodo)
 				thisTodo.classList.add('bg-green');
 				thisTodo.classList.remove('bg-red');
 			}
@@ -61,12 +51,9 @@ for (var i = 0; i < todosLen; i++) {
 	});
 }
 
-
-
-function hideModal(e) {
-	addTodoModal.classList.add('hidden');
-}
-
-function showModal(e) {
-	addTodoModal.classList.remove('hidden');
-}
+// When the + button is clicked, open the new todo modal.
+// When the x button in the modal are clicked, close it.
+var modalCloseButton = document.getElementById('close-button');
+var modalAcceptButton = document.getElementById('accept-button');
+function hideModal(e) {	addTodoModal.classList.add('hidden') }
+function showModal(e) {	addTodoModal.classList.remove('hidden') }
