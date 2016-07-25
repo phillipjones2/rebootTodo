@@ -4,7 +4,7 @@ const mongoose = require('mongoose'),
 const todoSchema = new Schema({
   title          : { type: String, required: true },
   body           : String,
-  priority       : { type: Number, default: 3 },
+  priority       : Number,
   formatedCreate : String,
   formatedUpdate : String
 },

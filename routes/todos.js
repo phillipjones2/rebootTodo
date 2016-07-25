@@ -23,7 +23,8 @@ router.get('/', (req, res) => {
 
 // create todo
 router.post('/', (req, res) => {
-  var todo = new Todo({ title: req.body.title, body: req.body.body});
+  console.log(req.body);
+  var todo = new Todo({ title: req.body.title, body: req.body.body, priority: req.body.priority});
   todo.save((err, doc) => {
     if (err) return console.error(err);
     Todo.find().sort('priority').exec((err, docs) => {

@@ -5,7 +5,9 @@ const express = require('express'),
 
 const jsPaths = {
 	main     : './public/javascripts/main.js',
-	priority : './public/javascripts/priority.js'
+	priority : './public/javascripts/priority.js',
+	newTodoForm: './public/javascripts/new-todo-form.js',
+	functions: './public/javascripts/functions.js'
 };
 
 
@@ -19,7 +21,7 @@ router.get('/main', (req, res, next) => {
 	});
 });
 
-/* MAIN.JS FILE REQUEST */
+/* PRIORITY.JS FILE REQUEST */
 router.get('/priority', (req, res, next) => {
 	babel.transformFile(jsPaths.priority, {
 		presets: ['es2015']
@@ -28,5 +30,35 @@ router.get('/priority', (req, res, next) => {
 		res.send(data.code);
 	});
 });
+
+/* NEW-TODO-FORM.JS FILE REQUEST */
+router.get('/new-todo-form', (req, res, next) => {
+	babel.transformFile(jsPaths.newTodoForm, {
+		presets: ['es2015']
+	}, (err, data) => {
+		if (err) console.log(err);
+		res.send(data.code);
+	});
+});
+
+/* FUNCTIONS.JS FILE REQUEST */
+router.get('/functions', (req, res, next) => {
+	babel.transformFile(jsPaths.functions, {
+		presets: ['es2015']
+	}, (err, data) => {
+		if (err) console.log(err);
+		res.send(data.code);
+	});
+});
+
+/* NEW-TODO-FORM.JS FILE REQUEST */
+// router.get('/new-todo-form', (req, res, next) => {
+// 	babel.transformFile(jsPaths.newTodoForm, {
+// 		presets: ['es2015']
+// 	}, (err, data) => {
+// 		if (err) console.log(err);
+// 		res.send(data.code);
+// 	});
+// });
 
 module.exports = router;

@@ -4,7 +4,7 @@
  formatDate = require('./routes/todos').formatDate,
 
        todos = [],
-    priorityArr = [1 , 2, 3],
+    priorityArr = [0, 1, 2],
 
 
 mongoose.connect('mongodb://localhost/rebootTodo');
