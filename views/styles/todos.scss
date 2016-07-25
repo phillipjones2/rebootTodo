@@ -15,20 +15,23 @@
 
 .todo {
   background: $color3;
-  padding: 15px 35px 15px;
+  padding: 15px 35px 25px !important;
   margin: 10px;
   display: flex;
   flex-direction: column;
   transition: all 1s;
-	h3 {
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-  p {
-  	margin-bottom: 15px;
-  }
-  small {
-  	margin-top: 10px;
+  .todo-content {
+    transition: all 1s;
+  	h3 {
+  		margin-top: 10px;
+  		margin-bottom: 10px;
+  	}
+    p {
+    	margin-bottom: 15px;
+    }
+    small {
+    	margin-top: 10px;
+    }
   }
 }
 
@@ -38,33 +41,38 @@
 
 
 
-@media screen and (max-width: 520px) {
+@media (max-width: 520px) {
   .todo {
     background: $color3;
     padding: 15px 25px 10px;
     margin: 10px;
-    h3 {
-      margin-top: 10px;
-      margin-bottom: 10px;
-    }
-    p {
-      display: none;
-      margin-bottom: 15px;
-    }
-    small {
-      display: none;
-      margin-top: 10px;
-    }
-    .todo-button-box {
-      display: none;
-    }
+    .todo-content {
+      &.hidden-todo-child {
+        display: none;
+      }
+      &.shown-todo-child {
+        display: inline;
+      }
+      h3 {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      p {
+        margin-bottom: 15px;
+      }
+      small {
+        margin-top: 10px;
+      }
+      .todo-button-box {
+      }
 
-    &.complete {
-      background: $color2;
-    }
-    &.aborted {
-      background: $color4;
+      &.complete {
+        background: $color2;
+      }
+      &.aborted {
+        background: $color4;
 
+      }
     }
   }
 }

@@ -4,6 +4,8 @@ const addTodoModal = document.getElementById('add-todo-modal'),
 			todosLen = todos.length;
 
 for (let todo of todos) {
+	todo.style.height = todo.scrollY;
+
 	let	touchStartX, touchStartY;
 
 	// When touch on todo element begins, store the
@@ -26,7 +28,8 @@ for (let todo of todos) {
 			thisTodo = document.getElementById(thisParentID);
 		} // if
 
-		const touchEndX = e.changedTouches[0].screenX,
+		const thisParentID = thisTodo.getAttribute('id'),
+					touchEndX = e.changedTouches[0].screenX,
 					touchEndY = e.changedTouches[0].screenY,
 					todoWidth = todo.scrollWidth,
 					todoHeight = todo.scrollHeight,
@@ -35,8 +38,24 @@ for (let todo of todos) {
 		// Create absolute values from swipe coordinates.
 		const [distance, wavier] = [
 			Math.abs(swipeXDifference),
-			Math. abs(touchStartY - touchEndY)
+			Math.abs(touchStartY - touchEndY)
 		];
+
+		// If the touch event is an obvious tap, expand the
+		// todo to show all content and close other open todos.
+		if (distance < 10 && wavier < 10) {
+			const todoChildren = document.querySelectorAll(`[todo-parent=${thisParentID}]`);
+
+			const otherTodoChildren = document.querySelectorAll(`:not([todo-parent=${thisParentID}]`)
+			for (let otherTodoChild of otherTodoChildren) {
+				otherTodoChild.classList.remove('shown-todo-child');
+			}
+
+			for (let todoChild of todoChildren) {
+				todoChild.classList.add('shown-todo-child');
+			}
+
+		}
 
 		const validSwipe = (wavier < todoHeight &&
 											  distance > todoWidth / 2);
@@ -48,7 +67,6 @@ for (let todo of todos) {
 		// If the swipe does not meet state change criteria, exit.
 		// Otherwise, check if the swipe was leftward or rightward.
 		if (!validSwipe) return;
-
 		else {
 			if (rightSwipe) {
 
@@ -85,6 +103,12 @@ for (let todo of todos) {
 		} // else
 	}); // touchend
 } // for
+
+
+
+
+
+
 
 // When the + button is clicked, open the new todo modal.
 // When the x button in the modal are clicked, close it.

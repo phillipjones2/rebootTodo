@@ -25,10 +25,11 @@ block content
 	div#todo-container
 		each todo, i in todosObj
 			- var ii = 'todo-' + i;
-			div(id=ii class="todo" _span="11 11 5 4 3")
-				h3(todo-parent=ii) #{todo.title}
-				p(todo-parent=ii) #{todo.body}
-				div(class="todo-button-box" todo-parent=ii)
-					button(class="btn-1 todo-action" todo-parent=ii) EDIT
-					button(class="btn-1 todo-action" todo-parent=ii) COMPLETE
-				small(todo-parent=ii): em(todo-parent=ii) Created: #{todo.createdAt}
+			div(id=ii, class="todo", _span="11 11 5 4 3")
+				h3(todo-parent=ii contenteditable="true" spellcheck="false") #{todo.title}
+				div(class="todo-content box-col hidden-todo-child", todo-parent=ii)
+					p(todo-parent=ii contenteditable="true" spellcheck="false") #{todo.body}
+					div(class="todo-button-box" todo-parent=ii)
+						button(class="btn-1 todo-action" todo-parent=ii) EDIT
+						button(class="btn-1 todo-action" todo-parent=ii) COMPLETE
+					small(todo-parent=ii): em Created: #{todo.createdAt}
