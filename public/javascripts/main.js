@@ -7,6 +7,8 @@ for (let todo of todos) {
 	todo.style.height = todo.scrollY;
 	let	touchStartX, touchStartY;
 
+	todo.tree = getTodoTree(todo);
+
 	todo.addEventListener('touchstart', (e) => {
 		if (document.body.clientWidth >= 520) { return }
 		touchStartX = e.touches[0].screenX;
@@ -64,52 +66,85 @@ for (let todo of todos) {
 } // for
 
 
-//|------------------------------------
-//|------------------------------------
-//|------------------------------------
-//| When a todo title or todo body is focused
-//| and is provided keyboard input...
-const titles = getElsByClass('todo-title'),
-			bodies = getElsByClass('todo-body');
 
-for (let title of titles) {
-	const thisTodoParentID = title.getAttribute('todo-parent');	
-	const saveButton = getElByQuery(`.inactive-todo-button[todo-parent=${thisTodoParentID}]`);
-	title.addEventListener('keypress', handleTodoKeystrokes);
+//|------------------------------------
+//|------------------------------------
+//|------------------------------------
+
+
+
+//|------------------------------------
+//|------------------------------------
+//|------------------------------------
+
+const titles = getElsByClass('todo-title');
+
+for (let title of titles) {	
+	title.parent = getParentTodo(title);
+	
+
+	title.addEventListener('keyup', (e) => {
+		const newText = `${title.innerText} ${title.parent.tree.body.innerText}`,
+					originalText = title.parent.tree.originalText;
+
+		if (newText != originalText) {
+			title.parent.tree.saveButton.classList.remove('inactive-todo-button');
+			title.parent.tree.discardButton.classList.remove('inactive-todo-button');
+			// console.log(title.todoTree.titleText, title.innerText);
+		} else {
+			title.parent.tree.saveButton.classList.add('inactive-todo-button');
+			title.parent.tree.discardButton.classList.add('inactive-todo-button');
+			// console.log(title.todoTree.titleText, title.innerText);
+		}
+		// console.log(body.todoTree.titleText, body.innerText);
+	});
 }
+
+
+
+//|------------------------------------
+//|------------------------------------
+//|------------------------------------
+
+const bodies = getElsByClass('todo-body');
 
 for (let body of bodies) {
-	const thisTodoParentID = body.getAttribute('todo-parent');
-	const saveButton = getElByQuery(`.inactive-todo-button[todo-parent=${thisTodoParentID}]`);
-	body.addEventListener('keypress', handleTodoKeystrokes(e, body));
+	body.parent = getParentTodo(body);
+	
+	body.addEventListener('keyup', (e) => {
+		const newText = `${body.parent.tree.title.innerText} ${body.parent.tree.body.innerText}`,
+					originalText = body.parent.tree.originalText;
+
+		if (newText != originalText) {
+			body.parent.tree.saveButton.classList.remove('inactive-todo-button');
+			body.parent.tree.discardButton.classList.remove('inactive-todo-button');
+			// console.log(body.todoTree.bodyText, body.innerText);
+		} else {
+			body.parent.tree.saveButton.classList.add('inactive-todo-button');
+			body.parent.tree.discardButton.classList.add('inactive-todo-button');
+			// console.log(body.todoTree.bodyText, body.innerText);
+		}
+		// console.log(body.todoTree.bodyText, body.innerText);
+	});
+};
+
+
+//|------------------------------------
+//|------------------------------------
+//|------------------------------------
+const discardButtons = getElsByClass('todo-discard-button');
+for (let button of discardButtons) {
+	button.addEventListener('click', (e) => {
+		button.todoTree = getTodoTree(button);
+		if (button.classList.contains('inactive-todo-button')) {
+			return;
+		} else {
+			button.todoTree.title.innerText = button.todoTree.titleText;
+			button.todoTree.body.innerText = button.todoTree.bodyText;
+
+		}
+	});
 }
- 
-function handleTodoKeystrokes(e, el) {
-	const el = e.target,
-				todoTree = getTodoTree(el);
-
-	el.todoTree = getTodoTree(e.target);
-	el.todoTree.keystrokes++;
-	console.log(todoTree.keystrokes);
-	todoTree.saveButton.classList.remove('inactive-todo-button');
-	todoTree.discardButton.classList.remove('inactive-todo-button');
-}
-
-
-//|------------------------------------
-//|------------------------------------
-//|------------------------------------
-//|
-
-
-
-
-//|------------------------------------
-//|------------------------------------
-//|------------------------------------
-//| When a save button is clicked...
-//|
-
 
 
 //|------------------------------------
@@ -227,12 +262,22 @@ function removeClasses(el, classArray) {
 	});
 };
 
+function getParentTodo(el) {
+	const parentID = el.getAttribute('todo-parent'),
+				parent = getElById(parentID);
+
+	return parent;
+}
+
 function getTodoTree(el) {
-	const todoID = el.getAttribute('todo-parent') || el.getAttribute('id'),
+	const todoID = el.getAttribute('todo-parent'),
 				parent = getElById(todoID),
 				children = getElsByQuery('[todo-parent]', parent),
 				title = getElByQuery('h3', parent),
+				titleText = title.innerText.trim(),
 				body = getElByQuery('.todo-body', parent),
+				bodyText = body.innerText.trim(),
+				originalText = `${titleText} ${bodyText}`,
 				saveButton = getElByQuery('.todo-save-button', parent),
 				discardButton = getElByQuery('.todo-discard-button', parent),
 				completeButton = getElByQuery('.todo-complete-button', parent),
@@ -244,7 +289,10 @@ function getTodoTree(el) {
 		parent,
 		children,
 		title,
+		titleText,
 		body,
+		bodyText,
+		originalText,
 		saveButton,
 		discardButton,
 		completeButton,
