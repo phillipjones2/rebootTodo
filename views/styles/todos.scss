@@ -19,6 +19,7 @@
   margin: 10px;
   display: flex;
   flex-direction: column;
+  transition: all 1s;
 	h3 {
 		margin-top: 10px;
 		margin-bottom: 10px;
@@ -37,7 +38,7 @@
 
 
 
-@media (max-width: 520px) {
+@media screen and (max-width: 520px) {
   .todo {
     background: $color3;
     padding: 15px 25px 10px;

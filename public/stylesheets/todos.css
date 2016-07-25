@@ -15,7 +15,8 @@
   padding: 15px 35px 15px;
   margin: 10px;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  transition: all 1s; }
   .todo h3 {
     margin-top: 10px;
     margin-bottom: 10px; }
@@ -27,7 +28,7 @@
 .todo-button-box {
   display: flex; }
 
-@media (max-width: 520px) {
+@media screen and (max-width: 520px) {
   .todo {
     background: #f5efed;
     padding: 15px 25px 10px;

@@ -1,18 +1,15 @@
 'use strict';
 
 const express      = require('express'),
-      // Serves a favicon.ico file.
       favicon      = require('serve-favicon'),
-      // Morgan logs out HTTP requests.
       logger       = require('morgan'),
+      babel        = require('babel-core'),
       mongoose     = require('mongoose'),
       todoModel    = require('./modules/todoModel'),
       bodyParser   = require('body-parser'),
       todos        = require('./routes/todos'),
+      js           = require('./routes/scripts'),
       app          = express();
-
-
-
 
 
 // Set up Pug compilation.
@@ -28,6 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // ???
 app.use(express.static(`${__dirname}/public`));
 
 app.use('/', todos);
+app.use('/scripts', js);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
