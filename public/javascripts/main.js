@@ -8,25 +8,50 @@ var todosLen = todos.length;
 
 for (var i = 0; i < todosLen; i++) {
 	var todo = todos[i];
-	var touchStart;
+	var touchStartX;
+	var touchStartY;
 	todo.addEventListener('touchstart', function(e) {
-		touchStart = e.touches[0].screenX;
+		touchStartX = e.touches[0].screenX;
+		touchStartY = e.touches[0].screenY;
+
 	});
 	todo.addEventListener('touchend', function(e) {
-		var touchEnd = e.changedTouches[0].screenX;
+		var touchEndX = e.changedTouches[0].screenX;
+		var touchEndY = e.changedTouches[0].screenY;
+
 		var thisTodoWidth = todo.scrollWidth;
-		var touchXDifference = touchStart - touchEnd;
-		console.log(`thisTodoWidth / 2}`);
-		console.log(touchStart);
-		console.log(touchEnd);
-		if (touchXDifference <= (thisTodoWidth / 2)) {
-			console.log(`startx - endx = ${touchStart - touchEnd}`)
-			if (touchXDifference > 0) {
-				console.log('left');
-			} else {
-				console.log('right');
-			}
+		var thisTodoHeight = todo.scrollHeight;
+		var touchXDifference = touchStartX - touchEndX;
+		// console.log(`touch start: ${touchStartX}`);
+		// console.log(`touch end: ${touchEndX}`);
+		if (touchXDifference < 0 ) {
+		console.log('LEFT TO RIGHT');
+		} else {
+		console.log('RIGHT TO LEFT');
+		};
+		var swipeDist = Math.abs(touchXDifference);
+		console.log(`swipe distance: ${swipeDist}`);
+		var swipeWaiver = Math. abs(touchStartY - touchEndY)
+		console.log(`swipe Waiver: ${swipeWaiver}`);
+		if (swipeWaiver > thisTodoHeight) {
+			console.log("doesn't register")
 		}
+
+
+
+
+
+
+
+
+		// if (touchXDifference <= (thisTodoWidth / 2)) {
+		// 	console.log(`startx - endx = ${touchStart - touchEnd}`)
+		// 	if (touchXDifference > 0) {
+		// 		console.log('left');
+		// 	} else {
+		// 		console.log('right');
+		// 	}
+		// }
 	});
 }
 
@@ -39,4 +64,3 @@ function hideModal(e) {
 function showModal(e) {
 	addTodoModal.classList.remove('hidden');
 }
-
