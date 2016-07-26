@@ -46,7 +46,7 @@
       margin-bottom: 10px;
       transition: all .5s; }
     .todo-box .todo-content p {
-      margin-bottom: 15px; }
+      margin-bottom: 10px; }
     .todo-box .todo-content small {
       margin-top: 10px; }
     .todo-box .todo-content.complete {

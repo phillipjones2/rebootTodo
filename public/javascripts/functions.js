@@ -17,7 +17,7 @@ function closeTodo(e) {
 	const closeButtonClicked = e.target,
 				buttonParentID = closeButtonClicked.getAttribute('todo-parent'),
 				elsButtonHides = getElsByQuery(`[todo-parent=${buttonParentID}]`);
-	
+
 	closeButtonClicked.classList.add('hidden');
 	for (let el of elsButtonHides) {
 		el.classList.remove('shown-todo-child');
@@ -111,25 +111,31 @@ function getTodoTree(el) {
 //| to determine something that I don't remember now.
 
 
-function rotatePriorities(el, valueArr, classArr, bool) {
+function rotatePriorities(el, valueArr, classArr, bordersArr, parent) {
 	if (el.value == '0') {
 		el.value++; //| Make value = 1;
 		removeClasses(el, [classArr[0], classArr[2]]);
+		removeClasses(parent, [bordersArr[0], bordersArr[2]]);
 		addClasses(el, [classArr[1]]);
+		addClasses(parent, [bordersArr[1]]);
 		el.innerText = 'PRIORITY: MEDIUM';
 	}
 
 	else if (el.value == '1') {
 		el.value++; //| Make value = 2;
 		removeClasses(el, [classArr[0], classArr[1]]);
+		removeClasses(parent, [bordersArr[0], bordersArr[1]]);
 		addClasses(el, [classArr[2]]);
+		addClasses(parent, [bordersArr[2]]);
 		el.innerText = 'PRIORITY: HIGH';
 	}
 
 	else if (el.value == '2') {
 		el.value = 0; //| Make value = 0;
 		removeClasses(el, [classArr[1], classArr[2]]);
+		removeClasses(parent, [bordersArr[1], bordersArr[2]]);
 		addClasses(el, [classArr[0]]);
+		addClasses(parent, [bordersArr[0]]);
 		el.innerText = 'PRIORITY: LOW';
 	}
 }

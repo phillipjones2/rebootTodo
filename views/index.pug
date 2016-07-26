@@ -49,6 +49,9 @@ block content
 						class="todo-body").
 						#{todo.body}
 
+					div(class="todo-edit-priority-box box all-12", todo-parent=ii)
+						button(class="todo-edit-priority box xs-10 todo-priority-button priority-bg-"+todo.priority,
+									 todo-parent=ii, value=todo.priority)  #{todoPriorities[todo.priority]}
 					div(class="todo-button-box box wrap", todo-parent=ii)
 						button(class="btn-1 todo-save-button inactive-todo-button",
 									todo-parent=ii) SAVE
@@ -57,7 +60,5 @@ block content
 						button(class="btn-1 todo-discard-button inactive-todo-button",
 									todo-parent=ii) DISCARD
 
-						button(class="todo-edit-priority priority-bg-"+todo.priority,
-									 todo-parent=ii, value=todo.priority)  #{todoPriorities[todo.priority]}
 					small(todo-parent=ii, class="todo-date")
 						em #{todo.formatedCreate}

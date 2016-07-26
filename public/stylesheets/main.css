@@ -68,8 +68,7 @@ small {
   font-size: 1.414rem; }
 
 button {
-  margin: 10px;
-  margin-left: 0; }
+  margin: 0px 10px 10px 0px; }
 
 button.btn-1 {
   background: black;
@@ -107,6 +106,15 @@ button.btn-3 {
     background: black;
     color: white;
     border-radius: 0; }
+
+button.todo-priority-button {
+  font-family: GothamBold;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  padding: 13px 13px 10px;
+  margin: 5px 0px 8px 0px;
+  text-align: left;
+  transition: all .5s; }
 
 #add-button {
   position: fixed;
@@ -233,7 +241,7 @@ nav {
       margin-bottom: 10px;
       transition: all .5s; }
     .todo-box .todo-content p {
-      margin-bottom: 15px; }
+      margin-bottom: 10px; }
     .todo-box .todo-content small {
       margin-top: 10px; }
     .todo-box .todo-content.complete {

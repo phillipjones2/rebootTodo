@@ -79,9 +79,9 @@ for (let todo of todos) {
 
 const titles = getElsByClass('todo-title');
 
-for (let title of titles) {	
+for (let title of titles) {
 	title.parent = getParentTodo(title);
-	
+
 
 	title.addEventListener('keyup', (e) => {
 		console.log(title.parent.tree.priority);
@@ -94,7 +94,7 @@ const bodies = getElsByClass('todo-body');
 
 for (let body of bodies) {
 	body.parent = getParentTodo(body);
-	
+
 	body.addEventListener('keyup', (e) => {
 		console.log(body.parent.tree.priority);
 		const newText = `${body.parent.tree.title.innerText} ${body.parent.tree.body.innerText} ${body.parent.tree.priorityButton.value}`;
@@ -106,13 +106,19 @@ const todoEditPriorityButtons = document.getElementsByClassName('todo-edit-prior
 
 for (let button of todoEditPriorityButtons) {
   button.addEventListener('click', (e) => {
+		button.parent = getParentTodo(button);
     rotatePriorities(button, [0, 1, 2], [
       'priority-bg-0',
       'priority-bg-1',
       'priority-bg-2',
-    ]);
+    ],
+		[
+			'priority-0',
+			'priority-1',
+			'priority-2'
+		], button.parent);
 
-    button.parent = getParentTodo(button);
+
 
     const newText = `${button.parent.tree.title.innerText} ${button.parent.tree.body.innerText} ${button.parent.tree.priorityButton.value}`;
     compareNewAndOriginalText(button, newText);
@@ -224,7 +230,7 @@ function closeTodo(e) {
 	const closeButtonClicked = e.target,
 				buttonParentID = closeButtonClicked.getAttribute('todo-parent'),
 				elsButtonHides = getElsByQuery(`[todo-parent=${buttonParentID}]`);
-	
+
 	closeButtonClicked.classList.add('hidden');
 	for (let el of elsButtonHides) {
 		el.classList.remove('shown-todo-child');

@@ -1,8 +1,7 @@
 @import 'vars';
 
 button {
-  margin: 10px;
-  margin-left: 0;
+  margin: 0px 10px 10px 0px;
 }
 
 button.btn-1 {
@@ -12,7 +11,7 @@ button.btn-1 {
   color: white;
   border: 2px solid black;
   padding: 7px 15px 5px;
-  transition: all .2s;  
+  transition: all .2s;
   &:active {
     background: $color3;
     color: $color0;
@@ -26,7 +25,7 @@ button.btn-2 {
   color: $color0;
   border: 2px solid black;
   padding: 7px 15px 5px;
-  transition: all .2s;  
+  transition: all .2s;
   &:active {
     background: $color0;
     color: $color4;
@@ -40,12 +39,23 @@ button.btn-3 {
   border: 2px solid black;
   padding: 7px 15px 5px;
   border-radius: 0px 11px 0px 11px;
-  transition: all .2s;  
+  transition: all .2s;
   &:active {
     background: black;
     color: white;
     border-radius: 0;
   }
+}
+
+button.todo-priority-button {
+	font-family: GothamBold;
+  font-size: 1.3rem;
+	text-transform: uppercase;
+	// border: 3px solid black;
+	padding: 13px 13px 10px;
+	margin: 5px 0px 8px 0px;
+	text-align: left;
+  transition: all .5s;
 }
 
 
