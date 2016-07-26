@@ -65,20 +65,25 @@ for (let todo of todos) {
 
   else { // If right swipe...
     const thisTodoTitle = todo.tree.title,
-          todoObjectId = todo.getAttribute('todo-object-id').slice(1,-1);
+          todoObjectId = trimQuotes(todo.getAttribute('todo-object-id'));
       let putLink = `/${todoObjectId}`;
       console.log(putLink);
     if (rightSwipe) {
     if (thisTodo.classList.contains('deleted-todo')) {
 
       const req = new XMLHttpRequest();
-    	req.open('delete', putLink , true);
-    	// req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    	req.send();
 
-    	setTimeout(() => {
-    		location.reload();
-    	}, 150);
+      //| When the state of the request changes:
+      //| (4): "request finished and response is ready"
+      req.onreadystatechange = function() {
+        if (req.readyState == 4 && req.status == 200) {
+          console.log('lll')
+          location.reload();
+        }
+      };
+
+    	req.open('delete', putLink , true);
+    	req.send();
     };
 
     thisTodo.classList.add('deleted-todo');

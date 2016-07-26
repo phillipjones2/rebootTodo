@@ -37,13 +37,13 @@ addTodoAcceptBtn.addEventListener('click', (e) => {
 
 
 	const req = new XMLHttpRequest();
+	req.onreadystatechange = ( ) => {
+		console.log('lolo');
+		location.reload();
+	}
 	req.open('post', '/', true);
 	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	req.send(`title=${title}&body=${body}&priority=${priority}`);
-
-	setTimeout(() => {
-		location.reload();
-	}, 150);
 });
 
 // ----- CREATE A TODO PRIORITY BUTTON ----- \\

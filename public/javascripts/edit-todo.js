@@ -7,7 +7,7 @@ for (let button of saveEditedTodoButtons) {
       todoTitle = parent.querySelector('.todo-title').innerText,
       todoBody = parent.querySelector('.todo-body').innerText.trim(),
       priority = parent.querySelector('.todo-edit-priority').value,
-      objectID = parent.getAttribute('todo-object-id').slice(1,-1),
+      objectID = trimQuotes(parent.getAttribute('todo-object-id')),
       putLink = `/${objectID}`;
 
   button.addEventListener('click', (e) => {
@@ -16,7 +16,7 @@ for (let button of saveEditedTodoButtons) {
         todoTitle = parent.querySelector('.todo-title').innerText,
         todoBody = parent.querySelector('.todo-body').innerText.trim(),
         priority = parent.querySelector('.todo-edit-priority').value,
-        objectID = parent.getAttribute('todo-object-id').slice(1,-1),
+        objectID = trimQuotes(parent.getAttribute('todo-object-id')),
         putLink = `/${objectID}`;
 
   	const req = new XMLHttpRequest();

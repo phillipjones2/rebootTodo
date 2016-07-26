@@ -36,10 +36,13 @@ function removeClasses(el, classesArray) {
 	});
 };
 
+function trimQuotes(string) {
+	return string.slice(1, -1);
+} 
+
 function getParentTodo(el) {
 	const parentID = el.getAttribute('todo-parent'),
 				parent = getElById(parentID);
-
 	return parent;
 };
 
