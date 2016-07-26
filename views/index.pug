@@ -58,6 +58,6 @@ block content
 									todo-parent=ii) DISCARD
 
 						button(class="todo-edit-priority priority-bg-"+todo.priority,
-									 todo-parent=ii value=todo.priority)  #{todoPriorities[todo.priority]}
+									 todo-parent=ii, value=todo.priority)  #{todoPriorities[todo.priority]}
 					small(todo-parent=ii, class="todo-date")
 						em #{todo.formatedCreate}

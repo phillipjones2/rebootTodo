@@ -55,7 +55,7 @@ function addClasses(el, classesArray) {
 	});
 };
 
-function removeClasses(el, classArray) {
+function removeClasses(el, classesArray) {
 	classesArray.forEach((_class, i) => {
 		el.classList.remove(_class)
 	});
@@ -66,7 +66,7 @@ function getParentTodo(el) {
 				parent = getElById(parentID);
 
 	return parent;
-}
+};
 
 function getTodoTree(el) {
 	const todoID = el.getAttribute('todo-parent'),
@@ -99,3 +99,34 @@ function getTodoTree(el) {
 		keystrokes,
 	}
 };
+
+
+
+//| Supply the function with the element being clicked on,
+//| the array of values to be applied, and the array of
+//| classes to be applied, as well as an optional boolean
+//| to determine something that I don't remember now.
+
+
+function rotatePriorities(el, valueArr, classArr, bool) {
+	if (el.value == '0') {
+		el.value++; //| Make value = 1;
+		removeClasses(el, [classArr[0], classArr[2]]);
+		addClasses(el, [classArr[1]]);
+		el.innerText = 'PRIORITY: MEDIUM';
+	}
+
+	else if (el.value == '1') {
+		el.value++; //| Make value = 2;
+		removeClasses(el, [classArr[0], classArr[1]]);
+		addClasses(el, [classArr[2]]);
+		el.innerText = 'PRIORITY: HIGH';
+	}
+
+	else if (el.value == '2') {
+		el.value = 0; //| Make value = 0;
+		removeClasses(el, [classArr[1], classArr[2]]);
+		addClasses(el, [classArr[0]]);
+		el.innerText = 'PRIORITY: LOW';
+	}
+}

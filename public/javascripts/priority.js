@@ -32,48 +32,13 @@ addTodoPriorityButton.addEventListener('click',(e) => {
   // remove the previous class and add the new class
 });
 
-// const todoEditPriorityButtons = document.getElementsByClassName('todo-edit-priority');
-//
-// for (let button of todoEditPriorityButtons) {
-//   let buttonValue = Number(button.value);
-//   let buttonValuePlus;
-//   if (buttonValue === 2 ) {
-//     buttonValuePlus = 0;
-//   } else {
-//     buttonValuePlus = buttonValue + 1;
-//   }
-//   let editTodoPriorityButtonClicks = buttonValue;
-//   let editTodoPriorityButtonClassRemove = buttonValuePlus;
-//
-//   console.log(`END editTodoPriorityButtonClicks: ${editTodoPriorityButtonClicks}` );
-//   console.log(`END editTodoPriorityButtonClassRemove: ${editTodoPriorityButtonClassRemove}` );
-//
-//   button.addEventListener('click', (e) => {
-//
-//     button.innerText = priorities[editTodoPriorityButtonClicks].priority;
-//     button.value = editTodoPriorityButtonClicks;
-//     console.log(`editTodoPriorityButtonClassRemove: ${editTodoPriorityButtonClassRemove}` );
-//     console.log(`REMOVE: ${priorities[editTodoPriorityButtonClassRemove].priorityClass}`);
-//
-//     if (editTodoPriorityButtonClicks === 2) {
-//       editTodoPriorityButtonClicks = 0;
-//     } else {
-//       editTodoPriorityButtonClicks += 1;
-//     }
-//     console.log(`END editTodoPriorityButtonClicks: ${editTodoPriorityButtonClicks}` );
-//     if (editTodoPriorityButtonClassRemove == 2) {
-//       editTodoPriorityButtonClassRemove = 0;
-//     } else {
-//       editTodoPriorityButtonClassRemove += 1;
-//     }
-//     console.log(`END editTodoPriorityButtonClassRemove: ${editTodoPriorityButtonClassRemove}` );
-//
-//
-//     button.classList.remove(priorities[editTodoPriorityButtonClassRemove].priorityClass);
-//     console.log(`editTodoPriorityButtonClicks: ${editTodoPriorityButtonClicks}` );
-//     console.log(`ADD: ${priorities[editTodoPriorityButtonClicks].priorityClass}`);
-//     button.classList.add(priorities[editTodoPriorityButtonClicks].priorityClass);
-//
-//
-//   });
-// }
+const todoEditPriorityButtons = document.getElementsByClassName('todo-edit-priority');
+for (let button of todoEditPriorityButtons) {
+  button.addEventListener('click', (e) => {
+    rotatePriorities(button, [0, 1, 2], [
+      'priority-bg-0',
+      'priority-bg-1',
+      'priority-bg-2',
+    ]);
+  });
+}
