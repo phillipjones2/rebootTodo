@@ -2,7 +2,7 @@
 
 const express      = require('express'),
       favicon      = require('serve-favicon'),
-      logger       = require('morgan'),
+      // logger       = require('morgan'),
       babel        = require('babel-core'),
       mongoose     = require('mongoose'),
       todoModel    = require('./modules/todoModel'),
@@ -20,7 +20,7 @@ app.set('view engine', 'pug');
 // ***** Need to create a favicon. ***** //
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false })); // ???
 app.use(express.static(`${__dirname}/public`));

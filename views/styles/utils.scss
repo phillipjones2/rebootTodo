@@ -39,10 +39,6 @@
 	background: #DBA2A7;
 }
 
-.wrap {
-	flex-wrap: wrap;
-}
-
 
 .font-white {
 	color: white;
@@ -204,3 +200,15 @@
 .opc_3 {	opacity: .3; }
 .opc_2 {	opacity: .2; }
 .opc_1 {	opacity: .1; }
+
+@media (min-width: 1200px) {
+	.xl-2-5 {
+		width: 30%;
+	}
+}
+
+@media (min-width: 891px) and (max-width: 1200px) {
+	.lg-3-5 {
+		width: 42%;
+	}
+}

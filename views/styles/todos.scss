@@ -1,5 +1,8 @@
 @import 'vars';
 
+// All element styling for elements relating to individual todos
+// (and the main container) should live inside this file.
+
 #todo-container {
 	display: flex;
   flex-wrap: wrap;
@@ -35,75 +38,69 @@
   }
 }
 
-.todo-button-box {
-	display: flex;
-}
-
-
 
 @media (max-width: 768px) {
+  .todo {
+    padding: 20px 8vw;
+  }
   .todo-box {
     background: $color3;
     padding: 15px 25px 10px;
     margin: 10px;
-    .todo-content {
-      &.hidden-todo-child {
-        display: none;
-        opacity: 0;
-        transition: opacity .5s;
-      }
-      &.shown-todo-child {
-        display: inline;
-        opacity: 1;
-      }
-      h3 {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        transition: all .5s;
-      }
-      p {
-        margin-bottom: 10px;
-      }
-      small {
-        margin-top: 10px;
-      }
-      .todo-button-box {
-      }
+  }
+  .todo-content {
+    &.hidden-todo-child {
+      display: none;
+      opacity: 0;
+      transition: opacity .5s;
+    }
+    &.shown-todo-child {
+      display: inline;
+      opacity: 1;
+    }
+    h3 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      transition: all .5s;
+    }
+    p {
+      margin-bottom: 10px;
+    }
+    small {
+      margin-top: 10px;
+    }
+    .todo-button-box {
+    }
 
-      &.complete {
-        background: $color2;
-      }
-      &.aborted {
-        background: $color4;
-      }
+    &.complete {
+      background: $color2;
+    }
+    &.aborted {
+      background: $color4;
     }
   }
 }
 
-.todo-mini-complete-modal {
-	background: $color2;
-	padding: 10px 25px 5px;
-	margin: 10px 10px 0px 10px;
-	position: relative;
-	width: 100%;
-	h3 {
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-  p {
-  	margin-bottom: 15px;
-  }
-  small {
-  	margin-top: 10px;
-  }
+@media (min-width: 767px) {
+
 }
 
+// Backgrounds depending on todo state.
 .deleted-todo {
   background: $pale-red;
 }
 
 .completed-todo {
   background: $pale-green;
+}
+
+// Buttons connected to individual todos.
+.todo-action {
+  margin-right: 10px;
+}
+
+.todo-button-box {
+  display: flex;
 }
 
 .close-todo-button-box {
@@ -128,13 +125,8 @@ button.inactive-todo-button {
   }
 }
 
-// Buttons connected to individual todos.
-.todo-action {
-  margin-right: 10px;
-}
-
-@media (max-width: 525px) {
-  .todo {
-    padding: 20px 8vw;
-  }
+.confirmation-action-button {
+  width: 60px;
+  height: 60px;
+  fill: white;
 }

@@ -58,7 +58,8 @@ button.todo-priority-button {
   transition: all .5s;
 }
 
-
+// The add button is displayed on the main index page,
+// so it can continue to reside here.
 #add-button {
   position: fixed;
   bottom: 25px;
@@ -68,10 +69,4 @@ button.todo-priority-button {
   width: 60px;
   height: 60px;
   z-index: 55;
-}
-
-.confirmation-action-button {
-  width: 60px;
-  height: 60px;
-  fill: white;
 }
