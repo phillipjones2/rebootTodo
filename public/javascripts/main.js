@@ -8,6 +8,7 @@ for (let todo of todos) {
 	let	touchStartX, touchStartY;
 
 	todo.tree = getTodoTree(todo);
+	todo.originalClasses = `${todo.classList}`;
 
 	todo.addEventListener('touchstart', (e) => {
 		if (document.body.clientWidth >= 520) { return }
@@ -118,8 +119,6 @@ for (let button of todoEditPriorityButtons) {
 			'priority-2'
 		], button.parent);
 
-
-
     const newText = `${button.parent.tree.title.innerText} ${button.parent.tree.body.innerText} ${button.parent.tree.priorityButton.value}`;
     compareNewAndOriginalText(button, newText);
   });
@@ -147,13 +146,23 @@ function compareNewAndOriginalText(val, newText) {
 const discardButtons = getElsByClass('todo-discard-button');
 for (let button of discardButtons) {
 	button.addEventListener('click', (e) => {
-		button.todoTree = getTodoTree(button);
+		button.parent = getParentTodo(button);
+		const todoTree = button.parent.tree;
+
 		if (button.classList.contains('inactive-todo-button')) {
 			return;
-		} else {
-			button.todoTree.title.innerText = button.todoTree.titleText;
-			button.todoTree.body.innerText = button.todoTree.bodyText;
 
+		} else {
+			console.log(todoTree.parent.classList);
+			console.log(todoTree.parent.originalClasses);
+			todoTree.title.innerText = todoTree.titleText;
+			todoTree.body.innerText = todoTree.bodyText;
+			todoTree.priorityButton.value = todoTree.priority;
+			todoTree.priorityButton.innerText = todoTree.priorityText;
+			todoTree.priorityButton.classList = todoTree.priorityClass;
+			todoTree.parent.classList = todoTree.parent.originalClasses;
+			todoTree.saveButton.classList.add('inactive-todo-button');
+			todoTree.discardButton.classList.add('inactive-todo-button');
 		}
 	});
 }
@@ -284,9 +293,12 @@ function getParentTodo(el) {
 function getTodoTree(el) {
 	const todoID = el.getAttribute('todo-parent'),
 				parent = getElById(todoID),
+				parentClass = `${parent.classList}`,
 				children = getElsByQuery('[todo-parent]', parent),
 				priorityButton = getElByQuery('.todo-edit-priority', parent),
 				priority = priorityButton.value,
+				priorityText = `${priorityButton.innerText}`,
+				priorityClass = `${priorityButton.classList}`,
 				title = getElByQuery('h3', parent),
 				titleText = title.innerText.trim(),
 				body = getElByQuery('.todo-body', parent),
@@ -301,9 +313,12 @@ function getTodoTree(el) {
 
 	return {
 		parent,
+		parentClass,
 		children,
 		priorityButton,
 		priority,
+		priorityText,
+		priorityClass,
 		title,
 		titleText,
 		body,
