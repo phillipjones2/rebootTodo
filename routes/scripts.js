@@ -8,19 +8,19 @@ const jsPaths = {
 	newTodoForm: './public/javascripts/new-todo-form.js',
 	functions: './public/javascripts/functions.js',
 	editTodo: './public/javascripts/edit-todo.js',
-	mobileEvents: './public/javascripts/mobile-events.js'
+	mobileEvents: './public/javascripts/mobile-events.js',
+	deleteTodo: './public/javascripts/delete-todo.js'
 };
 
 
-// /* MAIN.JS FILE REQUEST */
-// router.get('/main', (req, res, next) => {
-// 	babel.transformFile(jsPaths.main, {
-// 		presets: ['es2015']
-// 	}, (err, data) => {
-// 		if (err) console.log(err);
-// 		res.send(data.code);
-// 	});
-// });
+router.get('/delete-todo', (req, res, next) => {
+	babel.transformFile(jsPaths.deleteTodo, {
+		presets: ['es2015']
+	}, (err, data) => {
+		if (err) console.log(err);
+		res.send(data.code);
+	});
+});
 
 /* NEW-TODO-FORM.JS FILE REQUEST */
 router.get('/new-todo-form', (req, res, next) => {

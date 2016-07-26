@@ -57,4 +57,9 @@ button.todo-priority-button {
   height: 60px;
   z-index: 55; }
 
+.confirmation-action-button {
+  width: 60px;
+  height: 60px;
+  fill: white; }
+
 /*# sourceMappingURL=buttons.css.map */
