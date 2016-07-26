@@ -69,14 +69,16 @@ function getParentTodo(el) {
 };
 
 function getTodoTree(el) {
-	const todoID = el.getAttribute('todo-parent'),
+	const todoID = el.getAttribute('todo-parent'), // parent's ID
+
 				parent = getElById(todoID),
 				children = getElsByQuery('[todo-parent]', parent),
+				priority = getElByQuery('.todo-edit-priority', parent).value;
 				title = getElByQuery('h3', parent),
 				titleText = title.innerText.trim(),
 				body = getElByQuery('.todo-body', parent),
 				bodyText = body.innerText.trim(),
-				originalText = `${titleText} ${bodyText}`,
+				originalText = `${titleText} ${bodyText} ${priority}`,
 				saveButton = getElByQuery('.todo-save-button', parent),
 				discardButton = getElByQuery('.todo-discard-button', parent),
 				completeButton = getElByQuery('.todo-complete-button', parent),
@@ -87,6 +89,7 @@ function getTodoTree(el) {
 	return {
 		parent,
 		children,
+		priority,
 		title,
 		titleText,
 		body,

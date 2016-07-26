@@ -27,18 +27,4 @@ addTodoPriorityButton.addEventListener('click',(e) => {
   addTodoPriorityButton.value = addTodoPriorityButtonClicks;
   addTodoPriorityButton.classList.remove(priorities[addTodoPriorityButtonClassRemove].priorityClass);
   addTodoPriorityButton.classList.add(priorities[addTodoPriorityButtonClicks].priorityClass);
-
-  // change inner html text to Priority MED, height
-  // remove the previous class and add the new class
 });
-
-const todoEditPriorityButtons = document.getElementsByClassName('todo-edit-priority');
-for (let button of todoEditPriorityButtons) {
-  button.addEventListener('click', (e) => {
-    rotatePriorities(button, [0, 1, 2], [
-      'priority-bg-0',
-      'priority-bg-1',
-      'priority-bg-2',
-    ]);
-  });
-}

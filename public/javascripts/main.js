@@ -84,27 +84,11 @@ for (let title of titles) {
 	
 
 	title.addEventListener('keyup', (e) => {
-		const newText = `${title.innerText} ${title.parent.tree.body.innerText}`,
-					originalText = title.parent.tree.originalText;
-
-		if (newText != originalText) {
-			title.parent.tree.saveButton.classList.remove('inactive-todo-button');
-			title.parent.tree.discardButton.classList.remove('inactive-todo-button');
-			// console.log(title.todoTree.titleText, title.innerText);
-		} else {
-			title.parent.tree.saveButton.classList.add('inactive-todo-button');
-			title.parent.tree.discardButton.classList.add('inactive-todo-button');
-			// console.log(title.todoTree.titleText, title.innerText);
-		}
-		// console.log(body.todoTree.titleText, body.innerText);
+		console.log(title.parent.tree.priority);
+		const newText = `${title.innerText} ${title.parent.tree.body.innerText} ${title.parent.tree.priorityButton.value}`;
+		compareNewAndOriginalText(title, newText);
 	});
 }
-
-
-
-//|------------------------------------
-//|------------------------------------
-//|------------------------------------
 
 const bodies = getElsByClass('todo-body');
 
@@ -112,22 +96,44 @@ for (let body of bodies) {
 	body.parent = getParentTodo(body);
 	
 	body.addEventListener('keyup', (e) => {
-		const newText = `${body.parent.tree.title.innerText} ${body.parent.tree.body.innerText}`,
-					originalText = body.parent.tree.originalText;
-
-		if (newText != originalText) {
-			body.parent.tree.saveButton.classList.remove('inactive-todo-button');
-			body.parent.tree.discardButton.classList.remove('inactive-todo-button');
-			// console.log(body.todoTree.bodyText, body.innerText);
-		} else {
-			body.parent.tree.saveButton.classList.add('inactive-todo-button');
-			body.parent.tree.discardButton.classList.add('inactive-todo-button');
-			// console.log(body.todoTree.bodyText, body.innerText);
-		}
-		// console.log(body.todoTree.bodyText, body.innerText);
+		console.log(body.parent.tree.priority);
+		const newText = `${body.parent.tree.title.innerText} ${body.parent.tree.body.innerText} ${body.parent.tree.priorityButton.value}`;
+		compareNewAndOriginalText(body, newText);
 	});
 };
 
+const todoEditPriorityButtons = document.getElementsByClassName('todo-edit-priority');
+
+for (let button of todoEditPriorityButtons) {
+  button.addEventListener('click', (e) => {
+    rotatePriorities(button, [0, 1, 2], [
+      'priority-bg-0',
+      'priority-bg-1',
+      'priority-bg-2',
+    ]);
+
+    button.parent = getParentTodo(button);
+
+    const newText = `${button.parent.tree.title.innerText} ${button.parent.tree.body.innerText} ${button.parent.tree.priorityButton.value}`;
+    compareNewAndOriginalText(button, newText);
+  });
+}
+
+
+function compareNewAndOriginalText(val, newText) {
+	const originalText = val.parent.tree.originalText;
+	if (newText != originalText) {
+		console.log('if')
+		val.parent.tree.saveButton.classList.remove('inactive-todo-button');
+		val.parent.tree.discardButton.classList.remove('inactive-todo-button');
+		// console.log(body.todoTree.bodyText, body.innerText);
+	} else {
+		console.log('else')
+		val.parent.tree.saveButton.classList.add('inactive-todo-button');
+		val.parent.tree.discardButton.classList.add('inactive-todo-button');
+		// console.log(body.todoTree.bodyText, body.innerText);
+	}
+}
 
 //|------------------------------------
 //|------------------------------------
@@ -191,3 +197,116 @@ function handleTodoTap(distance, wavier, todo, todoParentID) {
 	}
 };
 
+
+
+//|------------------------------------
+//|------------------------------------
+//|------------------------------------
+// When the + button is clicked, open the new todo modal.
+// When the x button in the modal are clicked, close it.
+// Swap plus icons for variable open and submit functionalities.
+const addTodoModal = getElById('add-todo-modal'),
+			modalCloseButton = getElById('close-button'),
+			modalAcceptButton = getElById('accept-button'),
+			addTodoButton = getElById('add-button');
+
+function hideModal(e) {
+	addTodoModal.classList.add('hidden');
+	addTodoButton.classList.remove('hidden');
+};
+
+function showModal(e) {
+	addTodoModal.classList.remove('hidden');
+	addTodoButton.classList.add('hidden');
+};
+
+function closeTodo(e) {
+	const closeButtonClicked = e.target,
+				buttonParentID = closeButtonClicked.getAttribute('todo-parent'),
+				elsButtonHides = getElsByQuery(`[todo-parent=${buttonParentID}]`);
+	
+	closeButtonClicked.classList.add('hidden');
+	for (let el of elsButtonHides) {
+		el.classList.remove('shown-todo-child');
+	}
+}
+
+function getElById(id, parent) {
+	if (parent) { return parent.getElementById(id) }
+	else { return document.getElementById(id) }
+};
+
+function getElsByClass(className, parent) {
+	if (parent) { return parent.getElementsByClassName(className) }
+	else { return document.getElementsByClassName(className) }
+};
+
+function getElByQuery(query, parent) {
+	if (parent) { return parent.querySelector(query) }
+	else { return document.querySelector(query) }
+};
+
+function getElsByQuery(query, parent) {
+	if (parent) { return parent.querySelectorAll(query) }
+	else { return document.querySelectorAll(query) }
+};
+
+function getElsByTag(tag, parent) {
+	if (parent) { return parent.getElementsByTagName(tag) }
+	else { return document.getElementsByTagName(tag) }
+};
+
+function addClasses(el, classesArray) {
+	classesArray.forEach((_class, i) => {
+		el.classList.add(_class);
+	});
+};
+
+function removeClasses(el, classesArray) {
+	classesArray.forEach((_class, i) => {
+		el.classList.remove(_class)
+	});
+};
+
+function getParentTodo(el) {
+	const parentID = el.getAttribute('todo-parent'),
+				parent = getElById(parentID);
+
+	return parent;
+}
+
+function getTodoTree(el) {
+	const todoID = el.getAttribute('todo-parent'),
+				parent = getElById(todoID),
+				children = getElsByQuery('[todo-parent]', parent),
+				priorityButton = getElByQuery('.todo-edit-priority', parent),
+				priority = priorityButton.value,
+				title = getElByQuery('h3', parent),
+				titleText = title.innerText.trim(),
+				body = getElByQuery('.todo-body', parent),
+				bodyText = body.innerText.trim(),
+				originalText = `${titleText} ${bodyText} ${priority}`,
+				saveButton = getElByQuery('.todo-save-button', parent),
+				discardButton = getElByQuery('.todo-discard-button', parent),
+				completeButton = getElByQuery('.todo-complete-button', parent),
+				date = getElByQuery('.todo-date', parent),
+				closeButton = getElByQuery('.todo-close-button', parent),
+				keystrokes = 0;
+
+	return {
+		parent,
+		children,
+		priorityButton,
+		priority,
+		title,
+		titleText,
+		body,
+		bodyText,
+		originalText,
+		saveButton,
+		discardButton,
+		completeButton,
+		date,
+		keystrokes,
+	}
+};
