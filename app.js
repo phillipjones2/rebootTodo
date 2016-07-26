@@ -8,6 +8,7 @@ const express      = require('express'),
       todoModel    = require('./modules/todoModel'),
       bodyParser   = require('body-parser'),
       todos        = require('./routes/todos').router,
+      fresh        = require('./routes/fresh'),
       js           = require('./routes/scripts'),
       app          = express();
 

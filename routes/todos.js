@@ -1,6 +1,7 @@
 const express = require('express'),
        router = express.Router(),
      mongoose = require('mongoose'),
+     winterfresh = require('../winterfresh'),
          Todo = require('../modules/todoModel');
 
 // todo index - all todos
@@ -11,6 +12,8 @@ router.get('/', (req, res) => {
     res.render('index', { title: 'TodoTwo', todosObj: docs });
   });
 });
+
+router.get('/fresh', (req, res) =>  winterfresh(res));
 
 // todo show - one todo -response is json
 // router.get('/:todo_id', (req, res) => {

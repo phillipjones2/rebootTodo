@@ -75,9 +75,8 @@ for (let todo of todos) {
 
       //| When the state of the request changes:
       //| (4): "request finished and response is ready"
-      req.onreadystatechange = function() {
+      req.onreadystatechange = ( ) => {
         if (req.readyState == 4 && req.status == 200) {
-          console.log('lll')
           location.reload();
         }
       };
