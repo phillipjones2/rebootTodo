@@ -25,7 +25,7 @@ block content
 	div#todo-container
 		each todo, i in todosObj
 			- var ii = 'todo-' + i;
-
+			- var todoPriorities = ['PRIORITY: LOW','PRIORITY: MEDIUM', 'PRIORITY: HIGH']
 			div(id=ii, todo-parent=ii,
 					class="todo-box priority-"+todo.priority,
 					_span="11 11 5 4 3")
@@ -45,15 +45,19 @@ block content
 						todo-parent=ii)
 
 					p(todo-parent=ii contenteditable="true"
-						spellcheck="false"
+						spellcheck="false",
 						class="todo-body").
 						#{todo.body}
 
-					div(class="todo-button-box box wrap" todo-parent=ii)
-						button(class="btn-1 todo-save-button inactive-todo-button" todo-parent=ii) SAVE
-						button(class="btn-1 todo-complete-button",
+					div(class="todo-button-box box wrap", todo-parent=ii)
+						button(class="btn-1 todo-save-button inactive-todo-button",
+									todo-parent=ii) SAVE
+						button(class="btn-1 todo-complete-button xs-0 sm-0",
 									todo-parent=ii) COMPLETE
 						button(class="btn-1 todo-discard-button inactive-todo-button",
 									todo-parent=ii) DISCARD
+
+						button(class="todo-edit-priority priority-bg-"+todo.priority,
+									 todo-parent=ii value=todo.priority)  #{todoPriorities[todo.priority]}
 					small(todo-parent=ii, class="todo-date")
-						em #{todo.formattedDate}
+						em #{todo.formatedCreate}
