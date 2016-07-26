@@ -48,6 +48,10 @@ router.put('/:todo_id', (req, res) => {
     todo.body = req.body.body;
     todo.priority = req.body.priority;
     todo.formattedUpdate = formatDate(new Date());
+    if (req.body.completed) {
+      todo.completed = true;
+      todo.completedDate = new Date();
+    }
     todo.save((err, doc) => {
       if (err) return consol.error(err);
       Todo.find().sort('priority').exec((err, docs) => {
