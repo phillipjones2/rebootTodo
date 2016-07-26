@@ -64,10 +64,22 @@ for (let todo of todos) {
   if (!validSwipe) { return }
 
   else { // If right swipe...
-    const thisTodoTitle = todo.tree.title;
-
+    const thisTodoTitle = todo.tree.title,
+          todoObjectId = todo.getAttribute('todo-object-id').slice(1,-1);
+      let putLink = `/${todoObjectId}`;
+      console.log(putLink);
     if (rightSwipe) {
-    if (thisTodo.classList.contains('deleted-todo')) return;
+    if (thisTodo.classList.contains('deleted-todo')) {
+
+      const req = new XMLHttpRequest();
+    	req.open('delete', putLink , true);
+    	// req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    	req.send();
+
+    	setTimeout(() => {
+    		location.reload();
+    	}, 150);
+    };
 
     thisTodo.classList.add('deleted-todo');
     thisTodo.classList.remove('completed-todo');
@@ -76,45 +88,66 @@ for (let todo of todos) {
     // Insert delete confirmation string above title.
 
     // Create necessary elements and text node.
-    const confirmDeleteMessage = document.createElement('h2'),
-         confirmDeleteButtonDiv = document.createElement('div'),
-         confirmDeleteButton = document.createElement('img'),
-         cancelDeleteButton = document.createElement('img'),
-         deleteMessage = document.createTextNode('Delete todo?');
+    // const confirmDeleteMessage = document.createElement('h2'),
+    //      confirmDeleteButtonDiv = document.createElement('div'),
+    //      confirmDeleteButton = document.createElement('img'),
+    //      cancelDeleteButton = document.createElement('img'),
+    //      deleteMessage = document.createTextNode('Delete todo?');
+    //
+    // // Add classes to confirmDeleteButtonDiv.
+    // addClasses(confirmDeleteButtonDiv, [
+    //   'box', 'all-12', 'space-inside'
+    // ]);
+    // let todoParentID = todo.getAttribute('id');
+    // // Give buttons respective image srcs.
+    // confirmDeleteButton.setAttribute('src', 'icons/checked.svg');
+    // confirmDeleteButton.setAttribute('todo-parent',todoParentID);
+    // addClasses(confirmDeleteButton, [
+    //     'confirmation-action-button',
+    //     'confirmation-delete'
+    //   ]);
+    //
+    // cancelDeleteButton.setAttribute('src', 'icons/cancel.svg');
+    // cancelDeleteButton.setAttribute('todo-parent',todoParentID)
+    //     addClasses(cancelDeleteButton, [
+    //     'confirmation-action-button',
+    //     'confirmation-cancel'
+    //   ]);
+    //
+    // // Place buttons inside of confirmDeleteButtonDiv.
+    // confirmDeleteButtonDiv.appendChild(cancelDeleteButton);
+    // confirmDeleteButtonDiv.appendChild(confirmDeleteButton);
+    // confirmDeleteButtonDiv.classList.add('pt_25');
+    //
+    // // Add text node to confirmDeleteMessage.
+    // confirmDeleteMessage.appendChild(deleteMessage);
+    //
+    // // Insert confirmDeleteMessage into the todo before the title.
+    // todo.insertBefore(confirmDeleteMessage, todo.tree.title);
+    //
+    // // Insert confirmDeleteButtonDiv at end of the todo.
+    // todo.appendChild(confirmDeleteButtonDiv);
 
-    // Add classes to confirmDeleteButtonDiv.
-    addClasses(confirmDeleteButtonDiv, [
-      'box', 'all-12', 'space-inside'
-    ]);
 
-    // Give buttons respective image srcs.
-    confirmDeleteButton.setAttribute('src', 'icons/checked.svg');
-    addClasses(confirmDeleteButton, [
-        'confirmation-action-button',
-        'confirmation-delete'
-      ]);
+    // confirmDeleteButton.addEventListener('click', (e) => {
+    //   const todoTree = getParentTodo(confirmDeleteButton);
+    //         console.log(todoTree);
+      // const req = new XMLHttpRequest();
+    	// req.open('delete', putLink , true);
+    	// req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    	// req.send(`title=${todoTitle}&body=${todoBody}&priority=${priority}`);
 
-    cancelDeleteButton.setAttribute('src', 'icons/cancel.svg');
-        addClasses(cancelDeleteButton, [
-        'confirmation-action-button',
-        'confirmation-cancel'
-      ]);
+    	// setTimeout(() => {
+    	// 	location.reload();
+    	// }, 150);
+    // });
 
-    // Place buttons inside of confirmDeleteButtonDiv.
-    confirmDeleteButtonDiv.appendChild(cancelDeleteButton);
-    confirmDeleteButtonDiv.appendChild(confirmDeleteButton);
-    confirmDeleteButtonDiv.classList.add('pt_25');
-
-    // Add text node to confirmDeleteMessage.
-    confirmDeleteMessage.appendChild(deleteMessage);
-
-    // Insert confirmDeleteMessage into the todo before the title.
-    todo.insertBefore(confirmDeleteMessage, todo.tree.title);
-
-    // Insert confirmDeleteButtonDiv at end of the todo.
-    todo.appendChild(confirmDeleteButtonDiv);
+    // cancelDeleteButton.addEventListener('click', (e) => {
+    //
+    // });
 
      } else { // If left swipe...
+       if (thisTodo.classList.contains('deleted-todo')) return;
        if (thisTodo.classList.contains('completed-todo')) {
          thisTodo.classList.remove('completed-todo');
          thisTodo.classList.remove('deleted-todo');
