@@ -8,19 +8,19 @@ const jsPaths = {
 	newTodoForm: './public/javascripts/new-todo-form.js',
 	functions: './public/javascripts/functions.js',
 	editTodo: './public/javascripts/edit-todo.js',
-	swipe: './public/javascripts/swipe.js'
+	mobileEvents: './public/javascripts/mobile-events.js'
 };
 
 
-/* MAIN.JS FILE REQUEST */
-router.get('/main', (req, res, next) => {
-	babel.transformFile(jsPaths.main, {
-		presets: ['es2015']
-	}, (err, data) => {
-		if (err) console.log(err);
-		res.send(data.code);
-	});
-});
+// /* MAIN.JS FILE REQUEST */
+// router.get('/main', (req, res, next) => {
+// 	babel.transformFile(jsPaths.main, {
+// 		presets: ['es2015']
+// 	}, (err, data) => {
+// 		if (err) console.log(err);
+// 		res.send(data.code);
+// 	});
+// });
 
 /* NEW-TODO-FORM.JS FILE REQUEST */
 router.get('/new-todo-form', (req, res, next) => {
@@ -54,8 +54,8 @@ router.get('/functions', (req, res, next) => {
 });
 
 /* SWIPE FUNCTIONALITY */
-router.get('/swipe', (req, res, next) => {
-	babel.transformFile(jsPaths.swipe, {
+router.get('/mobile-events', (req, res, next) => {
+	babel.transformFile(jsPaths.mobileEvents, {
 		presets: ['es2015']
 	}, (err, data) => {
 		if (err) console.log(err);

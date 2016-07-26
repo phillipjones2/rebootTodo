@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "nodemon+sass": "sass --watch ./views/styles:./public/stylesheets & nodemon bin/www.js"
+    "start": "sass --watch ./views/styles:./public/stylesheets & nodemon bin/www.js"
   },
   "dependencies": {
     "babel-core": "^6.11.4",

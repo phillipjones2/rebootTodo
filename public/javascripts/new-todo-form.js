@@ -1,3 +1,25 @@
+const addTodoModal = getElById('add-todo-modal'),
+			modalCloseButton = getElById('close-button'),
+			modalAcceptButton = getElById('accept-button'),
+			addTodoButton = getElById('add-button');
+
+
+
+modalCloseButton.addEventListener('click', (e) => {
+	addTodoModal.classList.add('hidden');
+	addTodoButton.classList.remove('hidden');
+})
+
+function showModal(e) {
+	addTodoModal.classList.remove('hidden');
+	addTodoButton.classList.add('hidden');
+};
+
+
+
+
+
+
 // ----- CREATE A TODO ----- \\
 const addTodoAcceptBtn = document.getElementById('accept-button'),
 			addTodoInput = getElById('add-todo-input'),

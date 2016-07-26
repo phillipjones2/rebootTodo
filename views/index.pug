@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	img#add-button(src="icons/plus.svg" onclick="showModal()")
+	img#add-button(src="icons/plus.svg")
 
 	div#add-todo-modal(class="box-col all-12 x-center hidden")
 		div(class="box-col all-12 x-center")
@@ -11,7 +11,7 @@ block content
 				textarea#add-todo-textarea(placeholder="todo content" name="body")
 				button#add-todo-priority-button(class="priority-bg-0", type="button", name="priority", value="0")  priority: low
 				image#accept-button(type="button", src="icons/plus.svg", action="/")
-			img#close-button(src="icons/cancel.svg", onclick="hideModal()")
+			img#close-button(src="icons/cancel.svg")
 
 	nav(class="box-col all-12 fixed pb_15")
 			div(class="box all-12 space-inside y-center")
@@ -30,7 +30,6 @@ block content
 				div(class="close-todo-button-box", todo-parent=ii)
 					img(src="icons/cancel.svg",
 							todo-parent=ii,
-							onclick="closeTodo(event)",
 							class="close-todo-button hidden")
 
 				h3(todo-parent=ii contenteditable="true"

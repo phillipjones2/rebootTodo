@@ -1,28 +1,3 @@
-const addTodoModal = getElById('add-todo-modal'),
-			modalCloseButton = getElById('close-button'),
-			modalAcceptButton = getElById('accept-button'),
-			addTodoButton = getElById('add-button');
-
-function hideModal(e) {
-	addTodoModal.classList.add('hidden');
-	addTodoButton.classList.remove('hidden');
-};
-
-function showModal(e) {
-	addTodoModal.classList.remove('hidden');
-	addTodoButton.classList.add('hidden');
-};
-
-function closeTodo(e) {
-	const closeButtonClicked = e.target,
-				buttonParentID = closeButtonClicked.getAttribute('todo-parent'),
-				elsButtonHides = getElsByQuery(`[todo-parent=${buttonParentID}]`);
-
-	closeButtonClicked.classList.add('hidden');
-	for (let el of elsButtonHides) {
-		el.classList.remove('shown-todo-child');
-	}
-}
 
 function getElById(id, parent) {
 	if (parent) { return parent.getElementById(id) }
@@ -69,10 +44,14 @@ function getParentTodo(el) {
 };
 
 function getTodoTree(el) {
-	const todoID = el.getAttribute('todo-parent'), // parent's ID
+	const todoID = el.getAttribute('todo-parent'),
 				parent = getElById(todoID),
+				parentClass = `${parent.classList}`,
 				children = getElsByQuery('[todo-parent]', parent),
-				priority = getElByQuery('.todo-edit-priority', parent).value;
+				priorityButton = getElByQuery('.todo-edit-priority', parent),
+				priority = priorityButton.value,
+				priorityText = `${priorityButton.innerText}`,
+				priorityClass = `${priorityButton.classList}`,
 				title = getElByQuery('h3', parent),
 				titleText = title.innerText.trim(),
 				body = getElByQuery('.todo-body', parent),
@@ -82,13 +61,18 @@ function getTodoTree(el) {
 				discardButton = getElByQuery('.todo-discard-button', parent),
 				completeButton = getElByQuery('.todo-complete-button', parent),
 				date = getElByQuery('.todo-date', parent),
-				closeButton = getElByQuery('.todo-close-button', parent),
+				closeButtonBox = getElByQuery('.close-todo-button-box', parent),
+				closeButton = getElByQuery('.close-todo-button', parent),
 				keystrokes = 0;
 
 	return {
 		parent,
+		parentClass,
 		children,
+		priorityButton,
 		priority,
+		priorityText,
+		priorityClass,
 		title,
 		titleText,
 		body,
@@ -97,11 +81,16 @@ function getTodoTree(el) {
 		saveButton,
 		discardButton,
 		completeButton,
+		closeButtonBox,
+		closeButton,
 		date,
 		keystrokes,
-	}
-};
+	};
+}
 
+
+
+//----- COMPARE DIFFS FOR DISCARD/SAVE BUTTON FUNCTIONALITY -----\\
 function compareNewAndOriginalText(val, newText) {
 	const originalText = val.parent.tree.originalText;
 	if (newText != originalText) {
@@ -115,11 +104,11 @@ function compareNewAndOriginalText(val, newText) {
 
 
 
+//----- ROTATE CLASSES AND VALUES OF SPECIFIED ELEMENTS -----\\
 //| Supply the function with the element being clicked on,
 //| the array of values to be applied, and the array of
 //| classes to be applied, as well as an optional boolean
 //| to determine something that I don't remember now.
-
 function rotatePriorities(el, el2, classArr2, textArr) {
 	const classArr = [
       'priority-bg-0',
@@ -174,3 +163,16 @@ function rotatePriorities(el, el2, classArr2, textArr) {
 		el.innerText = 'PRIORITY: LOW' || textArr[0];
 	}
 }
+
+
+//----- MAKE PARENT TODO THE TARGET OF TAP OR SWIPE -----\\
+//| Did the touch event happen on a todo-box or one of its children?
+//| If it was a child, get the todo-box parent.
+function validateTargetAsTodo(e) {
+	const target = e.target;
+	if (!target.classList.contains('todo-box')) {
+		const thisParentID = target.getAttribute('todo-parent'),
+					todoParent = getElById(thisParentID);
+		return todoParent;
+	} else { return target };
+};

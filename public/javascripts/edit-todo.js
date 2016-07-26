@@ -1,7 +1,6 @@
 'use strict';
 
 const saveEditedTodoButtons = document.getElementsByClassName('todo-save-button');
-
 for (let button of saveEditedTodoButtons) {
   let parentID = button.getAttribute('todo-parent'),
       parent = document.getElementById(parentID),
@@ -47,9 +46,7 @@ for (let title of titles) {
 const bodies = getElsByClass('todo-body');
 for (let body of bodies) {
  body.parent = getParentTodo(body);
-
  body.addEventListener('keyup', (e) => {
-
    const newText = `${body.parent.tree.title.innerText} ${body.parent.tree.body.innerText} ${body.parent.tree.priorityButton.value}`;
    compareNewAndOriginalText(body, newText);
  });
@@ -58,12 +55,10 @@ for (let body of bodies) {
  //********************************************************//
 //--- PRIORITY DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
 const todoEditPriorityButtons = document.getElementsByClassName('todo-edit-priority');
-
 for (let button of todoEditPriorityButtons) {
  button.addEventListener('click', (e) => {
    button.parent = getParentTodo(button);
    rotatePriorities(button, button.parent,'border');
-
    const newText = `${button.parent.tree.title.innerText} ${button.parent.tree.body.innerText} ${button.parent.tree.priorityButton.value}`;
    compareNewAndOriginalText(button, newText);
  });
@@ -76,12 +71,9 @@ for (let button of discardButtons) {
  button.addEventListener('click', (e) => {
    button.parent = getParentTodo(button);
    const todoTree = button.parent.tree;
-
    if (button.classList.contains('inactive-todo-button')) {
      return;
-
    } else {
-
      todoTree.title.innerText = todoTree.titleText;
      todoTree.body.innerText = todoTree.bodyText;
      todoTree.priorityButton.value = todoTree.priority;
@@ -93,3 +85,7 @@ for (let button of discardButtons) {
    }
  });
 }
+
+
+///////////////////////
+//////////////////////

@@ -1,10 +1,10 @@
-const	todos = getElsByClass('todo-box'),
-			todosLen = todos.length;
+
 //*******************************//
 //--- TODO SWIPE FUNCTIONALITY --//
+const	todos = getElsByClass('todo-box');
+
 for (let todo of todos) {
- todo.style.height = todo.scrollY;
- let	touchStartX, touchStartY;
+ let touchStartX, touchStartY;
 
  todo.tree = getTodoTree(todo);
  todo.originalClasses = `${todo.classList}`;
@@ -17,9 +17,9 @@ for (let todo of todos) {
 
  todo.addEventListener('touchend', (e) => {
    if (document.body.clientWidth >= 520) { return }
-
    const thisTodo = validateTargetAsTodo(e),
-         thisParentID = thisTodo.getAttribute('id'),
+         todoTree = thisTodo.tree,
+         todoID = todo.tree.todoID,
          touchEndX = e.changedTouches[0].screenX,
          touchEndY = e.changedTouches[0].screenY,
          todoWidth = todo.scrollWidth,
@@ -30,13 +30,42 @@ for (let todo of todos) {
          rightSwipe = (swipeXDifference < 0 ? true : false),
          validSwipe = (wavier < todoHeight && distance > todoWidth / 2);
 
-   // const openTodoHeight = getOpenTodoHeight(thisTodo, thisParentID);
-   handleTodoTap(distance, wavier, todo, thisParentID);
+  //| If touch event was an apparent tap on a todo, close all other
+  //| open todos and open the one that was tapped.
+  if (distance < 10 && wavier < 10) {
+    const otherTodoChildren = getElsByQuery(`:not([todo-parent=${todoID}]`),
+          otherTodoCloseButtons = getElsByQuery(`img[todo-parent]:not([todo-parent=${todoID}])`);
+
+    for (let otherTodoChild of otherTodoChildren) {
+      otherTodoChild.classList.remove('shown-todo-child');
+    }
+
+    for (let otherTodoCloseButton of otherTodoCloseButtons) {
+      otherTodoCloseButton.classList.add('hidden');
+    }
+
+    for (let todoChild of todoTree.children) {
+      todoChild.classList.add('shown-todo-child');
+    }
+
+    todoTree.closeButton.classList.remove('hidden');
+    todoTree.closeButtonBox.classList.remove('hidden');
+  }
+
+  todoTree.closeButtonBox.addEventListener('click', (e) => {
+    const elsToHide = document.querySelectorAll(`[todo-parent=${todoID}]`);
+    todoTree.closeButton.classList.add('hidden');
+    todoTree.closeButtonBox.classList.add('hidden');
+    for (let el of todoTree.children) {
+      el.classList.remove('shown-todo-child');
+    }
+  })
 
    if (!validSwipe) { return }
 
    else {
-     const thisTodoTitle = getElByQuery(`h3[todo-parent=${thisParentID}`);
+     const thisTodoTitle = todo.tree.title;
+     console.log(thisTodoTitle)
 
      if (rightSwipe) {
        if (thisTodo.classList.contains('deleted-todo')) {
