@@ -25,8 +25,8 @@ for (let button of editTodoButtons) {
   	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   	req.send(`title=${todoTitle}&body=${todoBody}&priority=${priority}`);
 
-  	// setTimeout(() => {
-  	// 	location.reload();
-  	// }, 150);
+  	setTimeout(() => {
+  		location.reload();
+  	}, 150);
   });
 }
