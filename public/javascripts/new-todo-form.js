@@ -1,5 +1,3 @@
-'use strict';
-
 // ----- CREATE A TODO ----- \\
 const addTodoAcceptBtn = document.getElementById('accept-button'),
 			addTodoInput = getElById('add-todo-input'),

@@ -1,153 +1,3 @@
-'use strict';
-
-const	todos = getElsByClass('todo-box'),
-			todosLen = todos.length;
-
-for (let todo of todos) {
-	todo.style.height = todo.scrollY;
-	let	touchStartX, touchStartY;
-
-	todo.tree = getTodoTree(todo);
-	todo.originalClasses = `${todo.classList}`;
-
-	todo.addEventListener('touchstart', (e) => {
-		if (document.body.clientWidth >= 520) { return }
-		touchStartX = e.touches[0].screenX;
-		touchStartY = e.touches[0].screenY;
-	}); // touchstart
-
-	todo.addEventListener('touchend', (e) => {
-		if (document.body.clientWidth >= 520) { return }
-
-		const thisTodo = validateTargetAsTodo(e),
-					thisParentID = thisTodo.getAttribute('id'),
-					touchEndX = e.changedTouches[0].screenX,
-					touchEndY = e.changedTouches[0].screenY,
-					todoWidth = todo.scrollWidth,
-					todoHeight = todo.scrollHeight,
-					swipeXDifference = touchStartX - touchEndX,
-					distance = Math.abs(swipeXDifference),
-					wavier = Math.abs(touchStartY - touchEndY),
-					rightSwipe = (swipeXDifference < 0 ? true : false),
-					validSwipe = (wavier < todoHeight && distance > todoWidth / 2);
-
-		// const openTodoHeight = getOpenTodoHeight(thisTodo, thisParentID);
-		handleTodoTap(distance, wavier, todo, thisParentID);
-
-		if (!validSwipe) { return }
-
-		else {
-			const thisTodoTitle = getElByQuery(`h3[todo-parent=${thisParentID}`);
-
-			if (rightSwipe) {
-				if (thisTodo.classList.contains('deleted-todo')) {
-					thisTodo.classList.remove('deleted-todo');
-					thisTodo.classList.remove('completed-todo');
-					thisTodoTitle.classList.remove('font-white');
-
-				} else {
-					thisTodo.classList.add('deleted-todo');
-					thisTodo.classList.remove('completed-todo');
-					thisTodoTitle.classList.add('font-white');
-				} // else
-
-			} else { // If left swipe...
-				if (thisTodo.classList.contains('completed-todo')) {
-					thisTodo.classList.remove('completed-todo');
-					thisTodo.classList.remove('deleted-todo');
-					thisTodoTitle.classList.remove('font-white');
-
-				} else {
-					thisTodo.classList.add('completed-todo');
-					thisTodoTitle.classList.add('font-white');
-				}
-			} // else
-		} // else
-	}); // touchend
-} // for
-
-
-
-//|------------------------------------
-//|------------------------------------
-//|------------------------------------
-
-
-
-//|------------------------------------
-//|------------------------------------
-//|------------------------------------
-
-const titles = getElsByClass('todo-title');
-
-for (let title of titles) {
-	title.parent = getParentTodo(title);
-
-
-	title.addEventListener('keyup', (e) => {
-
-		const newText = `${title.innerText} ${title.parent.tree.body.innerText} ${title.parent.tree.priorityButton.value}`;
-		compareNewAndOriginalText(title, newText);
-	});
-}
-
-const bodies = getElsByClass('todo-body');
-
-for (let body of bodies) {
-	body.parent = getParentTodo(body);
-
-	body.addEventListener('keyup', (e) => {
-
-		const newText = `${body.parent.tree.title.innerText} ${body.parent.tree.body.innerText} ${body.parent.tree.priorityButton.value}`;
-		compareNewAndOriginalText(body, newText);
-	});
-};
-
-const todoEditPriorityButtons = document.getElementsByClassName('todo-edit-priority');
-
-for (let button of todoEditPriorityButtons) {
-  button.addEventListener('click', (e) => {
-		button.parent = getParentTodo(button);
-    rotatePriorities(button, button.parent,'border');
-
-    const newText = `${button.parent.tree.title.innerText} ${button.parent.tree.body.innerText} ${button.parent.tree.priorityButton.value}`;
-    compareNewAndOriginalText(button, newText);
-  });
-}
-
-
-
-
-//|------------------------------------
-//|------------------------------------
-//|------------------------------------
-const discardButtons = getElsByClass('todo-discard-button');
-for (let button of discardButtons) {
-	button.addEventListener('click', (e) => {
-		button.parent = getParentTodo(button);
-		const todoTree = button.parent.tree;
-
-		if (button.classList.contains('inactive-todo-button')) {
-			return;
-
-		} else {
-
-			todoTree.title.innerText = todoTree.titleText;
-			todoTree.body.innerText = todoTree.bodyText;
-			todoTree.priorityButton.value = todoTree.priority;
-			todoTree.priorityButton.innerText = todoTree.priorityText;
-			todoTree.priorityButton.classList = todoTree.priorityClass;
-			todoTree.parent.classList = todoTree.parent.originalClasses;
-			todoTree.saveButton.classList.add('inactive-todo-button');
-			todoTree.discardButton.classList.add('inactive-todo-button');
-		}
-	});
-}
-
-
-//|------------------------------------
-//|------------------------------------
-//|------------------------------------
 //| Did the touch event happen on a todo-box or one of its children?
 //| If it was a child, get the todo-box parent.
 function validateTargetAsTodo(e) {
@@ -159,11 +9,6 @@ function validateTargetAsTodo(e) {
 	} else { return target };
 };
 
-
-
-//|------------------------------------
-//|------------------------------------
-//|------------------------------------
 //| If touch event was an apparent tap on a todo, close all other
 //| open todos and open the one that was tapped.
 function handleTodoTap(distance, wavier, todo, todoParentID) {
@@ -187,13 +32,8 @@ function handleTodoTap(distance, wavier, todo, todoParentID) {
 
 		todoCloseButton.classList.remove('hidden');
 	}
-};
+}
 
-
-
-//|------------------------------------
-//|------------------------------------
-//|------------------------------------
 // When the + button is clicked, open the new todo modal.
 // When the x button in the modal are clicked, close it.
 // Swap plus icons for variable open and submit functionalities.
@@ -205,12 +45,12 @@ const addTodoModal = getElById('add-todo-modal'),
 function hideModal(e) {
 	addTodoModal.classList.add('hidden');
 	addTodoButton.classList.remove('hidden');
-};
+}
 
 function showModal(e) {
 	addTodoModal.classList.remove('hidden');
 	addTodoButton.classList.add('hidden');
-};
+}
 
 function closeTodo(e) {
 	const closeButtonClicked = e.target,
@@ -226,39 +66,39 @@ function closeTodo(e) {
 function getElById(id, parent) {
 	if (parent) { return parent.getElementById(id) }
 	else { return document.getElementById(id) }
-};
+}
 
 function getElsByClass(className, parent) {
 	if (parent) { return parent.getElementsByClassName(className) }
 	else { return document.getElementsByClassName(className) }
-};
+}
 
 function getElByQuery(query, parent) {
 	if (parent) { return parent.querySelector(query) }
 	else { return document.querySelector(query) }
-};
+}
 
 function getElsByQuery(query, parent) {
 	if (parent) { return parent.querySelectorAll(query) }
 	else { return document.querySelectorAll(query) }
-};
+}
 
 function getElsByTag(tag, parent) {
 	if (parent) { return parent.getElementsByTagName(tag) }
 	else { return document.getElementsByTagName(tag) }
-};
+}
 
 function addClasses(el, classesArray) {
 	classesArray.forEach((_class, i) => {
 		el.classList.add(_class);
 	});
-};
+}
 
 function removeClasses(el, classesArray) {
 	classesArray.forEach((_class, i) => {
-		el.classList.remove(_class)
+		el.classList.remove(_class);
 	});
-};
+}
 
 function getParentTodo(el) {
 	const parentID = el.getAttribute('todo-parent'),
@@ -306,5 +146,5 @@ function getTodoTree(el) {
 		completeButton,
 		date,
 		keystrokes,
-	}
-};
+	};
+}

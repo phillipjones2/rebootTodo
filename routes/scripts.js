@@ -5,26 +5,16 @@ const express = require('express'),
 
 const jsPaths = {
 	main     : './public/javascripts/main.js',
-	priority : './public/javascripts/priority.js',
 	newTodoForm: './public/javascripts/new-todo-form.js',
 	functions: './public/javascripts/functions.js',
-	editTodo: './public/javascripts/edit-todo.js'
+	editTodo: './public/javascripts/edit-todo.js',
+	swipe: './public/javascripts/swipe.js'
 };
 
 
 /* MAIN.JS FILE REQUEST */
 router.get('/main', (req, res, next) => {
 	babel.transformFile(jsPaths.main, {
-		presets: ['es2015']
-	}, (err, data) => {
-		if (err) console.log(err);
-		res.send(data.code);
-	});
-});
-
-/* PRIORITY.JS FILE REQUEST */
-router.get('/priority', (req, res, next) => {
-	babel.transformFile(jsPaths.priority, {
 		presets: ['es2015']
 	}, (err, data) => {
 		if (err) console.log(err);
@@ -56,6 +46,16 @@ router.get('/edit-todo', (req, res, next) => {
 /* FUNCTIONS.JS FILE REQUEST */
 router.get('/functions', (req, res, next) => {
 	babel.transformFile(jsPaths.functions, {
+		presets: ['es2015']
+	}, (err, data) => {
+		if (err) console.log(err);
+		res.send(data.code);
+	});
+});
+
+/* SWIPE FUNCTIONALITY */
+router.get('/swipe', (req, res, next) => {
+	babel.transformFile(jsPaths.swipe, {
 		presets: ['es2015']
 	}, (err, data) => {
 		if (err) console.log(err);
