@@ -6,7 +6,7 @@ block content
 	div#add-todo-modal(class="box-col all-12 x-center hidden")
 		div(class="box-col all-12 x-center")
 			h2 Create a todo.
-			form(method="post" class="box-col x-center all-12")
+			form(class="box-col x-center all-12")
 				input#add-todo-input(placeholder="todo title" name="title")
 				textarea#add-todo-textarea(placeholder="todo content" name="body")
 				button#add-todo-priority-button(class="priority-bg-0", type="button", name="priority", value="0")  priority: low
@@ -26,8 +26,8 @@ block content
 		each todo, i in todosObj
 			- var ii = 'todo-' + i;
 			- var todoPriorities = ['PRIORITY: LOW','PRIORITY: MEDIUM', 'PRIORITY: HIGH']
-			div(id=ii, todo-parent=ii,
-					class="todo-box xs-11 sm-11 md-5 lg-4 xl-3 priority-"+todo.priority,)
+			div(id=ii, todo-parent=ii, todo-object-id=todo._id,
+					class="todo-box xs-11 sm-11 md-5 lg-4 xl-3 priority-"+todo.priority)
 
 				div(class="close-todo-button-box", todo-parent=ii)
 					img(src="icons/cancel.svg",

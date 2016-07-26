@@ -7,7 +7,8 @@ const jsPaths = {
 	main     : './public/javascripts/main.js',
 	priority : './public/javascripts/priority.js',
 	newTodoForm: './public/javascripts/new-todo-form.js',
-	functions: './public/javascripts/functions.js'
+	functions: './public/javascripts/functions.js',
+	editTodo: './public/javascripts/edit-todo.js'
 };
 
 
@@ -40,6 +41,17 @@ router.get('/new-todo-form', (req, res, next) => {
 		res.send(data.code);
 	});
 });
+
+/* EDIT-TODO-FORM.JS FILE REQUEST */
+router.get('/edit-todo', (req, res, next) => {
+	babel.transformFile(jsPaths.editTodo, {
+		presets: ['es2015']
+	}, (err, data) => {
+		if (err) console.log(err);
+		res.send(data.code);
+	});
+});
+
 
 /* FUNCTIONS.JS FILE REQUEST */
 router.get('/functions', (req, res, next) => {

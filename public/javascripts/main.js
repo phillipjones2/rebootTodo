@@ -85,7 +85,7 @@ for (let title of titles) {
 
 
 	title.addEventListener('keyup', (e) => {
-		console.log(title.parent.tree.priority);
+
 		const newText = `${title.innerText} ${title.parent.tree.body.innerText} ${title.parent.tree.priorityButton.value}`;
 		compareNewAndOriginalText(title, newText);
 	});
@@ -97,7 +97,7 @@ for (let body of bodies) {
 	body.parent = getParentTodo(body);
 
 	body.addEventListener('keyup', (e) => {
-		console.log(body.parent.tree.priority);
+
 		const newText = `${body.parent.tree.title.innerText} ${body.parent.tree.body.innerText} ${body.parent.tree.priorityButton.value}`;
 		compareNewAndOriginalText(body, newText);
 	});
@@ -125,20 +125,7 @@ for (let button of todoEditPriorityButtons) {
 }
 
 
-function compareNewAndOriginalText(val, newText) {
-	const originalText = val.parent.tree.originalText;
-	if (newText != originalText) {
-		console.log('if')
-		val.parent.tree.saveButton.classList.remove('inactive-todo-button');
-		val.parent.tree.discardButton.classList.remove('inactive-todo-button');
-		// console.log(body.todoTree.bodyText, body.innerText);
-	} else {
-		console.log('else')
-		val.parent.tree.saveButton.classList.add('inactive-todo-button');
-		val.parent.tree.discardButton.classList.add('inactive-todo-button');
-		// console.log(body.todoTree.bodyText, body.innerText);
-	}
-}
+
 
 //|------------------------------------
 //|------------------------------------
@@ -153,8 +140,7 @@ for (let button of discardButtons) {
 			return;
 
 		} else {
-			console.log(todoTree.parent.classList);
-			console.log(todoTree.parent.originalClasses);
+
 			todoTree.title.innerText = todoTree.titleText;
 			todoTree.body.innerText = todoTree.bodyText;
 			todoTree.priorityButton.value = todoTree.priority;

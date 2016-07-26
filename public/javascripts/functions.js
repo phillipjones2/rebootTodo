@@ -103,6 +103,21 @@ function getTodoTree(el) {
 	}
 };
 
+function compareNewAndOriginalText(val, newText) {
+	const originalText = val.parent.tree.originalText;
+	if (newText != originalText) {
+
+		val.parent.tree.saveButton.classList.remove('inactive-todo-button');
+		val.parent.tree.discardButton.classList.remove('inactive-todo-button');
+		// console.log(body.todoTree.bodyText, body.innerText);
+	} else {
+
+		val.parent.tree.saveButton.classList.add('inactive-todo-button');
+		val.parent.tree.discardButton.classList.add('inactive-todo-button');
+		// console.log(body.todoTree.bodyText, body.innerText);
+	}
+}
+
 
 
 //| Supply the function with the element being clicked on,

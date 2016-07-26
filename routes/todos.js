@@ -38,8 +38,11 @@ router.put('/:todo_id', (req, res) => {
   Todo.findById(req.params.todo_id, (err, todo) => {
     if (err)
       res.send(err);
+    console.log(req.params);
+    console.log(req.body);
     todo.title = req.body.title;
     todo.body = req.body.body;
+    todo.priority = req.body.priority;
     todo.save((err, doc) => {
       if (err) return consol.error(err);
       Todo.find().sort('priority').exec((err, docs) => {
