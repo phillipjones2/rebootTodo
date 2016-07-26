@@ -1,7 +1,7 @@
 const addTodoPriorityButton = document.getElementById('add-todo-priority-button'),
-      priorities = [{priority:'priority: low', priorityClass:'priority-bg-2'},
+      priorities = [{priority:'priority: low', priorityClass:'priority-bg-0'},
                     {priority:'priority: medium', priorityClass:'priority-bg-1'},
-                    {priority:'priority: high', priorityClass:'priority-bg-0'}
+                    {priority:'priority: high', priorityClass:'priority-bg-2'}
                   ];
 
 let addTodoPriorityButtonClicks = 0,

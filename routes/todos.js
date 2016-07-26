@@ -5,7 +5,7 @@ const express = require('express'),
 
 // todo index - all todos
 router.get('/', (req, res) => {
-  Todo.find().sort('priority').exec((err, docs) => {
+  Todo.find().sort('-priority').exec((err, docs) => {
     // res.send(docs);
     // console.log(docs);
     res.render('index', { title: 'TodoTwo', todosObj: docs });
