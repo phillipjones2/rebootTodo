@@ -20,8 +20,8 @@ db.once('open', () => {
         title: faker.lorem.sentence(),
         body: faker.lorem.sentence(),
         priority: randomPriority,
-        formatedCreate: formatDate(new Date()),
-        formatedUpdate: formatDate(new Date())
+        formattedCreate: formatDate(new Date()),
+        formattedUpdate: formatDate(new Date())
       });
       console.log(todo);
       todo.save((err, todo) => {

@@ -24,7 +24,11 @@ router.get('/', (req, res) => {
 // create todo
 router.post('/', (req, res) => {
   console.log(req.body);
-  var todo = new Todo({ title: req.body.title, body: req.body.body, priority: req.body.priority});
+  var todo = new Todo({ title: req.body.title,
+                         body: req.body.body,
+                     priority: req.body.priority,
+               formattedCreate: formatDate(new Date()),
+               formattedUpdate: formatDate(new Date())});
   todo.save((err, doc) => {
     if (err) return console.error(err);
     Todo.find().sort('priority').exec((err, docs) => {
@@ -43,6 +47,7 @@ router.put('/:todo_id', (req, res) => {
     todo.title = req.body.title;
     todo.body = req.body.body;
     todo.priority = req.body.priority;
+    todo.formattedUpdate = formatDate(new Date());
     todo.save((err, doc) => {
       if (err) return consol.error(err);
       Todo.find().sort('priority').exec((err, docs) => {

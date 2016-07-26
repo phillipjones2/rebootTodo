@@ -5,8 +5,8 @@ const todoSchema = new Schema({
   title          : { type: String, required: true },
   body           : String,
   priority       : Number,
-  formatedCreate : String,
-  formatedUpdate : String
+  formattedCreate : String,
+  formattedUpdate : String
 },
 {
   timestamps: true
