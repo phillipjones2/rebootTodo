@@ -1,24 +1,17 @@
 const addTodoModal = getElById('add-todo-modal'),
-			modalCloseButton = getElById('close-button'),
-			modalAcceptButton = getElById('accept-button'),
-			addTodoButton = getElById('add-button');
+			closeCreateTodoModalButton = getElById('close-button'),
+			newTodoSubmitButton = getElById('accept-button'),
+			openCreateTodoModalButton = getElById('add-button');
 
-
-
-modalCloseButton.addEventListener('click', (e) => {
+closeCreateTodoModalButton.addEventListener('click', (e) => {
 	addTodoModal.classList.add('hidden');
-	addTodoButton.classList.remove('hidden');
+	openCreateTodoModalButton.classList.remove('hidden');
 })
 
-function showModal(e) {
-	addTodoModal.classList.remove('hidden');
-	addTodoButton.classList.add('hidden');
-};
-
-
-
-
-
+openCreateTodoModalButton.addEventListener('click', (e) => {
+		addTodoModal.classList.remove('hidden');
+		openCreateTodoModalButton.classList.add('hidden');
+});
 
 // ----- CREATE A TODO ----- \\
 const addTodoAcceptBtn = document.getElementById('accept-button'),
@@ -26,10 +19,22 @@ const addTodoAcceptBtn = document.getElementById('accept-button'),
 			addTodoTextArea = getElById('add-todo-textarea'),
 			addTodoPriorityBtn = getElById('add-todo-priority-button');
 
+addTodoInput.addEventListener('keyup', (e) => {
+	if (addTodoInput.value == '') {
+		newTodoSubmitButton.classList.add('inactive-todo-submit-button');
+	}
+	else {
+		newTodoSubmitButton.classList.remove('inactive-todo-submit-button');
+	}
+});
+
 addTodoAcceptBtn.addEventListener('click', (e) => {
+	if (newTodoSubmitButton.classList.contains('inactive-todo-submit-button')) return;
+
 	const title = addTodoInput.value,
 				body = addTodoTextArea.value,
 				priority = addTodoPriorityBtn.value;
+
 
 	const req = new XMLHttpRequest();
 	req.open('post', '/', true);

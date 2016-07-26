@@ -67,4 +67,7 @@
   height: 60px;
   z-index: 55;
   margin: 0;
+	&.inactive-todo-submit-button {
+	  opacity: .2;
+	}
 }

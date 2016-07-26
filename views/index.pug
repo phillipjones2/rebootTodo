@@ -10,7 +10,8 @@ block content
 				input#add-todo-input(placeholder="todo title" name="title")
 				textarea#add-todo-textarea(placeholder="todo content" name="body")
 				button#add-todo-priority-button(class="priority-bg-0", type="button", name="priority", value="0")  priority: low
-				image#accept-button(type="button", src="icons/plus.svg", action="/")
+				image#accept-button(class="inactive-todo-submit-button",
+							type="button", src="icons/plus.svg", action="/")
 			img#close-button(src="icons/cancel.svg")
 
 	nav(class="box-col all-12 fixed pb_15")

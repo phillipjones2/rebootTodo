@@ -192,6 +192,8 @@ nav {
   height: 60px;
   z-index: 55;
   margin: 0; }
+  #accept-button.inactive-todo-submit-button {
+    opacity: .2; }
 
 #todo-container {
   display: flex;
