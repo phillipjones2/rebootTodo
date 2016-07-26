@@ -1,5 +1,6 @@
 'use strict';
 
+// ----- CREATE A TODO ----- \\
 const addTodoAcceptBtn = document.getElementById('accept-button'),
 			addTodoInput = getElById('add-todo-input'),
 			addTodoTextArea = getElById('add-todo-textarea'),
@@ -18,4 +19,12 @@ addTodoAcceptBtn.addEventListener('click', (e) => {
 	setTimeout(() => {
 		location.reload();
 	}, 150);
+});
+
+// ----- CREATE A TODO PRIORITY BUTTON ----- \\
+const addTodoPriorityButton = document.getElementById('add-todo-priority-button'),
+      addTodoO = document.getElementById('todo-o');
+
+addTodoPriorityButton.addEventListener('click',(e) => {
+  rotatePriorities(addTodoPriorityButton, addTodoO, 'text');
 });

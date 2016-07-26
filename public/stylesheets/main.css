@@ -350,6 +350,15 @@ button.inactive-todo-button {
 .priority-bg-0 {
   background: #46EA61; }
 
+.priority-text-2 {
+  color: #E84A4A; }
+
+.priority-text-1 {
+  color: #FFF359; }
+
+.priority-text-0 {
+  color: #46EA61; }
+
 /***********************/
 /* Font weight classes */
 .font_light {

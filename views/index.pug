@@ -5,15 +5,13 @@ block content
 
 	div#add-todo-modal(class="box-col all-12 x-center hidden")
 		div(class="box-col all-12 x-center")
-			h2 Create a todo.
+			h2 Create a tod#[span#todo-o(class="priority-text-0") o].
 			form(class="box-col x-center all-12")
 				input#add-todo-input(placeholder="todo title" name="title")
 				textarea#add-todo-textarea(placeholder="todo content" name="body")
 				button#add-todo-priority-button(class="priority-bg-0", type="button", name="priority", value="0")  priority: low
 				image#accept-button(type="button", src="icons/plus.svg", action="/")
 			img#close-button(src="icons/cancel.svg", onclick="hideModal()")
-
-
 
 	nav(class="box-col all-12 fixed pb_15")
 			div(class="box all-12 space-inside y-center")

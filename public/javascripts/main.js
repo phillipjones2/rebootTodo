@@ -108,16 +108,7 @@ const todoEditPriorityButtons = document.getElementsByClassName('todo-edit-prior
 for (let button of todoEditPriorityButtons) {
   button.addEventListener('click', (e) => {
 		button.parent = getParentTodo(button);
-    rotatePriorities(button, [0, 1, 2], [
-      'priority-bg-0',
-      'priority-bg-1',
-      'priority-bg-2',
-    ],
-		[
-			'priority-0',
-			'priority-1',
-			'priority-2'
-		], button.parent);
+    rotatePriorities(button, button.parent,'border');
 
     const newText = `${button.parent.tree.title.innerText} ${button.parent.tree.body.innerText} ${button.parent.tree.priorityButton.value}`;
     compareNewAndOriginalText(button, newText);
