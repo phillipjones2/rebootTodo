@@ -105,15 +105,11 @@ function getTodoTree(el) {
 function compareNewAndOriginalText(val, newText) {
 	const originalText = val.parent.tree.originalText;
 	if (newText != originalText) {
-
 		val.parent.tree.saveButton.classList.remove('inactive-todo-button');
 		val.parent.tree.discardButton.classList.remove('inactive-todo-button');
-		// console.log(body.todoTree.bodyText, body.innerText);
 	} else {
-
 		val.parent.tree.saveButton.classList.add('inactive-todo-button');
 		val.parent.tree.discardButton.classList.add('inactive-todo-button');
-		// console.log(body.todoTree.bodyText, body.innerText);
 	}
 }
 
@@ -130,19 +126,6 @@ function rotatePriorities(el, el2, classArr2, textArr) {
       'priority-bg-1',
       'priority-bg-2',
     ];
-	// if (classArr == 'backgrounds') {
-	// 	classArr = [
- //      'priority-bg-0',
- //      'priority-bg-1',
- //      'priority-bg-2',
- //    ]
-	// } else if (classArr == 'borders') {
-	// 	[
-	// 		'priority-0',
-	// 		'priority-1',
-	// 		'priority-2'
-	// 	]
-	// };
 
 	if (classArr2 == 'border') {
 		classArr2 = [
