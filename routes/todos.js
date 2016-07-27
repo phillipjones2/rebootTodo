@@ -41,7 +41,13 @@ router.post('/', (req, res) => {
                formattedUpdate: formatDate(new Date())});
   todo.save((err, doc) => {
     if (err) return console.error(err);
-    Todo.find().sort('priority').exec((err, docs) => {
+    Todo.find().
+              and([
+                { $or: [{'completed':false },{ 'completedDate': {$gte : yesterday}}] }
+              ]).
+                sort('completed').
+                sort('-priority').
+                exec((err, docs) => {
       res.render('index', { title: 'Express', todosObj: docs });
     });
   });
@@ -64,7 +70,13 @@ router.put('/:todo_id', (req, res) => {
     }
     todo.save((err, doc) => {
       if (err) return console.error(err);
-      Todo.find().sort('priority').exec((err, docs) => {
+      Todo.find().
+                and([
+                  { $or: [{'completed':false },{ 'completedDate': {$gte : yesterday}}] }
+                ]).
+                  sort('completed').
+                  sort('-priority').
+                  exec((err, docs) => {
         res.render('index', { title: 'Express', todosObj: docs });
       });
     });
@@ -76,7 +88,13 @@ router.delete('/:todo_id', (req, res) => {
     if (err)
       res.send(err);
     else {
-      Todo.find().sort('priority').exec((err, docs) => {
+      Todo.find().
+                and([
+                  { $or: [{'completed':false },{ 'completedDate': {$gte : yesterday}}] }
+                ]).
+                  sort('completed').
+                  sort('-priority').
+                  exec((err, docs) => {
         res.render('index', { title: 'Express', todosObj: docs });
       });
     }
