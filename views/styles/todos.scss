@@ -24,7 +24,7 @@
   flex-direction: column;
   transition: all .5s;
 	&[completed] {
-		background: $color2;
+		background: $pale-green;
 		color: white;
 	}
   .todo-content {
@@ -133,4 +133,20 @@ button.inactive-todo-button {
   width: 60px;
   height: 60px;
   fill: white;
+}
+
+button.todo-priority-button {
+  font-family: GothamBold;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  // border: 3px solid black;
+  padding: 13px 13px 10px;
+  margin: 5px 0px 8px 0px;
+  text-align: left;
+  transition: all .5s;
+  &[disabled] {
+    background: black;
+    color: white;
+    opacity: 0.2;
+  }
 }

@@ -18,7 +18,7 @@
   flex-direction: column;
   transition: all .5s; }
   .todo-box[completed] {
-    background: #adedd2;
+    background: #56E39F;
     color: white; }
   .todo-box .todo-content h3 {
     margin-top: 10px;
@@ -91,5 +91,18 @@ button.inactive-todo-button {
   width: 60px;
   height: 60px;
   fill: white; }
+
+button.todo-priority-button {
+  font-family: GothamBold;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  padding: 13px 13px 10px;
+  margin: 5px 0px 8px 0px;
+  text-align: left;
+  transition: all .5s; }
+  button.todo-priority-button[disabled] {
+    background: black;
+    color: white;
+    opacity: 0.2; }
 
 /*# sourceMappingURL=todos.css.map */

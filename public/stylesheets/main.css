@@ -107,15 +107,6 @@ button.btn-3 {
     color: white;
     border-radius: 0; }
 
-button.todo-priority-button {
-  font-family: GothamBold;
-  font-size: 1.3rem;
-  text-transform: uppercase;
-  padding: 13px 13px 10px;
-  margin: 5px 0px 8px 0px;
-  text-align: left;
-  transition: all .5s; }
-
 #add-button {
   position: fixed;
   bottom: 25px;
@@ -150,7 +141,8 @@ nav {
     border: 3px solid black;
     padding: 13px 13px 10px;
     margin-top: 10px;
-    margin-bottom: 8px; }
+    margin-bottom: 8px;
+    font-size: 1.8rem; }
     #add-todo-modal input:not(:nth-of-type(2))::-webkit-input-placeholder {
       font-size: 1.6rem; }
   #add-todo-modal textarea {
@@ -159,7 +151,8 @@ nav {
     border: 3px solid black;
     padding: 13px 10px 10px;
     height: 170px;
-    margin-top: 10px; }
+    margin-top: 10px;
+    font-size: 1.8rem; }
     #add-todo-modal textarea::-webkit-input-placeholder {
       font-size: 1.6rem; }
 
@@ -167,8 +160,8 @@ nav {
   width: 70%;
   font-family: GothamBold;
   text-transform: uppercase;
-  padding: 13px 13px 10px;
-  margin: 10px 0px 8px 0px;
+  padding: 16px 13px 13px;
+  margin: 18px 0px 8px 0px;
   text-align: left; }
 
 #close-button {
@@ -215,7 +208,7 @@ nav {
   flex-direction: column;
   transition: all .5s; }
   .todo-box[completed] {
-    background: #adedd2;
+    background: #56E39F;
     color: white; }
   .todo-box .todo-content h3 {
     margin-top: 10px;
@@ -288,6 +281,19 @@ button.inactive-todo-button {
   width: 60px;
   height: 60px;
   fill: white; }
+
+button.todo-priority-button {
+  font-family: GothamBold;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  padding: 13px 13px 10px;
+  margin: 5px 0px 8px 0px;
+  text-align: left;
+  transition: all .5s; }
+  button.todo-priority-button[disabled] {
+    background: black;
+    color: white;
+    opacity: 0.2; }
 
 .hidden {
   display: none !important; }

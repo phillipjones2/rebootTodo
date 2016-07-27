@@ -63,7 +63,7 @@ for (let todo of todos) {
 
   if (!validSwipe) { return }
 
-  else { // If right swipe...
+  else {
     const thisTodoTitle = todo.tree.title,
           todoObjectId = trimQuotes(todo.getAttribute('todo-object-id'));
       let parentID = thisTodo.getAttribute('todo-parent'),
@@ -128,10 +128,8 @@ for (let todo of todos) {
           priorityElement.removeAttribute('disabled');
 
        } // ?? TODO IS COMPLETE AND USER SWIPES LEFT AGAIN ??
-       else if (thisTodo.classList.contains('completed-todo')) {
-         thisTodo.classList.remove('completed-todo');
-         thisTodo.classList.remove('deleted-todo');
-         thisTodoTitle.classList.remove('font-white');
+       else if (thisTodo.hasAttribute('completed')) {
+        return;
 
        } else {
 
