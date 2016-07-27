@@ -72,7 +72,14 @@ for (let todo of todos) {
           todoBody = parent.querySelector('.todo-body').innerText.trim(),
           priority = parent.querySelector('.todo-edit-priority').value,
           timestamp = new Date(),
-          putLink = `/${todoObjectId}`;
+          putLink = `/${todoObjectId}`,
+          titleElement = parent.querySelector('.todo-title'),
+          bodyElement = parent.querySelector('.todo-body'),
+          priorityElement = parent.querySelector('.todo-edit-priority');
+
+    console.log(titleElement);
+    console.log(bodyElement);
+    console.log(priorityElement);
 
     if (rightSwipe) {
       // MARKED FOR DELETION -> DELETE
@@ -101,16 +108,27 @@ for (let todo of todos) {
     // console.log(`{\"title\":\"${todoTitle}\",\"body\":\"${todoBody}\",\"priority\":\"${priority}\",\"completed\":false}`);
      req.send(`{\"title\":\"${todoTitle}\",\"body\":\"${todoBody}\",\"priority\":\"${priority}\",\"completed\":false}`);
 
-    } else {
+   } //FROM A NORMAL STATE TO A MARKED FOR DELETION STATE
+    else {
       thisTodo.classList.add('deleted-todo');
       thisTodo.classList.remove('completed-todo');
       thisTodoTitle.classList.add('font-white');
+      titleElement.setAttribute('contenteditable', false);
+      bodyElement.setAttribute('contenteditable', false);
+      priorityElement.setAttribute('disabled', true);
+
+
       }
     } else { // If left swipe...
        if (thisTodo.classList.contains('deleted-todo')) {
           thisTodo.classList.remove('deleted-todo');
           thisTodoTitle.classList.remove('font-white');
-       } else if (thisTodo.classList.contains('completed-todo')) {
+          titleElement.setAttribute('contenteditable', true);
+          bodyElement.setAttribute('contenteditable', true);
+          priorityElement.removeAttribute('disabled');
+
+       } // ?? TODO IS COMPLETE AND USER SWIPES LEFT AGAIN ??
+       else if (thisTodo.classList.contains('completed-todo')) {
          thisTodo.classList.remove('completed-todo');
          thisTodo.classList.remove('deleted-todo');
          thisTodoTitle.classList.remove('font-white');
