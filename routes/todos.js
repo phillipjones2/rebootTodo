@@ -66,7 +66,7 @@ router.put('/:todo_id', (req, res) => {
       todo.completed = true;
       todo.completedDate = new Date();
     } else {
-      todo.completed = req.body.completed;
+      todo.completed = false;
     }
     todo.save((err, doc) => {
       if (err) return console.error(err);
