@@ -1,4 +1,4 @@
-
+const req = new XMLHttpRequest();
 //*******************************//
 //--- TODO SWIPE FUNCTIONALITY --//
 const	todos = getElsByClass('todo-box');
@@ -66,41 +66,70 @@ for (let todo of todos) {
   else { // If right swipe...
     const thisTodoTitle = todo.tree.title,
           todoObjectId = trimQuotes(todo.getAttribute('todo-object-id'));
-      let putLink = `/${todoObjectId}`;
-      console.log(putLink);
+      let parentID = thisTodo.getAttribute('todo-parent'),
+          parent = document.getElementById(parentID),
+          todoTitle = parent.querySelector('.todo-title').innerText.trim(),
+          todoBody = parent.querySelector('.todo-body').innerText.trim(),
+          priority = parent.querySelector('.todo-edit-priority').value,
+          timestamp = new Date(),
+          putLink = `/${todoObjectId}`;
+
     if (rightSwipe) {
-    if (thisTodo.classList.contains('deleted-todo')) {
+      // MARKED FOR DELETION -> DELETE
+      if (thisTodo.classList.contains('deleted-todo')) {
+        //| When the state of the request changes:
+        //| (4): "request finished and response is ready"
+        req.onreadystatechange = ( ) => {
+          if (req.readyState == 4 && req.status == 200) {
+            location.reload();
+          }
+        };
+    	req.open('delete', putLink , true);
+    	req.send();
 
-      const req = new XMLHttpRequest();
-
-      //| When the state of the request changes:
-      //| (4): "request finished and response is ready"
+      // IF CURRENTLY IN A COMPLETED STATE -> UNCOMPLETE
+    } else if(parent.hasAttribute('completed')) {
       req.onreadystatechange = ( ) => {
         if (req.readyState == 4 && req.status == 200) {
           location.reload();
         }
       };
+     req.open('put', putLink , true);
+     req.setRequestHeader("Content-type", "application/json");
+     console.log({"title": todoTitle,"body":todoBody,"priority": priority,"completed":false});
+    // console.log(`title=${todoTitle}&body=${todoBody}&priority=${priority}&completed=false`);
+    // console.log(`{\"title\":\"${todoTitle}\",\"body\":\"${todoBody}\",\"priority\":\"${priority}\",\"completed\":false}`);
+     req.send(`{\"title\":\"${todoTitle}\",\"body\":\"${todoBody}\",\"priority\":\"${priority}\",\"completed\":false}`);
 
-    	req.open('delete', putLink , true);
-    	req.send();
-    };
-
-    thisTodo.classList.add('deleted-todo');
-    thisTodo.classList.remove('completed-todo');
-    thisTodoTitle.classList.add('font-white');
-
-     } else { // If left swipe...
-       if (thisTodo.classList.contains('deleted-todo')) return;
-       if (thisTodo.classList.contains('completed-todo')) {
+    } else {
+      thisTodo.classList.add('deleted-todo');
+      thisTodo.classList.remove('completed-todo');
+      thisTodoTitle.classList.add('font-white');
+      }
+    } else { // If left swipe...
+       if (thisTodo.classList.contains('deleted-todo')) {
+          thisTodo.classList.remove('deleted-todo');
+          thisTodoTitle.classList.remove('font-white');
+       } else if (thisTodo.classList.contains('completed-todo')) {
          thisTodo.classList.remove('completed-todo');
          thisTodo.classList.remove('deleted-todo');
          thisTodoTitle.classList.remove('font-white');
 
        } else {
-         thisTodo.classList.add('completed-todo');
-         thisTodoTitle.classList.add('font-white');
-       }
-     } // else
+
+         //| When the state of the request changes:
+         //| (4): "request finished and response is ready"
+         req.onreadystatechange = ( ) => {
+           if (req.readyState == 4 && req.status == 200) {
+             location.reload();
+           }
+         };
+       	req.open('put', putLink , true);
+        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+       	req.send(`title=${todoTitle}&body=${todoBody}&priority=${priority}&completed=true&completedDate=${timestamp}`);
+
+      }
+    } // else
    } // else
  }); // touchend
 } // for

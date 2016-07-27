@@ -1,19 +1,27 @@
 const express = require('express'),
        router = express.Router(),
      mongoose = require('mongoose'),
-     winterfresh = require('../winterfresh'),
+    //  winterfresh = require('../winterfresh'),
          Todo = require('../modules/todoModel');
+  let today = new Date(),
+      yesterday = today.getDate() -1;
 
 // todo index - all todos
 router.get('/', (req, res) => {
-  Todo.find().sort('-priority').exec((err, docs) => {
+  Todo.find().
+            and([
+              { $or: [{'completed':false },{ 'completedDate': {$gte : yesterday}}] }
+            ]).
+              sort('completed').
+              sort('-priority').
+              exec((err, docs) => {
     // res.send(docs);
-    // console.log(docs);
+    console.log(docs);
     res.render('index', { title: 'TodoTwo', todosObj: docs });
   });
 });
 
-router.get('/fresh', (req, res) =>  winterfresh(res));
+// router.get('/fresh', (req, res) =>  winterfresh(res));
 
 // todo show - one todo -response is json
 // router.get('/:todo_id', (req, res) => {
@@ -26,7 +34,6 @@ router.get('/fresh', (req, res) =>  winterfresh(res));
 
 // create todo
 router.post('/', (req, res) => {
-  console.log(req.body);
   var todo = new Todo({ title: req.body.title,
                          body: req.body.body,
                      priority: req.body.priority,
@@ -45,18 +52,18 @@ router.put('/:todo_id', (req, res) => {
   Todo.findById(req.params.todo_id, (err, todo) => {
     if (err)
       res.send(err);
-    console.log(req.params);
-    console.log(req.body);
     todo.title = req.body.title;
     todo.body = req.body.body;
     todo.priority = req.body.priority;
     todo.formattedUpdate = formatDate(new Date());
-    if (req.body.completed) {
+    if (req.body.completed ) {
       todo.completed = true;
       todo.completedDate = new Date();
+    } else {
+      todo.completed = req.body.completed;
     }
     todo.save((err, doc) => {
-      if (err) return consol.error(err);
+      if (err) return console.error(err);
       Todo.find().sort('priority').exec((err, docs) => {
         res.render('index', { title: 'Express', todosObj: docs });
       });

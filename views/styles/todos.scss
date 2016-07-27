@@ -23,6 +23,10 @@
   display: flex;
   flex-direction: column;
   transition: all .5s;
+	&[completed] {
+		background: $color2;
+		color: white;
+	}
   .todo-content {
   	h3 {
   		margin-top: 10px;
@@ -87,7 +91,7 @@
 
 // Backgrounds depending on todo state.
 .deleted-todo {
-  background: $pale-red;
+  background: $pale-red !important; 
 }
 
 .completed-todo {

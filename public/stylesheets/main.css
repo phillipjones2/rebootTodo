@@ -214,6 +214,9 @@ nav {
   display: flex;
   flex-direction: column;
   transition: all .5s; }
+  .todo-box[completed] {
+    background: #adedd2;
+    color: white; }
   .todo-box .todo-content h3 {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -252,7 +255,7 @@ nav {
   .todo-content.aborted {
     background: white; } }
 .deleted-todo {
-  background: #EF6F6C; }
+  background: #EF6F6C !important; }
 
 .completed-todo {
   background: #56E39F; }

@@ -20,6 +20,7 @@ for (let button of saveEditedTodoButtons) {
         putLink = `/${objectID}`;
 
   	const req = new XMLHttpRequest();
+    console.log(putLink);
   	req.open('put', putLink , true);
   	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   	req.send(`title=${todoTitle}&body=${todoBody}&priority=${priority}`);
