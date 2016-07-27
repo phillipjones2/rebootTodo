@@ -16,7 +16,7 @@ block content
 
 	nav(class="box-col all-12 fixed pb_15")
 			div(class="box all-12 space-inside y-center")
-				h3 Todo AppPPP
+				h3 Todo App
 				ul
 					li about
 					li github
@@ -25,7 +25,7 @@ block content
 		each todo, i in todosObj
 			- var ii = 'todo-' + i;
 			- var todoPriorities = ['PRIORITY: LOW','PRIORITY: MEDIUM', 'PRIORITY: HIGH']
-			
+
 			div(id=ii, todo-parent=ii, todo-object-id=todo._id, completed=todo.completed,
 					class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-"+todo.priority)
 

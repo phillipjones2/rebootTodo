@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
               sort('-priority').
               exec((err, docs) => {
     // res.send(docs);
-    console.log(docs);
+    // console.log(docs);
     res.render('index', { title: 'TodoTwo', todosObj: docs });
   });
 });

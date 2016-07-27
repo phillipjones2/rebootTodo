@@ -10,13 +10,13 @@ for (let todo of todos) {
  todo.originalClasses = `${todo.classList}`;
 
  todo.addEventListener('touchstart', (e) => {
-   if (document.body.clientWidth >= 520) { return }
+   if (document.body.clientWidth >= 520) { return;}
    touchStartX = e.touches[0].screenX;
    touchStartY = e.touches[0].screenY;
  }); // touchstart
 
  todo.addEventListener('touchend', (e) => {
-   if (document.body.clientWidth >= 520) { return }
+   if (document.body.clientWidth >= 520) { return; }
    const thisTodo = validateTargetAsTodo(e),
          todoTree = thisTodo.tree,
          todoID = todo.tree.todoID,
@@ -59,7 +59,7 @@ for (let todo of todos) {
     for (let el of todoTree.children) {
       el.classList.remove('shown-todo-child');
     }
-  })
+  });
 
   if (!validSwipe) { return }
 

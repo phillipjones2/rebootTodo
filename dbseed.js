@@ -1,17 +1,15 @@
-   mongoose = require('mongoose'),
-      faker = require('faker'),
-       Todo = require('./modules/todoModel'),
- formatDate = require('./routes/todos').formatDate;
-
- const today = new Date(),
-       old = today.getDate() -2;
-
-       todos = [],
-    priorityArr = [0, 1, 2],
+const   mongoose = require('mongoose'),
+           faker = require('faker'),
+            Todo = require('./modules/todoModel'),
+      formatDate = require('./routes/todos').formatDate,
+           today = new Date(),
+             old = today.getDate() -2;
+           todos = [],
+     priorityArr = [0, 1, 2],
 
 
 mongoose.connect('mongodb://localhost/rebootTodo');
-  var     db = mongoose.connection;
+  const   db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log('Connected to Mongo db');
@@ -30,7 +28,6 @@ db.once('open', () => {
       console.log(todo);
       todo.save((err, todo) => {
         if (err) return console.error(err);
-
       });
     }
 
@@ -49,7 +46,6 @@ db.once('open', () => {
       console.log(todo);
       todo.save((err, todo) => {
         if (err) return console.error(err);
-
       });
     }
 
@@ -68,7 +64,6 @@ db.once('open', () => {
       console.log(todo);
       todo.save((err, todo) => {
         if (err) return console.error(err);
-
       });
     }
     console.log('populated db');
