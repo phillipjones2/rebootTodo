@@ -145,7 +145,7 @@ for (let todo of todos) {
        	req.open('put', putLink , true);
         req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
        	req.send(`title=${todoTitle}&body=${todoBody}&priority=${priority}&completed=true&completedDate=${timestamp}`);
-
+        
       }
     } // else
    } // else

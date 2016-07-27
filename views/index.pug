@@ -24,7 +24,9 @@ block content
 	div#todo-container
 		each todo, i in todosObj
 			- var ii = 'todo-' + i;
-			- var todoPriorities = ['PRIORITY: LOW','PRIORITY: MEDIUM', 'PRIORITY: HIGH']
+			- var todoPriorities = ['PRIORITY: LOW','PRIORITY: MEDIUM', 'PRIORITY: HIGH'];
+			- var completedBoolOpp ;
+			- var completedBool ;
 
 			div(id=ii, todo-parent=ii, todo-object-id=todo._id, completed=todo.completed,
 					class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-"+todo.priority)
@@ -34,7 +36,7 @@ block content
 							todo-parent=ii,
 							class="close-todo-button hidden")
 
-				h3(todo-parent=ii contenteditable="true"
+				h3(todo-parent=ii contenteditable=true
 					 spellcheck="false",
 					 class="todo-title").
 					#{todo.title}
@@ -42,14 +44,14 @@ block content
 				div(class="todo-content box-col hidden-todo-child",
 						todo-parent=ii)
 
-					p(todo-parent=ii contenteditable="true"
+					p(todo-parent=ii contenteditable=true
 						spellcheck="false",
 						class="todo-body").
 						#{todo.body}
 
 					div(class="todo-edit-priority-box box all-12", todo-parent=ii)
 						button(class="todo-edit-priority box xs-10 todo-priority-button priority-bg-"+todo.priority,
-									 todo-parent=ii, value=todo.priority)  #{todoPriorities[todo.priority]}
+									 todo-parent=ii, value=todo.priority, disabled=false)  #{todoPriorities[todo.priority]}
 					div(class="todo-button-box box wrap", todo-parent=ii)
 						button(class="btn-1 todo-save-button inactive-todo-button",
 									todo-parent=ii) SAVE
