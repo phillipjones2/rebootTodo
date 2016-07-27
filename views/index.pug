@@ -28,8 +28,9 @@ block content
 			- var completedBoolOpp ;
 			- var completedBool ;
 
-			div(id=ii, todo-parent=ii, todo-object-id=todo._id, completed=todo.completed,
-					class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-"+todo.priority)
+			div(id=ii, todo-parent=ii, todo-object-id=todo._id,
+				completed=todo.completed,class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5
+				priority-"+todo.priority)
 
 				div(class="close-todo-button-box", todo-parent=ii)
 					img(src="icons/cancel.svg",
@@ -50,8 +51,10 @@ block content
 						#{todo.body}
 
 					div(class="todo-edit-priority-box box all-12", todo-parent=ii)
-						button(class="todo-edit-priority box xs-10 todo-priority-button priority-bg-"+todo.priority,
-									 todo-parent=ii, value=todo.priority, disabled=false)  #{todoPriorities[todo.priority]}
+						button(class="todo-edit-priority box xs-10
+									 todo-priority-button priority-bg-"+todo.priority,
+									 todo-parent=ii, value=todo.priority, 
+									 disabled=false) #{todoPriorities[todo.priority]}
 					div(class="todo-button-box box wrap", todo-parent=ii)
 						button(class="btn-1 todo-save-button inactive-todo-button",
 									todo-parent=ii) SAVE
