@@ -34,7 +34,7 @@
       transition: all .5s;
   	}
     p {
-    	margin-bottom: 15px;
+    	margin-bottom: 5px;
     }
     small {
     	margin-top: 10px;
@@ -68,7 +68,7 @@
       transition: all .5s;
     }
     p {
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
     small {
       margin-top: 10px;
@@ -111,6 +111,7 @@
   position: relative;
   right: -53px;
   top: -30px;
+  margin-top: 15px;
 }
 
 .close-todo-button {
@@ -150,10 +151,13 @@ button.todo-priority-button {
     opacity: 0.2;
   }
 }
-.todo-body-character-count {
+.todo-body-character-count, .todo-title-character-count {
+  width: 25px;
   background: none;
   color: #c4bfbd;
   font-size: 1.4rem;
   position: relative;
   top: -10px;
+  margin-bottom: 0px;
+  margin-top: 5px;
 }

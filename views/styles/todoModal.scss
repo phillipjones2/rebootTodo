@@ -13,7 +13,6 @@
 		border: 3px solid black;
 		padding: 13px 13px 10px;
 		margin-top: 10px;
-		margin-bottom: 8px;
 		font-size: 1.8rem;
 
 		&::-webkit-input-placeholder {
@@ -26,7 +25,7 @@
 		border: 3px solid black;
 		padding: 13px 10px 10px;
 		height: 170px;
-		margin-top: 10px;
+		margin-top: 18px;
 		font-size: 1.8rem;
 
 		&::-webkit-input-placeholder {
@@ -72,4 +71,17 @@
 	&.inactive-todo-submit-button {
 	  opacity: .2;
 	}
+}
+
+
+#add-todo-body-character-count-box, #add-todo-title-character-count-box {
+	width: 70%;
+}
+
+#add-todo-body-character-count-box p, #add-todo-title-character-count-box p {
+	position: relative;
+	top: -35px;
+	left: -15px;
+	color: #a9a9a9;
+	font-size: 1.4rem;
 }

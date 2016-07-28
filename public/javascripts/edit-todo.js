@@ -36,34 +36,64 @@ for (let button of saveEditedTodoButtons) {
 //--- TITLE DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
 const titles = getElsByClass('todo-title'),
       maxTitleLength = 55;
+
 for (let title of titles) {
  title.parent = getParentTodo(title);
- title.addEventListener('keyup', (e) => {
-   const newText = `${title.innerText} ${title.parent.tree.body.innerText} ${title.parent.tree.priorityButton.value}`;
-   compareNewAndOriginalText(title, newText);
- });
+ const titleCount = title.parent.querySelector('.todo-title-character-count'),
+       titleCountBox = title.parent.querySelector('.todo-title-character-count-box');
+
+  title.addEventListener('keyup', (e) => {
+    const newText = `${title.innerText} ${title.parent.tree.body.innerText} ${title.parent.tree.priorityButton.value}`;
+    compareNewAndOriginalText(title, newText);
+
+    // VALIDATE CHARACTER LENGTH
+    titleCount.classList.remove('hidden');
+    titleCountBox.classList.remove('hidden');
+    titleCount.value = maxTitleLength - title.innerText.length;
+
+    if (title.innerText.length > maxTitleLength ) {
+      title.parent.tree.saveButton.classList.add('inactive-todo-button');
+      titleCount.classList.add('priority-text-2');
+    } else {
+      titleCount.classList.remove('priority-text-2');
+    }
+  });
+
+  title.addEventListener('focus', (e) => {
+    title.parent.querySelector('.todo-body-character-count').classList.add('hidden');
+  });
 }
 
  //*****************************************************//
 //---  BODY DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
 const bodies = getElsByClass('todo-body'),
       maxBodyLength = 140;
+
 for (let body of bodies) {
  body.parent = getParentTodo(body);
- const bodyCount = body.parent.querySelector('.todo-body-character-count');
- body.addEventListener('keyup', (e) => {
-   const newText = `${body.parent.tree.title.innerText} ${body.parent.tree.body.innerText} ${body.parent.tree.priorityButton.value}`;
-   compareNewAndOriginalText(body, newText);
-   // VALIDATE CHARACTER LENGTH
-   bodyCount.classList.remove('hidden');
-   bodyCount.value = maxBodyLength - body.innerText.length;
-   if (body.innerText.length> maxBodyLength ) {
+ const bodyCount = body.parent.querySelector('.todo-body-character-count'),
+       bodyCountBox = body.parent.querySelector('.todo-body-character-count-box')
+
+  body.addEventListener('keyup', (e) => {
+    const newText = `${body.parent.tree.title.innerText} ${body.parent.tree.body.innerText} ${body.parent.tree.priorityButton.value}`;
+    compareNewAndOriginalText(body, newText);
+
+    // VALIDATE CHARACTER LENGTH
+    bodyCount.classList.remove('hidden');
+    bodyCountBox.classList.remove('hidden')
+    bodyCount.value = maxBodyLength - body.innerText.length;
+
+    if (body.innerText.length > maxBodyLength ) {
      body.parent.tree.saveButton.classList.add('inactive-todo-button');
      bodyCount.classList.add('priority-text-2');
-   } else {
+    } else {
      bodyCount.classList.remove('priority-text-2');
-   }
- });
+    }
+  });
+
+  body.addEventListener('focus', (e) => {
+    body.parent.querySelector('.todo-title-character-count').classList.add('hidden');
+  });
 }
 
  //********************************************************//
@@ -104,6 +134,7 @@ for (let button of discardButtons) {
      bodyCount.value = maxBodyLength - bodyElement.innerText.length;
      titleCount.value = maxTitleLength - titleElement.innerText.length;
      bodyCount.classList.add('hidden');
+     titleCount.classList.add('hidden');
    }
  });
 }

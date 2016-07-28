@@ -8,7 +8,11 @@ block content
 			h2 Create a tod#[span#todo-o(class="priority-text-0") o]
 			form(class="box-col x-center all-12")
 				input#add-todo-input(placeholder="todo title" name="title")
-				textarea#add-todo-textarea(placeholder="todo content" name="body")
+				div#add-todo-title-character-count-box(class="box justify-content-end")
+					p 55
+				textarea#add-todo-textarea(placeholder="write a few details about your todo" name="body")
+				div#add-todo-body-character-count-box(class="box justify-content-end")
+					p 140
 				button#add-todo-priority-button(class="priority-bg-0", type="button", name="priority", value="0")  priority: low
 				image#accept-button(class="inactive-todo-submit-button",
 							type="button", src="icons/plus.svg", action="/")
@@ -41,7 +45,9 @@ block content
 					 class="todo-title").
 					#{todo.title}
 
-				input(class="todo-title-character-count hidden", value=0, disabled, todo-parent=ii)
+				div(class="todo-title-character-count-box box all-12 justify-content-end hidden")
+					input(class="todo-title-character-count hidden", value=0, disabled, todo-parent=ii)
+
 
 				div(class="todo-content box-col hidden-todo-child",
 						todo-parent=ii)
@@ -51,7 +57,8 @@ block content
 						class="todo-body").
 						#{todo.body}
 
-					input(class="todo-body-character-count hidden", value=0, disabled, todo-parent=ii)
+					div(class="todo-body-character-count-box box all-12 justify-content-end hidden")
+						input(class="todo-body-character-count", value=0, disabled, todo-parent=ii)
 
 					div(class="todo-edit-priority-box box all-12", todo-parent=ii)
 						button(class="todo-edit-priority box xs-10 todo-priority-button priority-bg-"+todo.priority,

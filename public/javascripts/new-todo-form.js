@@ -20,12 +20,17 @@ const addTodoAcceptBtn = document.getElementById('accept-button'),
 			addTodoPriorityBtn = getElById('add-todo-priority-button');
 
 addTodoInput.addEventListener('keyup', (e) => {
+	addTodoInput.setAttribute('placeholder', 'donkey');
+
+
 	if (addTodoInput.value.trim() == '') {
 		newTodoSubmitButton.classList.add('inactive-todo-submit-button');
 	}
 	else {
 		newTodoSubmitButton.classList.remove('inactive-todo-submit-button');
 	}
+
+
 });
 
 addTodoAcceptBtn.addEventListener('click', (e) => {

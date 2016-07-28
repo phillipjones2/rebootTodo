@@ -1,6 +1,12 @@
 .hidden {
   display: none !important; }
 
+.scaled-down {
+  transform: scale(0); }
+
+.grow-in {
+  transform: scale(1); }
+
 /**********************/
 /* Background classes */
 .bg-black, .bg-0 {

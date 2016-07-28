@@ -4,6 +4,14 @@
 	display: none !important;
 }
 
+.scaled-down {
+	transform: scale(0.0);
+}
+
+.grow-in {
+	transform: scale(1.0);
+}
+
 /**********************/
 /* Background classes */
 
