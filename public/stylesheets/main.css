@@ -649,7 +649,8 @@ button.todo-priority-button {
   margin: 0; }
 
 #about-page-content {
-  padding: 75px 25px 25px 25px; }
+  padding: 75px 25px 25px 25px;
+  max-height: 65px; }
 
 #pc-container {
   width: 200%;

@@ -53,8 +53,6 @@ for (let todo of todos) {
   }
 
   todoTree.closeButtonBox.addEventListener('click', (e) => {
-    
-    if (!todoTree.saveButton.classList.contains('inactive-todo-button')) { console.log('ppppppp') }
     const elsToHide = document.querySelectorAll(`[todo-parent=${todoID}]`);
     todoTree.closeButton.classList.add('hidden');
     todoTree.closeButtonBox.classList.add('hidden');
@@ -137,7 +135,7 @@ for (let todo of todos) {
 
        } // ?? TODO IS COMPLETE AND USER SWIPES LEFT AGAIN ??
        else if (thisTodo.hasAttribute('completed')) {
-        return;
+        return; // do nothing currently
 
        } else {
 
@@ -151,7 +149,7 @@ for (let todo of todos) {
        	req.open('put', putLink , true);
         req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
        	req.send(`title=${todoTitle}&body=${todoBody}&priority=${priority}&completed=true&completedDate=${timestamp}`);
-        
+
       }
     } // else
    } // else
