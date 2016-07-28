@@ -28,6 +28,7 @@
 		color: white;
 	}
   .todo-content {
+    transition: all .5s;
   	h3 {
   		margin-top: 10px;
   		margin-bottom: 10px;
@@ -53,6 +54,7 @@
     margin: 10px;
   }
   .todo-content {
+    transition: all .5s;
     &.hidden-todo-child {
       display: none;
       opacity: 0;

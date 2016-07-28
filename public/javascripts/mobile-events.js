@@ -53,6 +53,8 @@ for (let todo of todos) {
   }
 
   todoTree.closeButtonBox.addEventListener('click', (e) => {
+    
+    if (!todoTree.saveButton.classList.contains('inactive-todo-button')) { console.log('ppppppp') }
     const elsToHide = document.querySelectorAll(`[todo-parent=${todoID}]`);
     todoTree.closeButton.classList.add('hidden');
     todoTree.closeButtonBox.classList.add('hidden');

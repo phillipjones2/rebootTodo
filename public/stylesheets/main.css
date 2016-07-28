@@ -218,14 +218,16 @@ nav {
   .todo-box[completed] {
     background: #56E39F;
     color: white; }
-  .todo-box .todo-content h3 {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  .todo-box .todo-content {
     transition: all .5s; }
-  .todo-box .todo-content p {
-    margin-bottom: 5px; }
-  .todo-box .todo-content small {
-    margin-top: 10px; }
+    .todo-box .todo-content h3 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      transition: all .5s; }
+    .todo-box .todo-content p {
+      margin-bottom: 5px; }
+    .todo-box .todo-content small {
+      margin-top: 10px; }
 
 @media (max-width: 768px) {
   .todo {
@@ -236,25 +238,27 @@ nav {
     padding: 15px 25px 10px;
     margin: 10px; }
 
-  .todo-content.hidden-todo-child {
-    display: none;
-    opacity: 0;
-    transition: opacity .5s; }
-  .todo-content.shown-todo-child {
-    display: inline;
-    opacity: 1; }
-  .todo-content h3 {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  .todo-content {
     transition: all .5s; }
-  .todo-content p {
-    margin-bottom: 5px; }
-  .todo-content small {
-    margin-top: 10px; }
-  .todo-content.complete {
-    background: #adedd2; }
-  .todo-content.aborted {
-    background: white; } }
+    .todo-content.hidden-todo-child {
+      display: none;
+      opacity: 0;
+      transition: opacity .5s; }
+    .todo-content.shown-todo-child {
+      display: inline;
+      opacity: 1; }
+    .todo-content h3 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      transition: all .5s; }
+    .todo-content p {
+      margin-bottom: 5px; }
+    .todo-content small {
+      margin-top: 10px; }
+    .todo-content.complete {
+      background: #adedd2; }
+    .todo-content.aborted {
+      background: white; } }
 .deleted-todo {
   background: #EF6F6C !important; }
 
@@ -622,6 +626,15 @@ button.todo-priority-button {
 @media (min-width: 891px) and (max-width: 1200px) {
   .lg-3-5 {
     width: 42%; } }
+@keyframes flash {
+  from, 50%, to {
+    opacity: 1; }
+  25%, 75% {
+    opacity: 0; } }
+.flash {
+  animation-name: flash;
+  animation-duration: .5s; }
+
 .color-box {
   height: 30px;
   margin: 0 10px; }
