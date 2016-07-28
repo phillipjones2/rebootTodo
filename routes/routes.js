@@ -1,13 +1,9 @@
 const express = require('express'),
 			router = express.Router();
 
-/* HOME PAGE REQUEST */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' });
+  res.render('about');
 });
-
-
-
 
 /* STYLEGUIDE PAGE REQUEST */
 router.get('/styleguide', (req, res, next) => {
