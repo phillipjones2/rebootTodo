@@ -8,6 +8,7 @@ const express      = require('express'),
       todoModel    = require('./modules/todoModel'),
       bodyParser   = require('body-parser'),
       todos        = require('./routes/todos').router,
+      routes       = require('./routes/routes'),
       // fresh        = require('./routes/fresh'),
       js           = require('./routes/scripts'),
       app          = express();
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // ???
 app.use(express.static(`${__dirname}/public`));
 
 app.use('/', todos);
+app.use('/about', routes);
 app.use('/scripts', js);
 
 // catch 404 and forward to error handler

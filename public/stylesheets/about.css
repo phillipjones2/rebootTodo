@@ -1,0 +1,28 @@
+#about-page-back-button {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 60px;
+  height: 60px;
+  z-index: 55;
+  margin: 0; }
+
+#about-page-content {
+  padding: 75px 25px 25px 25px; }
+
+#pc-container {
+  width: 200%;
+  flex-wrap: nowrap; }
+
+.personal-info-container {
+  margin: 0;
+  padding: 0;
+  width: 50%;
+  height: 300px;
+  position: relative; }
+
+#c-container {
+  background: #07A0C3;
+  transition: all 1s; }
+
+/*# sourceMappingURL=about.css.map */

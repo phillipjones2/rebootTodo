@@ -315,4 +315,8 @@
   animation-name: flash;
   animation-duration: .5s; }
 
+.left-25 {
+  left: -25%;
+  max-width: 90vw; }
+
 /*# sourceMappingURL=utils.css.map */
