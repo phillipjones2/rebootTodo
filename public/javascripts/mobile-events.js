@@ -118,10 +118,10 @@ for (let todo of todos) {
       bodyElement.setAttribute('contenteditable', false);
       priorityElement.setAttribute('disabled', true);
 
-      setTimeout(( ) => {
-        if (parent != 'undefined') {
+      var deleteTimeout = setTimeout(( ) => {
+        if (parent) {
           thisTodo.classList.remove('deleted-todo');
-          titleElement.classList.remove('font-white')
+          titleElement.classList.remove('font-white');
         }
       }, 2000)
       }
