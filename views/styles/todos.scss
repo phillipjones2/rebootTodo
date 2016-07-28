@@ -91,7 +91,7 @@
 
 // Backgrounds depending on todo state.
 .deleted-todo {
-  background: $pale-red !important; 
+  background: $pale-red !important;
 }
 
 .completed-todo {
@@ -149,4 +149,11 @@ button.todo-priority-button {
     color: white;
     opacity: 0.2;
   }
+}
+.todo-body-character-count {
+  background: none;
+  color: #c4bfbd;
+  font-size: 1.4rem;
+  position: relative;
+  top: -10px;
 }

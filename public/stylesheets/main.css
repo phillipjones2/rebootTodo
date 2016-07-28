@@ -295,6 +295,13 @@ button.todo-priority-button {
     color: white;
     opacity: 0.2; }
 
+.todo-body-character-count {
+  background: none;
+  color: #c4bfbd;
+  font-size: 1.4rem;
+  position: relative;
+  top: -10px; }
+
 .hidden {
   display: none !important; }
 
