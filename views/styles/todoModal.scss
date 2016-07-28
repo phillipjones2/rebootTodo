@@ -25,7 +25,7 @@
 		border: 3px solid black;
 		padding: 13px 10px 10px;
 		height: 170px;
-		margin-top: 18px;
+		// margin-top: 18px;
 		font-size: 1.8rem;
 
 		&::-webkit-input-placeholder {
@@ -40,7 +40,7 @@
 	text-transform: uppercase;
 	// border: 3px solid black;
 	padding: 16px 13px 13px;
-	margin: 18px 0px 8px 0px;
+	margin: 0px 0px 8px 0px;
 	text-align: left;
 }
 
@@ -76,12 +76,16 @@
 
 #add-todo-body-character-count-box, #add-todo-title-character-count-box {
 	width: 70%;
+	// position: relative;
+	// top: -35px;
+	// left: -15px;
+	height: 18px;
+	color: #a9a9a9;
+	font-size: 1.2rem;
 }
 
-#add-todo-body-character-count-box p, #add-todo-title-character-count-box p {
-	position: relative;
-	top: -35px;
-	left: -15px;
+#body-character-count p, #add-todo-title-character-count-box p {
+
 	color: #a9a9a9;
-	font-size: 1.4rem;
+	font-size: 1rem;
 }

@@ -19,7 +19,6 @@
     border: 3px solid black;
     padding: 13px 10px 10px;
     height: 170px;
-    margin-top: 18px;
     font-size: 1.8rem; }
     #add-todo-modal textarea::-webkit-input-placeholder {
       font-size: 1.6rem; }
@@ -29,7 +28,7 @@
   font-family: GothamBold;
   text-transform: uppercase;
   padding: 16px 13px 13px;
-  margin: 18px 0px 8px 0px;
+  margin: 0px 0px 8px 0px;
   text-align: left; }
 
 #close-button {
@@ -57,13 +56,13 @@
     opacity: .2; }
 
 #add-todo-body-character-count-box, #add-todo-title-character-count-box {
-  width: 70%; }
-
-#add-todo-body-character-count-box p, #add-todo-title-character-count-box p {
-  position: relative;
-  top: -35px;
-  left: -15px;
+  width: 70%;
+  height: 18px;
   color: #a9a9a9;
-  font-size: 1.4rem; }
+  font-size: 1.2rem; }
+
+#body-character-count p, #add-todo-title-character-count-box p {
+  color: #a9a9a9;
+  font-size: 1rem; }
 
 /*# sourceMappingURL=todoModal.css.map */

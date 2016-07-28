@@ -1,4 +1,6 @@
 const addTodoModal = getElById('add-todo-modal'),
+			titleCharP = document.getElementById('titleCharP'),
+			bodyCharP = document.getElementById('bodyCharP'),
 			closeCreateTodoModalButton = getElById('close-button'),
 			newTodoSubmitButton = getElById('accept-button'),
 			openCreateTodoModalButton = getElById('add-button');
@@ -28,17 +30,17 @@ addTodoInput.addEventListener('keyup', (e) => {
 	// IF NO CHARACTERS
 	if (addTodoInput.value.trim() == '') {
 		newTodoSubmitButton.classList.add('inactive-todo-submit-button');
-		createModalTitleCount.classList.add('hidden');
+		titleCharP.classList.add('hidden');
 	}
 	else {
 		newTodoSubmitButton.classList.remove('inactive-todo-submit-button');
-		createModalTitleCount.classList.remove('hidden');
-		createModalTitleCount.classList.remove('priority-text-2');
-		createModalTitleCount.innerText = maxTitleLength - addTodoInput.value.length;
+		titleCharP.classList.remove('hidden');
+		titleCharP.classList.remove('priority-text-2');
+		titleCharP.innerText = maxTitleLength - addTodoInput.value.length;
 		// IF TITLE CHARACTERS GO OVER 55 (MAX LENGTH)
 		if (addTodoInput.value.length > maxTitleLength) {
 			newTodoSubmitButton.classList.add('inactive-todo-submit-button');
-			createModalTitleCount.classList.add('priority-text-2');
+			titleCharP.classList.add('priority-text-2');
 		}
 	}
 });
@@ -46,12 +48,12 @@ addTodoInput.addEventListener('keyup', (e) => {
 	addTodoTextArea.addEventListener('keyup', (e) => {
 		// IF NO CHARACTERS
 		if (addTodoTextArea.value == 0) {
-			createModalBodyCount.classList.add('hidden');
+			bodyCharP.classList.add('hidden');
 		}
 		else {
-			createModalBodyCount.classList.remove('hidden');
-			createModalBodyCount.classList.remove('priority-text-2');
-			createModalBodyCount.innerText = maxBodyLength - addTodoTextArea.value.length;
+			bodyCharP.classList.remove('hidden');
+			bodyCharP.classList.remove('priority-text-2');
+			bodyCharP.innerText = maxBodyLength - addTodoTextArea.value.length;
 			if (addTodoTextArea.value.length < maxBodyLength
 					&& addTodoInput.value.trim() != '') {
 				newTodoSubmitButton.classList.remove('inactive-todo-submit-button');
@@ -59,17 +61,10 @@ addTodoInput.addEventListener('keyup', (e) => {
 			// IF TITLE CHARACTERS GO OVER 55 (MAX LENGTH)
 			if (addTodoTextArea.value.length > maxBodyLength) {
 				newTodoSubmitButton.classList.add('inactive-todo-submit-button');
-				createModalBodyCount.classList.add('priority-text-2');
+				bodyCharP.classList.add('priority-text-2');
 			}
 		}
 	});
-
-
-
-
-
-
-
 
 addTodoAcceptBtn.addEventListener('click', (e) => {
 	if (newTodoSubmitButton.classList.contains('inactive-todo-submit-button')) return;
@@ -77,7 +72,6 @@ addTodoAcceptBtn.addEventListener('click', (e) => {
 	const title = addTodoInput.value,
 				body = addTodoTextArea.value,
 				priority = addTodoPriorityBtn.value;
-
 
 	const req = new XMLHttpRequest();
 	req.onreadystatechange = ( ) => {
