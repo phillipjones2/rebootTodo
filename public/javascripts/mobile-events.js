@@ -82,6 +82,7 @@ for (let todo of todos) {
     console.log(priorityElement);
 
     if (rightSwipe) {
+
       // MARKED FOR DELETION -> DELETE
       if (thisTodo.classList.contains('deleted-todo')) {
         //| When the state of the request changes:
@@ -117,7 +118,12 @@ for (let todo of todos) {
       bodyElement.setAttribute('contenteditable', false);
       priorityElement.setAttribute('disabled', true);
 
-
+      setTimeout(( ) => {
+        if (parent != 'undefined') {
+          thisTodo.classList.remove('deleted-todo');
+          titleElement.classList.remove('font-white')
+        }
+      }, 2000)
       }
     } else { // If left swipe...
        if (thisTodo.classList.contains('deleted-todo')) {
