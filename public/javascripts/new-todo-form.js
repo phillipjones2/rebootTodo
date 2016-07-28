@@ -17,21 +17,59 @@ openCreateTodoModalButton.addEventListener('click', (e) => {
 const addTodoAcceptBtn = document.getElementById('accept-button'),
 			addTodoInput = getElById('add-todo-input'),
 			addTodoTextArea = getElById('add-todo-textarea'),
-			addTodoPriorityBtn = getElById('add-todo-priority-button');
+			addTodoPriorityBtn = getElById('add-todo-priority-button'),
+			maxTitleLength = 55,
+			maxBodyLength = 140,
+			createModalTitleCount = document.querySelector('#add-todo-title-character-count-box'),
+			createModalBodyCount = document.querySelector('#add-todo-body-character-count-box');
 
+// create TODO TITLE LISTENER
 addTodoInput.addEventListener('keyup', (e) => {
-	addTodoInput.setAttribute('placeholder', 'donkey');
-
-
+	// IF NO CHARACTERS
 	if (addTodoInput.value.trim() == '') {
 		newTodoSubmitButton.classList.add('inactive-todo-submit-button');
+		createModalTitleCount.classList.add('hidden');
 	}
 	else {
 		newTodoSubmitButton.classList.remove('inactive-todo-submit-button');
+		createModalTitleCount.classList.remove('hidden');
+		createModalTitleCount.classList.remove('priority-text-2');
+		createModalTitleCount.innerText = maxTitleLength - addTodoInput.value.length;
+		// IF TITLE CHARACTERS GO OVER 55 (MAX LENGTH)
+		if (addTodoInput.value.length > maxTitleLength) {
+			newTodoSubmitButton.classList.add('inactive-todo-submit-button');
+			createModalTitleCount.classList.add('priority-text-2');
+		}
 	}
-
-
 });
+	// create TODO BODY LISTENER
+	addTodoTextArea.addEventListener('keyup', (e) => {
+		// IF NO CHARACTERS
+		if (addTodoTextArea.value == 0) {
+			createModalBodyCount.classList.add('hidden');
+		}
+		else {
+			createModalBodyCount.classList.remove('hidden');
+			createModalBodyCount.classList.remove('priority-text-2');
+			createModalBodyCount.innerText = maxBodyLength - addTodoTextArea.value.length;
+			if (addTodoTextArea.value.length < maxBodyLength
+					&& addTodoInput.value.trim() != '') {
+				newTodoSubmitButton.classList.remove('inactive-todo-submit-button');
+					}
+			// IF TITLE CHARACTERS GO OVER 55 (MAX LENGTH)
+			if (addTodoTextArea.value.length > maxBodyLength) {
+				newTodoSubmitButton.classList.add('inactive-todo-submit-button');
+				createModalBodyCount.classList.add('priority-text-2');
+			}
+		}
+	});
+
+
+
+
+
+
+
 
 addTodoAcceptBtn.addEventListener('click', (e) => {
 	if (newTodoSubmitButton.classList.contains('inactive-todo-submit-button')) return;
