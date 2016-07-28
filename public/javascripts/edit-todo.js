@@ -50,8 +50,11 @@ for (let title of titles) {
     titleCount.classList.remove('hidden');
     titleCountBox.classList.remove('hidden');
     titleCount.value = maxTitleLength - title.innerText.length;
-
-    if (title.innerText.length > maxTitleLength ) {
+    console.log(title.innerText.trim().length);
+    if (title.innerText.trim().length == 0){
+      title.parent.tree.saveButton.classList.add('inactive-todo-button');
+      titleCount.classList.add('priority-text-2');
+    } else if (title.innerText.length > maxTitleLength ) {
       title.parent.tree.saveButton.classList.add('inactive-todo-button');
       titleCount.classList.add('priority-text-2');
     } else {
