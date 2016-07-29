@@ -18,7 +18,7 @@ openCreateTodoModalButton.addEventListener('click', (e) => {
 // ----- CREATE A TODO ----- \\
 const addTodoAcceptBtn = document.getElementById('accept-button'),
 			addTodoInput = getElById('add-todo-input'),
-			addTodoTextArea = getElById('add-todo-textarea'),
+			createModalBody = getElById('add-todo-textarea'),
 			addTodoPriorityBtn = getElById('add-todo-priority-button'),
 			maxTitleLength = 55,
 			maxBodyLength = 140,
@@ -44,25 +44,36 @@ addTodoInput.addEventListener('keyup', (e) => {
 		}
 	}
 });
+addTodoInput.addEventListener('focus', (e) => {
+	if (!bodyCharP.classList.contains('priority-text-2')) {
+	bodyCharP.classList.add('hidden');
+	}
+});
+
 	// create TODO BODY LISTENER
-	addTodoTextArea.addEventListener('keyup', (e) => {
+	createModalBody.addEventListener('keyup', (e) => {
 		// IF NO CHARACTERS
-		if (addTodoTextArea.value == 0) {
+		if (createModalBody.value == 0) {
 			bodyCharP.classList.add('hidden');
 		}
 		else {
 			bodyCharP.classList.remove('hidden');
 			bodyCharP.classList.remove('priority-text-2');
-			bodyCharP.innerText = maxBodyLength - addTodoTextArea.value.length;
-			if (addTodoTextArea.value.length < maxBodyLength
+			bodyCharP.innerText = maxBodyLength - createModalBody.value.length;
+			if (createModalBody.value.length < maxBodyLength
 					&& addTodoInput.value.trim() != '') {
 				newTodoSubmitButton.classList.remove('inactive-todo-submit-button');
 					}
 			// IF TITLE CHARACTERS GO OVER 55 (MAX LENGTH)
-			if (addTodoTextArea.value.length > maxBodyLength) {
+			if (createModalBody.value.length > maxBodyLength) {
 				newTodoSubmitButton.classList.add('inactive-todo-submit-button');
 				bodyCharP.classList.add('priority-text-2');
 			}
+		}
+	});
+	createModalBody.addEventListener('focus', (e) => {
+		if (!titleCharP.classList.contains('priority-text-2')) {
+		titleCharP.classList.add('hidden');
 		}
 	});
 
@@ -70,7 +81,7 @@ addTodoAcceptBtn.addEventListener('click', (e) => {
 	if (newTodoSubmitButton.classList.contains('inactive-todo-submit-button')) return;
 
 	const title = addTodoInput.value,
-				body = addTodoTextArea.value,
+				body = createModalBody.value,
 				priority = addTodoPriorityBtn.value;
 
 	const req = new XMLHttpRequest();
