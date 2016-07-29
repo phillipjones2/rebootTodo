@@ -93,11 +93,12 @@ function onListening() {
   mongooseConnection();
 }
 
-
+const mongoURI = "mongodb://heroku_z9ntdjbz:lkivbkmngs0ike59c4mgb8emie@ds031845.mlab.com:31845/heroku_z9ntdjbz" ||
+                 "mongodb://localhost/rebootTodo";
 
 // mongoose
 function mongooseConnection() {
-  mongoose.connect('mongodb://localhost/rebootTodo');
+  mongoose.connect(mongoURI);
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', () => {
