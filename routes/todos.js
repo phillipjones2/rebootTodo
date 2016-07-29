@@ -3,7 +3,7 @@ const express = require('express'),
      mongoose = require('mongoose'),
     //  winterfresh = require('../winterfresh'),
          Todo = require('../modules/todoModel');
-  let today = new Date(),
+  var today = new Date(),
       yesterday = new Date(today.setDate(today.getDate() -1)),
       thisWeek = new Date(today.setDate(today.getDate() - 7));
 
