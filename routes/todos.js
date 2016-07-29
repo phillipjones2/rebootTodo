@@ -4,7 +4,8 @@ const express = require('express'),
     //  winterfresh = require('../winterfresh'),
          Todo = require('../modules/todoModel');
   let today = new Date(),
-      yesterday = today.getDate() -1;
+      yesterday = new Date(today.setDate(today.getDate() -1)),
+      thisWeek = new Date(today.setDate(today.getDate() - 7));
 
 // todo index - all todos
 router.get('/', (req, res) => {
@@ -14,6 +15,18 @@ router.get('/', (req, res) => {
             ]).
               sort('completed').
               sort('-priority').
+              exec((err, docs) => {
+    // res.send(docs);
+    // console.log(docs);
+    res.render('index', { title: 'TodoTwo', todosObj: docs });
+  });
+});
+
+// completed todos from 7 days ago up to today
+router.get('/completed', (req, res) => {
+  Todo.find({completed:true,
+             completedDate: {$gte : thisWeek}}).
+              sort('-completedDate').
               exec((err, docs) => {
     // res.send(docs);
     // console.log(docs);

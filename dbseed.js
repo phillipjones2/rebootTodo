@@ -3,7 +3,7 @@ const   mongoose = require('mongoose'),
             Todo = require('./modules/todoModel'),
       formatDate = require('./routes/todos').formatDate,
            today = new Date(),
-             old = today.getDate() -2;
+             old = new Date(today.setDate(getDate() -2));
            todos = [],
      priorityArr = [0, 1, 2],
 
