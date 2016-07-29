@@ -649,8 +649,52 @@ button.todo-priority-button {
   margin: 0; }
 
 #about-page-content {
-  padding: 75px 25px 25px 25px;
-  max-height: 65px; }
+  padding: 75px 25px 25px 25px; }
+
+#html5-logo, #css3-logo, #es6-logo {
+  max-height: 100px; }
+
+#nodejsbox, #expressbox, #mongoosebox, #slackbox, #babelbox {
+  height: 100px; }
+
+#nodejs1-logo, #express-logo, #mongodb-logo {
+  max-width: 90%; }
+
+#mongobox {
+  height: 70px; }
+
+#gitbox {
+  height: 150px; }
+
+#git-logo {
+  min-width: 140px; }
+
+#github-logo {
+  min-width: 50px; }
+
+#mongoose-logo {
+  width: 260px; }
+
+#robomongo-logo {
+  width: 90px; }
+
+#slack-logo {
+  width: 90px; }
+
+#nodemon-logo {
+  width: 91px; }
+
+#pug-sassbox {
+  height: 120px; }
+
+#pug-logo, #sass-logo {
+  min-width: 140px; }
+
+#babel-logo {
+  min-width: 100px; }
+
+#bottomspace {
+  height: 154px; }
 
 #pc-container {
   width: 200%;

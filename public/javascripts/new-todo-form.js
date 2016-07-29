@@ -28,7 +28,7 @@ const addTodoAcceptBtn = document.getElementById('accept-button'),
 // create TODO TITLE LISTENER
 addTodoInput.addEventListener('keyup', (e) => {
 	// IF NO CHARACTERS
-	if (addTodoInput.value.trim() == '') {
+	if (addTodoInput.value.trim() == 0) {
 		newTodoSubmitButton.classList.add('inactive-todo-submit-button');
 		titleCharP.classList.add('hidden');
 	}
