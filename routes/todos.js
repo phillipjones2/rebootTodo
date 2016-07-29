@@ -115,7 +115,7 @@ router.delete('/:todo_id', (req, res) => {
 });
 
 function formatDate(date) {
-  let hours = date.getHours(),
+  var hours = date.getHours(),
     minutes = date.getMinutes(),
        ampm = hours >= 12 ? 'pm' : 'am',
     DaysArr = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri'],
@@ -124,8 +124,7 @@ function formatDate(date) {
   hours = hours % 12;
   hours = hours ? hours : 12; // the hour '0' should be '12'
   minutes = minutes < 10 ? '0'+minutes : minutes;
-  let strTime = `${DaysArr[date.getDay()]} ${MonthsArr[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()} ${hours}:${minutes}${ampm}`;
-  return strTime;
+  return `${DaysArr[date.getDay()]} ${MonthsArr[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()} ${hours}:${minutes}${ampm}`;
 }
 
 module.exports = {router, formatDate};
