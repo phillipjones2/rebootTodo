@@ -34,7 +34,7 @@ block content
 			- var disabled = todo.completed;
 			- var todoPriorities = ['PRIORITY: LOW','PRIORITY: MEDIUM', 'PRIORITY: HIGH'];
 
-			div(id=ii, todo-parent=ii, todo-object-id=todo._id,
+			div(id=ii, todo-parent=ii, todo-object-id=todo.idString,
 				completed=todo.completed, class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-"+todo.priority)
 
 				div(class="close-todo-button-box", todo-parent=ii)

@@ -2,13 +2,13 @@
 
 const saveEditedTodoButtons = document.getElementsByClassName('todo-save-button');
 for (let button of saveEditedTodoButtons) {
-  let parentID = button.getAttribute('todo-parent'),
-      parent = document.getElementById(parentID),
-      todoTitle = parent.querySelector('.todo-title').innerText,
-      todoBody = parent.querySelector('.todo-body').innerText.trim(),
-      priority = parent.querySelector('.todo-edit-priority').value,
-      objectID = trimQuotes(parent.getAttribute('todo-object-id')),
-      putLink = `/${objectID}`;
+  // let parentID = button.getAttribute('todo-parent'),
+  //     parent = document.getElementById(parentID),
+  //     todoTitle = parent.querySelector('.todo-title').innerText,
+  //     todoBody = parent.querySelector('.todo-body').innerText.trim(),
+  //     priority = parent.querySelector('.todo-edit-priority').value,
+  //     objectID = parent.getAttribute('todo-object-id'),
+  //     putLink = "/" + objectID;
 
   button.addEventListener('click', (e) => {
     if (button.classList.contains('inactive-todo-button')) { return;}
@@ -17,8 +17,8 @@ for (let button of saveEditedTodoButtons) {
         todoTitle = parent.querySelector('.todo-title').innerText,
         todoBody = parent.querySelector('.todo-body').innerText.trim(),
         priority = parent.querySelector('.todo-edit-priority').value,
-        objectID = trimQuotes(parent.getAttribute('todo-object-id')),
-        putLink = `/${objectID}`;
+        objectID = parent.getAttribute('todo-object-id'),
+        putLink = "/" + objectID;
 
   	const req = new XMLHttpRequest();
     console.log(putLink);

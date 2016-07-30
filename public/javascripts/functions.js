@@ -36,9 +36,10 @@ function removeClasses(el, classesArray) {
 	});
 };
 
-function trimQuotes(string) {
-	return string.slice(1, -1);
-} 
+// NO LONGER NEEDED - - convert the id's to strings in the route
+// function trimQuotes(string) {
+// 	return string.slice(1, -1);
+// };
 
 function getParentTodo(el) {
 	const parentID = el.getAttribute('todo-parent'),

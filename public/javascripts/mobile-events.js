@@ -64,22 +64,22 @@ for (let todo of todos) {
   if (!validSwipe) { return }
 
   else {
-    const thisTodoTitle = todo.tree.title,
-          todoObjectId = trimQuotes(todo.getAttribute('todo-object-id'));
+    const thisTodoTitle = todo.tree.title;
+          // todoObjectId = trimQuotes(todo.getAttribute('todo-object-id'));
+    const todoObjectId = todo.getAttribute('todo-object-id');
+
       let parentID = thisTodo.getAttribute('todo-parent'),
           parent = document.getElementById(parentID),
           todoTitle = parent.querySelector('.todo-title').innerText.trim(),
           todoBody = parent.querySelector('.todo-body').innerText.trim(),
           priority = parent.querySelector('.todo-edit-priority').value,
           timestamp = new Date(),
-          putLink = `/${todoObjectId}`,
+          // putLink = `/${todoObjectId}`,
+          putLink =  '/' + todoObjectId,
           titleElement = parent.querySelector('.todo-title'),
           bodyElement = parent.querySelector('.todo-body'),
           priorityElement = parent.querySelector('.todo-edit-priority');
-
-    console.log(titleElement);
-    console.log(bodyElement);
-    console.log(priorityElement);
+          console.log(putLink);
 
     if (rightSwipe) {
 
