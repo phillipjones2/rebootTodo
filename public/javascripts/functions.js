@@ -49,29 +49,30 @@ function getParentTodo(el) {
 
 function getTodoTree(el) {
 	const todoID = el.getAttribute('todo-parent'),
-				parent = getElById(todoID),
-				parentClass = `${parent.classList}`,
-				children = getElsByQuery('[todo-parent]', parent),
-				priorityButton = getElByQuery('.todo-edit-priority', parent),
+				parent = document.getElementById(todoID),
+				children = parent.querySelector('[todo-parent]'),
+				priorityButton = parent.querySelector('.todo-edit-priority'),
 				priority = priorityButton.value,
 				priorityText = `${priorityButton.innerText}`,
 				priorityClass = `${priorityButton.classList}`,
-				title = getElByQuery('h3', parent),
+				title = parent.querySelector('h3'),
 				titleText = title.innerText.trim(),
-				body = getElByQuery('.todo-body', parent),
+				body = parent.querySelector('.todo-body'),
 				bodyText = body.innerText.trim(),
 				originalText = `${titleText} ${bodyText} ${priority}`,
-				saveButton = getElByQuery('.todo-save-button', parent),
-				discardButton = getElByQuery('.todo-discard-button', parent),
-				completeButton = getElByQuery('.todo-complete-button', parent),
-				date = getElByQuery('.todo-date', parent),
-				closeButtonBox = getElByQuery('.close-todo-button-box', parent),
-				closeButton = getElByQuery('.close-todo-button', parent),
+				saveButton = parent.querySelector('.todo-save-button'),
+				discardButton = parent.querySelector('.todo-discard-button'),
+				completeButton = parent.querySelector('.todo-complete-button'),
+				date = parent.querySelector('.todo-date'),
+				closeButtonBox = parent.querySelector('.close-todo-button-box'),
+				closeButton = parent.querySelector('.close-todo-button'),
+				putLink = '/' + todoID,
 				keystrokes = 0;
+				// parentClass = `${parent.classList}`;
 
 	return {
 		parent,
-		parentClass,
+		// parentClass,
 		children,
 		priorityButton,
 		priority,
@@ -88,11 +89,10 @@ function getTodoTree(el) {
 		closeButtonBox,
 		closeButton,
 		date,
+		putLink,
 		keystrokes,
 	};
 }
-
-
 
 //----- COMPARE DIFFS FOR DISCARD/SAVE BUTTON FUNCTIONALITY -----\\
 function compareNewAndOriginalText(val, newText) {
@@ -175,8 +175,8 @@ function rotatePriorities(el, el2, classArr2, textArr) {
 function validateTargetAsTodo(e) {
 	const target = e.target;
 	if (!target.classList.contains('todo-box')) {
-		const thisParentID = target.getAttribute('todo-parent'),
-					todoParent = getElById(thisParentID);
-		return todoParent;
+		const todoID = target.getAttribute('todo-parent'),
+					parent = docuement.getElementById(todoID);
+		return parent;
 	} else { return target };
 };
