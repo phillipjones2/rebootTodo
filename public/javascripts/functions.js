@@ -43,23 +43,25 @@ function removeClasses(el, classesArray) {
 
 function getParentTodo(el) {
 	const parentID = el.getAttribute('todo-parent'),
-				parent = getElById(parentID);
+				parent = document.getElementById(parentID);
 	return parent;
 };
 
 function getTodoTree(el) {
 	const todoID = el.getAttribute('todo-parent'),
 				parent = document.getElementById(todoID),
-				children = parent.querySelector('[todo-parent]'),
+				children = parent.querySelectorAll('[todo-parent]'),
 				priorityButton = parent.querySelector('.todo-edit-priority'),
-				priority = priorityButton.value,
+				priorityValue = priorityButton.value,
 				priorityText = `${priorityButton.innerText}`,
 				priorityClass = `${priorityButton.classList}`,
 				title = parent.querySelector('h3'),
 				titleText = title.innerText.trim(),
+				titleCount = parent.querySelector('.todo-title-character-count'),
 				body = parent.querySelector('.todo-body'),
 				bodyText = body.innerText.trim(),
-				originalText = `${titleText} ${bodyText} ${priority}`,
+				bodyCount = parent.querySelector('.todo-body-character-count'),
+				originalText = `${titleText} ${bodyText} ${priorityValue}`,
 				saveButton = parent.querySelector('.todo-save-button'),
 				discardButton = parent.querySelector('.todo-discard-button'),
 				completeButton = parent.querySelector('.todo-complete-button'),
@@ -67,21 +69,23 @@ function getTodoTree(el) {
 				closeButtonBox = parent.querySelector('.close-todo-button-box'),
 				closeButton = parent.querySelector('.close-todo-button'),
 				putLink = '/' + todoID,
-				keystrokes = 0;
-				// parentClass = `${parent.classList}`;
+				keystrokes = 0,
+				parentClass = `${parent.classList}`;
 
 	return {
 		parent,
-		// parentClass,
+		parentClass,
 		children,
 		priorityButton,
-		priority,
+		priorityValue,
 		priorityText,
 		priorityClass,
 		title,
 		titleText,
+		titleCount,
 		body,
 		bodyText,
+		bodyCount,
 		originalText,
 		saveButton,
 		discardButton,
@@ -176,7 +180,7 @@ function validateTargetAsTodo(e) {
 	const target = e.target;
 	if (!target.classList.contains('todo-box')) {
 		const todoID = target.getAttribute('todo-parent'),
-					parent = docuement.getElementById(todoID);
+					parent = document.getElementById(todoID);
 		return parent;
 	} else { return target };
 };

@@ -35,27 +35,32 @@ for (let i = 0, todosLen = todos.length; i < todosLen; i++) {
   //| open todos and open the one that was tapped.
   if (tap) {
     const otherTodoChildren = document
-            .querySelectorAll(`:not([todo-parent=${todoID}]`),
+            .querySelectorAll(`:not([todo-parent=${todo.tree.todoID}]`),
           otherTodoCloseButtons = document
-            .querySelectorAll(`img[todo-parent]:not([todo-parent=${todoID}])`);
+            .querySelectorAll(`img[todo-parent]:not([todo-parent=${todo.tree.todoID}])`);
+
     for (let i = 0, otherLen = otherTodoChildren.length; i < otherLen; i++) {
       const otherTodoChild = otherTodoChildren[i];
       otherTodoChild.classList.remove('shown-todo-child');
     }
+
     for (let i = 0, otherLen = otherTodoCloseButtons.length; i < otherLen; i++) {
       const otherTodoCloseButton = otherTodoCloseButtons[i];
       otherTodoCloseButton.classList.add('hidden');
     }
+
+    console.log(todo.tree.children);
     for (let i = 0, childrenLen = todo.tree.children.length; i < childrenLen; i++) {
       const todoChild = todo.tree.children[i];
       todoChild.classList.add('shown-todo-child');
+      console.log('add shown todo child');
     }
     todo.tree.closeButton.classList.remove('hidden');
     todo.tree.closeButtonBox.classList.remove('hidden');
   }
   // EVENT LISTENER TO CLOSE THE EXPANDED TODO
   todo.tree.closeButtonBox.addEventListener('click', (e) => {
-    // const elsToHide = document.querySelectorAll(`[todo-parent=${todoID}]`);
+    // const elsToHide = document.querySelectorAll(`[todo-parent=${todo.tree.todoID}]`);
     todo.tree.closeButton.classList.add('hidden');
     todo.tree.closeButtonBox.classList.add('hidden');
     for (let i = 0, childrenLen = todo.tree.children.length; i < childrenLen; i++) {
@@ -73,7 +78,7 @@ for (let i = 0, todosLen = todos.length; i < todosLen; i++) {
     //   todoTitle = parent.querySelector('.todo-title').innerText.trim(),
     //   todoBody = parent.querySelector('.todo-body').innerText.trim(),
     //   priority = parent.querySelector('.todo-edit-priority').value,
-    //   timestamp = new Date(),
+    const timestamp = new Date();
     //   // putLink = `/${todoObjectId}`,
     //   putLink =  '/' + todoObjectId,
     //   titleElement = parent.querySelector('.todo-title'),
@@ -103,7 +108,7 @@ for (let i = 0, todosLen = todos.length; i < todosLen; i++) {
         };
         req.open('put', todo.tree.putLink , true);
         req.setRequestHeader("Content-type", "application/json");
-        req.send(`{\"title\":\"${todoTitle}\",\"body\":\"${todoBody}\",\"priority\":\"${priority}\",\"completed\":false}`);
+        req.send(`{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`);
       } //FROM A NORMAL STATE TO A MARKED FOR DELETION STATE
       else {
         todo.classList.add('deleted-todo');
@@ -111,12 +116,12 @@ for (let i = 0, todosLen = todos.length; i < todosLen; i++) {
         todo.tree.title.classList.add('font-white');
         todo.tree.title.setAttribute('contenteditable', false);
         todo.tree.body.setAttribute('contenteditable', false);
-        todo.tree.priority.setAttribute('disabled', true);
+        todo.tree.priorityButton.setAttribute('disabled', true);
 
         setTimeout(( ) => {
           if (todo.classList.contains('deleted-todo')){
             todo.classList.remove('deleted-todo');
-            titleElement.classList.remove('font-white');
+            todo.tree.title.classList.remove('font-white');
           }
         }, 2000)
       }
@@ -141,7 +146,7 @@ for (let i = 0, todosLen = todos.length; i < todosLen; i++) {
         };
         req.open('put', todo.tree.putLink , true);
         req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        req.send(`title=${todoTitle}&body=${todoBody}&priority=${priority}&completed=true&completedDate=${timestamp}`);
+        req.send(`title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`);
       }
     } // else
    } // else
