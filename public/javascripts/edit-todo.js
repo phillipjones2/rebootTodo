@@ -1,7 +1,8 @@
 'use strict';
 
 const saveEditedTodoButtons = document.getElementsByClassName('todo-save-button');
-for (let button of saveEditedTodoButtons) {
+for (let i = 0; i < saveEditedTodoButtons.length; i++) {
+  let button = saveEditedTodoButtons[i];
   let parentID = button.getAttribute('todo-parent'),
       parent = document.getElementById(parentID),
       todoTitle = parent.querySelector('.todo-title').innerText,
@@ -37,7 +38,8 @@ for (let button of saveEditedTodoButtons) {
 const titles = getElsByClass('todo-title'),
       maxTitleLength = 55;
 
-for (let title of titles) {
+for (let i = 0; i < titles.length; i++) {
+ let title = titles[i]
  title.parent = getParentTodo(title);
  const titleCount = title.parent.querySelector('.todo-title-character-count'),
        titleCountBox = title.parent.querySelector('.todo-title-character-count-box');
@@ -72,7 +74,8 @@ for (let title of titles) {
 const bodies = getElsByClass('todo-body'),
       maxBodyLength = 140;
 
-for (let body of bodies) {
+for (let i = 0; i < bodies.length; i++) {
+  let body = bodies[i];
  body.parent = getParentTodo(body);
  const bodyCount = body.parent.querySelector('.todo-body-character-count'),
        bodyCountBox = body.parent.querySelector('.todo-body-character-count-box')
@@ -102,7 +105,8 @@ for (let body of bodies) {
  //********************************************************//
 //--- PRIORITY DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
 const todoEditPriorityButtons = document.getElementsByClassName('todo-edit-priority');
-for (let button of todoEditPriorityButtons) {
+for (let i = 0; i < todoEditPriorityButtons.length; i++) {
+ let button = todoEditPriorityButtons[i];
  button.addEventListener('click', (e) => {
    button.parent = getParentTodo(button);
    rotatePriorities(button, button.parent,'border');
@@ -114,7 +118,8 @@ for (let button of todoEditPriorityButtons) {
  //************************************//
 //--- DISCARD BUTTON FUNCTIONALITY ---//
 const discardButtons = getElsByClass('todo-discard-button');
-for (let button of discardButtons) {
+for (let i = 0; i < discardButtons.length; i++) {
+ let button = discardButtons[i];
  button.addEventListener('click', (e) => {
 
    button.parent = getParentTodo(button);

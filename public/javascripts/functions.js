@@ -14,10 +14,10 @@ function getElByQuery(query, parent) {
 	else { return document.querySelector(query) }
 };
 
-function getElsByQuery(query, parent) {
-	if (parent) { return parent.querySelectorAll(query) }
-	else { return document.querySelectorAll(query) }
-};
+// function getElsByQuery(query, parent) {
+// 	if (parent) { return parent.querySelectorAll(query) }
+// 	else { return document.querySelectorAll(query) }
+// };
 
 function getElsByTag(tag, parent) {
 	if (parent) { return parent.getElementsByTagName(tag) }
@@ -50,7 +50,7 @@ function getTodoTree(el) {
 	const todoID = el.getAttribute('todo-parent'),
 				parent = getElById(todoID),
 				parentClass = `${parent.classList}`,
-				children = getElsByQuery('[todo-parent]', parent),
+				children = parent.querySelectorAll('[todo-parent]'),
 				priorityButton = getElByQuery('.todo-edit-priority', parent),
 				priority = priorityButton.value,
 				priorityText = `${priorityButton.innerText}`,
