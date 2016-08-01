@@ -3,20 +3,21 @@ const req = new XMLHttpRequest();
 //--- TODO SWIPE FUNCTIONALITY --//
 const	todos = getElsByClass('todo-box');
 
-for (let todo of todos) {
+for (let i = 0; i < todos.length; i++) {
+ let todo = todos[i];
  let touchStartX, touchStartY;
 
  todo.tree = getTodoTree(todo);
  todo.originalClasses = `${todo.classList}`;
 
  todo.addEventListener('touchstart', (e) => {
-   if (document.body.clientWidth >= 520) { return;}
+   if (document.body.clientWidth >= 768) { return;}
    touchStartX = e.touches[0].screenX;
    touchStartY = e.touches[0].screenY;
  }); // touchstart
 
  todo.addEventListener('touchend', (e) => {
-   if (document.body.clientWidth >= 520) { return; }
+   if (document.body.clientWidth >= 768) { return; }
    const thisTodo = validateTargetAsTodo(e),
          todoTree = thisTodo.tree,
          todoID = todo.tree.todoID,
@@ -33,18 +34,23 @@ for (let todo of todos) {
   //| If touch event was an apparent tap on a todo, close all other
   //| open todos and open the one that was tapped.
   if (distance < 10 && wavier < 10) {
-    const otherTodoChildren = getElsByQuery(`:not([todo-parent=${todoID}]`),
-          otherTodoCloseButtons = getElsByQuery(`img[todo-parent]:not([todo-parent=${todoID}])`);
+    console.log(todoID);
+    console.log('dddjkdjkdjdj')
+    const otherTodoChildren = document.querySelectorAll(`:not([todo-parent=${todoID}]`),
+          otherTodoCloseButtons = document.querySelectorAll(`img[todo-parent]:not([todo-parent=${todoID}])`);
 
-    for (let otherTodoChild of otherTodoChildren) {
+    for (let i = 0; i < otherTodoChildren.length; i++) {
+      let otherTodoChild = otherTodoChildren[i];
       otherTodoChild.classList.remove('shown-todo-child');
     }
 
-    for (let otherTodoCloseButton of otherTodoCloseButtons) {
+    for (let i = 0; i < otherTodoCloseButtons.length; i++) {
+      let otherTodoCloseButton = otherTodoCloseButtons[i];
       otherTodoCloseButton.classList.add('hidden');
     }
 
-    for (let todoChild of todoTree.children) {
+    for (let i = 0; i < todoTree.children.length; i++) {
+      let todoChild = todoTree.children[i];
       todoChild.classList.add('shown-todo-child');
     }
 
@@ -56,7 +62,8 @@ for (let todo of todos) {
     const elsToHide = document.querySelectorAll(`[todo-parent=${todoID}]`);
     todoTree.closeButton.classList.add('hidden');
     todoTree.closeButtonBox.classList.add('hidden');
-    for (let el of todoTree.children) {
+    for (let i = 0; i < todoTree.children.length; i++) {
+      let el = todoTree.children[i];
       el.classList.remove('shown-todo-child');
     }
   });

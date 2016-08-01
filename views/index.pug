@@ -40,7 +40,7 @@ block content
 							todo-parent=ii,
 							class="close-todo-button hidden")
 
-				h3(todo-parent=ii contenteditable=editable
+				h3(todo-parent=ii contenteditable="true",
 					 spellcheck="false",
 					 class="todo-title").
 					#{todo.title}
@@ -52,7 +52,7 @@ block content
 				div(class="todo-content box-col hidden-todo-child",
 						todo-parent=ii)
 
-					p(todo-parent=ii contenteditable=editable
+					p(todo-parent=ii contenteditable="true"
 						spellcheck="false",
 						class="todo-body").
 						#{todo.body}

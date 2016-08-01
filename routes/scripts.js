@@ -11,18 +11,26 @@ const jsPaths = {
 	mobileEvents: './public/javascripts/mobile-events.js',
 	deleteTodo: './public/javascripts/delete-todo.js',
 	winterfresh: './public/javascripts/winterfresh.js',
-	about: './public/javascripts/about.js'
+	about: './public/javascripts/about.js',
+	boxGrid: './public/javascripts/box-grid.js',
+	polyfill: './public/javscripts/polyfill.js'
 };
 
 
-// router.get('/delete-todo', (req, res, next) => {
-// 	babel.transformFile(jsPaths.deleteTodo, {
-// 		presets: ['es2015']
-// 	}, (err, data) => {
-// 		if (err) console.log(err);
-// 		res.send(data.code);
-// 	});
-// });
+router.get('/box-grid', (req, res, next) => {
+	babel.transformFile(jsPaths.boxGrid, {
+		presets: ['es2015']
+	}, (err, data) => {
+		if (err) console.log(err);
+		res.send(data.code);
+	});
+});
+
+router.get('/polyfill', (req, res, next) => {
+	fs.readFile(jsPaths.polyfill, 'utf8', (err, data) => {
+		res.send(data);
+	})
+});
 
 /* NEW-TODO-FORM.JS FILE REQUEST */
 router.get('/new-todo-form', (req, res, next) => {

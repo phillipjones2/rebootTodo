@@ -1,15 +1,17 @@
 doctype html
 html
 	head
-		meta(name="viewport" content="width=device-width, initial-scale=1")
+		meta(name="viewport", content="width=device-width, initial-scale=1, user-scalable=no")/
 		title= title
 		link(rel='stylesheet', href='stylesheets/main.css')
 		link(rel="stylesheet", href="https://cdn.rawgit.com/colshacol/box/master/box-grid.css")
+		script(src="scripts/polyfill")
 		script(src="scripts/functions")
 		script(src="scripts/new-todo-form" defer)
 		script(src="scripts/edit-todo" defer)
 		script(src="scripts/mobile-events" defer)
-		script(src="https://cdn.rawgit.com/colshacol/box/master/box-grid.js" defer)
+		script(src="scripts/box-grid" defer)
 
 	body
+		p x
 		block content
