@@ -34,6 +34,9 @@ router.get('/completed', (req, res) => {
               exec((err, docs) => {
     // res.send(docs);
     // console.log(docs);
+    for (var doc of docs) {
+      doc.idString = doc._id.toString();
+    }
     res.render('index', { title: 'TodoTwo', todosObj: docs });
   });
 });
