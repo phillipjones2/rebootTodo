@@ -15,7 +15,7 @@ for (let i = 0, saveEditedTodoButtonsLen = saveEditedTodoButtons.length; i < sav
     };
   	req.open('put', todo.tree.putLink , true);
   	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  	req.send(`title=${todoTitle}&body=${todoBody}&priority=${priority}`);
+  	req.send(`title=${todo.tree.title.innerText}&body=${todo.tree.body.innerText}&priority=${todo.tree.priorityButton.value}`);
   });
 }
 

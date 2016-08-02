@@ -104,7 +104,7 @@ function compareNewAndOriginalText(todo, newText) {
 	const originalText = todo.tree.originalText,
 		titleLen = todo.tree.title.innerText.trim().length,
 		maxTitleLength = 55,
-		bodyLen = todo.tree.body.innerText.trim().length,
+		bodyLen = todo.tree.body.innerText.length,
 		maxBodyLength = 140;
 	// If everything is valid and there have been changes,
 	// make the save button active.
@@ -112,6 +112,8 @@ function compareNewAndOriginalText(todo, newText) {
 			titleLen != 0 && titleLen <= maxTitleLength &&
 			bodyLen <= maxBodyLength) {
 		todo.tree.saveButton.classList.remove('inactive-todo-button');
+		todo.tree.titleCount.classList.remove('priority-text-2');
+		todo.tree.bodyCount.classList.remove('priority-text-2');
 	}
 
 	// If there have been changes, make the discard button active.
