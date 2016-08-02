@@ -1,6 +1,6 @@
 const addTodoModal = getElById('add-todo-modal'),
-			titleCharP = document.getElementById('titleCharP'),
-			bodyCharP = document.getElementById('bodyCharP'),
+			titleCharacterCount = document.getElementById('add-todo-title-chatacter-count'),
+			bodyCharacterCount = document.getElementById('add-todo-body-character-count'),
 			closeCreateTodoModalButton = getElById('close-button'),
 			newTodoSubmitButton = getElById('accept-button'),
 			openCreateTodoModalButton = getElById('add-button');
@@ -16,77 +16,81 @@ openCreateTodoModalButton.addEventListener('click', (e) => {
 });
 
 // ----- CREATE A TODO ----- \\
-const addTodoAcceptBtn = document.getElementById('accept-button'),
-			addTodoInput = getElById('add-todo-input'),
-			createModalBody = getElById('add-todo-textarea'),
+const addTodoSubmitButton = document.getElementById('accept-button'),
+			addTodoTitleInput = getElById('add-todo-input'),
+			addTodoBodyInput = getElById('add-todo-textarea'),
 			addTodoPriorityBtn = getElById('add-todo-priority-button'),
 			maxTitleLength = 55,
-			maxBodyLength = 140,
-			createModalTitleCount = document.querySelector('#add-todo-title-character-count-box'),
-			createModalBodyCount = document.querySelector('#add-todo-body-character-count-box');
+			maxBodyLength = 140;
 
-// create TODO TITLE LISTENER
-addTodoInput.addEventListener('keyup', (e) => {
-	// IF NO CHARACTERS
-	if (addTodoInput.value.trim() == 0) {
+
+
+
+function addTodoValidityCheck() {
+	// If title is 0 or greater than 55 or
+	// if body is greater than 140 disable
+	// the submit button AND 
+
+	const titleInputLength = addTodoTitleInput.value.trim().length,
+		bodyInputLength = addTodoBodyInput.value.trim().length;
+
+	let valid = true;
+
+	if (titleInputLength == 0 || titleInputLength > maxTitleLength) {
+		valid = false;
 		newTodoSubmitButton.classList.add('inactive-todo-submit-button');
-		titleCharP.classList.add('hidden');
+		titleCharacterCount.classList.add('priority-text-2');
+	} else {
+		titleCharacterCount.classList.remove('priority-text-2');
 	}
-	else {
+
+	if (bodyInputLength > maxBodyLength) {
+		valid = false;
+		newTodoSubmitButton.classList.add('inactive-todo-submit-button');
+		bodyCharacterCount.classList.add('priority-text-2');
+	} else {
+		bodyCharacterCount.classList.remove('priority-text-2');
+	}
+
+	if (valid) {
 		newTodoSubmitButton.classList.remove('inactive-todo-submit-button');
-		titleCharP.classList.remove('hidden');
-		titleCharP.classList.remove('priority-text-2');
-		titleCharP.innerText = maxTitleLength - addTodoInput.value.length;
-		// IF TITLE CHARACTERS GO OVER 55 (MAX LENGTH)
-		if (addTodoInput.value.length > maxTitleLength) {
-			newTodoSubmitButton.classList.add('inactive-todo-submit-button');
-			titleCharP.classList.add('priority-text-2');
-		}
 	}
+}
+
+addTodoTitleInput.addEventListener('keyup', (e) => {
+	titleCharacterCount.innerText = maxTitleLength - addTodoTitleInput.value.trim().length;
+	titleCharacterCount.classList.remove('hidden');
+	addTodoValidityCheck()
 });
-addTodoInput.addEventListener('focus', (e) => {
-	if (!bodyCharP.classList.contains('priority-text-2')) {
-	bodyCharP.classList.add('hidden');
+
+addTodoTitleInput.addEventListener('focus', (e) => {
+	if (!bodyCharacterCount.classList.contains('priority-text-2')) {
+	bodyCharacterCount.classList.add('hidden');
 	}
 });
 
-	// create TODO BODY LISTENER
-	createModalBody.addEventListener('keyup', (e) => {
-		// IF NO CHARACTERS
-		if (createModalBody.value == 0) {
-			bodyCharP.classList.add('hidden');
-		}
-		else {
-			bodyCharP.classList.remove('hidden');
-			bodyCharP.classList.remove('priority-text-2');
-			bodyCharP.innerText = maxBodyLength - createModalBody.value.length;
-			if (createModalBody.value.length < maxBodyLength
-					&& addTodoInput.value.trim() != '') {
-				newTodoSubmitButton.classList.remove('inactive-todo-submit-button');
-					}
-			// IF TITLE CHARACTERS GO OVER 55 (MAX LENGTH)
-			if (createModalBody.value.length > maxBodyLength) {
-				newTodoSubmitButton.classList.add('inactive-todo-submit-button');
-				bodyCharP.classList.add('priority-text-2');
-			}
-		}
-	});
-	createModalBody.addEventListener('focus', (e) => {
-		if (!titleCharP.classList.contains('priority-text-2')) {
-		titleCharP.classList.add('hidden');
-		}
-	});
+// create TODO BODY LISTENER
+addTodoBodyInput.addEventListener('keyup', (e) => {
+	bodyCharacterCount.innerText = maxBodyLength - addTodoBodyInput.value.trim().length;
+	bodyCharacterCount.classList.remove('hidden');
+	addTodoValidityCheck();
+});
 
-addTodoAcceptBtn.addEventListener('click', (e) => {
+addTodoBodyInput.addEventListener('focus', (e) => {
+	if (!titleCharacterCount.classList.contains('priority-text-2')) {
+	titleCharacterCount.classList.add('hidden');
+	}
+});
+
+addTodoSubmitButton.addEventListener('click', (e) => {
 	if (newTodoSubmitButton.classList.contains('inactive-todo-submit-button')) return;
 
-	const title = addTodoInput.value,
-				body = createModalBody.value,
+	const title = addTodoTitleInput.value,
+				body = addTodoBodyInput.value,
 				priority = addTodoPriorityBtn.value;
 
 	const req = new XMLHttpRequest();
 	req.onreadystatechange = ( ) => {
-		console.log('lolo');
 		location.reload();
 	}
 	req.open('post', '/', true);

@@ -41,46 +41,52 @@ function removeClasses(el, classesArray) {
 // 	return string.slice(1, -1);
 // };
 
-function getParentTodo(el) {
-	const parentID = el.getAttribute('todo-parent'),
-				parent = getElById(parentID);
+function getParentTodo(element) {
+	const parentID = element.getAttribute('todo-parent'),
+				parent = document.getElementById(parentID);
 	return parent;
 };
 
 function getTodoTree(el) {
 	const todoID = el.getAttribute('todo-parent'),
-				parent = getElById(todoID),
-				parentClass = `${parent.classList}`,
+				parent = document.getElementById(todoID),
 				children = parent.querySelectorAll('[todo-parent]'),
-				priorityButton = getElByQuery('.todo-edit-priority', parent),
-				priority = priorityButton.value,
+				priorityButton = parent.querySelector('.todo-edit-priority'),
+				priorityValue = priorityButton.value,
 				priorityText = `${priorityButton.innerText}`,
 				priorityClass = `${priorityButton.classList}`,
-				title = getElByQuery('h3', parent),
+				title = parent.querySelector('h3'),
 				titleText = title.innerText.trim(),
-				body = getElByQuery('.todo-body', parent),
+				titleCount = parent.querySelector('.todo-title-character-count'),
+				titleCountValue = titleCount.value,
+				body = parent.querySelector('.todo-body'),
 				bodyText = body.innerText.trim(),
-				originalText = `${titleText} ${bodyText} ${priority}`,
-				saveButton = getElByQuery('.todo-save-button', parent),
-				discardButton = getElByQuery('.todo-discard-button', parent),
-				completeButton = getElByQuery('.todo-complete-button', parent),
-				date = getElByQuery('.todo-date', parent),
-				closeButtonBox = getElByQuery('.close-todo-button-box', parent),
-				closeButton = getElByQuery('.close-todo-button', parent),
-				keystrokes = 0;
+				bodyCount = parent.querySelector('.todo-body-character-count'),
+				originalText = `${titleText} ${bodyText} ${priorityValue}`,
+				saveButton = parent.querySelector('.todo-save-button'),
+				discardButton = parent.querySelector('.todo-discard-button'),
+				completeButton = parent.querySelector('.todo-complete-button'),
+				date = parent.querySelector('.todo-date'),
+				closeButtonBox = parent.querySelector('.close-todo-button-box'),
+				closeButton = parent.querySelector('.close-todo-button'),
+				putLink = '/' + todoID,
+				keystrokes = 0,
+				parentClass = `${parent.classList}`;
 
 	return {
 		parent,
 		parentClass,
 		children,
 		priorityButton,
-		priority,
+		priorityValue,
 		priorityText,
 		priorityClass,
 		title,
 		titleText,
+		titleCount,
 		body,
 		bodyText,
+		bodyCount,
 		originalText,
 		saveButton,
 		discardButton,
@@ -88,25 +94,56 @@ function getTodoTree(el) {
 		closeButtonBox,
 		closeButton,
 		date,
+		putLink,
 		keystrokes,
 	};
 }
 
-
-
 //----- COMPARE DIFFS FOR DISCARD/SAVE BUTTON FUNCTIONALITY -----\\
-function compareNewAndOriginalText(val, newText) {
-	const originalText = val.parent.tree.originalText;
-	if (newText != originalText) {
-		val.parent.tree.saveButton.classList.remove('inactive-todo-button');
-		val.parent.tree.discardButton.classList.remove('inactive-todo-button');
-	} else {
-		val.parent.tree.saveButton.classList.add('inactive-todo-button');
-		val.parent.tree.discardButton.classList.add('inactive-todo-button');
+function compareNewAndOriginalText(todo, newText) {
+	const originalText = todo.tree.originalText,
+		titleLen = todo.tree.title.innerText.trim().length,
+		maxTitleLength = 55,
+		bodyLen = todo.tree.body.innerText.length,
+		maxBodyLength = 140;
+	// If everything is valid and there have been changes,
+	// make the save button active.
+	if (newText != originalText &&
+			titleLen != 0 && titleLen <= maxTitleLength &&
+			bodyLen <= maxBodyLength) {
+		todo.tree.saveButton.classList.remove('inactive-todo-button');
+		todo.tree.titleCount.classList.remove('priority-text-2');
+		todo.tree.bodyCount.classList.remove('priority-text-2');
 	}
+
+	// If there have been changes, make the discard button active.
+	if (newText != originalText) {
+		todo.tree.discardButton.classList.remove('inactive-todo-button');
+		// and if the title is invalid, make the title count red
+		// and inactivate the save button.
+		if (titleLen == 0 || titleLen > maxTitleLength) {
+			todo.tree.titleCount.classList.add('priority-text-2');
+			todo.tree.saveButton.classList.add('inactive-todo-button');
+		} else {
+			todo.tree.titleCount.classList.remove('priority-text-2');
+		}
+		// and if the body is invalid, make the body count red
+		// and inactivate the save button.
+		if (bodyLen > maxBodyLength) {
+			todo.tree.bodyCount.classList.add('priority-text-2');
+			todo.tree.saveButton.classList.add('inactive-todo-button');
+		}
+		else {
+			todo.tree.bodyCount.classList.remove('priority-text-2');
+		}
+	}
+
+	if (newText == originalText) {
+		todo.tree.discardButton.classList.add('inactive-todo-button');
+		todo.tree.saveButton.classList.add('inactive-todo-button');
+	}
+
 }
-
-
 
 //----- ROTATE CLASSES AND VALUES OF SPECIFIED ELEMENTS -----\\
 //| Supply the function with the element being clicked on,
@@ -175,8 +212,8 @@ function rotatePriorities(el, el2, classArr2, textArr) {
 function validateTargetAsTodo(e) {
 	const target = e.target;
 	if (!target.classList.contains('todo-box')) {
-		const thisParentID = target.getAttribute('todo-parent'),
-					todoParent = getElById(thisParentID);
-		return todoParent;
+		const todoID = target.getAttribute('todo-parent'),
+					parent = document.getElementById(todoID);
+		return parent;
 	} else { return target };
 };

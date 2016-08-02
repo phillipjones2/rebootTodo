@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
               sort('-priority').
               exec((err, docs) => {
     // res.send(docs);
-    // console.log(docs);
+
     for (var doc of docs) {
       doc.idString = doc._id.toString();
     }
@@ -33,8 +33,7 @@ router.get('/completed', (req, res) => {
               sort('-completedDate').
               exec((err, docs) => {
     // res.send(docs);
-    // console.log(docs);
-    
+
     res.render('index', { title: 'TodoTwo', todosObj: docs });
   });
 });
