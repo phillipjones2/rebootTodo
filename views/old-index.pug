@@ -3,11 +3,6 @@ extends layout
 block content
 	img#add-button(src="icons/plus.svg")
 
-
-	//- ADD TODO MODAL -/////////////////////////////////////
-	//- ADD TODO MODAL -/////////////////////////////////////
-	//- ADD TODO MODAL -/////////////////////////////////////
-
 	div#add-todo-modal(class="box-col all-12 x-center hidden")
 		div(class="box-col all-12 x-center")
 			h2 Create a tod#[span#todo-o(class="priority-text-0") o]
@@ -23,10 +18,6 @@ block content
 							type="button", src="icons/plus.svg", action="/")
 			img#close-button(src="icons/cancel.svg")
 
-	//- NAVIGATION -/////////////////////////////////////
-	//- NAVIGATION -/////////////////////////////////////
-	//- NAVIGATION -/////////////////////////////////////
-
 	nav(class="box-col all-12 fixed pb_15")
 			div(class="box all-12 space-inside y-center")
 				h3 Todo App
@@ -34,20 +25,11 @@ block content
 					a(href='/about'): li about
 					a(href='https://github.com/phillipjones2/rebootTodo' target:"_blank"): li github
 
-	//- TODOS -/////////////////////////////////////
-	//- TODOS -/////////////////////////////////////
-	//- TODOS -/////////////////////////////////////
-
 	div#todo-container
-		div(class="spinner-container box x-center y-center")
-			div(class="spinner")
-
-		//- each todo, i in todosObj
-		//- 	- var editable = '' + !todo.completed;
-		//- 	- var disabled = todo.completed;
-		//- 	- var todoPriorities = ['PRIORITY: LOW','PRIORITY: MEDIUM', 'PRIORITY: HIGH'];
-
-			//- INDIVIDUAL TODOS -/////////////////////////////////////
+		each todo, i in todosObj
+			- var editable = '' + !todo.completed;
+			- var disabled = todo.completed;
+			- var todoPriorities = ['PRIORITY: LOW','PRIORITY: MEDIUM', 'PRIORITY: HIGH'];
 
 			div(id=todo.idString, todo-parent=todo.idString, todo-object-id=todo.idString,
 				completed=todo.completed, class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-"+todo.priority)
@@ -91,5 +73,3 @@ block content
 
 					small(todo-parent=todo.idString, class="todo-date")
 						em #{todo.formattedCreate}
-
-	script(src="scripts/initial-request")

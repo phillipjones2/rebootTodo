@@ -11,7 +11,8 @@ const jsPaths = {
 	mobileEvents: './public/javascripts/mobile-events.js',
 	deleteTodo: './public/javascripts/delete-todo.js',
 	winterfresh: './public/javascripts/winterfresh.js',
-	about: './public/javascripts/about.js'
+	about: './public/javascripts/about.js',
+	initialRequest: './public/javascripts/initial-request.js'
 };
 
 
@@ -78,6 +79,16 @@ router.get('/mobile-events', (req, res, next) => {
 /* NEW-TODO-FORM.JS FILE REQUEST */
 router.get('/winterfresh', (req, res, next) => {
 	babel.transformFile(jsPaths.winterfresh, {
+		presets: ['es2015']
+	}, (err, data) => {
+		if (err) console.log(err);
+		res.send(data.code);
+	});
+});
+
+/* NEW-TODO-FORM.JS FILE REQUEST */
+router.get('/initial-request', (req, res, next) => {
+	babel.transformFile(jsPaths.initialRequest, {
 		presets: ['es2015']
 	}, (err, data) => {
 		if (err) console.log(err);
