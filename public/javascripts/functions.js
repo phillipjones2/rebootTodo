@@ -41,8 +41,8 @@ function removeClasses(el, classesArray) {
 // 	return string.slice(1, -1);
 // };
 
-function getParentTodo(el) {
-	const parentID = el.getAttribute('todo-parent'),
+function getParentTodo(element) {
+	const parentID = element.getAttribute('todo-parent'),
 				parent = document.getElementById(parentID);
 	return parent;
 };
@@ -58,6 +58,7 @@ function getTodoTree(el) {
 				title = parent.querySelector('h3'),
 				titleText = title.innerText.trim(),
 				titleCount = parent.querySelector('.todo-title-character-count'),
+				titleCountValue = titleCount.value,
 				body = parent.querySelector('.todo-body'),
 				bodyText = body.innerText.trim(),
 				bodyCount = parent.querySelector('.todo-body-character-count'),
@@ -99,14 +100,14 @@ function getTodoTree(el) {
 }
 
 //----- COMPARE DIFFS FOR DISCARD/SAVE BUTTON FUNCTIONALITY -----\\
-function compareNewAndOriginalText(val, newText) {
-	const originalText = val.parent.tree.originalText;
+function compareNewAndOriginalText(todo, newText) {
+	const originalText = todo.tree.originalText;
 	if (newText != originalText) {
-		val.parent.tree.saveButton.classList.remove('inactive-todo-button');
-		val.parent.tree.discardButton.classList.remove('inactive-todo-button');
+		// TODO: .tree.saveButton.classList.remove('inactive-todo-button');
+		todo.tree.discardButton.classList.remove('inactive-todo-button');
 	} else {
-		val.parent.tree.saveButton.classList.add('inactive-todo-button');
-		val.parent.tree.discardButton.classList.add('inactive-todo-button');
+		todo.tree.saveButton.classList.add('inactive-todo-button');
+		todo.tree.discardButton.classList.add('inactive-todo-button');
 	}
 }
 

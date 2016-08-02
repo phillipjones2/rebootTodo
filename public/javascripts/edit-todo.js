@@ -3,75 +3,53 @@
 const saveEditedTodoButtons = document.getElementsByClassName('todo-save-button');
 for (let i = 0, saveEditedTodoButtonsLen = saveEditedTodoButtons.length; i < saveEditedTodoButtonsLen; i++) {
   const button = saveEditedTodoButtons[i];
-  // let parentID = button.getAttribute('todo-parent'),
-  //     parent = document.getElementById(parentID),
-  //     todoTitle = parent.querySelector('.todo-title').innerText,
-  //     todoBody = parent.querySelector('.todo-body').innerText.trim(),
-  //     priority = parent.querySelector('.todo-edit-priority').value,
-  //     objectID = parent.getAttribute('todo-object-id'),
-  //     putLink = "/" + objectID;
 
   button.addEventListener('click', (e) => {
     if (button.classList.contains('inactive-todo-button')) { return;}
-    let parentID = button.getAttribute('todo-parent'),
-        parent = document.getElementById(parentID),
-        todoTitle = parent.querySelector('.todo-title').innerText,
-        todoBody = parent.querySelector('.todo-body').innerText.trim(),
-        priority = parent.querySelector('.todo-edit-priority').value,
-        objectID = parent.getAttribute('todo-object-id'),
-        putLink = "/" + objectID;
-
-  	const req = new XMLHttpRequest();
-    console.log(putLink);
-  	req.open('put', putLink , true);
+    const todo = getParentTodo(button),
+  	  req = new XMLHttpRequest();
+    req.onreadystatechange = ( ) => {
+      if (req.readyState == 4 && req.status == 200) {
+        location.reload();
+      }
+    };
+  	req.open('put', todo.tree.putLink , true);
   	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   	req.send(`title=${todoTitle}&body=${todoBody}&priority=${priority}`);
-
-  	setTimeout(() => {
-  		location.reload();
-  	}, 150);
   });
 }
-
  //*****************************************************//
 //--- TITLE DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
-const titles = getElsByClass('todo-title'),
-      maxTitleLength = 55;
-
+const titles = document.getElementsByClassName('todo-title'),
+  maxTitleLength = 55;
 for (let i = 0, titlesLen = titles.length; i < titlesLen; i++) {
- const title = titles[i]
- title.parent = getParentTodo(title);
- const titleCount = title.parent.querySelector('.todo-title-character-count'),
-       titleCountBox = title.parent.querySelector('.todo-title-character-count-box');
+  const title = titles[i],
+    todo = getParentTodo(title);
 
   title.addEventListener('keyup', (e) => {
-    const newText = `${title.innerText} ${title.parent.tree.body.innerText} ${title.parent.tree.priorityButton.value}`;
-    compareNewAndOriginalText(title, newText);
-
+    const newText = `${title.innerText} ${todo.tree.body.innerText} ${todo.tree.priorityButton.value}`;
+    compareNewAndOriginalText(todo, newText);
     // VALIDATE CHARACTER LENGTH
-    titleCount.classList.remove('hidden');
-    titleCountBox.classList.remove('hidden');
-    titleCount.value = maxTitleLength - title.innerText.length;
-    console.log(title.innerText.trim().length);
-    if (title.innerText.trim().length == 0){
-      title.parent.tree.saveButton.classList.add('inactive-todo-button');
-      titleCount.classList.add('priority-text-2');
-    } else if (title.innerText.length > maxTitleLength ) {
-      title.parent.tree.saveButton.classList.add('inactive-todo-button');
-      titleCount.classList.add('priority-text-2');
+    console.log(todo.tree.titleCount.classList);
+    todo.tree.titleCount.classList.remove('hidden');
+    // todo.title.CountBox.classList.remove('hidden');
+    todo.tree.titleCountValue = maxTitleLength - title.innerText.length;
+    if (title.innerText.trim().length == 0 || title.innerText.length > maxTitleLength){
+      todo.tree.saveButton.classList.add('inactive-todo-button');
+      todo.tree.titleCount.classList.add('priority-text-2');
     } else {
-      titleCount.classList.remove('priority-text-2');
+      todo.tree.titleCount.classList.remove('priority-text-2');
     }
   });
 
   title.addEventListener('focus', (e) => {
-    title.parent.querySelector('.todo-body-character-count').classList.add('hidden');
+    todo.tree.bodyCount.classList.add('hidden');
   });
 }
 
  //*****************************************************//
 //---  BODY DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
-const bodies = getElsByClass('todo-body'),
+const bodies = document.getElementsByClassName('todo-body'),
       maxBodyLength = 140;
 
 for (let i = 0, bodiesLen = bodies.length; i < bodiesLen; i++) {
@@ -108,11 +86,11 @@ const todoEditPriorityButtons = document.getElementsByClassName('todo-edit-prior
 for (let i = 0, todoEditPriorityButtonsLen = todoEditPriorityButtons.length; i < todoEditPriorityButtonsLen; i++) {
  const button = todoEditPriorityButtons[i];
  button.addEventListener('click', (e) => {
-   button.parent = getParentTodo(button);
-   rotatePriorities(button, button.parent,'border');
-   const newText = `${button.parent.tree.title.innerText} ${button.parent.tree.body.innerText} ${button.parent.tree.priorityButton.value}`;
-   compareNewAndOriginalText(button, newText);
- });
+    const todo = getParentTodo(button);
+    rotatePriorities(button, button.parent,'border');
+    const newText = `${button.parent.tree.title.innerText} ${button.parent.tree.body.innerText} ${button.parent.tree.priorityButton.value}`;
+    compareNewAndOriginalText(todo, newText);
+  });
 }
 
  //************************************//

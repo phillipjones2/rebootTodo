@@ -86,7 +86,6 @@ addTodoAcceptBtn.addEventListener('click', (e) => {
 
 	const req = new XMLHttpRequest();
 	req.onreadystatechange = ( ) => {
-		console.log('lolo');
 		location.reload();
 	}
 	req.open('post', '/', true);

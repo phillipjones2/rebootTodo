@@ -25,7 +25,6 @@ db.once('open', () => {
         formattedCreate: formatDate(new Date()),
         formattedUpdate: formatDate(new Date())
       });
-      console.log(todo);
       todo.save((err, todo) => {
         if (err) return console.error(err);
       });
@@ -43,7 +42,6 @@ db.once('open', () => {
         completed: true,
         completedDate: new Date()
       });
-      console.log(todo);
       todo.save((err, todo) => {
         if (err) return console.error(err);
       });
@@ -61,7 +59,6 @@ db.once('open', () => {
         completed: true,
         completedDate: old
       });
-      console.log(todo);
       todo.save((err, todo) => {
         if (err) return console.error(err);
       });

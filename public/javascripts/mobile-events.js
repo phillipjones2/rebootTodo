@@ -48,12 +48,9 @@ for (let i = 0, todosLen = todos.length; i < todosLen; i++) {
       const otherTodoCloseButton = otherTodoCloseButtons[i];
       otherTodoCloseButton.classList.add('hidden');
     }
-
-    console.log(todo.tree.children);
     for (let i = 0, childrenLen = todo.tree.children.length; i < childrenLen; i++) {
       const todoChild = todo.tree.children[i];
       todoChild.classList.add('shown-todo-child');
-      console.log('add shown todo child');
     }
     todo.tree.closeButton.classList.remove('hidden');
     todo.tree.closeButtonBox.classList.remove('hidden');
