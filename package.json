@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "sass --watch ./views/styles:./public/stylesheets & nodemon -e pug,js,html,css,scss --watch public --watch bin --watch routes --watch views bin/www.js & mongod",
-    "go": "sass --watch ./views/styles:./public/stylesheets & nodemon -e pug,js,html,css,scss --watch public --watch bin --watch routes --watch views bin/www.js"
+    "go": "sass --watch ./views/styles:./public/stylesheets & nodemon -e pug,js,html,css,scss --watch public --watch bin --watch routes --watch views bin/www.js",
+    "test": "mocha ./tests/tests.js" 
   },
   "dependencies": {
     "babel-core": "^6.11.4",
@@ -19,7 +20,9 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "faker": "^3.1.0",
+    "mocha": "^3.0.0",
     "winterfresh": "^0.1.0"
   }
 }
