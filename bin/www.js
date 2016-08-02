@@ -105,3 +105,5 @@ function mongooseConnection() {
     console.log('We Are connected to MongoDB');
   });
 }
+
+module.exports = server
