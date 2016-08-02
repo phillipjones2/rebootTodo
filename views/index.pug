@@ -57,7 +57,7 @@ block content
 						#{todo.body}
 
 					div(class="todo-body-character-count-box box all-12 justify-content-end")
-						input(class="todo-body-character-count", value=0, disabled, todo-parent=todo.idString)
+						input(class="todo-body-character-count hidden", value=0, disabled, todo-parent=todo.idString)
 
 					div(class="todo-edit-priority-box box all-12", todo-parent=todo.idString)
 						button(class="todo-edit-priority box xs-10 todo-priority-button priority-bg-"+todo.priority,
