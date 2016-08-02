@@ -18,6 +18,10 @@ for (let i = 0, saveEditedTodoButtonsLen = saveEditedTodoButtons.length; i < sav
   	req.send(`title=${todoTitle}&body=${todoBody}&priority=${priority}`);
   });
 }
+
+
+
+
  //*****************************************************//
 //--- TITLE DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
 const titles = document.getElementsByClassName('todo-title'),
@@ -28,18 +32,11 @@ for (let i = 0, titlesLen = titles.length; i < titlesLen; i++) {
 
   title.addEventListener('keyup', (e) => {
     const newText = `${title.innerText} ${todo.tree.body.innerText} ${todo.tree.priorityButton.value}`;
+
     compareNewAndOriginalText(todo, newText);
     // VALIDATE CHARACTER LENGTH
-    console.log(todo.tree.titleCount.classList);
     todo.tree.titleCount.classList.remove('hidden');
-    // todo.title.CountBox.classList.remove('hidden');
-    todo.tree.titleCountValue = maxTitleLength - title.innerText.length;
-    if (title.innerText.trim().length == 0 || title.innerText.length > maxTitleLength){
-      todo.tree.saveButton.classList.add('inactive-todo-button');
-      todo.tree.titleCount.classList.add('priority-text-2');
-    } else {
-      todo.tree.titleCount.classList.remove('priority-text-2');
-    }
+    todo.tree.titleCount.value = maxTitleLength - title.innerText.length;
   });
 
   title.addEventListener('focus', (e) => {
@@ -53,30 +50,20 @@ const bodies = document.getElementsByClassName('todo-body'),
       maxBodyLength = 140;
 
 for (let i = 0, bodiesLen = bodies.length; i < bodiesLen; i++) {
- const body = bodies[i];
- body.parent = getParentTodo(body);
- const bodyCount = body.parent.querySelector('.todo-body-character-count'),
-       bodyCountBox = body.parent.querySelector('.todo-body-character-count-box')
+ const body = bodies[i],
+   todo = getParentTodo(body);
 
   body.addEventListener('keyup', (e) => {
-    const newText = `${body.parent.tree.title.innerText} ${body.parent.tree.body.innerText} ${body.parent.tree.priorityButton.value}`;
-    compareNewAndOriginalText(body, newText);
+    const newText = `${todo.tree.title.innerText} ${todo.tree.body.innerText} ${todo.tree.priorityButton.value}`;
+    compareNewAndOriginalText(todo, newText);
 
     // VALIDATE CHARACTER LENGTH
-    bodyCount.classList.remove('hidden');
-    bodyCountBox.classList.remove('hidden')
-    bodyCount.value = maxBodyLength - body.innerText.length;
-
-    if (body.innerText.length > maxBodyLength ) {
-     body.parent.tree.saveButton.classList.add('inactive-todo-button');
-     bodyCount.classList.add('priority-text-2');
-    } else {
-     bodyCount.classList.remove('priority-text-2');
-    }
+    todo.tree.bodyCount.classList.remove('hidden');
+    todo.tree.bodyCount.value = maxBodyLength - body.innerText.length;
   });
 
   body.addEventListener('focus', (e) => {
-    body.parent.querySelector('.todo-title-character-count').classList.add('hidden');
+    todo.tree.titleCount.classList.add('hidden');
   });
 }
 
@@ -87,8 +74,8 @@ for (let i = 0, todoEditPriorityButtonsLen = todoEditPriorityButtons.length; i <
  const button = todoEditPriorityButtons[i];
  button.addEventListener('click', (e) => {
     const todo = getParentTodo(button);
-    rotatePriorities(button, button.parent,'border');
-    const newText = `${button.parent.tree.title.innerText} ${button.parent.tree.body.innerText} ${button.parent.tree.priorityButton.value}`;
+    rotatePriorities(button, todo,'border');
+    const newText = `${todo.tree.title.innerText} ${todo.tree.body.innerText} ${todo.tree.priorityButton.value}`;
     compareNewAndOriginalText(todo, newText);
   });
 }
@@ -99,9 +86,7 @@ const discardButtons = getElsByClass('todo-discard-button');
 for (let i = 0, discardButtonsLen = discardButtons.length; i < discardButtonsLen; i++) {
   let button = discardButtons[i]
   button.addEventListener('click', (e) => {
-
     const todo = getParentTodo(button);
-
     if (button.classList.contains('inactive-todo-button')) {return;}
      else {
       todo.tree.title.innerText = todo.tree.titleText;

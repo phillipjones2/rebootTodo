@@ -101,14 +101,48 @@ function getTodoTree(el) {
 
 //----- COMPARE DIFFS FOR DISCARD/SAVE BUTTON FUNCTIONALITY -----\\
 function compareNewAndOriginalText(todo, newText) {
-	const originalText = todo.tree.originalText;
-	if (newText != originalText) {
-		// TODO: .tree.saveButton.classList.remove('inactive-todo-button');
-		todo.tree.discardButton.classList.remove('inactive-todo-button');
-	} else {
-		todo.tree.saveButton.classList.add('inactive-todo-button');
-		todo.tree.discardButton.classList.add('inactive-todo-button');
+	const originalText = todo.tree.originalText,
+		titleLen = todo.tree.title.innerText.trim().length,
+		maxTitleLength = 55,
+		bodyLen = todo.tree.body.innerText.trim().length,
+		maxBodyLength = 140;
+
+	// If everything is valid and there have been changes,
+	// make the save button active.
+	console.log(newText)
+	console.log(originalText)
+	if (newText != originalText &&
+			titleLen != 0 && titleLen <= maxTitleLength &&
+			bodyLen <= maxBodyLength) {
+		console.log('if1')
+		todo.tree.saveButton.classList.remove('inactive-todo-button');
 	}
+
+	// If there have been changes, make the discard button active.
+	if (newText != originalText) {
+		console.log('if2')
+		todo.tree.discardButton.classList.remove('inactive-todo-button');
+		// and if the title is invalid, make the title count red
+		// and inactivate the save button.
+		if (titleLen == 0 || titleLen > maxTitleLength) {
+			console.log('if3')
+			todo.tree.titleCount.classList.add('priority-text-2');
+			todo.tree.saveButton.classList.add('inactive-todo-button');
+		}		
+		// and if the body is invalid, make the body count red
+		// and inactivate the save button.
+		if (bodyLen > maxBodyLength) {
+			console.log('if4')
+			todo.tree.bodyCount.classList.add('priority-text-2');
+			todo.tree.saveButton.classList.add('inactive-todo-button');
+		}
+	}
+
+	if (newText == originalText) {
+		todo.tree.discardButton.classList.add('inactive-todo-button');
+		todo.tree.saveButton.classList.add('inactive-todo-button');
+	}
+
 }
 
 

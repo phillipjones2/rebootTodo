@@ -31,45 +31,45 @@ block content
 			- var disabled = todo.completed;
 			- var todoPriorities = ['PRIORITY: LOW','PRIORITY: MEDIUM', 'PRIORITY: HIGH'];
 
-			div(id=todo.idString, todo-parent=ii, todo-object-id=todo.idString,
+			div(id=todo.idString, todo-parent=todo.idString, todo-object-id=todo.idString,
 				completed=todo.completed, class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-"+todo.priority)
 
-				div(class="close-todo-button-box", todo-parent=ii)
+				div(class="close-todo-button-box", todo-parent=todo.idString)
 					img(src="icons/cancel.svg",
-							todo-parent=ii,
+							todo-parent=todo.idString,
 							class="close-todo-button hidden")
 
-				h3(todo-parent=ii contenteditable=editable
+				h3(todo-parent=todo.idString contenteditable=editable
 					 spellcheck="false",
 					 class="todo-title").
 					#{todo.title}
 
 				div(class="todo-title-character-count-box box all-12 justify-content-end")
-					input(class="todo-title-character-count hidden", value=0, disabled, todo-parent=ii)
+					input(class="todo-title-character-count hidden", value=0, disabled, todo-parent=todo.idString)
 
 
 				div(class="todo-content box-col hidden-todo-child",
-						todo-parent=ii)
+						todo-parent=todo.idString)
 
-					p(todo-parent=ii contenteditable=editable
+					p(todo-parent=todo.idString contenteditable=editable
 						spellcheck="false",
 						class="todo-body").
 						#{todo.body}
 
 					div(class="todo-body-character-count-box box all-12 justify-content-end")
-						input(class="todo-body-character-count", value=0, disabled, todo-parent=ii)
+						input(class="todo-body-character-count", value=0, disabled, todo-parent=todo.idString)
 
-					div(class="todo-edit-priority-box box all-12", todo-parent=ii)
+					div(class="todo-edit-priority-box box all-12", todo-parent=todo.idString)
 						button(class="todo-edit-priority box xs-10 todo-priority-button priority-bg-"+todo.priority,
-									 todo-parent=ii, value=todo.priority,
+									 todo-parent=todo.idString, value=todo.priority,
 									 disabled=todo.completed) #{todoPriorities[todo.priority]}
-					div(class="todo-button-box box wrap", todo-parent=ii)
+					div(class="todo-button-box box wrap", todo-parent=todo.idString)
 						button(class="btn-1 todo-save-button inactive-todo-button",
-									todo-parent=ii) SAVE
+									todo-parent=todo.idString) SAVE
 						button(class="btn-1 todo-complete-button xs-0 sm-0",
-									todo-parent=ii) COMPLETE
+									todo-parent=todo.idString) COMPLETE
 						button(class="btn-1 todo-discard-button inactive-todo-button",
-									todo-parent=ii) DISCARD
+									todo-parent=todo.idString) DISCARD
 
-					small(todo-parent=ii, class="todo-date")
+					small(todo-parent=todo.idString, class="todo-date")
 						em #{todo.formattedCreate}
