@@ -40,7 +40,9 @@ for (let i = 0, titlesLen = titles.length; i < titlesLen; i++) {
   });
 
   title.addEventListener('focus', (e) => {
-    todo.tree.bodyCount.classList.add('hidden');
+    if(!todo.tree.bodyCount.classList.contains('priority-text-2')){
+      todo.tree.bodyCount.classList.add('hidden');
+    }
   });
 }
 
@@ -63,7 +65,9 @@ for (let i = 0, bodiesLen = bodies.length; i < bodiesLen; i++) {
   });
 
   body.addEventListener('focus', (e) => {
-    todo.tree.titleCount.classList.add('hidden');
+    if(!todo.tree.titleCount.classList.contains('priority-text-2')){
+      todo.tree.titleCount.classList.add('hidden');
+    }
   });
 }
 
