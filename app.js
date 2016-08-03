@@ -12,6 +12,7 @@ const express      = require('express'),
       routes       = require('./routes/routes'),
       // fresh        = require('./routes/fresh'),
       js           = require('./routes/scripts'),
+      config       = require('./bin/config'),
       app          = express();
 
 

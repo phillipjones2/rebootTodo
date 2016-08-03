@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const mongoose = require('mongoose'),
-      Todo = require('../modules/todoModel');
+      Todo = require('../modules/todoModel'),
+      config = require('./config');
 
 /**
  * Module dependencies.
@@ -16,6 +17,7 @@ var http = require('http');
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
+
 
 /**
  * Create HTTP server.
@@ -93,12 +95,15 @@ function onListening() {
   mongooseConnection();
 }
 
-const mongoURI = "mongodb://heroku_z9ntdjbz:lkivbkmngs0ike59c4mgb8emie@ds031845.mlab.com:31845/heroku_z9ntdjbz" ||
-                 "mongodb://localhost/rebootTodo";
-
 // mongoose
 function mongooseConnection() {
-  mongoose.connect(mongoURI);
+  mongoose.connect(config.mongoURI[app.settings.env], (err, res) => {
+    if (err) {
+      console.log('Error connecting to the database. ' + err);
+    } else {
+      console.log('Connected to Database: ' + config.mongoURI[app.settings.env]);
+    }
+  });
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', () => {

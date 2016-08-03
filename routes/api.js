@@ -38,7 +38,7 @@ router.post('/todos', (req, res) => {
   todo.save((err, doc) => {
     if (err) return console.log(err);
     res.send({
-      msg:"state successful!",
+      msg:"create successful!",
       data:doc
     });
   });
@@ -54,7 +54,7 @@ router.put('/todos/:todo_id', (req, res) => {
     todo.save((err, doc) => {
       if (err) return console.log(err);
       res.send({
-        msg: "state successful!",
+        msg: "update successful!",
         data: doc
       });
     });
@@ -67,7 +67,10 @@ router.delete('/todos/:todo_id', (req, res) => {
     Todo.remove(todo, (err) => {
       if (err) {res.send(err);}
       else {
-        res.send('Deleted Todo');
+        res.send({
+          msg: "delete successful",
+          data: todo
+        });
       }
     });
   });
