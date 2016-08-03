@@ -19,6 +19,7 @@ router.get('/todos', (req, res) => {
     for (var doc of docs) {
       doc.idString = doc._id.toString();
     }
+    // console.log(docs);
     res.send(docs);
   });
 });

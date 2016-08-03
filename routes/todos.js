@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
       doc.idString = doc._id.toString();
     }
 
-    res.render('index', { title: 'TodoTwo', todosObj: docs });
+    res.render('old-index', { title: 'TodoTwo', todosObj: docs });
   });
 });
 
