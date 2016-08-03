@@ -8,7 +8,7 @@ var today = new Date(),
     thisWeek = new Date(today.setDate(today.getDate() - 7));
 
 // todo index - all todos cRud
-router.get('/todos', (req, res) => {
+router.get('/', (req, res) => {
   Todo.find().
             and([
               { $or: [{'completed':false },{ 'completedDate': {$gte : yesterday}}] }
@@ -25,7 +25,7 @@ router.get('/todos', (req, res) => {
 });
 
 // todo show - one todo  cRud
-router.get('/todos/:todo_id', (req, res) => {
+router.get('/:todo_id', (req, res) => {
   Todo.findById(req.params.todo_id, (err, todo) => {
     if (err) {
       res.sent(err)};
@@ -34,8 +34,14 @@ router.get('/todos/:todo_id', (req, res) => {
 });
 
 // todo create Crud
-router.post('/todos', (req, res) => {
-  var todo = new Todo({title: req.body.title, body: req.body.body, priority : req.body.priority});
+router.post('/', (req, res) => {
+  var todo = new Todo({
+    title: req.body.title,
+    body: req.body.body,
+    priority : req.body.priority,
+    formattedCreate: formatDate(new Date()),
+    formattedUpdate: formatDate(new Date())
+  });
   todo.save((err, doc) => {
     if (err) return console.log(err);
     res.send({
@@ -46,12 +52,19 @@ router.post('/todos', (req, res) => {
 });
 
 // todo update  crUd
-router.put('/todos/:todo_id', (req, res) => {
+router.put('/:todo_id', (req, res) => {
   Todo.findById(req.params.todo_id, (err, todo) => {
     if (err) {res.send(err)};
     todo.title = req.body.title;
     todo.body = req.body.body;
     todo.priority = req.body.priority;
+    todo.formattedUpdate = formatDate(new Date());
+    if (req.body.completed ) {
+      todo.completed = true;
+      todo.completedDate = new Date();
+    } else {
+      todo.completed = false;
+    }
     todo.save((err, doc) => {
       if (err) return console.log(err);
       res.send({
@@ -63,7 +76,7 @@ router.put('/todos/:todo_id', (req, res) => {
 });
 
 // todo delete cruD
-router.delete('/todos/:todo_id', (req, res) => {
+router.delete('/:todo_id', (req, res) => {
   Todo.findById(req.params.todo_id, (err, todo) => {
     Todo.remove(todo, (err) => {
       if (err) {res.send(err);}
@@ -77,4 +90,17 @@ router.delete('/todos/:todo_id', (req, res) => {
   });
 });
 
-module.exports = router;
+function formatDate(date) {
+  var hours = date.getHours(),
+    minutes = date.getMinutes(),
+       ampm = hours >= 12 ? 'pm' : 'am',
+    DaysArr = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri'],
+    MonthsArr = ['Januray', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      // Month = date.getMonth() +1;
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  return `${DaysArr[date.getDay()]} ${MonthsArr[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()} ${hours}:${minutes}${ampm}`;
+}
+
+module.exports = {router, formatDate};

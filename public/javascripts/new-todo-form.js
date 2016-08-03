@@ -29,7 +29,7 @@ const addTodoSubmitButton = document.getElementById('accept-button'),
 function addTodoValidityCheck() {
 	// If title is 0 or greater than 55 or
 	// if body is greater than 140 disable
-	// the submit button AND 
+	// the submit button AND
 
 	const titleInputLength = addTodoTitleInput.value.trim().length,
 		bodyInputLength = addTodoBodyInput.value.trim().length;
@@ -93,7 +93,7 @@ addTodoSubmitButton.addEventListener('click', (e) => {
 	req.onreadystatechange = ( ) => {
 		location.reload();
 	}
-	req.open('post', '/', true);
+	req.open('post', '/todos', true);
 	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	req.send(`title=${title}&body=${body}&priority=${priority}`);
 });

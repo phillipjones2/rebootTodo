@@ -22,101 +22,101 @@ router.get('/', (req, res) => {
       doc.idString = doc._id.toString();
     }
 
-    res.render('old-index', { title: 'TodoTwo', todosObj: docs });
-  });
-});
-
-// completed todos from 7 days ago up to today
-router.get('/completed', (req, res) => {
-  Todo.find({completed:true,
-             completedDate: {$gte : thisWeek}}).
-              sort('-completedDate').
-              exec((err, docs) => {
-    // res.send(docs);
-
     res.render('index', { title: 'TodoTwo', todosObj: docs });
   });
 });
 
-// router.get('/fresh', (req, res) =>  winterfresh(res));
-
-// todo show - one todo -response is json
-// router.get('/:todo_id', (req, res) => {
+// // completed todos from 7 days ago up to today
+// router.get('/completed', (req, res) => {
+//   Todo.find({completed:true,
+//              completedDate: {$gte : thisWeek}}).
+//               sort('-completedDate').
+//               exec((err, docs) => {
+//     // res.send(docs);
+//
+//     res.render('index', { title: 'TodoTwo', todosObj: docs });
+//   });
+// });
+//
+// // router.get('/fresh', (req, res) =>  winterfresh(res));
+//
+// // todo show - one todo -response is json
+// // router.get('/:todo_id', (req, res) => {
+// //   Todo.findById(req.params.todo_id, (err, todo) => {
+// //     if (err)
+// //       res.send(err);
+// //     res.send(todo);
+// //   });
+// // });
+//
+// // create todo
+// router.post('/', (req, res) => {
+//   var todo = new Todo({ title: req.body.title,
+//                          body: req.body.body,
+//                      priority: req.body.priority,
+//                formattedCreate: formatDate(new Date()),
+//                formattedUpdate: formatDate(new Date())});
+//   todo.save((err, doc) => {
+//     if (err) return console.error(err);
+//     Todo.find().
+//               and([
+//                 { $or: [{'completed':false },{ 'completedDate': {$gte : yesterday}}] }
+//               ]).
+//                 sort('completed').
+//                 sort('-priority').
+//                 exec((err, docs) => {
+//       res.render('index', { title: 'Express', todosObj: docs });
+//     });
+//   });
+// });
+//
+// // edit todo
+// router.put('/:todo_id', (req, res) => {
 //   Todo.findById(req.params.todo_id, (err, todo) => {
 //     if (err)
 //       res.send(err);
-//     res.send(todo);
+//     todo.title = req.body.title;
+//     todo.body = req.body.body;
+//     todo.priority = req.body.priority;
+//     todo.formattedUpdate = formatDate(new Date());
+//     if (req.body.completed ) {
+//       todo.completed = true;
+//       todo.completedDate = new Date();
+//     } else {
+//       todo.completed = false;
+//     }
+//     todo.save((err, doc) => {
+//       if (err) return console.error(err);
+//       Todo.find().
+//                 and([
+//                   { $or: [{'completed':false },{ 'completedDate': {$gte : yesterday}}] }
+//                 ]).
+//                   sort('completed').
+//                   sort('-priority').
+//                   exec((err, docs) => {
+//         res.render('index', { title: 'Express', todosObj: docs });
+//       });
+//     });
 //   });
 // });
-
-// create todo
-router.post('/', (req, res) => {
-  var todo = new Todo({ title: req.body.title,
-                         body: req.body.body,
-                     priority: req.body.priority,
-               formattedCreate: formatDate(new Date()),
-               formattedUpdate: formatDate(new Date())});
-  todo.save((err, doc) => {
-    if (err) return console.error(err);
-    Todo.find().
-              and([
-                { $or: [{'completed':false },{ 'completedDate': {$gte : yesterday}}] }
-              ]).
-                sort('completed').
-                sort('-priority').
-                exec((err, docs) => {
-      res.render('index', { title: 'Express', todosObj: docs });
-    });
-  });
-});
-
-// edit todo
-router.put('/:todo_id', (req, res) => {
-  Todo.findById(req.params.todo_id, (err, todo) => {
-    if (err)
-      res.send(err);
-    todo.title = req.body.title;
-    todo.body = req.body.body;
-    todo.priority = req.body.priority;
-    todo.formattedUpdate = formatDate(new Date());
-    if (req.body.completed ) {
-      todo.completed = true;
-      todo.completedDate = new Date();
-    } else {
-      todo.completed = false;
-    }
-    todo.save((err, doc) => {
-      if (err) return console.error(err);
-      Todo.find().
-                and([
-                  { $or: [{'completed':false },{ 'completedDate': {$gte : yesterday}}] }
-                ]).
-                  sort('completed').
-                  sort('-priority').
-                  exec((err, docs) => {
-        res.render('index', { title: 'Express', todosObj: docs });
-      });
-    });
-  });
-});
-
-router.delete('/:todo_id', (req, res) => {
-  Todo.remove({_id: req.params.todo_id}, (err) => {
-    if (err)
-      res.send(err);
-    else {
-      Todo.find().
-                and([
-                  { $or: [{'completed':false },{ 'completedDate': {$gte : yesterday}}] }
-                ]).
-                  sort('completed').
-                  sort('-priority').
-                  exec((err, docs) => {
-        res.render('index', { title: 'Express', todosObj: docs });
-      });
-    }
-  });
-});
+//
+// router.delete('/:todo_id', (req, res) => {
+//   Todo.remove({_id: req.params.todo_id}, (err) => {
+//     if (err)
+//       res.send(err);
+//     else {
+//       Todo.find().
+//                 and([
+//                   { $or: [{'completed':false },{ 'completedDate': {$gte : yesterday}}] }
+//                 ]).
+//                   sort('completed').
+//                   sort('-priority').
+//                   exec((err, docs) => {
+//         res.render('index', { title: 'Express', todosObj: docs });
+//       });
+//     }
+//   });
+// });
 
 function formatDate(date) {
   var hours = date.getHours(),

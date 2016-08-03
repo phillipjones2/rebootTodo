@@ -1,11 +1,11 @@
 const   mongoose = require('mongoose'),
            faker = require('faker'),
             Todo = require('./modules/todoModel'),
-      formatDate = require('./routes/todos').formatDate,
+      formatDate = require('./routes/api').formatDate,
            today = new Date(),
-             old = new Date(today.setDate(getDate() -2));
+             old = new Date(today.setDate(today.getDate() -2)),
            todos = [],
-     priorityArr = [0, 1, 2],
+     priorityArr = [0, 1, 2];
 
 
 mongoose.connect('mongodb://localhost/rebootTodo');

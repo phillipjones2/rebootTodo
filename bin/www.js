@@ -91,7 +91,7 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-  console.log(`listenin on http://localhost:${port}`);
+  console.log(`listening on http://localhost:${port}`);
   mongooseConnection();
 }
 
@@ -107,7 +107,7 @@ function mongooseConnection() {
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', () => {
-    console.log('We Are connected to MongoDB');
+    // console.log('We Are connected to MongoDB');
   });
 }
 

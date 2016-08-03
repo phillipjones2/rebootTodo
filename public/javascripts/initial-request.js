@@ -10,6 +10,7 @@ const req = newAjaxRequest({
 	async: true,
 	// send: 'name=tom&age=23',
 	onSuccessResponse: (req) => {
+		console.log("helo");
 		todoContainer.removeChild(spinner);
 		const todos = JSON.parse(req.response);
 		if (todos.length < 1) {
@@ -22,7 +23,7 @@ const req = newAjaxRequest({
 		}
 		for (let i = 0, todosLen = todos.length; i < todosLen; i++) {
 			const todo = todos[i];
-			console.log(todo);
+
 			insertTodoIntoDOM(todo);
 		}
 
@@ -30,9 +31,6 @@ const req = newAjaxRequest({
 		applyEditTodoFunctionality();
 	}
 });
-
-
-
 
 function insertTodoIntoDOM(todo) {
 	console.log(todo)

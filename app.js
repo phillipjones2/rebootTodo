@@ -8,7 +8,8 @@ const express      = require('express'),
       todoModel    = require('./modules/todoModel'),
       bodyParser   = require('body-parser'),
       todos        = require('./routes/todos').router,
-      api          = require('./routes/api'),
+      router       = express.Router(),
+      api          = require('./routes/api').router,
       routes       = require('./routes/routes'),
       // fresh        = require('./routes/fresh'),
       js           = require('./routes/scripts'),
@@ -28,7 +29,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false })); // ???
 app.use(express.static(`${__dirname}/public`));
 
-app.use('/', api);
+app.use('/todos', api);
 app.use('/', todos);
 app.use('/about', routes);
 app.use('/scripts', js);

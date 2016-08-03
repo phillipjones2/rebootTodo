@@ -69,7 +69,7 @@ function getTodoTree(el) {
 				date = parent.querySelector('.todo-date'),
 				closeButtonBox = parent.querySelector('.close-todo-button-box'),
 				closeButton = parent.querySelector('.close-todo-button'),
-				putLink = '/' + todoID,
+				putLink = '/todos/' + todoID,
 				keystrokes = 0,
 				parentClass = `${parent.classList}`;
 
@@ -233,7 +233,7 @@ function newAjaxRequest(obj) {
 	}
 	request.open(obj.method, obj.url, obj.async);
 	if (obj.send) {
-		request.send(obj.send);	
+		request.send(obj.send);
 	} else {
 		request.send();
 	}
