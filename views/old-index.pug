@@ -1,0 +1,75 @@
+extends layout
+
+block content
+	img#add-button(src="icons/plus.svg")
+
+	div#add-todo-modal(class="box-col all-12 x-center hidden")
+		div(class="box-col all-12 x-center")
+			h2 Create a tod#[span#todo-o(class="priority-text-0") o]
+			form(class="box-col x-center all-12")
+				input#add-todo-input(placeholder="todo title" name="title")
+				div#add-todo-title-character-count-box(class="box justify-content-end ")
+					p#add-todo-title-chatacter-count(class="box y-center hidden") 55
+				textarea#add-todo-textarea(placeholder="write a few details about your todo" name="body")
+				div#add-todo-body-character-count-box(class="box justify-content-end")
+					p#add-todo-body-character-count(class="box y-center hidden") 140
+				button#add-todo-priority-button(class="priority-bg-0", type="button", name="priority", value="0")  priority: low
+				image#accept-button(class="inactive-todo-submit-button",
+							type="button", src="icons/plus.svg", action="/")
+			img#close-button(src="icons/cancel.svg")
+
+	nav(class="box-col all-12 fixed pb_15")
+			div(class="box all-12 space-inside y-center")
+				h3 Todo App
+				ul
+					a(href='/about'): li about
+					a(href='https://github.com/phillipjones2/rebootTodo' target:"_blank"): li github
+
+	div#todo-container
+		each todo, i in todosObj
+			- var editable = '' + !todo.completed;
+			- var disabled = todo.completed;
+			- var todoPriorities = ['PRIORITY: LOW','PRIORITY: MEDIUM', 'PRIORITY: HIGH'];
+
+			div(id=todo.idString, todo-parent=todo.idString, todo-object-id=todo.idString,
+				completed=todo.completed, class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-"+todo.priority)
+
+				div(class="close-todo-button-box", todo-parent=todo.idString)
+					img(src="icons/cancel.svg",
+							todo-parent=todo.idString,
+							class="close-todo-button hidden")
+
+				h3(todo-parent=todo.idString contenteditable=editable
+					 spellcheck="false",
+					 class="todo-title").
+					#{todo.title}
+
+				div(class="todo-title-character-count-box box all-12 justify-content-end")
+					input(class="todo-title-character-count hidden", value=0, disabled, todo-parent=todo.idString)
+
+
+				div(class="todo-content box-col hidden-todo-child",
+						todo-parent=todo.idString)
+
+					p(todo-parent=todo.idString contenteditable=editable
+						spellcheck="false",
+						class="todo-body").
+						#{todo.body}
+
+					div(class="todo-body-character-count-box box all-12 justify-content-end")
+						input(class="todo-body-character-count hidden", value=0, disabled, todo-parent=todo.idString)
+
+					div(class="todo-edit-priority-box box all-12", todo-parent=todo.idString)
+						button(class="todo-edit-priority box xs-10 todo-priority-button priority-bg-"+todo.priority,
+									 todo-parent=todo.idString, value=todo.priority,
+									 disabled=todo.completed) #{todoPriorities[todo.priority]}
+					div(class="todo-button-box box wrap", todo-parent=todo.idString)
+						button(class="btn-1 todo-save-button inactive-todo-button",
+									todo-parent=todo.idString) SAVE
+						button(class="btn-1 todo-complete-button xs-0 sm-0",
+									todo-parent=todo.idString) COMPLETE
+						button(class="btn-1 todo-discard-button inactive-todo-button",
+									todo-parent=todo.idString) DISCARD
+
+					small(todo-parent=todo.idString, class="todo-date")
+						em #{todo.formattedCreate}

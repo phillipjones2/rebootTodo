@@ -13,7 +13,8 @@ const jsPaths = {
 	winterfresh: './public/javascripts/winterfresh.js',
 	about: './public/javascripts/about.js',
 	boxGrid: './public/javascripts/box-grid.js',
-	polyfill: './public/javscripts/polyfill.js'
+	polyfill: './public/javscripts/polyfill.js',
+	initialRequest: './public/javascripts/initial-request.js'
 };
 
 
@@ -86,6 +87,16 @@ router.get('/mobile-events', (req, res, next) => {
 /* NEW-TODO-FORM.JS FILE REQUEST */
 router.get('/winterfresh', (req, res, next) => {
 	babel.transformFile(jsPaths.winterfresh, {
+		presets: ['es2015']
+	}, (err, data) => {
+		if (err) console.log(err);
+		res.send(data.code);
+	});
+});
+
+/* NEW-TODO-FORM.JS FILE REQUEST */
+router.get('/initial-request', (req, res, next) => {
+	babel.transformFile(jsPaths.initialRequest, {
 		presets: ['es2015']
 	}, (err, data) => {
 		if (err) console.log(err);
