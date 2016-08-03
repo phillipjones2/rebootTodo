@@ -54,13 +54,11 @@
         todoChild.classList.add('shown-todo-child');
       }
       todo.tree.closeButton.classList.remove('hidden');
-      todo.tree.closeButtonBox.classList.remove('hidden');
     }
     // EVENT LISTENER TO CLOSE THE EXPANDED TODO
     todo.tree.closeButtonBox.addEventListener('click', (e) => {
       // const elsToHide = document.querySelectorAll(`[todo-parent=${todo.tree.todoID}]`);
       todo.tree.closeButton.classList.add('hidden');
-      todo.tree.closeButtonBox.classList.add('hidden');
       for (let i = 0, childrenLen = todo.tree.children.length; i < childrenLen; i++) {
         const child = todo.tree.children[i];
         child.classList.remove('shown-todo-child');

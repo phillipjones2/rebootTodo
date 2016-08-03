@@ -14,8 +14,8 @@ const req = newAjaxRequest({
 		const todos = JSON.parse(req.response);
 		if (todos.length < 1) {
 			todoContainer.innerHTML += `
-				<div class="no-todos-warning box x-center y-center">
-					<h1>No todos to show.</h1>
+				<div class="no-todos-warning box x-center y-center">\
+					<h1>No todos to show.</h1>\
 				</div>
 			`;
 			return;
