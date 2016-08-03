@@ -83,6 +83,7 @@ function insertTodoIntoDOM(todo) {
 					<button class="btn-1 todo-discard-button inactive-todo-button" ${todoParent}>\
 						DISCARD\
 					</button>\
+					<img src="icons/garbage.svg" class="todo-delete-button xs-0 sm-0"/>
 				</div>\
 
 				<small ${todoParent} class="todo-date">\

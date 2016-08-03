@@ -333,6 +333,7 @@ nav {
 .close-todo-button {
   position: absolute;
   right: 0;
+  top: -15px;
   max-width: 50px;
   background: white;
   border-radius: 50px; }
@@ -375,6 +376,10 @@ button.todo-priority-button {
   height: 50vh;
   width: 100%;
   opacity: 0.5; }
+
+.todo-delete-button {
+  max-height: 30px;
+  max-width: 30px; }
 
 .hidden {
   display: none !important; }
