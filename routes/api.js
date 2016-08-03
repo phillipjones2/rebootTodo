@@ -7,7 +7,7 @@ var today = new Date(),
     yesterday = new Date(today.setDate(today.getDate() -1)),
     thisWeek = new Date(today.setDate(today.getDate() - 7));
 
-// todo index - all todos
+// todo index - all todos cRud
 router.get('/todos', (req, res) => {
   Todo.find().
             and([
@@ -23,9 +23,17 @@ router.get('/todos', (req, res) => {
   });
 });
 
-// todo create
+// todo show - one todo  cRud
+router.get('/todos/:todo_id', (req, res) => {
+  Todo.findById(req.params.todo_id, (err, todo) => {
+    if (err) {
+      res.sent(err)};
+    res.send(todo);
+  });
+});
+
+// todo create Crud
 router.post('/todos', (req, res) => {
-  console.log(req.body);
   var todo = new Todo({title: req.body.title, body: req.body.body, priority : req.body.priority});
   todo.save((err, doc) => {
     if (err) return console.log(err);
@@ -36,6 +44,33 @@ router.post('/todos', (req, res) => {
   });
 });
 
+// todo update  crUd
+router.put('/todos/:todo_id', (req, res) => {
+  Todo.findById(req.params.todo_id, (err, todo) => {
+    if (err) {res.send(err)};
+    todo.title = req.body.title;
+    todo.body = req.body.body;
+    todo.priority = req.body.priority;
+    todo.save((err, doc) => {
+      if (err) return console.log(err);
+      res.send({
+        msg: "state successful!",
+        data: doc
+      });
+    });
+  });
+});
 
+// todo delete cruD
+router.delete('/todos/:todo_id', (req, res) => {
+  Todo.findById(req.params.todo_id, (err, todo) => {
+    Todo.remove(todo, (err) => {
+      if (err) {res.send(err);}
+      else {
+        res.send('Deleted Todo');
+      }
+    });
+  });
+});
 
 module.exports = router;
