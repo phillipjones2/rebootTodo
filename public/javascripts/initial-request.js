@@ -44,53 +44,53 @@ function insertTodoIntoDOM(todo) {
 		todoPriorities = ['PRIORITY: LOW','PRIORITY: MEDIUM', 'PRIORITY: HIGH'];
 
 	todoContainer.innerHTML += `
-		<div class="${todoClasses}" id="${todo._id}" ${completed}
-				 ${todoParent} todo-object-id="${todo._id}">
+		<div class="${todoClasses}" id="${todo._id}" ${completed}\
+				 ${todoParent} todo-object-id="${todo._id}">\
 
-			<div class="close-todo-button-box" ${todoParent}>
-				<img src="icons/cancel.svg" ${todoParent} class="close-todo-button hidden"/>
-			</div>
+			<div class="close-todo-button-box" ${todoParent}>\
+				<img src="icons/cancel.svg" ${todoParent} class="close-todo-button hidden"/>\
+			</div>\
 
-			<h3 ${todoParent} contenteditable=${editable} spellcheck="false" class="todo-title">
-				${todo.title}
-			</h3>
+			<h3 ${todoParent} contenteditable=${editable} spellcheck="false" class="todo-title">\
+				${todo.title}\
+			</h3>\
 
-			<div class="todo-title-character-count-box box all-12 justify-content-end">
-				<input class="todo-title-character-count hidden" value=0 ${disabled} ${todoParent}/>
-			</div>
+			<div class="todo-title-character-count-box box all-12 justify-content-end">\
+				<input class="todo-title-character-count hidden" value=0 ${disabled} ${todoParent}/>\
+			</div>\
 
-			<div class="todo-content box-col hidden-todo-child" ${todoParent}>
-				<p ${todoParent} contenteditable=${editable} spellcheck="false" class="todo-body">
-					${todo.body}
-				</p>
+			<div class="todo-content box-col hidden-todo-child" ${todoParent}>\
+				<p ${todoParent} contenteditable=${editable} spellcheck="false" class="todo-body">\
+					${todo.body}\
+				</p>\
 
-				<div class="todo-body-character-count-box box all-12 justify-content-end">
+				<div class="todo-body-character-count-box box all-12 justify-content-end">\
 					<input class="todo-body-character-count hidden" value=0 ${disabled} ${todoParent}/>
 				</div>
 
-				<div class="todo-edit-priority-box box all-12" ${todoParent}>
-					<button class="todo-edit-priority box xs-10 todo-priority-button priority-bg-${todo.priority}"
-									${todoParent} value=${todo.priority} ${disabled}>
-						${todoPriorities[todo.priority]}
-					</button>
-				</div>
+				<div class="todo-edit-priority-box box all-12" ${todoParent}>\
+					<button class="todo-edit-priority box xs-10 todo-priority-button priority-bg-${todo.priority}"\
+									${todoParent} value=${todo.priority} ${disabled}>\
+						${todoPriorities[todo.priority]}\
+					</button>\
+				</div>\
 
-				<div class="todo-button-box box wrap" ${todoParent}>
-					<button class="btn-1 todo-save-button inactive-todo-button" ${todoParent}>
-						SAVE
-					</button>
-					<button class="btn-1 todo-complete-button xs-0 sm-0" ${todoParent}>
-						COMPLETE
-					</button>
-					<button class="btn-1 todo-discard-button inactive-todo-button" ${todoParent}>
-						DISCARD
-					</button>
-				</div>
+				<div class="todo-button-box box wrap" ${todoParent}>\
+					<button class="btn-1 todo-save-button inactive-todo-button" ${todoParent}>\
+						SAVE\
+					</button>\
+					<button class="btn-1 todo-complete-button xs-0 sm-0" ${todoParent}>\
+						COMPLETE\
+					</button>\
+					<button class="btn-1 todo-discard-button inactive-todo-button" ${todoParent}>\
+						DISCARD\
+					</button>\
+				</div>\
 
-				<small ${todoParent} class="todo-date">
-					<em ${todoParent}>${todo.formattedCreate}</em>
-				</small>
-			</div>
+				<small ${todoParent} class="todo-date">\
+					<em ${todoParent}>${todo.formattedCreate}</em>\
+				</small>\
+			</div>\
 		</div>
 	`
 }
