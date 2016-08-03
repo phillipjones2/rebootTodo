@@ -120,4 +120,9 @@ button.todo-priority-button {
   margin-bottom: 0px;
   margin-top: 5px; }
 
+.no-todos-warning {
+  height: 50vh;
+  width: 100%;
+  opacity: 0.5; }
+
 /*# sourceMappingURL=todos.css.map */

@@ -217,3 +217,24 @@ function validateTargetAsTodo(e) {
 		return parent;
 	} else { return target };
 };
+
+
+// { method: string,
+// 	url: string,
+// 	async: bool,
+//	send: string,
+// 	onSuccessResponse: function }
+function newAjaxRequest(obj) {
+	const request = new XMLHttpRequest();
+	request.onreadystatechange = ( ) => {
+		if (request.readyState == 4 && request.status == 200) {
+			obj.onSuccessResponse(request);
+		}
+	}
+	request.open(obj.method, obj.url, obj.async);
+	if (obj.send) {
+		request.send(obj.send);	
+	} else {
+		request.send();
+	}
+}
