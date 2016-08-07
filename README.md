@@ -5,7 +5,7 @@
 ### https://stark-island-23600.herokuapp.com/
 
 ## Tools used in the making of this App
-1. HTML 5 ![HTML 5 logo](./[public/images/logos/HTML5_logo.svg)
+1. HTML 5 ![HTML 5 logo](./public/images/logos/HTML5_logo.svg)
 2. CSS 3
 3. JS 5
 4. ECMAScript 6
