@@ -9,21 +9,21 @@ const express = require('express'),
 
 // todo index - all todos
 router.get('/', (req, res) => {
-  Todo.find().
-            and([
-              { $or: [{'completed':false },{ 'completedDate': {$gte : yesterday}}] }
-            ]).
-              sort('completed').
-              sort('-priority').
-              exec((err, docs) => {
-    // res.send(docs);
+  // Todo.find().
+  //           and([
+  //             { $or: [{'completed':false },{ 'completedDate': {$gte : yesterday}}] }
+  //           ]).
+  //             sort('completed').
+  //             sort('-priority').
+  //             exec((err, docs) => {
+  //   // res.send(docs);
+  //
+  //   for (var doc of docs) {
+  //     doc.idString = doc._id.toString();
+  //   }
 
-    for (var doc of docs) {
-      doc.idString = doc._id.toString();
-    }
-
-    res.render('index', { title: 'TodoTwo', todosObj: docs });
-  });
+    res.render('index');
+  // });
 });
 
 // // completed todos from 7 days ago up to today

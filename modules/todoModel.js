@@ -2,8 +2,14 @@ const mongoose = require('mongoose'),
       Schema = mongoose.Schema;
 
 const todoSchema = new Schema({
-  title           : { type: String, required: true },
-  body            : String,
+  title           : { type: String,
+                      required: true,
+                      trim: true,
+                      maxlength: 55
+                    },
+  body            : { type: String,
+                      maxlength: 140
+                    },
   priority        : Number,
   formattedCreate : String,
   formattedUpdate : String,
