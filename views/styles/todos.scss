@@ -18,7 +18,7 @@
 
 .todo-box {
   background: $color3;
-  padding: 15px 35px 25px !important;
+  padding: 15px 35px 25px;
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -50,7 +50,7 @@
   }
   .todo-box {
     background: $color3;
-    padding: 15px 25px 10px;
+
     margin: 10px;
   }
   .todo-content {
@@ -93,7 +93,7 @@
 
 // Backgrounds depending on todo state.
 .deleted-todo {
-  background: $pale-red !important;
+  background: $pale-red;
 }
 
 div [data-completed] {

@@ -192,10 +192,6 @@ nav {
   color: #a9a9a9;
   font-size: 1rem; }
 
-#body-character-count p, #add-todo-title-character-count-box p {
-  color: #a9a9a9;
-  font-size: 1rem; }
-
 .spinner-container {
   height: 85vh;
   width: 100%; }
@@ -263,7 +259,7 @@ nav {
 
 .todo-box {
   background: #f5efed;
-  padding: 15px 35px 25px !important;
+  padding: 15px 35px 25px;
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -288,7 +284,6 @@ nav {
 
   .todo-box {
     background: #f5efed;
-    padding: 15px 25px 10px;
     margin: 10px; }
 
   .todo-content {
@@ -313,7 +308,7 @@ nav {
     .todo-content.aborted {
       background: white; } }
 .deleted-todo {
-  background: #EF6F6C !important; }
+  background: #EF6F6C; }
 
 div [data-completed] {
   background: #56E39F; }
@@ -443,7 +438,7 @@ button.todo-priority-button {
   background: #46EA61; }
 
 .priority-text-2 {
-  color: #E84A4A !important; }
+  color: #E84A4A; }
 
 .priority-text-1 {
   color: #FFF359; }
