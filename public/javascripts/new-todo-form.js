@@ -1,5 +1,5 @@
 const addTodoModal = getElById('add-todo-modal'),
-			titleCharacterCount = document.getElementById('add-todo-title-chatacter-count'),
+			titleCharacterCount = document.getElementById('add-todo-title-character-count'),
 			bodyCharacterCount = document.getElementById('add-todo-body-character-count'),
 			closeCreateTodoModalButton = getElById('close-button'),
 			newTodoSubmitButton = getElById('accept-button'),

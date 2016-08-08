@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const mongoose = require('mongoose'),
-      Todo = require('../modules/todoModel'),
+      Todo = require('../server/api/todo/todoModel'),
       config = require('./config');
 
 /**

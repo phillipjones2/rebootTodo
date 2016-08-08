@@ -1,7 +1,7 @@
 const express = require('express'),
   router = express.Router(),
   mongoose = require('mongoose'),
-  Todo = require('../modules/todoModel');
+  Todo = require('../server/api/todo/todoModel');
 
 var today = new Date(),
     yesterday = new Date(today.setDate(today.getDate() -1)),

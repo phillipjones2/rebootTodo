@@ -1,6 +1,6 @@
 const   mongoose = require('mongoose'),
            faker = require('faker'),
-            Todo = require('./modules/todoModel'),
+            Todo = require('./server/api/todo/todoModel'),
       formatDate = require('./routes/api').formatDate,
            today = new Date(),
              old = new Date(today.setDate(today.getDate() -2)),

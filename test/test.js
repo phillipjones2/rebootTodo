@@ -4,7 +4,7 @@ const chai = require('chai'),
   chaiHttp = require('chai-http'),
   mongoose = require('mongoose'),
   server = require('../bin/www'),
-  Todo = require('../modules/todoModel'),
+  Todo = require('../server/api/todo/todoModel'),
   should = chai.should(),
 
   testTodo = {
