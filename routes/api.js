@@ -20,7 +20,6 @@ router.route('/')
       for (var doc of docs) {
         doc.idString = doc._id.toString();
       }
-      // console.log(docs);
       res.send(docs);
     });
   })

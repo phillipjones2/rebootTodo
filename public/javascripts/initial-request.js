@@ -10,7 +10,6 @@ const req = newAjaxRequest({
 	async: true,
 	// send: 'name=tom&age=23',
 	onSuccessResponse: (req) => {
-		console.log("helo");
 		todoContainer.removeChild(spinner);
 		const todos = JSON.parse(req.response);
 		if (todos.length < 1) {
@@ -33,17 +32,16 @@ const req = newAjaxRequest({
 });
 
 function insertTodoIntoDOM(todo) {
-	console.log(todo)
 	const todoClasses = 'todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-' + todo.priority,
-		todoParent = `todo-parent="${todo._id}"`,
+		todoParent = `data-todo-parent="${todo._id}"`,
 		editable = !todo.completed,
 		disabled = (todo.completed) ? 'disabled' : '',
-		completed = (todo.completed) ? 'completed' : '',
+		completed = (todo.completed) ? 'data-completed' : '',
 		todoPriorities = ['PRIORITY: LOW','PRIORITY: MEDIUM', 'PRIORITY: HIGH'];
 
 	todoContainer.innerHTML += `
 		<div class="${todoClasses}" id="${todo._id}" ${completed}\
-				 ${todoParent} todo-object-id="${todo._id}">\
+				 ${todoParent} data-todo-object-id="${todo._id}">\
 
 			<div class="close-todo-button-box" ${todoParent}>\
 				<img src="icons/cancel.svg" ${todoParent} class="close-todo-button hidden"/>\

@@ -96,7 +96,7 @@
   background: $pale-red !important;
 }
 
-.completed-todo {
+div [data-completed] {
   background: $pale-green;
 }
 

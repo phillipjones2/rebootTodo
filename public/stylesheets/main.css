@@ -315,7 +315,7 @@ nav {
 .deleted-todo {
   background: #EF6F6C !important; }
 
-.completed-todo {
+div [data-completed] {
   background: #56E39F; }
 
 .todo-action {

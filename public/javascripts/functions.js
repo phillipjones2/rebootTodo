@@ -48,9 +48,9 @@ function getParentTodo(element) {
 };
 
 function getTodoTree(el) {
-	const todoID = el.getAttribute('todo-parent'),
+	const todoID = el.getAttribute('data-todo-parent'),
 				parent = document.getElementById(todoID),
-				children = parent.querySelectorAll('[todo-parent]'),
+				children = parent.querySelectorAll('[data-todo-parent]'),
 				priorityButton = parent.querySelector('.todo-edit-priority'),
 				priorityValue = priorityButton.value,
 				priorityText = `${priorityButton.innerText}`,
@@ -212,7 +212,7 @@ function rotatePriorities(el, el2, classArr2, textArr) {
 function validateTargetAsTodo(e) {
 	const target = e.target;
 	if (!target.classList.contains('todo-box')) {
-		const todoID = target.getAttribute('todo-parent'),
+		const todoID = target.getAttribute('data-todo-parent'),
 					parent = document.getElementById(todoID);
 		return parent;
 	} else { return target };

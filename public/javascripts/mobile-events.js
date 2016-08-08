@@ -1,4 +1,4 @@
- const mobileEvents = ( ) => { 
+ const mobileEvents = ( ) => {
   const req = new XMLHttpRequest();
   //*******************************//
   //--- TODO SWIPE FUNCTIONALITY --//
@@ -83,7 +83,7 @@
       	  req.send();
         // IF CURRENTLY IN A COMPLETED STATE -> UNCOMPLETE
         }
-        else if(todo.hasAttribute('completed')) {
+        else if(todo.hasAttribute('data-completed')) {
           req.onreadystatechange = ( ) => {
             if (req.readyState == 4 && req.status == 200) {
               location.reload();
@@ -118,7 +118,7 @@
           todo.tree.body.setAttribute('contenteditable', true);
           todo.tree.priority.removeAttribute('disabled');
         } // ?? TODO IS COMPLETE AND USER SWIPES LEFT AGAIN ??
-        else if (todo.hasAttribute('completed')) {return;}
+        else if (todo.hasAttribute('data-completed')) {return;}
         else {
            //| When the state of the request changes:
            //| (4): "request finished and response is ready"
