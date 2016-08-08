@@ -377,7 +377,10 @@ button.todo-priority-button {
   max-width: 30px; }
 
 .hidden {
-  display: none !important; }
+  display: none; }
+
+#add-todo-modal.hidden {
+  display: none; }
 
 .scaled-down {
   transform: scale(0); }

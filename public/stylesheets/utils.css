@@ -1,5 +1,8 @@
 .hidden {
-  display: none !important; }
+  display: none; }
+
+#add-todo-modal.hidden {
+  display: none; }
 
 .scaled-down {
   transform: scale(0); }
