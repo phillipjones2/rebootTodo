@@ -1,5 +1,10 @@
 const Todo = require('./todoModel'),
-  _ = require('lodash');
+  _ = require('lodash'),
+  formatDate = require('../../util/formatDate');
+
+var today = new Date(),
+    yesterday = new Date(today.setDate(today.getDate() -1)),
+    thisWeek = new Date(today.setDate(today.getDate() - 7));
 
 // get todo if given an id
 exports.params = (req, res, next, id) => {
@@ -17,7 +22,7 @@ exports.params = (req, res, next, id) => {
 };
 
 // index.  ALL todos
-exports.get = (req, res, next) {
+exports.get = (req, res, next) => {
   Todo.find({})
     // .populate('User')
     .and([
@@ -47,6 +52,13 @@ exports.getOne = (req, res, next) => {
 exports.put = (req, res, next) => {
   let todo = req.todo,
     update = req.body;
+    update.formattedUpdate = formatDate.formatDate(new Date());
+    if (update.completed){
+      update.completed = true;
+      update.completedDate = new Date();
+    } else {
+      update.completed = false;
+    }
     _.merge(todo,update);
     todo.save((err,saved) => {
       if (err) {
@@ -60,6 +72,8 @@ exports.put = (req, res, next) => {
 // create.
 exports.post = (req, res, next) => {
   let newtodo = req.body;
+  newtodo.formattedCreate = formatDate.formatDate(new Date());
+  newtodo.formattedUpdate = formatDate.formatDate(new Date());
 
   Todo.create(newtodo)
     .then((todo) => {
