@@ -53,6 +53,7 @@ exports.post = (req, res, next) => {
 
   User.create(newuser)
     .then((user) => {
+      console.log(user);
       res.json(user);
     }, (err) => {
       next(err);

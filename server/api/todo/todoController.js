@@ -85,7 +85,7 @@ exports.post = (req, res, next) => {
 
 // delete.
 exports.delete = (req, res, next) => {
-  req.post.remove((err, removed) => {
+  req.todo.remove((err, removed) => {
     if (err) {
       next(err);
     } else {
