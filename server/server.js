@@ -13,16 +13,12 @@ require('./middleware/appMiddleware')(app);
 
 app.use('/api', api);
 
-app.use(express.static(`${__dirname}/../public`));
-
-//
 // fix these: static routes...????
 app.use('/', todos);
 app.use('/about', routes);
 //*******************************
 
 app.use('/scripts', js);
-
 
 
 // catch 404 and forward to error handler
@@ -40,6 +36,7 @@ app.use((req, res, next) => {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
+    console.log(err.message);
     res.render('error', {
       message: err.message,
       error: err
