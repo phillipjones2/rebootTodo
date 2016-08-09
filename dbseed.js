@@ -1,7 +1,7 @@
 const   mongoose = require('mongoose'),
            faker = require('faker'),
             Todo = require('./server/api/todo/todoModel'),
-      formatDate = require('./routes/api').formatDate,
+      formatDate = require('./server/util/formatDate'),
            today = new Date(),
              old = new Date(today.setDate(today.getDate() -2)),
            todos = [],
@@ -22,8 +22,8 @@ db.once('open', () => {
         title: faker.lorem.sentence(),
         body: faker.lorem.sentence(),
         priority: randomPriority,
-        formattedCreate: formatDate(new Date()),
-        formattedUpdate: formatDate(new Date())
+        formattedCreate: formatDate.formatDate(new Date()),
+        formattedUpdate: formatDate.formatDate(new Date())
       });
       todo.save((err, todo) => {
         if (err) return console.error(err);
@@ -37,8 +37,8 @@ db.once('open', () => {
         title: faker.lorem.sentence(),
         body: faker.lorem.sentence(),
         priority: randomPriority,
-        formattedCreate: formatDate(new Date()),
-        formattedUpdate: formatDate(new Date()),
+        formattedCreate: formatDate.formatDate(new Date()),
+        formattedUpdate: formatDate.formatDate(new Date()),
         completed: true,
         completedDate: new Date()
       });
@@ -54,8 +54,8 @@ db.once('open', () => {
         title: faker.lorem.sentence(),
         body: faker.lorem.sentence(),
         priority: randomPriority,
-        formattedCreate: formatDate(new Date()),
-        formattedUpdate: formatDate(new Date()),
+        formattedCreate: formatDate.formatDate(new Date()),
+        formattedUpdate: formatDate.formatDate(new Date()),
         completed: true,
         completedDate: old
       });

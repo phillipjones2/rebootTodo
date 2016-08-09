@@ -1,7 +1,8 @@
 const express = require('express'),
   router = express.Router(),
   mongoose = require('mongoose'),
-  Todo = require('../server/api/todo/todoModel');
+  Todo = require('../server/api/todo/todoModel'),
+  formatDate = require('../server/util/formatDate');
 
 var today = new Date(),
     yesterday = new Date(today.setDate(today.getDate() -1)),
@@ -29,8 +30,8 @@ router.route('/')
       title: req.body.title,
       body: req.body.body,
       priority : req.body.priority,
-      formattedCreate: formatDate(new Date()),
-      formattedUpdate: formatDate(new Date())
+      formattedCreate: formatDate.formatDate(new Date()),
+      formattedUpdate: formatDate.formatDate(new Date())
     });
     todo.save((err, doc) => {
       if (err) return console.log(err);
@@ -57,7 +58,7 @@ router.route('/:todo_id')
       todo.title = req.body.title;
       todo.body = req.body.body;
       todo.priority = req.body.priority;
-      todo.formattedUpdate = formatDate(new Date());
+      todo.formattedUpdate = formatDate.formatDate(new Date());
       if (req.body.completed ) {
         todo.completed = true;
         todo.completedDate = new Date();
@@ -88,17 +89,4 @@ router.route('/:todo_id')
     });
   });
 
-function formatDate(date) {
-  var hours = date.getHours(),
-    minutes = date.getMinutes(),
-       ampm = hours >= 12 ? 'pm' : 'am',
-    DaysArr = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri'],
-    MonthsArr = ['Januray', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-      // Month = date.getMonth() +1;
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-  minutes = minutes < 10 ? '0'+minutes : minutes;
-  return `${DaysArr[date.getDay()]} ${MonthsArr[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()} ${hours}:${minutes}${ampm}`;
-}
-
-module.exports = {router, formatDate};
+module.exports = router;

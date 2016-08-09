@@ -1,21 +1,24 @@
-'use strict';
+const express = require('express'),
+  app = express(),
+  router = express.Router(),
+  api = require('../routes/api'),
 
-const express      = require('express'),
+
+
       favicon      = require('serve-favicon'),
       logger       = require('morgan'),
       babel        = require('babel-core'),
       mongoose     = require('mongoose'),
       todoModel    = require('./api/todo/todoModel'),
       bodyParser   = require('body-parser'),
-      todos        = require('../routes/todos').router,
-      router       = express.Router(),
-      api          = require('../routes/api').router,
+      todos        = require('../routes/todos'),
+
+
       routes       = require('../routes/routes'),
       // fresh        = require('./routes/fresh'),
       js           = require('../routes/scripts'),
 
-      config       = require('./config/config'),
-      app          = express();
+      config       = require('./config/config');
 
 
 // Set up Pug compilation.
