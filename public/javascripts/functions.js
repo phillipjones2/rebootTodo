@@ -69,7 +69,7 @@ function getTodoTree(el) {
 				date = parent.querySelector('.todo-date'),
 				closeButtonBox = parent.querySelector('.close-todo-button-box'),
 				closeButton = parent.querySelector('.close-todo-button'),
-				putLink = '/todos/' + todoID,
+				putLink = 'api/todos/' + todoID,
 				keystrokes = 0,
 				parentClass = `${parent.classList}`;
 

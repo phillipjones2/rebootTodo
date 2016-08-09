@@ -6,7 +6,7 @@ const spinner = document.querySelector('.spinner-container'),
 
 const req = newAjaxRequest({
 	method: 'get',
-	url: '/todos',
+	url: '/api/todos',
 	async: true,
 	// send: 'name=tom&age=23',
 	onSuccessResponse: (req) => {

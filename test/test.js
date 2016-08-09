@@ -37,7 +37,7 @@ describe('Todos', function() {
     //index
     it('should list ALL todos on / GET', function(done) {
       chai.request(server)
-        .get('/todos')
+        .get('/api/todos')
         .end(function(err, res) {
           res.should.have.status(200);
           res.should.be.json;
@@ -63,7 +63,7 @@ describe('Todos', function() {
       });
       newTodo.save(function(err, data) {
         chai.request(server)
-          .get('/todos/'+data.id)
+          .get('/api/todos/'+data.id)
           .end(function(err, res) {
             res.should.have.status(200);
             res.should.be.json;
@@ -85,7 +85,7 @@ describe('Todos', function() {
     // create
     it('should add a SINGLE todo on /todos POST', function(done){
       chai.request(server)
-        .post('/todos')
+        .post('/api/todos')
         .send({
           'title' : 'automated test title',
           'body' : 'automated test body',
@@ -110,10 +110,10 @@ describe('Todos', function() {
     });
     it('should update a SINGLE todo on /todos/<id> PUT', function(done) {
       chai.request(server)
-        .get('/todos')
+        .get('/api/todos')
         .end(function(err, res) {
           chai.request(server)
-            .put('/todos/' + res.body[0]._id)
+            .put('/api/todos/' + res.body[0]._id)
             .send({
               'title': 'Updated TITLE',
               'body' : res.body[0].body,
@@ -136,10 +136,10 @@ describe('Todos', function() {
     });
     it('should delete a SINGLE todo on /todos/<id> DELETE', function(done) {
       chai.request(server)
-        .get('/todos')
+        .get('/api/todos')
         .end(function(err, res) {
           chai.request(server)
-            .delete('/todos/' + res.body[0]._id)
+            .delete('/api/todos/' + res.body[0]._id)
             .end(function(err, res) {
               res.should.have.status(200);
               res.should.be.json;

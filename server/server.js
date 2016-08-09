@@ -1,25 +1,16 @@
 const express = require('express'),
   app = express(),
-  router = express.Router(),
-  api = require('../routes/api'),
+  api = require('./api/api'),
 
-
-
-      favicon      = require('serve-favicon'),
-      logger       = require('morgan'),
-      babel        = require('babel-core'),
-      mongoose     = require('mongoose'),
-      todoModel    = require('./api/todo/todoModel'),
-      bodyParser   = require('body-parser'),
+      // favicon      = require('serve-favicon'),
+      // babel        = require('babel-core'),
+      // mongoose     = require('mongoose'),
       todos        = require('../routes/todos'),
-
-
       routes       = require('../routes/routes'),
       // fresh        = require('./routes/fresh'),
-      js           = require('../routes/scripts'),
+      js           = require('../routes/scripts');
 
-      config       = require('./config/config');
-
+require('./middleware/appMiddleware')(app);
 
 // Set up Pug compilation.
 app.set('views', `${__dirname}/../views`);
@@ -28,13 +19,9 @@ app.set('view engine', 'pug');
 // ***** Need to create a favicon. ***** //
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-app.use(logger('dev'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
 app.use(express.static(`${__dirname}/../public`));
 
-app.use('/todos', api);
+app.use('/api', api);
 app.use('/', todos);
 app.use('/about', routes);
 app.use('/scripts', js);

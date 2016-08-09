@@ -93,7 +93,7 @@ addTodoSubmitButton.addEventListener('click', (e) => {
 	req.onreadystatechange = ( ) => {
 		location.reload();
 	}
-	req.open('post', '/todos', true);
+	req.open('post', 'api/todos', true);
 	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	req.send(`title=${title}&body=${body}&priority=${priority}`);
 });
