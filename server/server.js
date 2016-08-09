@@ -1,30 +1,29 @@
 const express = require('express'),
   app = express(),
   api = require('./api/api'),
+  todos = require('../routes/todos'),
+  routes = require('../routes/routes'),
+  js = require('../routes/scripts');
 
-      // favicon      = require('serve-favicon'),
-      // babel        = require('babel-core'),
-      // mongoose     = require('mongoose'),
-      todos        = require('../routes/todos'),
-      routes       = require('../routes/routes'),
-      // fresh        = require('./routes/fresh'),
-      js           = require('../routes/scripts');
+  // fresh        = require('./routes/fresh'),
+  // babel        = require('babel-core'),
+  // mongoose     = require('mongoose'),
 
 require('./middleware/appMiddleware')(app);
 
-// Set up Pug compilation.
-app.set('views', `${__dirname}/../views`);
-app.set('view engine', 'pug');
-
-// ***** Need to create a favicon. ***** //
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use('/api', api);
 
 app.use(express.static(`${__dirname}/../public`));
 
-app.use('/api', api);
+//
+// fix these: static routes...????
 app.use('/', todos);
 app.use('/about', routes);
+//*******************************
+
 app.use('/scripts', js);
+
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -57,6 +56,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
