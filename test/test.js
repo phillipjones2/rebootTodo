@@ -5,15 +5,19 @@ const chai = require('chai'),
   mongoose = require('mongoose'),
   server = require('../bin/www'),
   Todo = require('../server/api/todo/todoModel'),
+  User = require('../server/api/user/userModel'),
   should = chai.should(),
   logger = require('../server/util/logger'),
   config = require('../server/config/config');
-
 
   testTodo = {
     'title' : 'automated test title',
     'body' : 'automated test body',
     'priority' : 2
+  };
+
+  testUser = {
+    'username' : 'Dylan Isthaman'
   };
 
 chai.use(chaiHttp);
@@ -55,7 +59,7 @@ describe('Todos', function() {
         });
     });
     // show
-    it('should list a SINGLE todo on /todo/<id> GET', function(done) {
+    it('should list a SINGLE todo on /todos/<id> GET', function(done) {
       var newTodo = new Todo({
         title: 'Single TODO',
         body: 'ID GET',
@@ -83,7 +87,7 @@ describe('Todos', function() {
       });
     });
     // create
-    it('should add a SINGLE todo on /todos POST', function(done){
+    it('should add a SINGLE todo on /users POST', function(done){
       chai.request(server)
         .post('/api/todos')
         .send({
@@ -138,6 +142,107 @@ describe('Todos', function() {
         .end(function(err, res) {
           chai.request(server)
             .delete('/api/todos/' + res.body[0]._id)
+            .end(function(err, res) {
+              res.should.have.status(200);
+              res.should.be.json;
+              res.body.should.be.a('object');
+              done();
+          });
+        });
+    });
+  });
+});
+
+describe('Users', function() {
+  Todo.collection.drop();
+
+  beforeEach(function(done) {
+    var newUser = new User(testUser);
+    newUser.save(function(err) {
+      done();
+    });
+  });
+  afterEach(function(done) {
+    User.collection.drop();
+    done();
+  });
+  describe('Users', function() {
+    this.timeout(5000);
+    //index
+    it('should list ALL users on / GET', function(done) {
+      chai.request(server)
+        .get('/api/users')
+        .end(function(err, res) {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('array');
+          res.body[0].should.have.property('_id');
+          res.body[0].should.have.property('username');
+          res.body[0].username.should.equal(testUser.username);
+          done();
+        });
+    });
+    // show
+    it('should list a SINGLE todo on /users/<id> GET', function(done) {
+      var newUser = new User({
+        username: 'Test User'
+      });
+      newUser.save(function(err, data) {
+        chai.request(server)
+          .get('/api/users/'+data.id)
+          .end(function(err, res) {
+            res.should.have.status(200);
+            res.should.be.json;
+            res.body.should.be.a('object');
+            res.body.should.have.property('_id');
+            res.body.should.have.property('username');
+            res.body.username.should.equal(newUser.username);
+          done();
+        });
+      });
+    });
+    // create
+    it('should add a SINGLE todo on /users POST', function(done){
+      chai.request(server)
+        .post('/api/users')
+        .send({
+          'username' : 'automated test username'
+        })
+        .end(function(err, res) {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.have.property('_id');
+          res.body.should.have.property('username');
+          res.body.username.should.equal('automated test username');
+          done();
+        });
+    });
+    it('should update a SINGLE todo on /users/<id> PUT', function(done) {
+      chai.request(server)
+        .get('/api/users')
+        .end(function(err, res) {
+          chai.request(server)
+            .put('/api/users/' + res.body[0]._id)
+            .send({
+              'username': 'Updated username'
+            })
+            .end(function(err, res) {
+              res.should.have.status(200);
+              res.should.be.json;
+              res.body.should.be.a('object');
+              res.body.should.have.property('username');
+              res.body.username.should.equal('Updated username');
+              done();
+          });
+      });
+    });
+    it('should delete a SINGLE todo on /users/<id> DELETE', function(done) {
+      chai.request(server)
+        .get('/api/users')
+        .end(function(err, res) {
+          chai.request(server)
+            .delete('/api/users/' + res.body[0]._id)
             .end(function(err, res) {
               res.should.have.status(200);
               res.should.be.json;
