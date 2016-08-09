@@ -24,7 +24,7 @@ exports.params = (req, res, next, id) => {
 // index.  ALL todos
 exports.get = (req, res, next) => {
   Todo.find({})
-    // .populate('User')
+    .populate('User')
     .and([
       { $or: [{'completed':false },
       { 'completedDate': {$gte : yesterday}}] }

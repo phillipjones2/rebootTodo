@@ -18,6 +18,8 @@ router.route('/:id')
   .put(controller.put)
   .delete(controller.delete);
 
+module.exports = router;
+
 // router.route('/')
 //   // todo index - all todos cRud
 //   .get((req, res) => {
@@ -98,5 +100,3 @@ router.route('/:id')
 //       });
 //     });
 //   });
-
-module.exports = router;
