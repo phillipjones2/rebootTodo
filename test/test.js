@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'testing';
 
 const chai = require('chai'),
   chaiHttp = require('chai-http'),
@@ -6,6 +6,9 @@ const chai = require('chai'),
   server = require('../bin/www'),
   Todo = require('../server/api/todo/todoModel'),
   should = chai.should(),
+  logger = require('../server/util/logger'),
+  config = require('../server/config/config');
+
 
   testTodo = {
     'title' : 'automated test title',

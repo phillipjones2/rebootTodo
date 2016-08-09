@@ -39,6 +39,7 @@ const applyEditTodoFunctionality = ( ) => {
     });
 
     title.addEventListener('focus', (e) => {
+      
       if(!todo.tree.bodyCount.classList.contains('priority-text-2')){
         todo.tree.bodyCount.classList.add('hidden');
       }

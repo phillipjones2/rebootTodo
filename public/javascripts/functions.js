@@ -42,7 +42,7 @@ function removeClasses(el, classesArray) {
 // };
 
 function getParentTodo(element) {
-	const parentID = element.getAttribute('todo-parent'),
+	const parentID = element.getAttribute('data-todo-parent'),
 				parent = document.getElementById(parentID);
 	return parent;
 };

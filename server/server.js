@@ -5,20 +5,21 @@ const express      = require('express'),
       logger       = require('morgan'),
       babel        = require('babel-core'),
       mongoose     = require('mongoose'),
-      todoModel    = require('./server/api/todo/todoModel'),
+      todoModel    = require('./api/todo/todoModel'),
       bodyParser   = require('body-parser'),
-      todos        = require('./routes/todos').router,
+      todos        = require('../routes/todos').router,
       router       = express.Router(),
-      api          = require('./routes/api').router,
-      routes       = require('./routes/routes'),
+      api          = require('../routes/api').router,
+      routes       = require('../routes/routes'),
       // fresh        = require('./routes/fresh'),
-      js           = require('./routes/scripts'),
-      config       = require('./bin/config'),
+      js           = require('../routes/scripts'),
+
+      config       = require('./config/config'),
       app          = express();
 
 
 // Set up Pug compilation.
-app.set('views', `${__dirname}/views`);
+app.set('views', `${__dirname}/../views`);
 app.set('view engine', 'pug');
 
 // ***** Need to create a favicon. ***** //
@@ -28,7 +29,7 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/../public`));
 
 app.use('/todos', api);
 app.use('/', todos);

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 const mongoose = require('mongoose'),
-      Todo = require('../server/api/todo/todoModel'),
-      config = require('./config');
+  config = require('../server/config/config'),
+  app = require('../server/server'),
+  logger = require('../server/util/logger');
 
 /**
  * Module dependencies.
  */
 
-var app = require('../app');
 var debug = require('debug')('todoreboot:server');
 var http = require('http');
 
@@ -15,7 +15,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(config.port || '3000');
 app.set('port', port);
 
 
@@ -91,17 +91,18 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-  console.log(`listening on http://localhost:${port}`);
+  logger.log(`listening on http://localhost:${port}`);
+  logger.log(config.env);
   mongooseConnection();
 }
 
 // mongoose
 function mongooseConnection() {
-  mongoose.connect(config.mongoURI[app.settings.env], (err, res) => {
+  mongoose.connect(config.mongoURI, (err, res) => {
     if (err) {
-      console.log('Error connecting to the database. ' + err);
+      logger.log('Error connecting to the database. ' + err);
     } else {
-      console.log('Connected to Database: ' + config.mongoURI[app.settings.env]);
+      logger.log('Connected to Database: ' + config.mongoURI);
     }
   });
   const db = mongoose.connection;
