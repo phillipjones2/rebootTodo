@@ -1,6 +1,6 @@
 const applyEditTodoFunctionality = ( ) => {
   const saveEditedTodoButtons = document.getElementsByClassName('todo-save-button');
-  for (let i = 0, saveEditedTodoButtonsLen = saveEditedTodoButtons.length; i < saveEditedTodoButtonsLen; i++) {
+  for (var i = 0, saveEditedTodoButtonsLen = saveEditedTodoButtons.length; i < saveEditedTodoButtonsLen; i++) {
     const button = saveEditedTodoButtons[i];
 
     button.addEventListener('click', (e) => {
@@ -25,7 +25,7 @@ const applyEditTodoFunctionality = ( ) => {
   //--- TITLE DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
   const titles = document.getElementsByClassName('todo-title'),
     maxTitleLength = 55;
-  for (let i = 0, titlesLen = titles.length; i < titlesLen; i++) {
+  for (var i = 0, titlesLen = titles.length; i < titlesLen; i++) {
     const title = titles[i],
       todo = getParentTodo(title);
 
@@ -39,7 +39,7 @@ const applyEditTodoFunctionality = ( ) => {
     });
 
     title.addEventListener('focus', (e) => {
-      
+
       if(!todo.tree.bodyCount.classList.contains('priority-text-2')){
         todo.tree.bodyCount.classList.add('hidden');
       }
@@ -51,7 +51,7 @@ const applyEditTodoFunctionality = ( ) => {
   const bodies = document.getElementsByClassName('todo-body'),
         maxBodyLength = 140;
 
-  for (let i = 0, bodiesLen = bodies.length; i < bodiesLen; i++) {
+  for (var i = 0, bodiesLen = bodies.length; i < bodiesLen; i++) {
    const body = bodies[i],
      todo = getParentTodo(body);
 
@@ -74,7 +74,7 @@ const applyEditTodoFunctionality = ( ) => {
    //********************************************************//
   //--- PRIORITY DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
   const todoEditPriorityButtons = document.getElementsByClassName('todo-edit-priority');
-  for (let i = 0, todoEditPriorityButtonsLen = todoEditPriorityButtons.length; i < todoEditPriorityButtonsLen; i++) {
+  for (var i = 0, todoEditPriorityButtonsLen = todoEditPriorityButtons.length; i < todoEditPriorityButtonsLen; i++) {
     const button = todoEditPriorityButtons[i];
     button.addEventListener('click', (e) => {
       const todo = getParentTodo(button);
@@ -87,8 +87,8 @@ const applyEditTodoFunctionality = ( ) => {
    //************************************//
   //--- DISCARD BUTTON FUNCTIONALITY ---//
   const discardButtons = getElsByClass('todo-discard-button');
-  for (let i = 0, discardButtonsLen = discardButtons.length; i < discardButtonsLen; i++) {
-    let button = discardButtons[i]
+  for (var i = 0, discardButtonsLen = discardButtons.length; i < discardButtonsLen; i++) {
+    var button = discardButtons[i]
     button.addEventListener('click', (e) => {
       const todo = getParentTodo(button);
       if (button.classList.contains('inactive-todo-button')) {return;}

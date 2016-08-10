@@ -29,13 +29,13 @@ exports.get = (req, res, next) => {
 
 // show. One user
 exports.getOne = (req, res, next) => {
-  let user = req.user;
+  var user = req.user;
   res.json(user);
 };
 
 // update. a user
 exports.put = (req, res, next) => {
-  let user = req.user,
+  var user = req.user,
     update = req.body;
   _.merge(user, update);
 

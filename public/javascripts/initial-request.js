@@ -20,7 +20,7 @@ const req = newAjaxRequest({
 			`;
 			return;
 		}
-		for (let i = 0, todosLen = todos.length; i < todosLen; i++) {
+		for (var i = 0, todosLen = todos.length; i < todosLen; i++) {
 			const todo = todos[i];
 
 			insertTodoIntoDOM(todo);

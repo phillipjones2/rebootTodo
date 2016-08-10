@@ -34,7 +34,7 @@ function addTodoValidityCheck() {
 	const titleInputLength = addTodoTitleInput.value.trim().length,
 		bodyInputLength = addTodoBodyInput.value.trim().length;
 
-	let valid = true;
+	var valid = true;
 
 	if (titleInputLength == 0 || titleInputLength > maxTitleLength) {
 		valid = false;

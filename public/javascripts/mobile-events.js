@@ -4,8 +4,8 @@
   //--- TODO SWIPE FUNCTIONALITY --//
   const	todos = getElsByClass('todo-box');
 
-  for (let i = 0, todosLen = todos.length; i < todosLen; i++) {
-    let touchStartX, touchStartY,
+  for (var i = 0, todosLen = todos.length; i < todosLen; i++) {
+    var touchStartX, touchStartY,
       todo = todos[i];
 
     todo.tree = getTodoTree(todo);
@@ -40,16 +40,16 @@
             otherTodoCloseButtons = document
               .querySelectorAll(`img[todo-parent]:not([todo-parent=${todo.tree.todoID}])`);
 
-      for (let i = 0, otherLen = otherTodoChildren.length; i < otherLen; i++) {
+      for (var i = 0, otherLen = otherTodoChildren.length; i < otherLen; i++) {
         const otherTodoChild = otherTodoChildren[i];
         otherTodoChild.classList.remove('shown-todo-child');
       }
 
-      for (let i = 0, otherLen = otherTodoCloseButtons.length; i < otherLen; i++) {
+      for (var i = 0, otherLen = otherTodoCloseButtons.length; i < otherLen; i++) {
         const otherTodoCloseButton = otherTodoCloseButtons[i];
         otherTodoCloseButton.classList.add('hidden');
       }
-      for (let i = 0, childrenLen = todo.tree.children.length; i < childrenLen; i++) {
+      for (var i = 0, childrenLen = todo.tree.children.length; i < childrenLen; i++) {
         const todoChild = todo.tree.children[i];
         todoChild.classList.add('shown-todo-child');
       }
@@ -59,7 +59,7 @@
     todo.tree.closeButtonBox.addEventListener('click', (e) => {
       // const elsToHide = document.querySelectorAll(`[todo-parent=${todo.tree.todoID}]`);
       todo.tree.closeButton.classList.add('hidden');
-      for (let i = 0, childrenLen = todo.tree.children.length; i < childrenLen; i++) {
+      for (var i = 0, childrenLen = todo.tree.children.length; i < childrenLen; i++) {
         const child = todo.tree.children[i];
         child.classList.remove('shown-todo-child');
       }

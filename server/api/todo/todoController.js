@@ -44,16 +44,16 @@ exports.get = (req, res, next) => {
 
 // show. One todo
 exports.getOne = (req, res, next) => {
-  let todo = req.todo;
+  var todo = req.todo;
   res.json(todo);
 };
 
 // update.
 exports.put = (req, res, next) => {
-  let todo = req.todo,
+  var todo = req.todo,
     update = req.body;
     update.formattedUpdate = formatDate.formatDate(new Date());
-    if (update.completed){
+    if (update.compvared){
       update.completed = true;
       update.completedDate = new Date();
     } else {
@@ -71,7 +71,7 @@ exports.put = (req, res, next) => {
 
 // create.
 exports.post = (req, res, next) => {
-  let newtodo = req.body;
+  var newtodo = req.body;
   newtodo.formattedCreate = formatDate.formatDate(new Date());
   newtodo.formattedUpdate = formatDate.formatDate(new Date());
 
