@@ -35,8 +35,8 @@ var logger = {
     var args = _.toArray(arguments)
       .map((arg) => {
         arg = arg.stake || arg;
-        let name = arg.name || '[ ❌  ERROR ❌  ]';
-        let log = `${name.yellow} ${arg.red}`;
+        var name = arg.name || '[ ❌  ERROR ❌  ]';
+        var log = `${name.yellow} ${arg.red}`;
         return log;
       });
     consoleLog.apply(console, args);
