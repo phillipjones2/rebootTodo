@@ -3,7 +3,7 @@ const express = require('express'),
 
 // todo index - all todos
 router.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', {title: 'todo app'});
 });
 
 module.exports = router;
