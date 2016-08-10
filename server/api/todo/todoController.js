@@ -1,6 +1,7 @@
 const Todo = require('./todoModel'),
   _ = require('lodash'),
-  formatDate = require('../../util/formatDate');
+  formatDate = require('../../util/formatDate'),
+  logger = require('../../util/logger');
 
 var today = new Date(),
     yesterday = new Date(today.setDate(today.getDate() -1)),
@@ -52,8 +53,9 @@ exports.getOne = (req, res, next) => {
 exports.put = (req, res, next) => {
   var todo = req.todo,
     update = req.body;
+    logger.log(update);
     update.formattedUpdate = formatDate.formatDate(new Date());
-    if (update.compvared){
+    if (update.completed){
       update.completed = true;
       update.completedDate = new Date();
     } else {
