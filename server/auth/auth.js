@@ -56,10 +56,10 @@ exports.verifyUser = () => {
   };
 };
 
-exports.signToken = (id) => {
+exports.signToken = function(id) {
   return jwt.sign(
     {_id: id},
     config.secrets.jwt,
-    {expiresInMinutes: config.expireTime}
+    {expiresIn: config.expireTime}
   );
 };

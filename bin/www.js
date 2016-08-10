@@ -91,13 +91,13 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-  logger.log(`listening on http://localhost:${port}`);
-  logger.log(config.env);
+  logger.log(`listening on http://localhost:${port}  Environment: ${config.env.green}`);
   mongooseConnection();
 }
 
 // mongoose
 function mongooseConnection() {
+  mongoose.Promise = global.Promise;
   mongoose.connect(config.mongoURI, (err, res) => {
     if (err) {
       logger.log('Error connecting to the database. ' + err);

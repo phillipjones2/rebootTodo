@@ -14,6 +14,9 @@ const UserSchema = new Schema({
     type: String,
     required: true
   }
+},
+{
+  timestamps: true
 });
 
 // middleware that will run before a document

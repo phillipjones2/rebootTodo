@@ -26,7 +26,7 @@ const todoSchema = new Schema({
   completedDate : { type: Date },
   user : {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'user'
   }
 },
 {

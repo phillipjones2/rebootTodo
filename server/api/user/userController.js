@@ -1,5 +1,6 @@
 const User = require('./userModel'),
-  _ = require('lodash');
+  _ = require('lodash'),
+  signToken = require('../../auth/auth').signToken;
 
 // get user if given an id
 exports.params = (req, res, next, id) => {
@@ -48,16 +49,13 @@ exports.put = (req, res, next) => {
 };
 
 //create. a user
-exports.post = (req, res, next) => {
-  let newuser = req.body;
-
-  User.create(newuser)
-    .then((user) => {
-      console.log(user);
-      res.json(user);
-    }, (err) => {
-      next(err);
-    });
+exports.post = function(req, res, next) {
+  var newUser = new User(req.body);
+  newUser.save(function(err, user) {
+    if(err) {next(err);}
+    var token = signToken(user._id);
+    res.json({token: token});
+  });
 };
 
 //delete. a user
