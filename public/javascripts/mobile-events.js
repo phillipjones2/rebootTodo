@@ -36,9 +36,9 @@
     //| open todos and open the one that was tapped.
     if (tap) {
       const otherTodoChildren = document
-              .querySelectorAll(`:not([todo-parent=${todo.tree.todoID}]`),
+              .querySelectorAll(`:not([data-todo-parent=${todo.tree.todoID}]`),
             otherTodoCloseButtons = document
-              .querySelectorAll(`img[todo-parent]:not([todo-parent=${todo.tree.todoID}])`);
+              .querySelectorAll(`img[data-todo-parent]:not([todo-parent=${todo.tree.todoID}])`);
 
       for (var i = 0, otherLen = otherTodoChildren.length; i < otherLen; i++) {
         const otherTodoChild = otherTodoChildren[i];

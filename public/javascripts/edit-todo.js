@@ -18,9 +18,6 @@ const applyEditTodoFunctionality = ( ) => {
     });
   }
 
-
-
-
    //*****************************************************//
   //--- TITLE DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
   const titles = document.getElementsByClassName('todo-title'),
