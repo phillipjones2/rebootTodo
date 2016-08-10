@@ -1,17 +1,45 @@
 const mongoose = require('mongoose'),
-      Schema = mongoose.Schema;
+  Schema = mongoose.Schema,
+  bcrypt = require('bcrypt');
 
-const userSchema = new Schema({
-  username  : {
+const UserSchema = new Schema({
+  username: {
     type: String,
-    unique: true,
-    required: true
+    required: true,
+    unique: true
   },
-},
-{
-  timestamps: true
+
+  // dont store the password as plain text
+  password: {
+    type: String,
+    required: true
+  }
 });
 
-const User = mongoose.model('User', userSchema);
+// middleware that will run before a document
+// is created
+UserSchema.pre('save', function(next) {
 
-module.exports = User;
+  if (!this.isModified('password')) return next();
+  this.password = this.encryptPassword(this.password);
+  next();
+})
+
+
+UserSchema.methods = {
+  // check the passwords on signin
+  authenticate: function(plainTextPword) {
+    return bcrypt.compareSync(plainTextPword, this.password);
+  },
+  // hash the passwords
+  encryptPassword: function(plainTextPword) {
+    if (!plainTextPword) {
+      return ''
+    } else {
+      var salt = bcrypt.genSaltSync(10);
+      return bcrypt.hashSync(plainTextPword, salt);
+    }
+  }
+};
+
+module.exports = mongoose.model('user', UserSchema);

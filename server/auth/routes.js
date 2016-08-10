@@ -3,4 +3,4 @@ const router = require('express').Router();
   controller = require('./controller');
 router.post('/signin', verifyUser(), controller.signin);
 
-modue.exports = router;
+module.exports = router;

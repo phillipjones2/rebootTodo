@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken'),
   expressJwt = require('express-jwt'),
-  confit = require('../config/config'),
+  config = require('../config/config'),
   checkToken = expressJwt({ secret: config.secrets.jwt}),
   User = require('../api/user/userModel');
 
