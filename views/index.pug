@@ -3,7 +3,6 @@ extends layout
 block content
 	img#add-button(src="icons/plus.svg")
 
-
 	//- ADD TODO MODAL -/////////////////////////////////////
 	//- ADD TODO MODAL -/////////////////////////////////////
 	//- ADD TODO MODAL -/////////////////////////////////////
@@ -24,8 +23,6 @@ block content
 			img#close-button(src="icons/cancel.svg")
 
 	//- NAVIGATION -/////////////////////////////////////
-	//- NAVIGATION -/////////////////////////////////////
-	//- NAVIGATION -/////////////////////////////////////
 
 	nav(class="box-col all-12 fixed pb_15")
 			div(class="box all-12 space-inside y-center")
@@ -35,11 +32,41 @@ block content
 					a(href='https://github.com/phillipjones2/rebootTodo' target:"_blank"): li github
 
 	//- TODOS -/////////////////////////////////////
-	//- TODOS -/////////////////////////////////////
-	//- TODOS -/////////////////////////////////////
-
 	div#todo-container
-		div(class="spinner-container box x-center y-center")
-			div(class="spinner")
+			div(id="login-todo", class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-1")
 
-	script(src="scripts/initial-request.js")
+				div(class="close-todo-button-box")
+					img(src="icons/cancel.svg",class="close-todo-button hidden")
+
+				h3(class="todo-title") Login
+
+				div( class="todo-content box-col login-elements hidden-todo-child ")
+					p(id="username", contenteditable=true,spellcheck="false",class="todo-body login-elements hidden-todo-child ").
+						Username:
+					p(id="password", contenteditable=true,spellcheck="false",class="todo-body login-elements hidden-todo-child ").
+						Password:
+
+					div(class="todo-button-box box wrap login-elements hidden-todo-child ")
+						button(class="btn-1 todo-save-button inactive-todo-button login-elements hidden-todo-child ") SAVE
+						button(class="btn-1 todo-complete-button xs-0 sm-0 login-elements hidden-todo-child ") COMPLETE
+
+					small(class="indexDate todo-date login-elements hidden-todo-child ")
+
+			div(id="register-todo",class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-1")
+
+				div(class="close-todo-button-box")
+					img(src="icons/cancel.svg",class="close-todo-button hidden")
+
+				h3(class="todo-title") Register
+
+				div(id="register-todo", class="todo-content box-col register-elements hidden-todo-child ")
+					p(id="usernameR", contenteditable=true,spellcheck="false",class="todo-body register-elements hidden-todo-child ").
+						Username:
+					p(id="passwordR", contenteditable=true,spellcheck="false",class="todo-body register-elements hidden-todo-child ").
+						Password:
+
+					div(class="todo-button-box box wrap register-elements hidden-todo-child ")
+						button(class="btn-1 todo-save-button inactive-todo-button register-elements hidden-todo-child ") SAVE
+						button(class="btn-1 todo-complete-button xs-0 sm-0 register-elements hidden-todo-child ") COMPLETE
+
+					small(class="indexDate todo-date register-elements hidden-todo-child ")

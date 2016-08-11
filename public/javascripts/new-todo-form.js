@@ -105,3 +105,69 @@ const addTodoPriorityButton = document.getElementById('add-todo-priority-button'
 addTodoPriorityButton.addEventListener('click',(e) => {
   rotatePriorities(addTodoPriorityButton, addTodoO, 'text');
 });
+
+
+
+
+// MOVE LATER.. WORK FOR INDEX PAGE
+
+const formatDate = function (date) {
+ var hours = date.getHours(),
+	 minutes = date.getMinutes(),
+			ampm = hours >= 12 ? 'pm' : 'am',
+	 DaysArr = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri'],
+	 MonthsArr = ['Januray', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		 // Month = date.getMonth() +1;
+ hours = hours % 12;
+ hours = hours ? hours : 12; // the hour '0' should be '12'
+ minutes = minutes < 10 ? '0'+minutes : minutes;
+ return `${DaysArr[date.getDay()]} ${MonthsArr[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()} ${hours}:${minutes}${ampm}`;
+};
+
+
+const indexDateElement = document.getElementsByClassName('indexDate'),
+  today = new Date,
+  loginTodo = document.getElementById('login-todo'),
+  registerTodo = document.getElementById('register-todo'),
+  loginElements = document.getElementsByClassName('login-elements'),
+  registerElements = document.getElementsByClassName('register-elements'),
+	placerholder = document.getElementById('placerholder');
+
+for(var i = 0, ideLen = indexDateElement.length; i < ideLen; i++ ) {
+	indexDateElement[i].innerHTML = '<em>'+formatDate(today)+'</em>';
+}
+
+
+loginTodo.addEventListener('click', function(e) {
+    for(var i = 0, registerLen = registerElements.length; i < registerLen ; i++) {
+      registerElements[i].classList.remove('shown-todo-child');
+      loginElements[i].classList.add('shown-todo-child');
+    }
+  });
+
+registerTodo.addEventListener('click', function(e) {
+  for(var i = 0, loginLen = loginElements.length; i < loginLen ; i++) {
+    loginElements[i].classList.remove('shown-todo-child');
+    registerElements[i].classList.add('shown-todo-child');
+  }
+});
+
+function userPass(id) {
+	var ele = document.getElementById(id);
+	ele.addEventListener('click', function(e) {
+		var check = ['Username:','Password:'];
+		if(this.innerText == check[0] || this.innerText == check[1]) {
+			var remember = this.innerText;
+			this.innerText = '';
+		}
+		this.addEventListener('blur', function(e) {
+			if(this.innerText == '') {
+				this.innerText = remember;
+			}
+		});
+	});
+}
+userPass('username');
+userPass('password');
+userPass('usernameR');
+userPass('passwordR');
