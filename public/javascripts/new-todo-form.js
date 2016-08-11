@@ -1,14 +1,14 @@
 const addTodoModal = getElById('add-todo-modal'),
 			titleCharacterCount = document.getElementById('add-todo-title-character-count'),
 			bodyCharacterCount = document.getElementById('add-todo-body-character-count'),
-			closeCreateTodoModalButton = getElById('close-button'),
-			newTodoSubmitButton = getElById('accept-button'),
-			openCreateTodoModalButton = getElById('add-button');
+			closeCreateTodoModalButton = document.getElementById('close-button'),
+			newTodoSubmitButton = document.getElementById('accept-button'),
+			openCreateTodoModalButton = document.getElementById('add-button');
 
 closeCreateTodoModalButton.addEventListener('click', (e) => {
 	addTodoModal.classList.add('hidden');
 	openCreateTodoModalButton.classList.remove('hidden');
-})
+});
 
 openCreateTodoModalButton.addEventListener('click', (e) => {
 		addTodoModal.classList.remove('hidden');
@@ -131,6 +131,8 @@ const indexDateElement = document.getElementsByClassName('indexDate'),
   registerTodo = document.getElementById('register-todo'),
 	loginContent= document.getElementById('login-todo-content'),
   registerContent = document.getElementById('register-todo-content'),
+  // loginElements = document.getElementsByClassName('login-elements'),
+  // registerElements = document.getElementsByClassName('register-elements'),
 	placerholder = document.getElementById('placerholder'),
 	loginCloseButton = document.getElementById('login-close-button'),
 	registerCloseButton = document.getElementById('register-close-button');
@@ -147,6 +149,10 @@ loginTodo.addEventListener('click', function(e) {
 		loginContent.classList.add('shown-todo-child');
 		registerContent.classList.remove('shown-todo-child');
 
+    // for(var i = 0, registerLen = registerElements.length; i < registerLen ; i++) {
+    //   registerElements[i].classList.remove('shown-todo-child');
+    //   loginElements[i].classList.add('shown-todo-child');
+    // }
   });
 
 registerTodo.addEventListener('click', function(e) {
@@ -156,24 +162,18 @@ registerTodo.addEventListener('click', function(e) {
 	loginContent.classList.remove('shown-todo-child');
 	registerContent.classList.add('shown-todo-child');
 
+  // for(var i = 0, loginLen = loginElements.length; i < loginLen ; i++) {
+  //   loginElements[i].classList.remove('shown-todo-child');
+  //   registerElements[i].classList.add('shown-todo-child');
+  // }
 });
-
-loginCloseButton.addEventListener('click', function(e) {
-	console.log(loginContent);
-  loginContent.classList.remove('shown-todo-child');
-});
-
-registerCloseButton.addEventListener('click', function(e) {
-	console.log(registerContent);
-	registerContent.classList.remove('shown-todo-child');
-});
-
 
 function userPass(id) {
 	var ele = document.getElementById(id);
 	ele.addEventListener('click', function(e) {
-		var check = ['Username:','Password:'];
-		if(this.innerText == check[0] || this.innerText == check[1]) {
+		var check = ['Username','Password','Confirm Password'];
+		if(this.innerText == check[0] || this.innerText == check[1]
+			|| this.innerText == check[2]) {
 			var remember = this.innerText;
 			this.innerText = '';
 		}
@@ -188,3 +188,15 @@ userPass('username');
 userPass('password');
 userPass('usernameR');
 userPass('passwordR');
+userPass('passwordConfR');
+
+
+loginCloseButton.addEventListener('click', (e) => {
+	console.log(loginContent);
+    loginContent.classList.remove('shown-todo-child');
+});
+
+registerCloseButton.addEventListener('click', (e) => {
+	console.log(registerContent);
+		registerContent.classList.remove('shown-todo-child');
+});

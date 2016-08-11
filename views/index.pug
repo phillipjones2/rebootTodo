@@ -33,7 +33,7 @@ block content
 
 	//- TODOS -/////////////////////////////////////
 	div#todo-container
-			div(id="login-todo", class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-1")
+			div(id="login-todo", class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-2")
 
 				div(class="close-todo-button-box")
 					img(src="icons/cancel.svg", id="login-close-button", class="close-todo-button hidden")
@@ -41,16 +41,16 @@ block content
 				h3(class="todo-title") Login
 
 				div(id="login-todo-content", class="todo-content box-col login-elements hidden-todo-child ")
-					p(id="username", contenteditable=true,spellcheck="false",class="todo-body login-elements hidden-todo-child ").
+					p(id="username", contenteditable=true,spellcheck="false",class="todo-body login-elements ").
 						Username
-					p(id="password", contenteditable=true,spellcheck="false",class="todo-body login-elements hidden-todo-child ").
+					p(id="password", contenteditable=true,spellcheck="false",class="todo-body login-elements ").
 						Password
 
-					div(class="todo-button-box box wrap login-elements hidden-todo-child ")
-						button(class="btn-1 todo-save-button inactive-todo-button login-elements hidden-todo-child ") SAVE
-						button(class="btn-1 todo-complete-button xs-0 sm-0 login-elements hidden-todo-child ") COMPLETE
+					div(class="todo-button-box box wrap login-elements ")
+						button(class="btn-1 todo-save-button inactive-todo-button login-elements ") SAVE
+						button(class="btn-1 todo-complete-button xs-0 sm-0 login-elements ") COMPLETE
 
-					small(class="indexDate todo-date login-elements hidden-todo-child ")
+					small(class="indexDate todo-date login-elements ")
 
 			div(id="register-todo",class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-1")
 
@@ -60,13 +60,15 @@ block content
 				h3(class="todo-title") Register
 
 				div(id="register-todo-content", class="todo-content box-col register-elements hidden-todo-child ")
-					p(id="usernameR", contenteditable=true,spellcheck="false",class="todo-body register-elements hidden-todo-child ").
+					p(id="usernameR", contenteditable=true,spellcheck="false",class="todo-body register-elements ").
 						Username
-					p(id="passwordR", contenteditable=true,spellcheck="false",class="todo-body register-elements hidden-todo-child ").
+					p(id="passwordR", contenteditable=true,spellcheck="false",class="todo-body register-elements ").
 						Password
+					p(id="passwordConfR", contenteditable=true,spellcheck="false",class="todo-body register-elements ").
+						Confirm Password
 
-					div(class="todo-button-box box wrap register-elements hidden-todo-child ")
-						button(class="btn-1 todo-save-button inactive-todo-button register-elements hidden-todo-child ") SAVE
-						button(class="btn-1 todo-complete-button xs-0 sm-0 register-elements hidden-todo-child ") COMPLETE
+					div(class="todo-button-box box wrap register-elements ")
+						button(class="btn-1 todo-save-button inactive-todo-button register-elements ") SAVE
+						button(class="btn-1 todo-complete-button xs-0 sm-0 register-elements ") COMPLETE
 
-					small(class="indexDate todo-date register-elements hidden-todo-child ")
+					small(class="indexDate todo-date register-elements ")

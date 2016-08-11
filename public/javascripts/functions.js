@@ -280,8 +280,9 @@ registerTodo.addEventListener('click', (e) => {
 function userPass(id) {
 	var ele = document.getElementById(id);
 	ele.addEventListener('click', function(e) {
-		var check = ['Username:','Password:'];
-		if(this.innerText == check[0] || this.innerText == check[1]) {
+		var check = ['Username','Password','Confirm Password'];
+		if(this.innerText == check[0] || this.innerText == check[1]
+				|| this.innerText == check[2] ) {
 			var remember = this.innerText;
 			this.innerText = '';
 		}
@@ -296,3 +297,4 @@ userPass('username');
 userPass('password');
 userPass('usernameR');
 userPass('passwordR');
+userPass('passwordConfR');
