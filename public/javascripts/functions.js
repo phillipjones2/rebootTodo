@@ -238,3 +238,61 @@ function newAjaxRequest(obj) {
 		request.send();
 	}
 }
+
+
+// MOVE LATER.. WORK FOR INDEX PAGE
+var indexDateElement = document.getElementsByClassName('indexDate'),
+  today = new Date,
+  loginTodo = document.getElementById('login-todo'),
+  registerTodo = document.getElementById('register-todo'),
+  loginElements = document.getElementsByClassName('login-elements'),
+  registerElements = document.getElementsByClassName('register-elements');
+console.log(indexDateElement);
+
+//console.log(today);
+console.log(document.getElementById('register-todo'));
+//console.log(registerTodo);
+//console.log(loginElements);
+//console.log(registerElements);
+
+for(let i = 0, ideLen = indexDateElement.length; i < ideLen; i++ ) {
+	console.log(indexDateElement[i]);
+	indexDateElement[i].innerHTML = '<em>'+today+'</em>';
+}
+
+
+loginTodo.addEventListener('click', (e) => {
+  console.log('ad');
+    for(let i = 0, registerLen = registerElements.length; i < registerLen ; i++) {
+      registerElements[i].getElementsByClassName.remove('shown-todo-child');
+      loginElements[i].getElementsByClassName.add('shown-todo-child');
+    }
+  });
+
+registerTodo.addEventListener('click', (e) => {
+  console.log('adding');
+  for(let i = 0, loginLen = loginElements.length; i < loginLen ; i++) {
+    loginElements[i].getElementsByClassName.remove('shown-todo-child');
+    registerElements[i].getElementsByClassName.add('shown-todo-child');
+  }
+});
+
+function userPass(id) {
+	var ele = document.getElementById(id);
+	ele.addEventListener('click', function(e) {
+		var check = ['Username:','Password:'];
+		if(this.innerText == check[0] || this.innerText == check[1]) {
+			var remember = this.innerText;
+			this.innerText = '';
+		}
+		this.addEventListener('blur', function(e) {
+			if(this.innerText == '') {
+				this.innerText = remember;
+			}
+		});
+	});
+}
+userPass('username');
+userPass('password');
+userPass('usernameR');
+userPass('passwordR');

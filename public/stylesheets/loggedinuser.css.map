@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,sBAAuB;EACrB,OAAO,EAAE,IAAI",
+"sources": ["../../views/styles/loggedinuser.scss"],
+"names": [],
+"file": "loggedinuser.css"
+}
