@@ -129,9 +129,11 @@ const indexDateElement = document.getElementsByClassName('indexDate'),
   today = new Date,
   loginTodo = document.getElementById('login-todo'),
   registerTodo = document.getElementById('register-todo'),
-  loginElements = document.getElementsByClassName('login-elements'),
-  registerElements = document.getElementsByClassName('register-elements'),
-	placerholder = document.getElementById('placerholder');
+	loginContent= document.getElementById('login-todo-content'),
+  registerContent = document.getElementById('register-todo-content'),
+	placerholder = document.getElementById('placerholder'),
+	loginCloseButton = document.getElementById('login-close-button'),
+	registerCloseButton = document.getElementById('register-close-button');
 
 for(var i = 0, ideLen = indexDateElement.length; i < ideLen; i++ ) {
 	indexDateElement[i].innerHTML = '<em>'+formatDate(today)+'</em>';
@@ -139,18 +141,33 @@ for(var i = 0, ideLen = indexDateElement.length; i < ideLen; i++ ) {
 
 
 loginTodo.addEventListener('click', function(e) {
-    for(var i = 0, registerLen = registerElements.length; i < registerLen ; i++) {
-      registerElements[i].classList.remove('shown-todo-child');
-      loginElements[i].classList.add('shown-todo-child');
-    }
+		loginCloseButton.classList.remove('hidden');
+		registerCloseButton.classList.add('hidden');
+
+		loginContent.classList.add('shown-todo-child');
+		registerContent.classList.remove('shown-todo-child');
+
   });
 
 registerTodo.addEventListener('click', function(e) {
-  for(var i = 0, loginLen = loginElements.length; i < loginLen ; i++) {
-    loginElements[i].classList.remove('shown-todo-child');
-    registerElements[i].classList.add('shown-todo-child');
-  }
+	registerCloseButton.classList.remove('hidden');
+	loginCloseButton.classList.add('hidden');
+
+	loginContent.classList.remove('shown-todo-child');
+	registerContent.classList.add('shown-todo-child');
+
 });
+
+loginCloseButton.addEventListener('click', function(e) {
+	console.log(loginContent);
+  loginContent.classList.remove('shown-todo-child');
+});
+
+registerCloseButton.addEventListener('click', function(e) {
+	console.log(registerContent);
+	registerContent.classList.remove('shown-todo-child');
+});
+
 
 function userPass(id) {
 	var ele = document.getElementById(id);

@@ -36,15 +36,15 @@ block content
 			div(id="login-todo", class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-1")
 
 				div(class="close-todo-button-box")
-					img(src="icons/cancel.svg",class="close-todo-button hidden")
+					img(src="icons/cancel.svg", id="login-close-button", class="close-todo-button hidden")
 
 				h3(class="todo-title") Login
 
-				div( class="todo-content box-col login-elements hidden-todo-child ")
+				div(id="login-todo-content", class="todo-content box-col login-elements hidden-todo-child ")
 					p(id="username", contenteditable=true,spellcheck="false",class="todo-body login-elements hidden-todo-child ").
-						Username:
+						Username
 					p(id="password", contenteditable=true,spellcheck="false",class="todo-body login-elements hidden-todo-child ").
-						Password:
+						Password
 
 					div(class="todo-button-box box wrap login-elements hidden-todo-child ")
 						button(class="btn-1 todo-save-button inactive-todo-button login-elements hidden-todo-child ") SAVE
@@ -55,15 +55,15 @@ block content
 			div(id="register-todo",class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-1")
 
 				div(class="close-todo-button-box")
-					img(src="icons/cancel.svg",class="close-todo-button hidden")
+					img(src="icons/cancel.svg", id="register-close-button", class="close-todo-button hidden")
 
 				h3(class="todo-title") Register
 
-				div(id="register-todo", class="todo-content box-col register-elements hidden-todo-child ")
+				div(id="register-todo-content", class="todo-content box-col register-elements hidden-todo-child ")
 					p(id="usernameR", contenteditable=true,spellcheck="false",class="todo-body register-elements hidden-todo-child ").
-						Username:
+						Username
 					p(id="passwordR", contenteditable=true,spellcheck="false",class="todo-body register-elements hidden-todo-child ").
-						Password:
+						Password
 
 					div(class="todo-button-box box wrap register-elements hidden-todo-child ")
 						button(class="btn-1 todo-save-button inactive-todo-button register-elements hidden-todo-child ") SAVE
