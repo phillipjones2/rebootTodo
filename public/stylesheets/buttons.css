@@ -48,4 +48,15 @@ button.btn-3 {
   height: 60px;
   z-index: 55; }
 
+#add-button-login {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  font-size: 3.8rem;
+  font-family: GothamBold;
+  width: 60px;
+  height: 60px;
+  z-index: 55;
+  opacity: 0.2; }
+
 /*# sourceMappingURL=buttons.css.map */
