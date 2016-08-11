@@ -3,7 +3,6 @@ const express = require('express'),
 			babel   = require('babel-core'),
 			fs      = require('fs');
 
-
 // /scripts
 router.get('*', (req, res, next) => {
 	babel.transformFile(`./public/javascripts/${req.url}`, {
@@ -13,7 +12,5 @@ router.get('*', (req, res, next) => {
 		res.send(data.code);
 	});
 });
-
-
 
 module.exports = router;
