@@ -83,26 +83,30 @@ const applyEditTodoFunctionality = ( ) => {
 
    //************************************//
   //--- DISCARD BUTTON FUNCTIONALITY ---//
-  const discardButtons = getElsByClass('todo-discard-button');
+  const discardButtons = document.getElementsByClassName('todo-discard-button');
   for (var i = 0, discardButtonsLen = discardButtons.length; i < discardButtonsLen; i++) {
-    var button = discardButtons[i]
-    button.addEventListener('click', (e) => {
-      const todo = getParentTodo(button);
-      if (button.classList.contains('inactive-todo-button')) {return;}
-       else {
-        todo.tree.title.innerText = todo.tree.titleText;
-        todo.tree.body.innerText = todo.tree.bodyText;
-        todo.tree.priorityButton.value = todo.tree.priorityValue;
-        todo.tree.priorityButton.innerText = todo.tree.priorityText;
-        todo.tree.priorityButton.classList = todo.tree.priorityClass;
-        todo.classList = todo.tree.parentClass;
-        todo.tree.saveButton.classList.add('inactive-todo-button');
-        todo.tree.discardButton.classList.add('inactive-todo-button');
-        todo.tree.bodyCount.value = maxBodyLength - todo.tree.body.innerText.length;
-        todo.tree.titleCount.value = maxTitleLength - todo.tree.title.innerText.length;
-        todo.tree.bodyCount.classList.add('hidden');
-        todo.tree.titleCount.classList.add('hidden');
-     }
-   });
+    var button = discardButtons[i];
+    var todo = {};
+    todo.tree = getTodoTree(button);
+    discardButtonFunction(button, todo);
   }
+};
+
+var discardButtonFunction = function(button, todo){
+  button.addEventListener('click', (e) => {
+    if (button.classList.contains('inactive-todo-button')) return;
+    todo.tree.title.innerText = todo.tree.titleText;
+    todo.tree.body.innerText = todo.tree.bodyText;
+    todo.tree.priorityButton.value = todo.tree.priorityValue;
+    todo.tree.priorityButton.innerText = todo.tree.priorityText;
+    todo.tree.priorityButton.classList = todo.tree.priorityClass;
+    todo.classList = todo.tree.parentClass;
+    todo.tree.saveButton.classList.add('inactive-todo-button');
+    todo.tree.discardButton.classList.add('inactive-todo-button');
+    todo.tree.bodyCount.value = maxBodyLength - todo.tree.body.innerText.length;
+    todo.tree.titleCount.value = maxTitleLength - todo.tree.title.innerText.length;
+    todo.tree.bodyCount.classList.add('hidden');
+    todo.tree.titleCount.classList.add('hidden');
+
+  });
 };

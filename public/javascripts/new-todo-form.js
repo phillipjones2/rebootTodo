@@ -5,16 +5,17 @@ const addTodoModal = getElById('add-todo-modal'),
 			newTodoSubmitButton = document.getElementById('accept-button'),
 			openCreateTodoModalButton = document.getElementById('add-button');
 
-closeCreateTodoModalButton.addEventListener('click', (e) => {
-	addTodoModal.classList.add('hidden');
-	openCreateTodoModalButton.classList.remove('hidden');
-});
+if (closeCreateTodoModalButton !== null) {
+	closeCreateTodoModalButton.addEventListener('click', (e) => {
+		addTodoModal.classList.add('hidden');
+		openCreateTodoModalButton.classList.remove('hidden');
+	});
 
-openCreateTodoModalButton.addEventListener('click', (e) => {
-		addTodoModal.classList.remove('hidden');
-		openCreateTodoModalButton.classList.add('hidden');
-});
-
+	openCreateTodoModalButton.addEventListener('click', (e) => {
+			addTodoModal.classList.remove('hidden');
+			openCreateTodoModalButton.classList.add('hidden');
+	});
+}
 // ----- CREATE A TODO ----- \\
 const addTodoSubmitButton = document.getElementById('accept-button'),
 			addTodoTitleInput = getElById('add-todo-input'),
@@ -22,9 +23,6 @@ const addTodoSubmitButton = document.getElementById('accept-button'),
 			addTodoPriorityBtn = getElById('add-todo-priority-button'),
 			maxTitleLength = 55,
 			maxBodyLength = 140;
-
-
-
 
 function addTodoValidityCheck() {
 	// If title is 0 or greater than 55 or
@@ -36,7 +34,7 @@ function addTodoValidityCheck() {
 
 	var valid = true;
 
-	if (titleInputLength == 0 || titleInputLength > maxTitleLength) {
+	if (titleInputLength === 0 || titleInputLength > maxTitleLength) {
 		valid = false;
 		newTodoSubmitButton.classList.add('inactive-todo-submit-button');
 		titleCharacterCount.classList.add('priority-text-2');
@@ -57,55 +55,57 @@ function addTodoValidityCheck() {
 	}
 }
 
-addTodoTitleInput.addEventListener('keyup', (e) => {
-	titleCharacterCount.innerText = maxTitleLength - addTodoTitleInput.value.trim().length;
-	titleCharacterCount.classList.remove('hidden');
-	addTodoValidityCheck()
-});
+if (addTodoTitleInput !== null) {
+	addTodoTitleInput.addEventListener('keyup', (e) => {
+		titleCharacterCount.innerText = maxTitleLength - addTodoTitleInput.value.trim().length;
+		titleCharacterCount.classList.remove('hidden');
+		addTodoValidityCheck();
+	});
 
-addTodoTitleInput.addEventListener('focus', (e) => {
-	if (!bodyCharacterCount.classList.contains('priority-text-2')) {
-	bodyCharacterCount.classList.add('hidden');
-	}
-});
+	addTodoTitleInput.addEventListener('focus', (e) => {
+		if (!bodyCharacterCount.classList.contains('priority-text-2')) {
+		bodyCharacterCount.classList.add('hidden');
+		}
+	});
 
-// create TODO BODY LISTENER
-addTodoBodyInput.addEventListener('keyup', (e) => {
-	bodyCharacterCount.innerText = maxBodyLength - addTodoBodyInput.value.trim().length;
-	bodyCharacterCount.classList.remove('hidden');
-	addTodoValidityCheck();
-});
 
-addTodoBodyInput.addEventListener('focus', (e) => {
-	if (!titleCharacterCount.classList.contains('priority-text-2')) {
-	titleCharacterCount.classList.add('hidden');
-	}
-});
+	// create TODO BODY LISTENER
+	addTodoBodyInput.addEventListener('keyup', (e) => {
+		bodyCharacterCount.innerText = maxBodyLength - addTodoBodyInput.value.trim().length;
+		bodyCharacterCount.classList.remove('hidden');
+		addTodoValidityCheck();
+	});
 
-addTodoSubmitButton.addEventListener('click', (e) => {
-	if (newTodoSubmitButton.classList.contains('inactive-todo-submit-button')) return;
+	addTodoBodyInput.addEventListener('focus', (e) => {
+		if (!titleCharacterCount.classList.contains('priority-text-2')) {
+		titleCharacterCount.classList.add('hidden');
+		}
+	});
 
-	const title = addTodoTitleInput.value,
-				body = addTodoBodyInput.value,
-				priority = addTodoPriorityBtn.value;
+	addTodoSubmitButton.addEventListener('click', (e) => {
+		if (newTodoSubmitButton.classList.contains('inactive-todo-submit-button')) return;
 
-	const req = new XMLHttpRequest();
-	req.onreadystatechange = ( ) => {
-		location.reload();
-	}
-	req.open('post', 'api/todos', true);
-	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	req.send(`title=${title}&body=${body}&priority=${priority}`);
-});
+		const title = addTodoTitleInput.value,
+					body = addTodoBodyInput.value,
+					priority = addTodoPriorityBtn.value;
 
-// ----- CREATE A TODO PRIORITY BUTTON ----- \\
-const addTodoPriorityButton = document.getElementById('add-todo-priority-button'),
-      addTodoO = document.getElementById('todo-o');
+		const req = new XMLHttpRequest();
+		req.onreadystatechange = ( ) => {
+			location.reload();
+		};
+		req.open('post', 'api/todos', true);
+		req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		req.send(`title=${title}&body=${body}&priority=${priority}`);
+	});
 
-addTodoPriorityButton.addEventListener('click',(e) => {
-  rotatePriorities(addTodoPriorityButton, addTodoO, 'text');
-});
+	// ----- CREATE A TODO PRIORITY BUTTON ----- \\
+	const addTodoPriorityButton = document.getElementById('add-todo-priority-button'),
+	      addTodoO = document.getElementById('todo-o');
 
+	addTodoPriorityButton.addEventListener('click',(e) => {
+	  rotatePriorities(addTodoPriorityButton, addTodoO, 'text');
+	});
+}
 
 
 
@@ -141,62 +141,61 @@ for(var i = 0, ideLen = indexDateElement.length; i < ideLen; i++ ) {
 	indexDateElement[i].innerHTML = '<em>'+formatDate(today)+'</em>';
 }
 
+if (loginTodo !== null) {
+	loginTodo.addEventListener('click', function(e) {
+			loginCloseButton.classList.remove('hidden');
+			registerCloseButton.classList.add('hidden');
 
-loginTodo.addEventListener('click', function(e) {
-		loginCloseButton.classList.remove('hidden');
-		registerCloseButton.classList.add('hidden');
+			loginContent.classList.add('shown-todo-child');
+			registerContent.classList.remove('shown-todo-child');
 
-		loginContent.classList.add('shown-todo-child');
-		registerContent.classList.remove('shown-todo-child');
+	    // for(var i = 0, registerLen = registerElements.length; i < registerLen ; i++) {
+	    //   registerElements[i].classList.remove('shown-todo-child');
+	    //   loginElements[i].classList.add('shown-todo-child');
+	    // }
+	  });
 
-    // for(var i = 0, registerLen = registerElements.length; i < registerLen ; i++) {
-    //   registerElements[i].classList.remove('shown-todo-child');
-    //   loginElements[i].classList.add('shown-todo-child');
-    // }
-  });
+	registerTodo.addEventListener('click', function(e) {
+		registerCloseButton.classList.remove('hidden');
+		loginCloseButton.classList.add('hidden');
 
-registerTodo.addEventListener('click', function(e) {
-	registerCloseButton.classList.remove('hidden');
-	loginCloseButton.classList.add('hidden');
+		loginContent.classList.remove('shown-todo-child');
+		registerContent.classList.add('shown-todo-child');
 
-	loginContent.classList.remove('shown-todo-child');
-	registerContent.classList.add('shown-todo-child');
+	  // for(var i = 0, loginLen = loginElements.length; i < loginLen ; i++) {
+	  //   loginElements[i].classList.remove('shown-todo-child');
+	  //   registerElements[i].classList.add('shown-todo-child');
+	  // }
+	});
 
-  // for(var i = 0, loginLen = loginElements.length; i < loginLen ; i++) {
-  //   loginElements[i].classList.remove('shown-todo-child');
-  //   registerElements[i].classList.add('shown-todo-child');
-  // }
-});
-
-function userPass(id) {
-	var ele = document.getElementById(id);
-	ele.addEventListener('click', function(e) {
-		var check = ['Username','Password','Confirm Password'];
-		if(this.innerText == check[0] || this.innerText == check[1]
-			|| this.innerText == check[2]) {
-			var remember = this.innerText;
-			this.innerText = '';
-		}
-		this.addEventListener('blur', function(e) {
-			if(this.innerText == '') {
-				this.innerText = remember;
+	function userPass(id) {
+		var ele = document.getElementById(id);
+		ele.addEventListener('click', function(e) {
+			var check = ['Username','Password','Confirm Password'];
+			if(this.innerText == check[0] || this.innerText == check[1]
+				|| this.innerText == check[2]) {
+				var remember = this.innerText;
+				this.innerText = '';
 			}
+			this.addEventListener('blur', function(e) {
+				if(this.innerText == '') {
+					this.innerText = remember;
+				}
+			});
 		});
+	}
+	userPass('username');
+	userPass('password');
+	userPass('usernameR');
+	userPass('passwordR');
+	userPass('passwordConfR');
+
+
+	loginCloseButton.addEventListener('click', (e) => {
+	    loginContent.classList.remove('shown-todo-child');
+	});
+
+	registerCloseButton.addEventListener('click', (e) => {
+			registerContent.classList.remove('shown-todo-child');
 	});
 }
-userPass('username');
-userPass('password');
-userPass('usernameR');
-userPass('passwordR');
-userPass('passwordConfR');
-
-
-loginCloseButton.addEventListener('click', (e) => {
-	console.log(loginContent);
-    loginContent.classList.remove('shown-todo-child');
-});
-
-registerCloseButton.addEventListener('click', (e) => {
-	console.log(registerContent);
-		registerContent.classList.remove('shown-todo-child');
-});
