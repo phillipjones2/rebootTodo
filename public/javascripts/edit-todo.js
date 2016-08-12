@@ -83,30 +83,74 @@ const applyEditTodoFunctionality = ( ) => {
 
    //************************************//
   //--- DISCARD BUTTON FUNCTIONALITY ---//
-  const discardButtons = document.getElementsByClassName('todo-discard-button');
-  for (var i = 0, discardButtonsLen = discardButtons.length; i < discardButtonsLen; i++) {
-    var button = discardButtons[i];
-    var todo = {};
-    todo.tree = getTodoTree(button);
-    discardButtonFunction(button, todo);
+//   const discardButtons = document.getElementsByClassName('todo-discard-button');
+//   for (let i = 0, discardButtonsLen = discardButtons.length; i < discardButtonsLen; i++) {
+//     let button = discardButtons[i],
+//       todo = {};
+//     todo.tree = getTodoTree(button);
+//     discardButtonFunction(button, todo);
+//   }
+// };
+
+// const discardButtonFunction = function(button, todo){
+//   button.addEventListener('click', (e) => {
+//     if (button.classList.contains('inactive-todo-button')) return;
+//     todo.tree.title.innerText = todo.tree.titleText;
+//     todo.tree.body.innerText = todo.tree.bodyText;
+//     todo.tree.priorityButton.value = todo.tree.priorityValue;
+//     todo.tree.priorityButton.innerText = todo.tree.priorityText;
+//     todo.tree.priorityButton.classList = todo.tree.priorityClass;
+//     todo.classList = todo.tree.parentClass;
+//     todo.tree.saveButton.classList.add('inactive-todo-button');
+//     todo.tree.discardButton.classList.add('inactive-todo-button');
+//     todo.tree.bodyCount.value = maxBodyLength - todo.tree.body.innerText.length;
+//     todo.tree.titleCount.value = maxTitleLength - todo.tree.title.innerText.length;
+//     todo.tree.bodyCount.classList.add('hidden');
+//     todo.tree.titleCount.classList.add('hidden');
+//
+//   });
+
+
+
+//*************************************************************//
+// todo edit buttons fuctionality:  discard, complete, trash
+//************************************************************//
+  const  editButtonFunction = (button, todo) => {
+    console.log(button);
+    console.log(todo);
+    button.addEventListener('click',(e) => {
+      if (button.classList.contains('todo-complete-button')){
+
+      } else if (button.classList.contains('todo-delete-button')) {
+
+      } else if (button.classList.contains('todo-discard-button')) {
+        if (button.classList.contains('inactive-todo-button')) return;
+        todo.tree.title.innerText = todo.tree.titleText;
+        todo.tree.body.innerText = todo.tree.bodyText;
+        todo.tree.priorityButton.value = todo.tree.priorityValue;
+        todo.tree.priorityButton.innerText = todo.tree.priorityText;
+        todo.tree.priorityButton.classList = todo.tree.priorityClass;
+        todo.classList = todo.tree.parentClass;
+        todo.tree.saveButton.classList.add('inactive-todo-button');
+        todo.tree.discardButton.classList.add('inactive-todo-button');
+        todo.tree.bodyCount.value = maxBodyLength - todo.tree.body.innerText.length;
+        todo.tree.titleCount.value = maxTitleLength - todo.tree.title.innerText.length;
+        todo.tree.bodyCount.classList.add('hidden');
+        todo.tree.titleCount.classList.add('hidden');
+      }
+    });
+  };
+
+  const completeButtons = document.getElementsByClassName('todo-complete-button'),
+    trashButtons = document.getElementsByClassName('todo-delete-button'),
+    discardButtons = document.getElementsByClassName('todo-discard-button');
+
+  for (let i = 0, cmpBtnLen = completeButtons.length; i < cmpBtnLen; i++) {
+    let editArray=[completeButtons[i],trashButtons[i],discardButtons[i]],
+      todo = {};
+    todo.tree = getTodoTree(completeButtons[i]);
+    for (let i = 0, eBtnsLen = editArray.length; i < eBtnsLen; i ++) {
+      editButtonFunction(editArray[i], todo);
+    }
   }
-};
-
-var discardButtonFunction = function(button, todo){
-  button.addEventListener('click', (e) => {
-    if (button.classList.contains('inactive-todo-button')) return;
-    todo.tree.title.innerText = todo.tree.titleText;
-    todo.tree.body.innerText = todo.tree.bodyText;
-    todo.tree.priorityButton.value = todo.tree.priorityValue;
-    todo.tree.priorityButton.innerText = todo.tree.priorityText;
-    todo.tree.priorityButton.classList = todo.tree.priorityClass;
-    todo.classList = todo.tree.parentClass;
-    todo.tree.saveButton.classList.add('inactive-todo-button');
-    todo.tree.discardButton.classList.add('inactive-todo-button');
-    todo.tree.bodyCount.value = maxBodyLength - todo.tree.body.innerText.length;
-    todo.tree.titleCount.value = maxTitleLength - todo.tree.title.innerText.length;
-    todo.tree.bodyCount.classList.add('hidden');
-    todo.tree.titleCount.classList.add('hidden');
-
-  });
 };
