@@ -1,5 +1,8 @@
 const applyEditTodoFunctionality = ( ) => {
-  const saveEditedTodoButtons = document.getElementsByClassName('todo-save-button');
+  const saveEditedTodoButtons = document.getElementsByClassName('todo-save-button'),
+    req = new XMLHttpRequest(),
+    timestamp = new Date();
+
   for (var i = 0, saveEditedTodoButtonsLen = saveEditedTodoButtons.length; i < saveEditedTodoButtonsLen; i++) {
     const button = saveEditedTodoButtons[i];
 
@@ -116,11 +119,32 @@ const applyEditTodoFunctionality = ( ) => {
 // todo edit buttons fuctionality:  discard, complete, trash
 //************************************************************//
   const  editButtonFunction = (button, todo) => {
-    console.log(button);
-    console.log(todo);
-    button.addEventListener('click',(e) => {
+    button.addEventListener('click', (e) => {
       if (button.classList.contains('todo-complete-button')){
-
+        if (!todo.tree.parent.hasAttribute('data-completed')){
+          //| When the state of the request changes:
+          //| (4): "request finished and response is ready"
+          console.log(button.innerText);
+          button.innerText = 'UNCOMPLETE';
+          console.log(button.innerText);
+          req.onreadystatechange = ( ) => {
+            if (req.readyState == 4 && req.status == 200) {
+              location.reload();
+            }
+          };
+          req.open('put', todo.tree.putLink , true);
+          req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          req.send(`title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`);
+        } else {
+          req.onreadystatechange = ( ) => {
+            if (req.readyState == 4 && req.status == 200) {
+              location.reload();
+            }
+          };
+          req.open('put', todo.tree.putLink , true);
+          req.setRequestHeader("Content-type", "application/json");
+          req.send(`{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`);
+        }
       } else if (button.classList.contains('todo-delete-button')) {
 
       } else if (button.classList.contains('todo-discard-button')) {
