@@ -120,6 +120,7 @@ const applyEditTodoFunctionality = ( ) => {
 //************************************************************//
   const  editButtonFunction = (button, todo) => {
     button.addEventListener('click', (e) => {
+      // complete button
       if (button.classList.contains('todo-complete-button')){
         if (!todo.tree.parent.hasAttribute('data-completed')){
           //| When the state of the request changes:
@@ -145,8 +146,33 @@ const applyEditTodoFunctionality = ( ) => {
           req.setRequestHeader("Content-type", "application/json");
           req.send(`{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`);
         }
+        // trash can button
       } else if (button.classList.contains('todo-delete-button')) {
+        if (todo.tree.parent.classList.contains('deleted-todo')){
 
+        } else {
+          todo.tree.parent.classList.add('deleted-todo');
+          todo.tree.parent.classList.remove('completed-todo');
+          todo.tree.title.classList.add('font-white');
+          todo.tree.title.setAttribute('contenteditable', false);
+          todo.tree.body.setAttribute('contenteditable', false);
+          todo.tree.priorityButton.setAttribute('disabled', true);
+          todo.tree.completeButton.classList.add('inactive-todo-button');
+          todo.tree.completeButton.setAttribute('disabled', true);
+
+          setTimeout(( ) => {
+            if (todo.tree.parent.classList.contains('deleted-todo')){
+              todo.tree.parent.classList.remove('deleted-todo');
+              todo.tree.title.classList.remove('font-white');              
+              todo.tree.completeButton.classList.remove('inactive-todo-button');
+              todo.tree.completeButton.setAttribute('disabled', false);
+              todo.tree.title.setAttribute('contenteditable', true);
+              todo.tree.body.setAttribute('contenteditable', true);
+              todo.tree.priorityButton.setAttribute('disabled', false);
+            }
+          }, 5000)
+        }
+        // disguard button
       } else if (button.classList.contains('todo-discard-button')) {
         if (button.classList.contains('inactive-todo-button')) return;
         todo.tree.title.innerText = todo.tree.titleText;
