@@ -1,5 +1,8 @@
 const applyEditTodoFunctionality = ( ) => {
-  const saveEditedTodoButtons = document.getElementsByClassName('todo-save-button');
+  const saveEditedTodoButtons = document.getElementsByClassName('todo-save-button'),
+    req = new XMLHttpRequest(),
+    timestamp = new Date();
+
   for (var i = 0, saveEditedTodoButtonsLen = saveEditedTodoButtons.length; i < saveEditedTodoButtonsLen; i++) {
     const button = saveEditedTodoButtons[i];
 
@@ -83,30 +86,121 @@ const applyEditTodoFunctionality = ( ) => {
 
    //************************************//
   //--- DISCARD BUTTON FUNCTIONALITY ---//
-  const discardButtons = document.getElementsByClassName('todo-discard-button');
-  for (var i = 0, discardButtonsLen = discardButtons.length; i < discardButtonsLen; i++) {
-    var button = discardButtons[i];
-    var todo = {};
-    todo.tree = getTodoTree(button);
-    discardButtonFunction(button, todo);
+//   const discardButtons = document.getElementsByClassName('todo-discard-button');
+//   for (let i = 0, discardButtonsLen = discardButtons.length; i < discardButtonsLen; i++) {
+//     let button = discardButtons[i],
+//       todo = {};
+//     todo.tree = getTodoTree(button);
+//     discardButtonFunction(button, todo);
+//   }
+// };
+
+// const discardButtonFunction = function(button, todo){
+//   button.addEventListener('click', (e) => {
+//     if (button.classList.contains('inactive-todo-button')) return;
+//     todo.tree.title.innerText = todo.tree.titleText;
+//     todo.tree.body.innerText = todo.tree.bodyText;
+//     todo.tree.priorityButton.value = todo.tree.priorityValue;
+//     todo.tree.priorityButton.innerText = todo.tree.priorityText;
+//     todo.tree.priorityButton.classList = todo.tree.priorityClass;
+//     todo.classList = todo.tree.parentClass;
+//     todo.tree.saveButton.classList.add('inactive-todo-button');
+//     todo.tree.discardButton.classList.add('inactive-todo-button');
+//     todo.tree.bodyCount.value = maxBodyLength - todo.tree.body.innerText.length;
+//     todo.tree.titleCount.value = maxTitleLength - todo.tree.title.innerText.length;
+//     todo.tree.bodyCount.classList.add('hidden');
+//     todo.tree.titleCount.classList.add('hidden');
+//
+//   });
+
+
+
+//*************************************************************//
+// todo edit buttons fuctionality:  discard, complete, trash
+//************************************************************//
+  const  editButtonFunction = (button, todo) => {
+    button.addEventListener('click', (e) => {
+      // complete button
+      if (button.classList.contains('todo-complete-button')){
+        if (!todo.tree.parent.hasAttribute('data-completed')){
+          //| When the state of the request changes:
+          //| (4): "request finished and response is ready"
+          console.log(button.innerText);
+          button.innerText = 'UNCOMPLETE';
+          console.log(button.innerText);
+          req.onreadystatechange = ( ) => {
+            if (req.readyState == 4 && req.status == 200) {
+              location.reload();
+            }
+          };
+          req.open('put', todo.tree.putLink , true);
+          req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          req.send(`title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`);
+        } else {
+          req.onreadystatechange = ( ) => {
+            if (req.readyState == 4 && req.status == 200) {
+              location.reload();
+            }
+          };
+          req.open('put', todo.tree.putLink , true);
+          req.setRequestHeader("Content-type", "application/json");
+          req.send(`{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`);
+        }
+        // trash can button
+      } else if (button.classList.contains('todo-delete-button')) {
+        if (todo.tree.parent.classList.contains('deleted-todo')){
+
+        } else {
+          todo.tree.parent.classList.add('deleted-todo');
+          todo.tree.parent.classList.remove('completed-todo');
+          todo.tree.title.classList.add('font-white');
+          todo.tree.title.setAttribute('contenteditable', false);
+          todo.tree.body.setAttribute('contenteditable', false);
+          todo.tree.priorityButton.setAttribute('disabled', true);
+          todo.tree.completeButton.classList.add('inactive-todo-button');
+          todo.tree.completeButton.setAttribute('disabled', true);
+
+          setTimeout(( ) => {
+            if (todo.tree.parent.classList.contains('deleted-todo')){
+              todo.tree.parent.classList.remove('deleted-todo');
+              todo.tree.title.classList.remove('font-white');              
+              todo.tree.completeButton.classList.remove('inactive-todo-button');
+              todo.tree.completeButton.setAttribute('disabled', false);
+              todo.tree.title.setAttribute('contenteditable', true);
+              todo.tree.body.setAttribute('contenteditable', true);
+              todo.tree.priorityButton.setAttribute('disabled', false);
+            }
+          }, 5000)
+        }
+        // disguard button
+      } else if (button.classList.contains('todo-discard-button')) {
+        if (button.classList.contains('inactive-todo-button')) return;
+        todo.tree.title.innerText = todo.tree.titleText;
+        todo.tree.body.innerText = todo.tree.bodyText;
+        todo.tree.priorityButton.value = todo.tree.priorityValue;
+        todo.tree.priorityButton.innerText = todo.tree.priorityText;
+        todo.tree.priorityButton.classList = todo.tree.priorityClass;
+        todo.classList = todo.tree.parentClass;
+        todo.tree.saveButton.classList.add('inactive-todo-button');
+        todo.tree.discardButton.classList.add('inactive-todo-button');
+        todo.tree.bodyCount.value = maxBodyLength - todo.tree.body.innerText.length;
+        todo.tree.titleCount.value = maxTitleLength - todo.tree.title.innerText.length;
+        todo.tree.bodyCount.classList.add('hidden');
+        todo.tree.titleCount.classList.add('hidden');
+      }
+    });
+  };
+
+  const completeButtons = document.getElementsByClassName('todo-complete-button'),
+    trashButtons = document.getElementsByClassName('todo-delete-button'),
+    discardButtons = document.getElementsByClassName('todo-discard-button');
+
+  for (let i = 0, cmpBtnLen = completeButtons.length; i < cmpBtnLen; i++) {
+    let editArray=[completeButtons[i],trashButtons[i],discardButtons[i]],
+      todo = {};
+    todo.tree = getTodoTree(completeButtons[i]);
+    for (let i = 0, eBtnsLen = editArray.length; i < eBtnsLen; i ++) {
+      editButtonFunction(editArray[i], todo);
+    }
   }
-};
-
-var discardButtonFunction = function(button, todo){
-  button.addEventListener('click', (e) => {
-    if (button.classList.contains('inactive-todo-button')) return;
-    todo.tree.title.innerText = todo.tree.titleText;
-    todo.tree.body.innerText = todo.tree.bodyText;
-    todo.tree.priorityButton.value = todo.tree.priorityValue;
-    todo.tree.priorityButton.innerText = todo.tree.priorityText;
-    todo.tree.priorityButton.classList = todo.tree.priorityClass;
-    todo.classList = todo.tree.parentClass;
-    todo.tree.saveButton.classList.add('inactive-todo-button');
-    todo.tree.discardButton.classList.add('inactive-todo-button');
-    todo.tree.bodyCount.value = maxBodyLength - todo.tree.body.innerText.length;
-    todo.tree.titleCount.value = maxTitleLength - todo.tree.title.innerText.length;
-    todo.tree.bodyCount.classList.add('hidden');
-    todo.tree.titleCount.classList.add('hidden');
-
-  });
 };

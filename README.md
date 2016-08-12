@@ -19,7 +19,7 @@
 12. Robomongo
 13. Slack
 14. Nodemon
-15. Pub (previously Jade)
+15. Pug (previously Jade)
 16. Sass
 17. Babel
 18. Mocha

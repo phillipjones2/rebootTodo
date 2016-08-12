@@ -36,6 +36,12 @@ function insertTodoIntoDOM(todo) {
 		disabled = (todo.completed) ? 'disabled' : '',
 		completed = (todo.completed) ? 'data-completed' : '',
 		todoPriorities = ['PRIORITY: LOW','PRIORITY: MEDIUM', 'PRIORITY: HIGH'];
+	let completeText = '';
+		if (todo.completed) {
+			completeText = 'UNCOMPLETE'
+		} else {
+			completeText = 'COMPLETE'
+		}
 
 	todoContainer.innerHTML += `
 		<div class="${todoClasses}" id="${todo._id}" ${completed}\
@@ -74,12 +80,12 @@ function insertTodoIntoDOM(todo) {
 						SAVE\
 					</button>\
 					<button class="btn-1 todo-complete-button xs-0 sm-0" ${todoParent}>\
-						COMPLETE\
+						${completeText}\
 					</button>\
 					<button class="btn-1 todo-discard-button inactive-todo-button" ${todoParent}>\
 						DISCARD\
 					</button>\
-					<img src="icons/garbage.svg" class="todo-delete-button xs-0 sm-0"/>
+					<img src="icons/garbage.svg" class="todo-delete-button xs-0 sm-0" ${todoParent}/>
 				</div>\
 
 				<small ${todoParent} class="todo-date">\

@@ -116,7 +116,7 @@
           todo.tree.title.classList.remove('font-white');
           todo.tree.title.setAttribute('contenteditable', true);
           todo.tree.body.setAttribute('contenteditable', true);
-          todo.tree.priority.removeAttribute('disabled');
+          todo.tree.priorityButton.removeAttribute('disabled');
         } // ?? TODO IS COMPLETE AND USER SWIPES LEFT AGAIN ??
         else if (todo.hasAttribute('data-completed')) {return;}
         else {
@@ -135,4 +135,4 @@
      } // else
    }); // touchend
   } // for
-} // mobileEvents
+}; // mobileEvents
