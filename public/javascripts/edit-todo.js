@@ -6,7 +6,7 @@ const applyEditTodoFunctionality = ( ) => {
   //--- TITLE DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
   const titles = document.getElementsByClassName('todo-title'),
     maxTitleLength = 55;
-  for (let i = 0, titlesLen = titles.length; i < titlesLen; i++) {
+  for (var i = 0, titlesLen = titles.length; i < titlesLen; i++) {
     const title = titles[i],
       todo = getParentTodo(title);
 
@@ -55,7 +55,7 @@ const applyEditTodoFunctionality = ( ) => {
 //****************************************************************************//
 // todo edit buttons fuctionality:  discard, complete, trash, save, priority
 //***************************************************************************//
-  const ajaxCall = (todo, data, contentType, call) => {
+  const ajaxCall = (todo, link, data, contentType, call) => {
     //| When the state of the request changes:
     //| (4): "request finished and response is ready"
     req.onreadystatechange = () => {
@@ -63,28 +63,30 @@ const applyEditTodoFunctionality = ( ) => {
         location.reload();
       }
     };
-    req.open(call, todo.tree.putLink , true);
+    req.open(call, link , true);
     req.setRequestHeader("Content-type", contentType);
     req.send(data);
   };
 
   const  editButtonFunction = (button, todo) => {
     button.addEventListener('click', (e) => {
-// complete button *********************************************
+      // complete button
       if (button.classList.contains('todo-complete-button')){
         if (!todo.tree.parent.hasAttribute('data-completed')){
           button.innerText = 'UNCOMPLETE';
           let data = `title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`,
+            link = todo.tree.todoPutLink,
             contentType = "application/x-www-form-urlencoded",
             call = "put";
-          ajaxCall(todo, data, contentType, call);
+          ajaxCall(todo, link, data, contentType, call);
         } else {
           let data = `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
-          contentType = "application/json",
-          call = "put";
-          ajaxCall(todo, data, contentType, call);
+            link = todo.tree.todoPutLink,
+            contentType = "application/json",
+            call = "put";
+          ajaxCall(todo, link, data, contentType, call);
         }
-// trash can button ******************************************
+        // trash can button
       } else if (button.classList.contains('todo-delete-button')) {
         if (todo.tree.parent.classList.contains('deleted-todo')){
           // WHAT TO DO???
@@ -110,7 +112,7 @@ const applyEditTodoFunctionality = ( ) => {
             }
           }, 5000);
         }
-// discard button ****************************************************
+        // disguard button
       } else if (button.classList.contains('todo-discard-button')) {
         if (button.classList.contains('inactive-todo-button')) return;
         todo.tree.title.innerText = todo.tree.titleText;
@@ -125,14 +127,15 @@ const applyEditTodoFunctionality = ( ) => {
         todo.tree.titleCount.value = maxTitleLength - todo.tree.title.innerText.length;
         todo.tree.bodyCount.classList.add('hidden');
         todo.tree.titleCount.classList.add('hidden');
-// save button *******************************************************
+        // save button
        } else if (button.classList.contains("todo-save-button")) {
         if (button.classList.contains('inactive-todo-button')) { return; }
         let data = `title=${todo.tree.title.innerText}&body=${todo.tree.body.innerText}&priority=${todo.tree.priorityButton.value}`,
+          link = todo.tree.todoPutLink,
           contentType = "application/x-www-form-urlencoded",
           call = "put";
-        ajaxCall(todo, data, contentType, call);
-// priority button ****************************************************
+        ajaxCall(todo, link, data, contentType, call);
+        // priority button
       } else if (button.classList.contains("todo-edit-priority")) {
         rotatePriorities(button, todo.tree.parent,'border');
         const newText = `${todo.tree.title.innerText} ${todo.tree.body.innerText} ${todo.tree.priorityButton.value}`;

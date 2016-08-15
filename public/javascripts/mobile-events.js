@@ -1,7 +1,7 @@
  const mobileEvents = ( ) => {
   const req = new XMLHttpRequest(),
     todos = getElsByClass('todo-box'),
-    ajaxCall = (todo, data, contentType, call) => {
+    ajaxCall = (todo, link, data, contentType, call) => {
       //| When the state of the request changes:
       //| (4): "request finished and response is ready"
       req.onreadystatechange = () => {
@@ -9,7 +9,7 @@
           location.reload();
         }
       };
-      req.open(call, todo.tree.putLink , true);
+      req.open(call, link , true);
       req.setRequestHeader("Content-type", contentType);
       req.send(data);
     };
@@ -87,14 +87,16 @@
         // MARKED FOR DELETION -> DELETE
         if (todo.classList.contains('deleted-todo')) {
           let data = "",
+            link = todo.tree.putLink,
             contentType = "",
             call = "delete";
-          ajaxCall(todo, data, contentType, call);
+          ajaxCall(todo, link, data, contentType, call);
 
         // IF CURRENTLY IN A COMPLETED STATE -> UNCOMPLETE
         }
         else if(todo.hasAttribute('data-completed')) {
           let data = `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
+            link = todo.tree.putLink,
             contentType = "application/json",
             call = "put";
           ajaxCall(todo, data, contentType, call);
@@ -128,9 +130,10 @@
         else if (todo.hasAttribute('data-completed')) {return;}
         else {
           let data = `title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`,
+            link = todo.tree.putLink,
             contentType = "application/x-www-form-urlencoded" ,
             call = "put";
-          ajaxCall(todo, data, contentType, call);
+          ajaxCall(todo, link, data, contentType, call);
 
         }
       } // else
