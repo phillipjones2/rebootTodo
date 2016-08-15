@@ -45,11 +45,11 @@
         otherTodoChild.classList.remove('shown-todo-child');
       }
 
-      for (var i = 0, otherLen = otherTodoCloseButtons.length; i < otherLen; i++) {
+      for (let i = 0, otherLen = otherTodoCloseButtons.length; i < otherLen; i++) {
         const otherTodoCloseButton = otherTodoCloseButtons[i];
         otherTodoCloseButton.classList.add('hidden');
       }
-      for (var i = 0, childrenLen = todo.tree.children.length; i < childrenLen; i++) {
+      for (let i = 0, childrenLen = todo.tree.children.length; i < childrenLen; i++) {
         const todoChild = todo.tree.children[i];
         todoChild.classList.add('shown-todo-child');
       }
@@ -106,7 +106,7 @@
               todo.classList.remove('deleted-todo');
               todo.tree.title.classList.remove('font-white');
             }
-          }, 2000)
+          }, 2000);
         }
       }
       else { // If left swipe...

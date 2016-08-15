@@ -15,14 +15,9 @@
 
 }
 
-#about-page-logos {
-	img {
-
- }
-}
-
 #html5-logo, #css3-logo, #es6-logo {
 	max-height: 100px;
+	padding-bottom: 5px;
 }
 
 #nodejsbox, #expressbox, #mongoosebox, #slackbox, #babelbox  {
@@ -100,4 +95,41 @@
 #c-container {
 	background: $blue;
 	transition: all 1s;
+}
+
+@media (min-width: 500px) {
+	#html5-logo {
+		padding-left: 60px;
+	}
+	#es6-logo {
+		padding-right: 60px;
+	}
+	#gitbox {
+		height: 200px;
+	}
+
+	#git-logo {
+		min-width: 140px;
+		padding-left: 25px;
+	}
+
+	#github-logo {
+		min-width: 50px;
+	}
+
+	#robomongo-logo {
+		padding-left: 60px;
+	}
+
+	#nodemon-logo {
+		padding-right: 60px;
+	}
+
+	#pug-logo {
+		padding-left: 60px;
+	}
+
+	#sass-logo {
+		padding-right: 60px;
+	}
 }
