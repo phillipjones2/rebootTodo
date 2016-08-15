@@ -123,7 +123,7 @@ function compareNewAndOriginalText(todo, newText) {
 
 		// and if the title is invalid, make the title count red
 		// and inactivate the save button.
-		if (titleLen === 0 || titleLen > maxTitleLength) {
+		if (titleLen == 0 || titleLen > maxTitleLength) {
 			todo.tree.titleCount.classList.add('priority-text-2');
 			todo.tree.saveButton.classList.add('inactive-todo-button');
 		} else {
