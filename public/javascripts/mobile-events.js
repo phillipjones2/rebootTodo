@@ -1,7 +1,18 @@
  const mobileEvents = ( ) => {
-  const req = new XMLHttpRequest();
-
-  const	todos = getElsByClass('todo-box');
+  const req = new XMLHttpRequest(),
+    todos = getElsByClass('todo-box'),
+    ajaxCall = (todo, data, contentType, call) => {
+      //| When the state of the request changes:
+      //| (4): "request finished and response is ready"
+      req.onreadystatechange = () => {
+        if (req.readyState == 4 && req.status == 200) {
+          location.reload();
+        }
+      };
+      req.open(call, todo.tree.putLink , true);
+      req.setRequestHeader("Content-type", contentType);
+      req.send(data);
+    };
 
   for (var i = 0, todosLen = todos.length; i < todosLen; i++) {
     var touchStartX, touchStartY,
@@ -11,7 +22,7 @@
     // todo.originalClasses = `${todo.classList}`;
 
     todo.addEventListener('touchstart', (e) => {
-      if (document.body.clientWidth >= 520) { return;}
+      if (document.body.clientWidth >= 520) { return; }
         touchStartX = e.touches[0].screenX;
         touchStartY = e.touches[0].screenY;
      }); // touchstart
@@ -75,26 +86,19 @@
 
         // MARKED FOR DELETION -> DELETE
         if (todo.classList.contains('deleted-todo')) {
-          //| When the state of the request changes:
-          //| (4): "request finished and response is ready"
-          req.onreadystatechange = ( ) => {
-            if (req.readyState == 4 && req.status == 200) {
-              location.reload();
-            }
-          };
-      	  req.open('delete', todo.tree.putLink , true);
-      	  req.send();
+          let data = "",
+            contentType = "",
+            call = "delete";
+          ajaxCall(todo, data, contentType, call);
+
         // IF CURRENTLY IN A COMPLETED STATE -> UNCOMPLETE
         }
         else if(todo.hasAttribute('data-completed')) {
-          req.onreadystatechange = ( ) => {
-            if (req.readyState == 4 && req.status == 200) {
-              location.reload();
-            }
-          };
-          req.open('put', todo.tree.putLink , true);
-          req.setRequestHeader("Content-type", "application/json");
-          req.send(`{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`);
+          let data = `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
+            contentType = "application/json",
+            call = "put";
+          ajaxCall(todo, data, contentType, call);
+
         } //FROM A NORMAL STATE TO A MARKED FOR DELETION STATE
         else {
           todo.classList.add('deleted-todo');
@@ -123,16 +127,11 @@
         } // ?? TODO IS COMPLETE AND USER SWIPES LEFT AGAIN ??
         else if (todo.hasAttribute('data-completed')) {return;}
         else {
-           //| When the state of the request changes:
-           //| (4): "request finished and response is ready"
-          req.onreadystatechange = ( ) => {
-            if (req.readyState == 4 && req.status == 200) {
-              location.reload();
-            }
-          };
-          req.open('put', todo.tree.putLink , true);
-          req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          req.send(`title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`);
+          let data = `title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`,
+            contentType = "application/x-www-form-urlencoded" ,
+            call = "put";
+          ajaxCall(todo, data, contentType, call);
+
         }
       } // else
      } // else
