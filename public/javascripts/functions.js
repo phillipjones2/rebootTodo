@@ -1,18 +1,18 @@
 
 function getElById(id, parent) {
-	if (parent) { return parent.getElementById(id) }
-	else { return document.getElementById(id) }
-};
+	if (parent) { return parent.getElementById(id); }
+	else { return document.getElementById(id); }
+}
 
 function getElsByClass(className, parent) {
-	if (parent) { return parent.getElementsByClassName(className) }
-	else { return document.getElementsByClassName(className) }
-};
+	if (parent) { return parent.getElementsByClassName(className); }
+	else { return document.getElementsByClassName(className); }
+}
 
 function getElByQuery(query, parent) {
-	if (parent) { return parent.querySelector(query) }
-	else { return document.querySelector(query) }
-};
+	if (parent) { return parent.querySelector(query); }
+	else { return document.querySelector(query); }
+}
 
 // function getElsByQuery(query, parent) {
 // 	if (parent) { return parent.querySelectorAll(query) }
@@ -20,21 +20,21 @@ function getElByQuery(query, parent) {
 // };
 
 function getElsByTag(tag, parent) {
-	if (parent) { return parent.getElementsByTagName(tag) }
-	else { return document.getElementsByTagName(tag) }
-};
+	if (parent) { return parent.getElementsByTagName(tag); }
+	else { return document.getElementsByTagName(tag); }
+}
 
 function addClasses(el, classesArray) {
 	classesArray.forEach((_class, i) => {
 		el.classList.add(_class);
 	});
-};
+}
 
 function removeClasses(el, classesArray) {
 	classesArray.forEach((_class, i) => {
-		el.classList.remove(_class)
+		el.classList.remove(_class);
 	});
-};
+}
 
 // NO LONGER NEEDED - - convert the id's to strings in the route
 // function trimQuotes(string) {
@@ -45,7 +45,7 @@ function getParentTodo(element) {
 	const parentID = element.getAttribute('data-todo-parent'),
 				parent = document.getElementById(parentID);
 	return parent;
-};
+}
 
 function getTodoTree(el) {
 	const todoID = el.getAttribute('data-todo-parent'),
@@ -123,7 +123,7 @@ function compareNewAndOriginalText(todo, newText) {
 
 		// and if the title is invalid, make the title count red
 		// and inactivate the save button.
-		if (titleLen == 0 || titleLen > maxTitleLength) {
+		if (titleLen === 0 || titleLen > maxTitleLength) {
 			todo.tree.titleCount.classList.add('priority-text-2');
 			todo.tree.saveButton.classList.add('inactive-todo-button');
 		} else {

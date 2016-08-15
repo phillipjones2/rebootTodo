@@ -1,25 +1,6 @@
 const applyEditTodoFunctionality = ( ) => {
-  const saveEditedTodoButtons = document.getElementsByClassName('todo-save-button'),
-    req = new XMLHttpRequest(),
-    timestamp = new Date();
-
-  for (var i = 0, saveEditedTodoButtonsLen = saveEditedTodoButtons.length; i < saveEditedTodoButtonsLen; i++) {
-    const button = saveEditedTodoButtons[i];
-
-    button.addEventListener('click', (e) => {
-      if (button.classList.contains('inactive-todo-button')) { return;}
-      const todo = getParentTodo(button),
-    	  req = new XMLHttpRequest();
-      req.onreadystatechange = ( ) => {
-        if (req.readyState == 4 && req.status == 200) {
-          location.reload();
-        }
-      };
-    	req.open('put', todo.tree.putLink , true);
-    	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    	req.send(`title=${todo.tree.title.innerText}&body=${todo.tree.body.innerText}&priority=${todo.tree.priorityButton.value}`);
-    });
-  }
+  const req = new XMLHttpRequest(),
+  timestamp = new Date();
 
    //*****************************************************//
   //--- TITLE DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
@@ -51,7 +32,7 @@ const applyEditTodoFunctionality = ( ) => {
   const bodies = document.getElementsByClassName('todo-body'),
         maxBodyLength = 140;
 
-  for (var i = 0, bodiesLen = bodies.length; i < bodiesLen; i++) {
+  for (let i = 0, bodiesLen = bodies.length; i < bodiesLen; i++) {
    const body = bodies[i],
      todo = getParentTodo(body);
 
@@ -74,7 +55,7 @@ const applyEditTodoFunctionality = ( ) => {
    //********************************************************//
   //--- PRIORITY DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
   const todoEditPriorityButtons = document.getElementsByClassName('todo-edit-priority');
-  for (var i = 0, todoEditPriorityButtonsLen = todoEditPriorityButtons.length; i < todoEditPriorityButtonsLen; i++) {
+  for (let i = 0, todoEditPriorityButtonsLen = todoEditPriorityButtons.length; i < todoEditPriorityButtonsLen; i++) {
     const button = todoEditPriorityButtons[i];
     button.addEventListener('click', (e) => {
       const todo = getParentTodo(button);
@@ -84,41 +65,42 @@ const applyEditTodoFunctionality = ( ) => {
     });
   }
 
-//*************************************************************//
-// todo edit buttons fuctionality:  discard, complete, trash
-//************************************************************//
+//***********************************************************************//
+// todo edit buttons fuctionality:  discard, complete, trash, save
+//*********************************************************************//
+  const ajaxCall = (todo, data, contentType, call) => {
+    //| When the state of the request changes:
+    //| (4): "request finished and response is ready"
+    req.onreadystatechange = () => {
+      if (req.readyState == 4 && req.status == 200) {
+        location.reload();
+      }
+    };
+    req.open(call, todo.tree.putLink , true);
+    req.setRequestHeader("Content-type", contentType);
+    req.send(data);
+  };
+
   const  editButtonFunction = (button, todo) => {
     button.addEventListener('click', (e) => {
       // complete button
       if (button.classList.contains('todo-complete-button')){
         if (!todo.tree.parent.hasAttribute('data-completed')){
-          //| When the state of the request changes:
-          //| (4): "request finished and response is ready"
-          console.log(button.innerText);
           button.innerText = 'UNCOMPLETE';
-          console.log(button.innerText);
-          req.onreadystatechange = ( ) => {
-            if (req.readyState == 4 && req.status == 200) {
-              location.reload();
-            }
-          };
-          req.open('put', todo.tree.putLink , true);
-          req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          req.send(`title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`);
+          let data = `title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`,
+            contentType = "application/x-www-form-urlencoded",
+            call = "put";
+          ajaxCall(todo, data, contentType, call);
         } else {
-          req.onreadystatechange = ( ) => {
-            if (req.readyState == 4 && req.status == 200) {
-              location.reload();
-            }
-          };
-          req.open('put', todo.tree.putLink , true);
-          req.setRequestHeader("Content-type", "application/json");
-          req.send(`{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`);
+          let data = `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
+          contentType = "application/json",
+          call = "put";
+          ajaxCall(todo, data, contentType, call);
         }
         // trash can button
       } else if (button.classList.contains('todo-delete-button')) {
         if (todo.tree.parent.classList.contains('deleted-todo')){
-
+          // WHAT TO DO???
         } else {
           todo.tree.parent.classList.add('deleted-todo');
           todo.tree.parent.classList.remove('completed-todo');
@@ -129,7 +111,7 @@ const applyEditTodoFunctionality = ( ) => {
           todo.tree.completeButton.classList.add('inactive-todo-button');
           todo.tree.completeButton.setAttribute('disabled', true);
 
-          setTimeout(( ) => {
+          setTimeout(() => {
             if (todo.tree.parent.classList.contains('deleted-todo')){
               todo.tree.parent.classList.remove('deleted-todo');
               todo.tree.title.classList.remove('font-white');
@@ -156,20 +138,27 @@ const applyEditTodoFunctionality = ( ) => {
         todo.tree.titleCount.value = maxTitleLength - todo.tree.title.innerText.length;
         todo.tree.bodyCount.classList.add('hidden');
         todo.tree.titleCount.classList.add('hidden');
+      } else if (button.classList.contains("todo-save-button")) {
+        if (button.classList.contains('inactive-todo-button')) { return; }
+        let data = `title=${todo.tree.title.innerText}&body=${todo.tree.body.innerText}&priority=${todo.tree.priorityButton.value}`,
+          contentType = "application/x-www-form-urlencoded",
+          call = "put";
+        ajaxCall(todo, data, contentType, call);
       }
     });
   };
 
   const completeButtons = document.getElementsByClassName('todo-complete-button'),
     trashButtons = document.getElementsByClassName('todo-delete-button'),
-    discardButtons = document.getElementsByClassName('todo-discard-button');
-
+    discardButtons = document.getElementsByClassName('todo-discard-button'),
+    saveButtons = document.getElementsByClassName('todo-save-button');
   for (let i = 0, cmpBtnLen = completeButtons.length; i < cmpBtnLen; i++) {
-    let editArray=[completeButtons[i],trashButtons[i],discardButtons[i]],
+    let editArray=[completeButtons[i],trashButtons[i],discardButtons[i], saveButtons[i]],
       todo = {};
     todo.tree = getTodoTree(completeButtons[i]);
     for (let i = 0, eBtnsLen = editArray.length; i < eBtnsLen; i ++) {
       editButtonFunction(editArray[i], todo);
     }
   }
+
 };

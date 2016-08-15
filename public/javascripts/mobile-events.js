@@ -1,7 +1,6 @@
  const mobileEvents = ( ) => {
   const req = new XMLHttpRequest();
-  //*******************************//
-  //--- TODO SWIPE FUNCTIONALITY --//
+
   const	todos = getElsByClass('todo-box');
 
   for (var i = 0, todosLen = todos.length; i < todosLen; i++) {
@@ -65,6 +64,10 @@
       }
     });
 
+
+//******************************************************//
+//--- TODO SWIPE FUNCTIONALITY                         //
+//****************************************************//
     if (!validSwipe) { return; }
     else {
       const timestamp = new Date();
