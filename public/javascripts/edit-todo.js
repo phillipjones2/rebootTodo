@@ -136,7 +136,7 @@ const applyEditTodoFunctionality = ( ) => {
               todo.tree.title.setAttribute('contenteditable', true);
               todo.tree.body.setAttribute('contenteditable', true);
               todo.tree.completeButton.classList.remove('inactive-todo-button');
-              todo.tree.completeButton.removeAttribute('disabled');          
+              todo.tree.completeButton.removeAttribute('disabled');
               todo.tree.priorityButton.removeAttribute('disabled');
             }
           }, 5000);
@@ -149,7 +149,7 @@ const applyEditTodoFunctionality = ( ) => {
         todo.tree.priorityButton.value = todo.tree.priorityValue;
         todo.tree.priorityButton.innerText = todo.tree.priorityText;
         todo.tree.priorityButton.classList = todo.tree.priorityClass;
-        todo.classList = todo.tree.parentClass;
+        todo.tree.parent.classList = todo.tree.parentClass;
         todo.tree.saveButton.classList.add('inactive-todo-button');
         todo.tree.discardButton.classList.add('inactive-todo-button');
         todo.tree.bodyCount.value = maxBodyLength - todo.tree.body.innerText.length;

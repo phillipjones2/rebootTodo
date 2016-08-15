@@ -217,8 +217,8 @@ function validateTargetAsTodo(e) {
 		const todoID = target.getAttribute('data-todo-parent'),
 					parent = document.getElementById(todoID);
 		return parent;
-	} else { return target };
-};
+	} else { return target; }
+}
 
 
 // { method: string,
@@ -232,7 +232,7 @@ function newAjaxRequest(obj) {
 		if (request.readyState == 4 && request.status == 200) {
 			obj.onSuccessResponse(request);
 		}
-	}
+	};
 	request.open(obj.method, obj.url, obj.async);
 	if (obj.send) {
 		request.send(obj.send);
