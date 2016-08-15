@@ -184,4 +184,8 @@ button.todo-priority-button {
 .todo-delete-button {
   max-height: 30px;
   max-width: 30px;
+	border-radius: 10px;
+	&:hover {
+		background-color: $pale-red;
+	}
 }

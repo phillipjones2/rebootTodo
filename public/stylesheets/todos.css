@@ -134,6 +134,9 @@ button.todo-priority-button {
 
 .todo-delete-button {
   max-height: 30px;
-  max-width: 30px; }
+  max-width: 30px;
+  border-radius: 10px; }
+  .todo-delete-button:hover {
+    background-color: #EF6F6C; }
 
 /*# sourceMappingURL=todos.css.map */

@@ -1,19 +1,25 @@
 nav {
 	height: 50px;
 	background: white;
-	padding: 10px 10px 0;
+	// padding: 10px 20px 0;
 	z-index: 90;
 
 	h3 {
 		margin: 0;
+		padding: 20px 0px 15px 10px;
 	}
 	ul {
-		li {
-			display: inline;
-			margin-left: 20px;
-			font-size: 1.6rem;
+		margin-right: 20px;
+		a {
+			text-decoration: none;
+			:hover { background-color: #f5efed;}
+			li {
+				display: inline;
+
+				font-size: 1.6rem;
+				border-radius: .5em;
+				padding: 20px 10px 15px 10px;
+			}
 		}
 	}
-
 }
-

@@ -49,11 +49,13 @@
 	bottom: 25px;
 	left: 25px;
 	font-size: 3.8rem;
-	border-radius: 40px;
 	width: 60px;
 	height: 60px;
 	z-index: 100;
-
+	border-radius: 40px;
+	&:hover {
+		background-color: $pale-red;
+	}
 	p {
 		position: relative;
 		top: 2px;
@@ -68,8 +70,12 @@
   height: 60px;
   z-index: 55;
   margin: 0;
+	border-radius: 40px;
 	&.inactive-todo-submit-button {
 	  opacity: .2;
+	}
+	&:hover {
+		background-color: $color2;
 	}
 }
 

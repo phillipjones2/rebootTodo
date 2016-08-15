@@ -81,6 +81,8 @@ button.btn-1 {
   button.btn-1:active {
     background: #f5efed;
     color: black; }
+  button.btn-1:hover {
+    color: #adedd2; }
 
 button.btn-2 {
   background: #f5efed;
@@ -115,7 +117,10 @@ button.btn-3 {
   font-family: GothamBold;
   width: 60px;
   height: 60px;
-  z-index: 55; }
+  z-index: 55;
+  border-radius: 40px; }
+  #add-button:hover {
+    background-color: #adedd2; }
 
 #add-button-login {
   position: fixed;
@@ -131,14 +136,21 @@ button.btn-3 {
 nav {
   height: 50px;
   background: white;
-  padding: 10px 10px 0;
   z-index: 90; }
   nav h3 {
-    margin: 0; }
-  nav ul li {
-    display: inline;
-    margin-left: 20px;
-    font-size: 1.6rem; }
+    margin: 0;
+    padding: 20px 0px 15px 10px; }
+  nav ul {
+    margin-right: 20px; }
+    nav ul a {
+      text-decoration: none; }
+      nav ul a :hover {
+        background-color: #f5efed; }
+      nav ul a li {
+        display: inline;
+        font-size: 1.6rem;
+        border-radius: .5em;
+        padding: 20px 10px 15px 10px; }
 
 #add-todo-modal {
   position: fixed;
@@ -178,10 +190,12 @@ nav {
   bottom: 25px;
   left: 25px;
   font-size: 3.8rem;
-  border-radius: 40px;
   width: 60px;
   height: 60px;
-  z-index: 100; }
+  z-index: 100;
+  border-radius: 40px; }
+  #close-button:hover {
+    background-color: #EF6F6C; }
   #close-button p {
     position: relative;
     top: 2px; }
@@ -193,9 +207,12 @@ nav {
   width: 60px;
   height: 60px;
   z-index: 55;
-  margin: 0; }
+  margin: 0;
+  border-radius: 40px; }
   #accept-button.inactive-todo-submit-button {
     opacity: .2; }
+  #accept-button:hover {
+    background-color: #adedd2; }
 
 #add-todo-body-character-count-box, #add-todo-title-character-count-box {
   width: 70%;
@@ -392,7 +409,10 @@ button.todo-priority-button {
 
 .todo-delete-button {
   max-height: 30px;
-  max-width: 30px; }
+  max-width: 30px;
+  border-radius: 10px; }
+  .todo-delete-button:hover {
+    background-color: #EF6F6C; }
 
 .hidden {
   display: none; }

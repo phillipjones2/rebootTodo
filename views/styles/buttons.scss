@@ -16,6 +16,9 @@ button.btn-1 {
     background: $color3;
     color: $color0;
   }
+  &:hover {
+    color: $color2;
+  }
 }
 
 button.btn-2 {
@@ -58,6 +61,10 @@ button.btn-3 {
   width: 60px;
   height: 60px;
   z-index: 55;
+  border-radius: 40px;
+  &:hover {
+    background-color: $color2;
+  }
 }
 
 #add-button-login {

@@ -12,6 +12,8 @@ button.btn-1 {
   button.btn-1:active {
     background: #f5efed;
     color: black; }
+  button.btn-1:hover {
+    color: #adedd2; }
 
 button.btn-2 {
   background: #f5efed;
@@ -46,7 +48,10 @@ button.btn-3 {
   font-family: GothamBold;
   width: 60px;
   height: 60px;
-  z-index: 55; }
+  z-index: 55;
+  border-radius: 40px; }
+  #add-button:hover {
+    background-color: #adedd2; }
 
 #add-button-login {
   position: fixed;
