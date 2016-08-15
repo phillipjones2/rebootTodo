@@ -126,8 +126,7 @@ const applyEditTodoFunctionality = ( ) => {
         todo.tree.bodyCount.classList.add('hidden');
         todo.tree.titleCount.classList.add('hidden');
         // save button
-       }
-      else if (button.classList.contains("todo-save-button")) {
+       } else if (button.classList.contains("todo-save-button")) {
         if (button.classList.contains('inactive-todo-button')) { return; }
         let data = `title=${todo.tree.title.innerText}&body=${todo.tree.body.innerText}&priority=${todo.tree.priorityButton.value}`,
           contentType = "application/x-www-form-urlencoded",
