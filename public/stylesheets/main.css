@@ -268,6 +268,9 @@ nav {
       flex-direction: column;
       align-items: center; } }
 
+.todo-title.shown-todo-child {
+  margin-bottom: 0px; }
+
 .todo-box {
   background: #f5efed;
   padding: 15px 35px 25px;
@@ -372,11 +375,15 @@ button.todo-priority-button {
   width: 25px;
   background: none;
   color: #c4bfbd;
-  font-size: 1.4rem;
+  font-size: 1rem;
   position: relative;
-  top: -10px;
+  left: 22px;
+  padding-top: 0px;
   margin-bottom: 0px;
-  margin-top: 5px; }
+  margin-top: 0px; }
+
+.todo-title-character-count-box, .todo-body-character-count-box {
+  height: 10px; }
 
 .no-todos-warning {
   height: 50vh;
