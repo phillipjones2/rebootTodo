@@ -133,10 +133,10 @@ const applyEditTodoFunctionality = ( ) => {
             if (todo.tree.parent.classList.contains('deleted-todo')){
               todo.tree.parent.classList.remove('deleted-todo');
               todo.tree.title.classList.remove('font-white');
-              todo.tree.completeButton.classList.remove('inactive-todo-button');
-              todo.tree.completeButton.setAttribute('disabled', false);
               todo.tree.title.setAttribute('contenteditable', true);
               todo.tree.body.setAttribute('contenteditable', true);
+              todo.tree.completeButton.classList.remove('inactive-todo-button');
+              todo.tree.completeButton.removeAttribute('disabled');          
               todo.tree.priorityButton.removeAttribute('disabled');
             }
           }, 5000);
