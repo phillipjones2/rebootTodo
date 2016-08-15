@@ -137,9 +137,9 @@ const applyEditTodoFunctionality = ( ) => {
               todo.tree.completeButton.setAttribute('disabled', false);
               todo.tree.title.setAttribute('contenteditable', true);
               todo.tree.body.setAttribute('contenteditable', true);
-              todo.tree.priorityButton.setAttribute('disabled', false);
+              todo.tree.priorityButton.removeAttribute('disabled');
             }
-          }, 5000)
+          }, 5000);
         }
         // disguard button
       } else if (button.classList.contains('todo-discard-button')) {
