@@ -68,7 +68,6 @@ if (addTodoTitleInput !== null) {
 		}
 	});
 
-
 	// create TODO BODY LISTENER
 	addTodoBodyInput.addEventListener('keyup', (e) => {
 		bodyCharacterCount.innerText = maxBodyLength - addTodoBodyInput.value.trim().length;
@@ -107,8 +106,6 @@ if (addTodoTitleInput !== null) {
 	});
 }
 
-
-
 // MOVE LATER.. WORK FOR INDEX PAGE
 
 const formatDate = function (date) {
@@ -123,7 +120,6 @@ const formatDate = function (date) {
  minutes = minutes < 10 ? '0'+minutes : minutes;
  return `${DaysArr[date.getDay()]} ${MonthsArr[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()} ${hours}:${minutes}${ampm}`;
 };
-
 
 const indexDateElement = document.getElementsByClassName('indexDate'),
   today = new Date,
@@ -184,12 +180,12 @@ if (loginTodo !== null) {
 			});
 		});
 	}
-	userPass('username');
-	userPass('password');
-	userPass('usernameR');
-	userPass('passwordR');
-	userPass('passwordConfR');
 
+	const passArray = ['username','password','usernameR','passwordR','passwordConfR'];
+
+	for (let i = 0, passLen = passArray.length; i < passLen; i++) {
+		userPass(passArray[i]);
+	}
 
 	loginCloseButton.addEventListener('click', (e) => {
 	    loginContent.classList.remove('shown-todo-child');

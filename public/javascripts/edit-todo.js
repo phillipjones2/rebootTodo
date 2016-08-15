@@ -84,37 +84,6 @@ const applyEditTodoFunctionality = ( ) => {
     });
   }
 
-   //************************************//
-  //--- DISCARD BUTTON FUNCTIONALITY ---//
-//   const discardButtons = document.getElementsByClassName('todo-discard-button');
-//   for (let i = 0, discardButtonsLen = discardButtons.length; i < discardButtonsLen; i++) {
-//     let button = discardButtons[i],
-//       todo = {};
-//     todo.tree = getTodoTree(button);
-//     discardButtonFunction(button, todo);
-//   }
-// };
-
-// const discardButtonFunction = function(button, todo){
-//   button.addEventListener('click', (e) => {
-//     if (button.classList.contains('inactive-todo-button')) return;
-//     todo.tree.title.innerText = todo.tree.titleText;
-//     todo.tree.body.innerText = todo.tree.bodyText;
-//     todo.tree.priorityButton.value = todo.tree.priorityValue;
-//     todo.tree.priorityButton.innerText = todo.tree.priorityText;
-//     todo.tree.priorityButton.classList = todo.tree.priorityClass;
-//     todo.classList = todo.tree.parentClass;
-//     todo.tree.saveButton.classList.add('inactive-todo-button');
-//     todo.tree.discardButton.classList.add('inactive-todo-button');
-//     todo.tree.bodyCount.value = maxBodyLength - todo.tree.body.innerText.length;
-//     todo.tree.titleCount.value = maxTitleLength - todo.tree.title.innerText.length;
-//     todo.tree.bodyCount.classList.add('hidden');
-//     todo.tree.titleCount.classList.add('hidden');
-//
-//   });
-
-
-
 //*************************************************************//
 // todo edit buttons fuctionality:  discard, complete, trash
 //************************************************************//
@@ -163,14 +132,14 @@ const applyEditTodoFunctionality = ( ) => {
           setTimeout(( ) => {
             if (todo.tree.parent.classList.contains('deleted-todo')){
               todo.tree.parent.classList.remove('deleted-todo');
-              todo.tree.title.classList.remove('font-white');              
+              todo.tree.title.classList.remove('font-white');
               todo.tree.completeButton.classList.remove('inactive-todo-button');
               todo.tree.completeButton.setAttribute('disabled', false);
               todo.tree.title.setAttribute('contenteditable', true);
               todo.tree.body.setAttribute('contenteditable', true);
-              todo.tree.priorityButton.setAttribute('disabled', false);
+              todo.tree.priorityButton.removeAttribute('disabled');
             }
-          }, 5000)
+          }, 5000);
         }
         // disguard button
       } else if (button.classList.contains('todo-discard-button')) {
