@@ -1,3 +1,17 @@
+function ajaxCall(todo, link, data, contentType, call){
+	//| When the state of the request changes:
+	//| (4): "request finished and response is ready"
+	const req = new XMLHttpRequest();
+
+	req.onreadystatechange = () => {
+		if (req.readyState == 4 && req.status == 200) {
+			location.reload();
+		}
+	};
+	req.open(call, link , true);
+	req.setRequestHeader("Content-type", contentType);
+	req.send(data);
+}
 
 function getElById(id, parent) {
 	if (parent) { return parent.getElementById(id); }

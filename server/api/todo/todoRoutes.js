@@ -1,11 +1,14 @@
 const router = require('express').Router(),
   logger = require('../../util/logger'),
   controller = require('./todoController'),
-  formatDate = require('../../util/formatDate');
+  formatDate = require('../../util/formatDate'),
+  auth = require('../../auth/auth');
 
 var today = new Date(),
     yesterday = new Date(today.setDate(today.getDate() -1)),
     thisWeek = new Date(today.setDate(today.getDate() - 7));
+
+var checkUser = [auth.decodeToken(),auth.getFreshUser()];
 
 router.param('id', controller.params);
 
@@ -14,89 +17,8 @@ router.route('/')
   .post(controller.post);
 
 router.route('/:id')
-  .get(controller.getOne)
-  .put(controller.put)
-  .delete(controller.delete);
+  .get( controller.getOne)
+  .put( controller.put)
+  .delete( controller.delete);
 
 module.exports = router;
-
-// router.route('/')
-//   // todo index - all todos cRud
-//   .get((req, res) => {
-//     Todo.find().
-//               and([
-//                 { $or: [{'completed':false },{ 'completedDate': {$gte : yesterday}}] }
-//               ]).
-//                 sort('completed').
-//                 sort('-priority').
-//                 exec((err, docs) => {
-//       for (var doc of docs) {
-//         doc.idString = doc._id.toString();
-//       }
-//       res.send(docs);
-//     });
-//   })
-//   // todo create Crud
-//   .post((req, res) => {
-//     var todo = new Todo({
-//       title: req.body.title,
-//       body: req.body.body,
-//       priority : req.body.priority,
-//       formattedCreate: formatDate.formatDate(new Date()),
-//       formattedUpdate: formatDate.formatDate(new Date())
-//     });
-//     todo.save((err, doc) => {
-//       if (err) return console.log(err);
-//       res.send({
-//         msg:"create successful!",
-//         data:doc
-//       });
-//     });
-//   });
-//
-// router.route('/:todo_id')
-//   // todo show - one todo  cRud
-//   .get((req, res) => {
-//     Todo.findById(req.params.todo_id, (err, todo) => {
-//       if (err) {
-//         res.sent(err);}
-//       res.send(todo);
-//     });
-//   })
-//   // todo update  crUd
-//   .put((req, res) => {
-//     Todo.findById(req.params.todo_id, (err, todo) => {
-//       if (err) {res.send(err);}
-//       todo.title = req.body.title;
-//       todo.body = req.body.body;
-//       todo.priority = req.body.priority;
-//       todo.formattedUpdate = formatDate.formatDate(new Date());
-//       if (req.body.completed ) {
-//         todo.completed = true;
-//         todo.completedDate = new Date();
-//       } else {
-//         todo.completed = false;
-//       }
-//       todo.save((err, doc) => {
-//         if (err) return console.log(err);
-//         res.send({
-//           msg: "update successful!",
-//           data: doc
-//         });
-//       });
-//     });
-//   })
-//   // todo delete cruD
-//   .delete((req, res) => {
-//     Todo.findById(req.params.todo_id, (err, todo) => {
-//       Todo.remove(todo, (err) => {
-//         if (err) {res.send(err);}
-//         else {
-//           res.send({
-//             msg: "delete successful",
-//             data: todo
-//           });
-//         }
-//       });
-//     });
-//   });

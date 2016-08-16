@@ -8,7 +8,6 @@ const UserSchema = new Schema({
     required: true,
     unique: true
   },
-
   // dont store the password as plain text
   password: {
     type: String,
@@ -26,7 +25,7 @@ UserSchema.pre('save', function(next) {
   if (!this.isModified('password')) return next();
   this.password = this.encryptPassword(this.password);
   next();
-})
+});
 
 
 UserSchema.methods = {
@@ -37,7 +36,7 @@ UserSchema.methods = {
   // hash the passwords
   encryptPassword: function(plainTextPword) {
     if (!plainTextPword) {
-      return ''
+      return '';
     } else {
       var salt = bcrypt.genSaltSync(10);
       return bcrypt.hashSync(plainTextPword, salt);

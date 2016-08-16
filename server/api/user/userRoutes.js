@@ -11,7 +11,7 @@ var checkUser = [auth.decodeToken(),auth.getFreshUser()];
 router.param('id', controller.params);
 
 router.route('/')
-  .get(checkUser,controller.get)
+  .get(controller.get)
   .post(controller.post);
 
 router.route('/:id')

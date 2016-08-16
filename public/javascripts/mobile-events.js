@@ -1,18 +1,6 @@
  const mobileEvents = ( ) => {
   const req = new XMLHttpRequest(),
-    todos = getElsByClass('todo-box'),
-    ajaxCall = (todo, link, data, contentType, call) => {
-      //| When the state of the request changes:
-      //| (4): "request finished and response is ready"
-      req.onreadystatechange = () => {
-        if (req.readyState == 4 && req.status == 200) {
-          location.reload();
-        }
-      };
-      req.open(call, link , true);
-      req.setRequestHeader("Content-type", contentType);
-      req.send(data);
-    };
+    todos = getElsByClass('todo-box');
 
   for (var i = 0, todosLen = todos.length; i < todosLen; i++) {
     var touchStartX, touchStartY,
@@ -87,7 +75,7 @@
         // MARKED FOR DELETION -> DELETE
         if (todo.classList.contains('deleted-todo')) {
           let data = "",
-            link = todo.tree.putLink,
+            link = todo.tree.todoPutLink,
             contentType = "",
             call = "delete";
           ajaxCall(todo, link, data, contentType, call);
@@ -96,10 +84,10 @@
         }
         else if(todo.hasAttribute('data-completed')) {
           let data = `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
-            link = todo.tree.putLink,
+            link = todo.tree.todoPutLink,
             contentType = "application/json",
             call = "put";
-          ajaxCall(todo, data, contentType, call);
+          ajaxCall(todo, link, data, contentType, call);
 
         } //FROM A NORMAL STATE TO A MARKED FOR DELETION STATE
         else {
@@ -130,7 +118,7 @@
         else if (todo.hasAttribute('data-completed')) {return;}
         else {
           let data = `title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`,
-            link = todo.tree.putLink,
+            link = todo.tree.todoPutLink,
             contentType = "application/x-www-form-urlencoded" ,
             call = "put";
           ajaxCall(todo, link, data, contentType, call);

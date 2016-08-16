@@ -1,6 +1,5 @@
 const applyEditTodoFunctionality = ( ) => {
-  const req = new XMLHttpRequest(),
-  timestamp = new Date();
+  const timestamp = new Date();
 
    //*****************************************************//
   //--- TITLE DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
@@ -55,18 +54,6 @@ const applyEditTodoFunctionality = ( ) => {
 //****************************************************************************//
 // todo edit buttons fuctionality:  discard, complete, trash, save, priority
 //***************************************************************************//
-  const ajaxCall = (todo, link, data, contentType, call) => {
-    //| When the state of the request changes:
-    //| (4): "request finished and response is ready"
-    req.onreadystatechange = () => {
-      if (req.readyState == 4 && req.status == 200) {
-        location.reload();
-      }
-    };
-    req.open(call, link , true);
-    req.setRequestHeader("Content-type", contentType);
-    req.send(data);
-  };
 
   const  editButtonFunction = (button, todo) => {
     button.addEventListener('click', (e) => {
