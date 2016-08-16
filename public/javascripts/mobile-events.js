@@ -1,6 +1,7 @@
  const mobileEvents = ( ) => {
   const req = new XMLHttpRequest(),
-    todos = getElsByClass('todo-box');
+    todos = getElsByClass('todo-box'),
+    timestamp = new Date();
 
   for (var i = 0, todosLen = todos.length; i < todosLen; i++) {
     var touchStartX, touchStartY,
@@ -63,13 +64,14 @@
       }
     });
 
+
 //******************************************************//
 //--- TODO SWIPE FUNCTIONALITY                         //
 //****************************************************//
     if (!validSwipe) { return; }
     else {
-      const timestamp = new Date();
       if (rightSwipe) {
+
         // MARKED FOR DELETION -> DELETE
         if (todo.classList.contains('deleted-todo')) {
           let ajaxObject = {
@@ -91,6 +93,7 @@
             contentType: "application/json"
           };
           ajaxCall(ajaxObject);
+
         } //FROM A NORMAL STATE TO A MARKED FOR DELETION STATE
         else {
           todo.classList.add('deleted-todo');
@@ -104,6 +107,7 @@
             if (todo.classList.contains('deleted-todo')){
               todo.classList.remove('deleted-todo');
               todo.tree.title.classList.remove('font-white');
+              todo.tree.priorityButton.removeAttribute('disabled');
             }
           }, 2000);
         }
@@ -118,15 +122,17 @@
           todo.tree.priorityButton.removeAttribute('disabled');
         } // ?? TODO IS COMPLETE AND USER SWIPES LEFT AGAIN ??
         else if (todo.hasAttribute('data-completed')) {return;}
+        // From normal state to completed
         else {
           let ajaxObject = {
             method: "put",
             url: todo.tree.todoPutLink,
             async: true,
-            send: `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
+            send: `title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`,
             contentType: "application/x-www-form-urlencoded"
           };
           ajaxCall(ajaxObject);
+
         }
       } // else
      } // else
