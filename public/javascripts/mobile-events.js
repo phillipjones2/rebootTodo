@@ -74,20 +74,37 @@
 
         // MARKED FOR DELETION -> DELETE
         if (todo.classList.contains('deleted-todo')) {
-          let data = "",
-            link = todo.tree.todoPutLink,
-            contentType = "",
-            call = "delete";
-          ajaxCall(todo, link, data, contentType, call);
+          let ajaxObject = {
+            method: "delete",
+            url: todo.tree.todoPutLink,
+            async: true,
+            send: "",
+            contentType: ""
+          };
+          ajaxCall(ajaxObject);
+
+          // let data = "",
+          //   link = todo.tree.todoPutLink,
+          //   contentType = "",
+          //   call = "delete";
+          // ajaxCall(todo, link, data, contentType, call);
 
         // IF CURRENTLY IN A COMPLETED STATE -> UNCOMPLETE
         }
         else if(todo.hasAttribute('data-completed')) {
-          let data = `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
-            link = todo.tree.todoPutLink,
-            contentType = "application/json",
-            call = "put";
-          ajaxCall(todo, link, data, contentType, call);
+          // let data = `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
+          //   link = todo.tree.todoPutLink,
+          //   contentType = "application/json",
+          //   call = "put";
+          // ajaxCall(todo, link, data, contentType, call);
+          let ajaxObject = {
+            method: "put",
+            url: todo.tree.todoPutLink,
+            async: true,
+            send: `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
+            contentType: "application/json"
+          };
+          ajaxCall(ajaxObject);
 
         } //FROM A NORMAL STATE TO A MARKED FOR DELETION STATE
         else {
@@ -117,11 +134,20 @@
         } // ?? TODO IS COMPLETE AND USER SWIPES LEFT AGAIN ??
         else if (todo.hasAttribute('data-completed')) {return;}
         else {
-          let data = `title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`,
-            link = todo.tree.todoPutLink,
-            contentType = "application/x-www-form-urlencoded" ,
-            call = "put";
-          ajaxCall(todo, link, data, contentType, call);
+          let ajaxObject = {
+            method: "put",
+            url: todo.tree.todoPutLink,
+            async: true,
+            send: `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
+            contentType: "application/x-www-form-urlencoded"
+          };
+          ajaxCall(ajaxObject);
+
+          // let data = `title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`,
+          //   link = todo.tree.todoPutLink,
+          //   contentType = "application/x-www-form-urlencoded" ,
+          //   call = "put";
+          // ajaxCall(todo, link, data, contentType, call);
 
         }
       } // else

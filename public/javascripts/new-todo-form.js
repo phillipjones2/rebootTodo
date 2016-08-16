@@ -88,13 +88,22 @@ if (addTodoTitleInput !== null) {
 					body = addTodoBodyInput.value,
 					priority = addTodoPriorityBtn.value;
 
-		const req = new XMLHttpRequest();
-		req.onreadystatechange = ( ) => {
-			location.reload();
+		let ajaxObject = {
+			method: "post",
+			url: "api/todos",
+			async: true,
+			send: `title=${title}&body=${body}&priority=${priority}`,
+			contentType: "application/x-www-form-urlencoded"
 		};
-		req.open('post', 'api/todos', true);
-		req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		req.send(`title=${title}&body=${body}&priority=${priority}`);
+		ajaxCall(ajaxObject);
+
+		// const req = new XMLHttpRequest();
+		// req.onreadystatechange = ( ) => {
+		// 	location.reload();
+		// };
+		// req.open('post', 'api/todos', true);
+		// req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		// req.send(`title=${title}&body=${body}&priority=${priority}`);
 	});
 
 	// ----- CREATE A TODO PRIORITY BUTTON ----- \\
@@ -122,7 +131,7 @@ const formatDate = function (date) {
 };
 
 const indexDateElement = document.getElementsByClassName('indexDate'),
-  today = new Date,
+  today = new Date(),
   loginTodo = document.getElementById('login-todo'),
   registerTodo = document.getElementById('register-todo'),
 	loginContent= document.getElementById('login-todo-content'),
@@ -168,13 +177,12 @@ if (loginTodo !== null) {
 		var ele = document.getElementById(id);
 		ele.addEventListener('click', function(e) {
 			var check = ['Username','Password','Confirm Password'];
-			if(this.innerText == check[0] || this.innerText == check[1]
-				|| this.innerText == check[2]) {
+			if(this.innerText == check[0] || this.innerText == check[1] || this.innerText == check[2]) {
 				var remember = this.innerText;
 				this.innerText = '';
 			}
 			this.addEventListener('blur', function(e) {
-				if(this.innerText == '') {
+				if(this.innerText === '') {
 					this.innerText = remember;
 				}
 			});

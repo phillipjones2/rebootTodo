@@ -1,4 +1,10 @@
-function ajaxCall(todo, link, data, contentType, call){
+// { method: string,
+// 	url: string,
+// 	async: bool,
+//	send: string,
+//	contentType: string }
+
+function ajaxCall(obj){
 	//| When the state of the request changes:
 	//| (4): "request finished and response is ready"
 	const req = new XMLHttpRequest();
@@ -8,9 +14,35 @@ function ajaxCall(todo, link, data, contentType, call){
 			location.reload();
 		}
 	};
-	req.open(call, link , true);
-	req.setRequestHeader("Content-type", contentType);
-	req.send(data);
+	req.open(obj.method, obj.url , obj.async);
+	req.setRequestHeader("Content-type", obj.contentType);
+	if (obj.send) {
+		req.send(obj.send);
+	} else {
+		req.send();
+	}
+}
+
+// { method: string,
+// 	url: string,
+// 	async: bool,
+//	send: string,
+//	contentType: string,
+// 	onSuccessResponse: function }
+function newAjaxRequest(obj) {
+	const request = new XMLHttpRequest();
+	request.onreadystatechange = ( ) => {
+		if (request.readyState == 4 && request.status == 200) {
+			obj.onSuccessResponse(request);
+		}
+	};
+	request.open(obj.method, obj.url, obj.async);
+	request.setRequestHeader("Content-type", obj.contentType);
+	if (obj.send) {
+		request.send(obj.send);
+	} else {
+		request.send();
+	}
 }
 
 function getElById(id, parent) {
@@ -28,11 +60,6 @@ function getElByQuery(query, parent) {
 	else { return document.querySelector(query); }
 }
 
-// function getElsByQuery(query, parent) {
-// 	if (parent) { return parent.querySelectorAll(query) }
-// 	else { return document.querySelectorAll(query) }
-// };
-
 function getElsByTag(tag, parent) {
 	if (parent) { return parent.getElementsByTagName(tag); }
 	else { return document.getElementsByTagName(tag); }
@@ -49,11 +76,6 @@ function removeClasses(el, classesArray) {
 		el.classList.remove(_class);
 	});
 }
-
-// NO LONGER NEEDED - - convert the id's to strings in the route
-// function trimQuotes(string) {
-// 	return string.slice(1, -1);
-// };
 
 function getParentTodo(element) {
 	const parentID = element.getAttribute('data-todo-parent'),
@@ -123,7 +145,7 @@ function compareNewAndOriginalText(todo, newText) {
 	// If everything is valid and there have been changes,
 	// make the save button active.
 	if (newText != originalText &&
-			titleLen != 0 && titleLen <= maxTitleLength &&
+			titleLen !== 0 && titleLen <= maxTitleLength &&
 			bodyLen <= maxBodyLength) {
 		todo.tree.saveButton.classList.remove('inactive-todo-button');
 		todo.tree.titleCount.classList.remove('priority-text-2');
@@ -137,7 +159,7 @@ function compareNewAndOriginalText(todo, newText) {
 
 		// and if the title is invalid, make the title count red
 		// and inactivate the save button.
-		if (titleLen == 0 || titleLen > maxTitleLength) {
+		if (titleLen === 0 || titleLen > maxTitleLength) {
 			todo.tree.titleCount.classList.add('priority-text-2');
 			todo.tree.saveButton.classList.add('inactive-todo-button');
 		} else {
@@ -232,25 +254,4 @@ function validateTargetAsTodo(e) {
 					parent = document.getElementById(todoID);
 		return parent;
 	} else { return target; }
-}
-
-
-// { method: string,
-// 	url: string,
-// 	async: bool,
-//	send: string,
-// 	onSuccessResponse: function }
-function newAjaxRequest(obj) {
-	const request = new XMLHttpRequest();
-	request.onreadystatechange = ( ) => {
-		if (request.readyState == 4 && request.status == 200) {
-			obj.onSuccessResponse(request);
-		}
-	};
-	request.open(obj.method, obj.url, obj.async);
-	if (obj.send) {
-		request.send(obj.send);
-	} else {
-		request.send();
-	}
 }
