@@ -61,12 +61,6 @@ const applyEditTodoFunctionality = () => {
       if (button.classList.contains('todo-complete-button')){
         if (!todo.tree.parent.hasAttribute('data-completed')){
           button.innerText = 'UNCOMPLETE';
-          // let data = `title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`,
-          //   link = todo.tree.todoPutLink,
-          //   contentType = "application/x-www-form-urlencoded",
-          //   call = "put";
-          // ajaxCall(todo, link, data, contentType, call);
-
           let ajaxObject = {
             method: "put",
             url: todo.tree.todoPutLink,
@@ -75,14 +69,7 @@ const applyEditTodoFunctionality = () => {
             contentType: "application/x-www-form-urlencoded"
           };
           ajaxCall(ajaxObject);
-
         } else {
-          // let data = `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
-          //   link = todo.tree.todoPutLink,
-          //   contentType = "application/json",
-          //   call = "put";
-          // ajaxCall(todo, link, data, contentType, call);
-
           let ajaxObject = {
             method: "put",
             url: todo.tree.todoPutLink,
@@ -91,7 +78,6 @@ const applyEditTodoFunctionality = () => {
             contentType: "application/json"
           };
           ajaxCall(ajaxObject);
-
         }
         // trash can button
       } else if (button.classList.contains('todo-delete-button')) {
@@ -137,12 +123,6 @@ const applyEditTodoFunctionality = () => {
         // save button
        } else if (button.classList.contains("todo-save-button")) {
         if (button.classList.contains('inactive-todo-button')) { return; }
-        // let data = `title=${todo.tree.title.innerText}&body=${todo.tree.body.innerText}&priority=${todo.tree.priorityButton.value}`,
-        //   link = todo.tree.todoPutLink,
-        //   contentType = "application/x-www-form-urlencoded",
-        //   call = "put";
-        // ajaxCall(todo, link, data, contentType, call);
-
         let ajaxObject = {
           method: "put",
           url: todo.tree.todoPutLink,

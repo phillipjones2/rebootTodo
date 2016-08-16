@@ -96,14 +96,6 @@ if (addTodoTitleInput !== null) {
 			contentType: "application/x-www-form-urlencoded"
 		};
 		ajaxCall(ajaxObject);
-
-		// const req = new XMLHttpRequest();
-		// req.onreadystatechange = ( ) => {
-		// 	location.reload();
-		// };
-		// req.open('post', 'api/todos', true);
-		// req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		// req.send(`title=${title}&body=${body}&priority=${priority}`);
 	});
 
 	// ----- CREATE A TODO PRIORITY BUTTON ----- \\
