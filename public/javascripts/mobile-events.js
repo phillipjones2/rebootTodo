@@ -1,4 +1,4 @@
- const mobileEvents = ( ) => {
+ const mobileEvents = () => {
   const req = new XMLHttpRequest(),
     todos = getElsByClass('todo-box'),
     timestamp = new Date();
@@ -29,7 +29,6 @@
         rightSwipe = (swipeXDifference < 0),
         validSwipe = (wavier < todoHeight && distance > todoWidth / 2),
         tap = (distance < 10 && wavier < 10);
-
 
     //| If touch event was an apparent tap on a todo, close all other
     //| open todos and open the one that was tapped.
@@ -64,14 +63,12 @@
       }
     });
 
-
 //******************************************************//
 //--- TODO SWIPE FUNCTIONALITY                         //
 //****************************************************//
     if (!validSwipe) { return; }
     else {
       if (rightSwipe) {
-
         // MARKED FOR DELETION -> DELETE
         if (todo.classList.contains('deleted-todo')) {
           let ajaxObject = {
@@ -93,7 +90,6 @@
             contentType: "application/json"
           };
           ajaxCall(ajaxObject);
-
         } //FROM A NORMAL STATE TO A MARKED FOR DELETION STATE
         else {
           todo.classList.add('deleted-todo');
@@ -102,7 +98,6 @@
           todo.tree.title.setAttribute('contenteditable', false);
           todo.tree.body.setAttribute('contenteditable', false);
           todo.tree.priorityButton.setAttribute('disabled', true);
-
           setTimeout(( ) => {
             if (todo.classList.contains('deleted-todo')){
               todo.classList.remove('deleted-todo');
@@ -132,7 +127,6 @@
             contentType: "application/x-www-form-urlencoded"
           };
           ajaxCall(ajaxObject);
-
         }
       } // else
      } // else
