@@ -41,7 +41,6 @@ function addTodoValidityCheck() {
 	} else {
 		titleCharacterCount.classList.remove('priority-text-2');
 	}
-
 	if (bodyInputLength > maxBodyLength) {
 		valid = false;
 		newTodoSubmitButton.classList.add('inactive-todo-submit-button');
@@ -49,12 +48,10 @@ function addTodoValidityCheck() {
 	} else {
 		bodyCharacterCount.classList.remove('priority-text-2');
 	}
-
 	if (valid) {
 		newTodoSubmitButton.classList.remove('inactive-todo-submit-button');
 	}
 }
-
 if (addTodoTitleInput !== null) {
 	addTodoTitleInput.addEventListener('keyup', (e) => {
 		titleCharacterCount.innerText = maxTitleLength - addTodoTitleInput.value.trim().length;
@@ -108,7 +105,6 @@ if (addTodoTitleInput !== null) {
 }
 
 // MOVE LATER.. WORK FOR INDEX PAGE
-
 const formatDate = function (date) {
  var hours = date.getHours(),
 	 minutes = date.getMinutes(),
@@ -186,6 +182,9 @@ if (loginTodo !== null) {
 	for (let i = 0, passLen = passArray.length; i < passLen; i++) {
 		userPass(passArray[i]);
 	}
+
+
+
 
 	loginCloseButton.addEventListener('click', (e) => {
 	    loginContent.classList.remove('shown-todo-child');
