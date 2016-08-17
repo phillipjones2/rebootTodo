@@ -1,8 +1,8 @@
 const router = require('express').Router(),
-  logger = require('../../util/logger'),
-  controller = require('./todoController'),
-  formatDate = require('../../util/formatDate'),
-  auth = require('../../auth/auth');
+  logger = require('../util/logger'),
+  controller = require('../api/todo/todoController'),
+  formatDate = require('../util/formatDate'),
+  auth = require('../auth/auth');
 
 var today = new Date(),
     yesterday = new Date(today.setDate(today.getDate() -1)),
@@ -14,7 +14,7 @@ router.param('id', controller.params);
 
 router.route('/')
   .get(controller.get)
-  .post(checkUser,controller.post);
+  .post(controller.post);
 
 router.route('/:id')
   .get( controller.getOne)

@@ -25,7 +25,7 @@ exports.params = (req, res, next, id) => {
 // index.  ALL todos
 exports.get = (req, res, next) => {
   if(!req.user) {
-    Todo.find({})
+    Todo.find({ user: { $exists: false }})
       .populate('User')
       .and([
         { $or: [{'completed':false },

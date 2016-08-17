@@ -1,75 +1,121 @@
 extends layout
 
 block content
-	img#add-button-login(src="icons/plus.svg")
+	img#add-button(src="icons/plus.svg")
+
+	//- ADD TODO MODAL -/////////////////////////////////////
+
+	div#add-todo-modal(class="box-col all-12 x-center hidden")
+		div(class="box-col all-12 x-center")
+			h2 Create a tod#[span#todo-o(class="priority-text-0") o]
+			form(class="box-col x-center all-12")
+				input#add-todo-input(placeholder="todo title" name="title")
+				div#add-todo-title-character-count-box(class="box justify-content-end ")
+					p#add-todo-title-character-count(class="box y-center hidden") 55
+				textarea#add-todo-textarea(placeholder="write a few details about your todo" name="body")
+				div#add-todo-body-character-count-box(class="box justify-content-end")
+					p#add-todo-body-character-count(class="box y-center hidden") 140
+				button#add-todo-priority-button(class="priority-bg-0", type="button", name="priority", value="0")  priority: low
+				image#accept-button(class="inactive-todo-submit-button",
+							type="button", src="icons/plus.svg", action="/")
+			img#close-button(src="icons/cancel.svg")
 
 	//- NAVIGATION -/////////////////////////////////////
 
 	nav(class="box-col all-12 fixed pb_15")
 			div(class="box all-12 space-inside y-center")
 				h3 Todo App
-				ul
-					a(href='/about'): li about
+				ul#nav-links
+					//- a(href='/about'): li about
 					a(href='https://github.com/phillipjones2/rebootTodo' target:"_blank"): li github
 
 	//- TODOS -/////////////////////////////////////
+
 	div#todo-container
-			div(id="login-todo", class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-2")
+		div(class="spinner-container box x-center y-center")
+			div(class="spinner")
 
-				div(class="close-todo-button-box")
-					img(src="icons/cancel.svg", id="login-close-button", class="close-todo-button hidden")
+		div(id="login-todo" class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-2"
+				data-todo-parent="login-todo" data-todo-object-id="login-todo")
 
-				h3(class="todo-title") Login
+			div(class="close-todo-button-box" data-todo-parent="login-todo")
+				img(src="icons/cancel.svg" id="login-todo"
+				 	  data-todo-parent="login-todo" class="close-todo-button hidden")
 
-				div(id="login-todo-content", class="todo-content box-col login-elements hidden-todo-child ")
-					p(id="username", contenteditable=true,spellcheck="false",class="todo-body login-elements ").
-						Username
-					p(id="password", contenteditable=true,spellcheck="false",class="todo-body login-elements ").
-						Password
 
-					div(class="todo-button-box box wrap login-elements ")
-						button(class="btn-1 todo-save-button inactive-todo-button login-elements ") SAVE
-						button(class="btn-1 todo-discard-button inactive-todo-button") DISCARD
-					small(class="indexDate todo-date login-elements ")
+			h3(data-todo-parent="login-todo" class="todo-title" ) Login #[span.todo-title.bg-pale-green(id="register-btn") Register ]
+			//- button(data-todo-parent="login-todo" class="todo-title") Register
 
-			div(id="register-todo",class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-1")
+			div(class="todo-title-character-count-box box all-12 justify-content-end hidden")
+				input(class="todo-title-character-count hidden" value=0 disabled=true
+							data-todo-parent="login-todo")
+			div(id="login-todo-content" data-todo-parent="login-todo"
+					class="todo-content box-col login-elements hidden-todo-child ")
+				p(id="username" data-todo-parent="login-todo" contenteditable=true
+					spellcheck="false" class="todo-body login-elements ").
+					Username
+				p(id="password" data-todo-parent="login-todo" contenteditable=true
+					spellcheck="false" class="todo-body login-elements ").
+					Password
+				div(class="todo-body-character-count-box box all-12 justify-content-end hidden")
+					input(class="todo-body-character-count hidden" value=0 disabled=true
+								data-todo-parent="login-todo")
 
-				div(class="close-todo-button-box")
-					img(src="icons/cancel.svg", id="register-close-button", class="close-todo-button hidden")
+				div(class="todo-edit-priority-box box all-12" data-todo-parent="login-todo")
+					button(class="todo-edit-priority box xs-10 todo-priority-button priority-bg-2"
+									data-todo-parent="login-todo" value="2") PRIORITY: HIGH
+				div(class="todo-button-box box wrap login-elements" data-todo-parent="login-todo")
+					button(class="btn-1 todo-save-button inactive-todo-button login-elements"
+								 data-todo-parent="login-todo") SAVE
+					button(class="btn-1 todo-discard-button inactive-todo-button"
+								 data-todo-parent="login-todo") DISCARD
+				small(class="indexDate todo-date login-elements"
+							data-todo-parent="login-todo")
 
-				h3(class="todo-title") Register
+		div(id="register-todo" class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-2 hidden"
+				data-todo-parent="register-todo" data-todo-object-id="register-todo")
 
-				div(id="register-todo-content", class="todo-content box-col register-elements hidden-todo-child ")
-					p(id="usernameR", contenteditable=true,spellcheck="false",class="todo-body register-elements ").
-						Username
-					p(id="passwordR", contenteditable=true,spellcheck="false",class="todo-body register-elements ").
-						Password
-					p(id="passwordConfR", contenteditable=true,spellcheck="false",class="todo-body register-elements ").
-						Confirm Password
+			div(class="close-todo-button-box" data-todo-parent="register-todo")
+				img(src="icons/cancel.svg" id="register-todo"
+				 	  data-todo-parent="register-todo" class="close-todo-button hidden")
 
-					div(class="todo-button-box box wrap register-elements ")
-						button(class="btn-1 todo-save-button inactive-todo-button register-elements ") SAVE
-						button(class="btn-1 todo-complete-button xs-0 sm-0 register-elements ") COMPLETE
+			h3(data-todo-parent="login-todo" class="todo-title") #[span.todo-title.bg-pale-green(id="login-btn") Login ] Register
 
-					small(class="indexDate todo-date register-elements ")
+			div(class="todo-title-character-count-box box all-12 justify-content-end hidden")
+				input(class="todo-title-character-count hidden" value=0 disabled=true
+							data-todo-parent="register-todo")
 
-			div(id="register-todo" class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-1")
+			div(id="register-todo-content" data-todo-parent="register-todo"
+					class="todo-content box-col register-elements hidden-todo-child ")
+				p(id="usernameR" data-todo-parent="register-todo" contenteditable=true
+					spellcheck="false" class="todo-body register-elements ").
+					Username
+				p(id="passwordR" data-todo-parent="register-todo" contenteditable=true
+					spellcheck="false" class="todo-body register-elements ").
+					Password
+				p(id="passwordConfR" data-todo-parent="register-todo" contenteditable=true
+					spellcheck="false" class="todo-body register-elements ").
+					Password
 
-				div(class="close-todo-button-box")
-					img(src="icons/cancel.svg" id="register-close-button" class="close-todo-button hidden")
+				div(class="todo-body-character-count-box box all-12 justify-content-end hidden")
+					input(class="todo-body-character-count hidden" value=0 disabled=true
+								data-todo-parent="register-todo")
 
-				h3(class="todo-title") Feed the dog
+				div(class="todo-edit-priority-box box all-12" data-todo-parent="register-todo")
+					button(class="todo-edit-priority box xs-10 todo-priority-button priority-bg-2"
+									data-todo-parent="register-todo" value="2" disabled=true)
+	PRIORITY: HIGH
 
-			div(id="register-todo" class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-1")
+				div(class="todo-button-box box wrap register-elements" data-todo-parent="register-todo")
+					button(class="btn-1 todo-save-button inactive-todo-button register-elements"
+								 data-todo-parent="register-todo") SAVE
+					button(class="btn-1 todo-discard-button inactive-todo-button"
+								 data-todo-parent="register-todo") DISCARD
+				small(class="indexDate todo-date register-elements"
+							data-todo-parent="register-todo")
 
-				div(class="close-todo-button-box")
-					img(src="icons/cancel.svg" id="register-close-button" class="close-todo-button hidden")
+	script(src="scripts/initial-request.js")
 
-				h3(class="todo-title") Water the plants
 
-			div(id="register-todo" class="todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-0")
-
-				div(class="close-todo-button-box")
-					img(src="icons/cancel.svg" id="register-close-button" class="close-todo-button hidden")
-
-				h3(class="todo-title") Mow the lawn
+	//- TODOS -/////////////////////////////////////
+	div#todo-container

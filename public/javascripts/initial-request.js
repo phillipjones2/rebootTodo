@@ -38,9 +38,9 @@ function insertTodoIntoDOM(todo) {
 		todoPriorities = ['PRIORITY: LOW','PRIORITY: MEDIUM', 'PRIORITY: HIGH'];
 	let completeText = '';
 		if (todo.completed) {
-			completeText = 'UNCOMPLETE'
+			completeText = 'UNCOMPLETE';
 		} else {
-			completeText = 'COMPLETE'
+			completeText = 'COMPLETE';
 		}
 
 	todoContainer.innerHTML += `

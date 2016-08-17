@@ -156,4 +156,71 @@ const applyEditTodoFunctionality = () => {
     }
   }
 
+  const indexDateElement = document.getElementsByClassName('indexDate'),
+    today = new Date(),
+    loginTodo = document.getElementById('login-todo'),
+    registerTodo = document.getElementById('register-todo'),
+  	loginContent= document.getElementById('login-todo-content'),
+    registerContent = document.getElementById('register-todo-content'),
+    // loginElements = document.getElementsByClassName('login-elements'),
+    // registerElements = document.getElementsByClassName('register-elements'),
+  	placerholder = document.getElementById('placerholder'),
+  	loginCloseButton = document.getElementById('login-close-button'),
+  	registerCloseButton = document.getElementById('register-close-button');
+
+  for(let i = 0, ideLen = indexDateElement.length; i < ideLen; i++ ) {
+  	indexDateElement[i].innerHTML = '<em>'+formatDate(today)+'</em>';
+  }
+
+  function userPass(id) {
+  	let ele = document.getElementById(id);
+  	console.log(ele);
+  	ele.addEventListener('click', function(e) {
+  		let check = ['Username','Password','Confirm Password'];
+  		if(this.innerText == check[0] || this.innerText == check[1] || this.innerText == check[2]) {
+  			var remember = this.innerText;
+  			this.innerText = '';
+  		}
+  		this.addEventListener('blur', (e) => {
+  			if(this.innerText === '') {
+  				this.innerText = remember;
+  			}
+  		});
+  	});
+  }
+
+  function logRegister(id1, id2) {
+    let btn1 = document.getElementById(id1),
+      btn2 = document.getElementById(id2),
+      prnt1 = btn1.parentElement.parentElement,
+      prnt2 = btn2.parentElement.parentElement;
+
+    btn1.addEventListener('click', function (e) {
+      if(prnt1.classList.contains('hidden')) {
+        prnt1.classList.remove('hidden');
+        prnt2.classList.add('hidden');
+      } else {
+        prnt1.classList.add('hidden');
+        prnt2.classList.remove('hidden');
+      }
+    });
+    btn2.addEventListener('click', function (e) {
+      if(prnt1.classList.contains('hidden')) {
+        prnt1.classList.remove('hidden');
+        prnt2.classList.add('hidden');
+      } else {
+        prnt1.classList.add('hidden');
+        prnt2.classList.remove('hidden');
+      }
+    });
+  }
+  logRegister('register-btn', 'login-btn');
+
+  if (loginTodo !== null) {
+  	const passArray = ['username','password','usernameR','passwordR','passwordConfR'];
+  	for (let i = 0, passLen = passArray.length; i < passLen; i++) {
+  		userPass(passArray[i]);
+  	}
+  }
+
 };

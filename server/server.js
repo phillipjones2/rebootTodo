@@ -1,5 +1,6 @@
 const express = require('express'),
   app = express(),
+  login = require('../routes/login'),
   api = require('./api/api'),
   todos = require('../routes/todos'),
   routes = require('../routes/routes'),
@@ -12,11 +13,11 @@ const express = require('express'),
   // mongoose     = require('mongoose'),
 
 require('./middleware/appMiddleware')(app);
-
 app.use('/api', api);
 app.use('/auth', auth);
 
 // fix these: static routes...????
+app.use('/login', login);
 app.use('/', todos);
 app.use('/about', routes);
 //*******************************
