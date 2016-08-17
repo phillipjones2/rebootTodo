@@ -66,7 +66,8 @@ const applyEditTodoFunctionality = () => {
             url: todo.tree.todoPutLink,
             async: true,
             send: `title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`,
-            contentType: "application/x-www-form-urlencoded"
+            contentType: "application/x-www-form-urlencoded",
+            onSuccessResponse: location.reload()
           };
           ajaxCall(ajaxObject);
         } else {
@@ -75,7 +76,8 @@ const applyEditTodoFunctionality = () => {
             url: todo.tree.todoPutLink,
             async: true,
             send: `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
-            contentType: "application/json"
+            contentType: "application/json",
+            onSuccessResponse: location.reload()
           };
           ajaxCall(ajaxObject);
         }
@@ -128,7 +130,8 @@ const applyEditTodoFunctionality = () => {
           url: todo.tree.todoPutLink,
           async: true,
           send: `title=${todo.tree.title.innerText}&body=${todo.tree.body.innerText}&priority=${todo.tree.priorityButton.value}`,
-          contentType: "application/x-www-form-urlencoded"
+          contentType: "application/x-www-form-urlencoded",
+          onSuccessResponse: location.reload()
         };
         ajaxCall(ajaxObject);
 
@@ -141,11 +144,11 @@ const applyEditTodoFunctionality = () => {
     });
   };
 
-  const completeButtons = document.getElementsByClassName('todo-complete-button'),
-    trashButtons = document.getElementsByClassName('todo-delete-button'),
-    discardButtons = document.getElementsByClassName('todo-discard-button'),
-    saveButtons = document.getElementsByClassName('todo-save-button'),
-    priorityButtons = document.getElementsByClassName('todo-edit-priority');
+  const completeButtons = document.getElementsByClassName('complete-btn'),
+    trashButtons = document.getElementsByClassName('trash-btn'),
+    discardButtons = document.getElementsByClassName('discard-btn'),
+    saveButtons = document.getElementsByClassName('save-btn'),
+    priorityButtons = document.getElementsByClassName('priority-btn');
   for (let i = 0, cmpBtnLen = completeButtons.length; i < cmpBtnLen; i++) {
     let editArray=[ completeButtons[i], trashButtons[i],
                     discardButtons[i], saveButtons[i], priorityButtons[i] ],
@@ -166,17 +169,25 @@ const applyEditTodoFunctionality = () => {
     // registerElements = document.getElementsByClassName('register-elements'),
   	placerholder = document.getElementById('placerholder'),
   	loginCloseButton = document.getElementById('login-close-button'),
-  	registerCloseButton = document.getElementById('register-close-button');
+  	registerCloseButton = document.getElementById('register-close-button'),
+    loginEmailField = document.getElementById('username'),
+    loginPassField = document.getElementById('password'),
+    registerEmailField = document.getElementById('usernameR'),
+    registerPassField = document.getElementById('passwordR'),
+    registerConfPassField = document.getElementById('passwordConfR'),
+    loginUserBtn = document.getElementById('login-user-btn'),
+    registerUserBtn = document.getElementById('register-user-btn');
 
   for(let i = 0, ideLen = indexDateElement.length; i < ideLen; i++ ) {
   	indexDateElement[i].innerHTML = '<em>'+formatDate(today)+'</em>';
   }
 
+// function to remove the placeholder text when a user click in the field
+// and returns it if the user didn't enter any characters
   function userPass(id) {
   	let ele = document.getElementById(id);
-  	console.log(ele);
   	ele.addEventListener('click', function(e) {
-  		let check = ['Username','Password','Confirm Password'];
+  		let check = ['Email','Password','Confirm Password'];
   		if(this.innerText == check[0] || this.innerText == check[1] || this.innerText == check[2]) {
   			var remember = this.innerText;
   			this.innerText = '';
@@ -189,6 +200,41 @@ const applyEditTodoFunctionality = () => {
   	});
   }
 
+  function activateLogin(ele) {
+    ele.addEventListener('keyup', function(e) {
+      if (loginEmailField.innerText !== "Email" && loginEmailField.innerText !== "" &&
+          loginPassField.innerText !== "Password" && loginPassField.innerText !== "") {
+        loginUserBtn.classList.remove('inactive-todo-button');
+      } else {
+        loginUserBtn.classList.add('inactive-todo-button');
+      }
+    });
+  }
+
+  function activateRegister(ele) {
+    ele.addEventListener('keyup', function(e) {
+      if (registerEmailField.innerText !== "Email" && registerEmailField.innerText !== "" &&
+          registerPassField.innerText !== "Password" && registerPassField.innerText !== "" &&
+          registerConfPassField.innerText !== "Confirm Password" && registerConfPassField.innerText !== "" &&
+          registerConfPassField.innerText === registerPassField.innerText) {
+        registerUserBtn.classList.remove('inactive-todo-button');
+      } else {
+        registerUserBtn.classList.add('inactive-todo-button');
+      }
+    });
+  }
+//function to make login user btn active when fields are not blank
+  let loginArray = [loginEmailField, loginPassField],
+    registerArray = [registerEmailField, registerPassField, registerConfPassField];
+
+  loginArray.forEach((field) => {
+    activateLogin(field);
+  });
+  registerArray.forEach((field) => {
+    activateRegister(field);
+  });
+
+// function to toggle between the login and register box
   function logRegister(id1, id2) {
     let btn1 = document.getElementById(id1),
       btn2 = document.getElementById(id2),
@@ -222,5 +268,19 @@ const applyEditTodoFunctionality = () => {
   		userPass(passArray[i]);
   	}
   }
+
+// if email and pass are good send ajax call for loginTodo
+loginUserBtn.addEventListener('click', function(e) {
+  let ajaxObject = {
+    method: "post",
+    url: "auth/signin",
+    async: true,
+    send: `username=${loginEmailField.innerText}&password=${loginPassField.innerText}`,
+    contentType: "application/x-www-form-urlencoded",
+    onSuccessResponse: ""
+  };
+  ajaxCall(ajaxObject);
+});
+
 
 };

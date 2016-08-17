@@ -2,7 +2,8 @@
 // 	url: string,
 // 	async: bool,
 //	send: string,
-//	contentType: string }
+//	contentType: string
+//  onSuccessResponse: function }
 
 function ajaxCall(obj){
 	//| When the state of the request changes:

@@ -69,23 +69,23 @@ function insertTodoIntoDOM(todo) {
 				</div>
 
 				<div class="todo-edit-priority-box box all-12" ${todoParent}>\
-					<button class="todo-edit-priority box xs-10 todo-priority-button priority-bg-${todo.priority}",\
+					<button class="priority-btn todo-edit-priority box xs-10 todo-priority-button priority-bg-${todo.priority}",\
 									${todoParent} value=${todo.priority} ${disabled}>\
 						${todoPriorities[todo.priority]}\
 					</button>\
 				</div>\
 
 				<div class="todo-button-box box wrap" ${todoParent}>\
-					<button class="btn-1 todo-save-button inactive-todo-button" ${todoParent}>\
+					<button class="btn-1 save-btn todo-save-button inactive-todo-button" ${todoParent}>\
 						SAVE\
 					</button>\
-					<button class="btn-1 todo-complete-button xs-0 sm-0" ${todoParent}>\
+					<button class="btn-1 complete-btn todo-complete-button xs-0 sm-0" ${todoParent}>\
 						${completeText}\
 					</button>\
-					<button class="btn-1 todo-discard-button inactive-todo-button" ${todoParent}>\
+					<button class="btn-1 discard-btn todo-discard-button inactive-todo-button" ${todoParent}>\
 						DISCARD\
 					</button>\
-					<img src="icons/garbage.svg" class="todo-delete-button xs-0 sm-0" ${todoParent}/>
+					<img src="icons/garbage.svg" class="trash-btn todo-delete-button xs-0 sm-0" ${todoParent}/>
 				</div>\
 
 				<small ${todoParent} class="todo-date">\

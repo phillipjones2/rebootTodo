@@ -1,6 +1,5 @@
  const mobileEvents = () => {
-  const req = new XMLHttpRequest(),
-    todos = getElsByClass('todo-box'),
+  const todos = getElsByClass('todo-box'),
     timestamp = new Date();
 
   for (var i = 0, todosLen = todos.length; i < todosLen; i++) {
@@ -76,7 +75,8 @@
             url: todo.tree.todoPutLink,
             async: true,
             send: "",
-            contentType: ""
+            contentType: "",
+            onSuccessResponse: location.reload()
           };
           ajaxCall(ajaxObject);
         // IF CURRENTLY IN A COMPLETED STATE -> UNCOMPLETE
@@ -87,7 +87,8 @@
             url: todo.tree.todoPutLink,
             async: true,
             send: `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
-            contentType: "application/json"
+            contentType: "application/json",
+            onSuccessResponse: location.reload()
           };
           ajaxCall(ajaxObject);
         } //FROM A NORMAL STATE TO A MARKED FOR DELETION STATE
@@ -124,7 +125,8 @@
             url: todo.tree.todoPutLink,
             async: true,
             send: `title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`,
-            contentType: "application/x-www-form-urlencoded"
+            contentType: "application/x-www-form-urlencoded",
+            onSuccessResponse: location.reload()
           };
           ajaxCall(ajaxObject);
         }

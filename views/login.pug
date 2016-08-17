@@ -43,7 +43,7 @@ block content
 				 	  data-todo-parent="login-todo" class="close-todo-button hidden")
 
 
-			h3(data-todo-parent="login-todo" class="todo-title" ) Login #[span.todo-title.bg-pale-green(id="register-btn") Register ]
+			h3(data-todo-parent="login-todo" class="todo-title" ) Login #[span.todo-title(id="register-btn") Register ]
 			//- button(data-todo-parent="login-todo" class="todo-title") Register
 
 			div(class="todo-title-character-count-box box all-12 justify-content-end hidden")
@@ -53,7 +53,7 @@ block content
 					class="todo-content box-col login-elements hidden-todo-child ")
 				p(id="username" data-todo-parent="login-todo" contenteditable=true
 					spellcheck="false" class="todo-body login-elements ").
-					Username
+					Email
 				p(id="password" data-todo-parent="login-todo" contenteditable=true
 					spellcheck="false" class="todo-body login-elements ").
 					Password
@@ -66,8 +66,8 @@ block content
 									data-todo-parent="login-todo" value="2") PRIORITY: HIGH
 				div(class="todo-button-box box wrap login-elements" data-todo-parent="login-todo")
 					button(class="btn-1 todo-save-button inactive-todo-button login-elements"
-								 data-todo-parent="login-todo") SAVE
-					button(class="btn-1 todo-discard-button inactive-todo-button"
+								  id="login-user-btn" data-todo-parent="login-todo") LOGIN
+					button(class="btn-1 todo-discard-button inactive-todo-button hidden"
 								 data-todo-parent="login-todo") DISCARD
 				small(class="indexDate todo-date login-elements"
 							data-todo-parent="login-todo")
@@ -79,7 +79,7 @@ block content
 				img(src="icons/cancel.svg" id="register-todo"
 				 	  data-todo-parent="register-todo" class="close-todo-button hidden")
 
-			h3(data-todo-parent="login-todo" class="todo-title") #[span.todo-title.bg-pale-green(id="login-btn") Login ] Register
+			h3(data-todo-parent="login-todo" class="todo-title") #[span.todo-title(id="login-btn") Login ] Register
 
 			div(class="todo-title-character-count-box box all-12 justify-content-end hidden")
 				input(class="todo-title-character-count hidden" value=0 disabled=true
@@ -89,13 +89,13 @@ block content
 					class="todo-content box-col register-elements hidden-todo-child ")
 				p(id="usernameR" data-todo-parent="register-todo" contenteditable=true
 					spellcheck="false" class="todo-body register-elements ").
-					Username
+					Email
 				p(id="passwordR" data-todo-parent="register-todo" contenteditable=true
 					spellcheck="false" class="todo-body register-elements ").
 					Password
 				p(id="passwordConfR" data-todo-parent="register-todo" contenteditable=true
 					spellcheck="false" class="todo-body register-elements ").
-					Password
+					Confirm Password
 
 				div(class="todo-body-character-count-box box all-12 justify-content-end hidden")
 					input(class="todo-body-character-count hidden" value=0 disabled=true
@@ -103,13 +103,12 @@ block content
 
 				div(class="todo-edit-priority-box box all-12" data-todo-parent="register-todo")
 					button(class="todo-edit-priority box xs-10 todo-priority-button priority-bg-2"
-									data-todo-parent="register-todo" value="2" disabled=true)
-	PRIORITY: HIGH
+									data-todo-parent="register-todo" value="2") PRIORITY: HIGH
 
 				div(class="todo-button-box box wrap register-elements" data-todo-parent="register-todo")
 					button(class="btn-1 todo-save-button inactive-todo-button register-elements"
-								 data-todo-parent="register-todo") SAVE
-					button(class="btn-1 todo-discard-button inactive-todo-button"
+								  id="register-user-btn" data-todo-parent="register-todo") REGISTER
+					button(class="btn-1 todo-discard-button inactive-todo-button hidden"
 								 data-todo-parent="register-todo") DISCARD
 				small(class="indexDate todo-date register-elements"
 							data-todo-parent="register-todo")

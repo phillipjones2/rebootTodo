@@ -90,7 +90,8 @@ if (addTodoTitleInput !== null) {
 			url: "api/todos",
 			async: true,
 			send: `title=${title}&body=${body}&priority=${priority}`,
-			contentType: "application/x-www-form-urlencoded"
+			contentType: "application/x-www-form-urlencoded",
+			onSuccessResponse: location.reload()
 		};
 		ajaxCall(ajaxObject);
 	});

@@ -78,3 +78,8 @@ button.btn-3 {
   z-index: 55;
   opacity: 0.2;
 }
+
+#register-btn,#login-btn{
+  color: grey;
+  background-color: $color2;
+}

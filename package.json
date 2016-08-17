@@ -5,7 +5,7 @@
   "scripts": {
     "start": "sass --watch ./views/styles:./public/stylesheets & nodemon -e pug,js,html,css,scss --watch public --watch bin --watch routes --watch server --watch views bin/www.js & mongod",
     "go": "sass --watch ./views/styles:./public/stylesheets & nodemon -e pug,js,html,css,scss --watch public --watch bin --watch routes --watch views bin/www.js",
-    "test": "mocha ./tests/tests.js"
+    "test": "mocha ./test/test.js"
   },
   "dependencies": {
     "babel-core": "^6.11.4",
