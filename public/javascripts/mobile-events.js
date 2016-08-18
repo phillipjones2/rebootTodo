@@ -76,6 +76,8 @@
             async: true,
             send: "",
             contentType: "",
+            headerKey: "Authorization",
+            headerValue: `Bearer ${window.sessionStorage.accessToken}`,
             onSuccessResponse: location.reload()
           };
           ajaxCall(ajaxObject);
@@ -88,6 +90,8 @@
             async: true,
             send: `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
             contentType: "application/json",
+            headerKey: "Authorization",
+            headerValue: `Bearer ${window.sessionStorage.accessToken}`,
             onSuccessResponse: location.reload()
           };
           ajaxCall(ajaxObject);
@@ -126,6 +130,8 @@
             async: true,
             send: `title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`,
             contentType: "application/x-www-form-urlencoded",
+            headerKey: "Authorization",
+            headerValue: `Bearer ${window.sessionStorage.accessToken}`,
             onSuccessResponse: location.reload()
           };
           ajaxCall(ajaxObject);

@@ -12,17 +12,33 @@ function ajaxCall(obj){
 
 	req.onreadystatechange = () => {
 		if (req.readyState == 4 && req.status == 200) {
-			location.reload();
+			obj.onSuccessResponse(req);
+			// let data = JSON.parse(req.responseText);
+			// console.log(data);
+			// let data = JSON.parse(req.responseText);
+			// console.log(data);
+			// headerKey (string); - - Authentication
+			// headerValue ();  - - token
+			// obj.onSuccesFunctionCall;
 		}
 	};
 	req.open(obj.method, obj.url , obj.async);
 	req.setRequestHeader("Content-type", obj.contentType);
+	req.setRequestHeader(obj.headerKey, obj.headerValue);
 	if (obj.send) {
 		req.send(obj.send);
 	} else {
 		req.send();
 	}
 }
+
+function saveToken(req){
+	let data  = JSON.parse(req.responseText);
+	window.sessionStorage.accessToken = data.token;
+	window.location.href = "/";
+
+}
+
 
 // { method: string,
 // 	url: string,
@@ -121,9 +137,14 @@ function getTodoTree(el) {
 				date = parent.querySelector('.todo-date'),
 				closeButtonBox = parent.querySelector('.close-todo-button-box'),
 				closeButton = parent.querySelector('.close-todo-button'),
-				todoPutLink = 'api/todos/' + todoID,
 				keystrokes = 0,
 				parentClass = `${parent.classList}`;
+		var todoPutLink;
+				if (parent.classList.contains('login-page')) {
+					todoPutLink = 'api/universalTodos/' + todoID;
+				} else {
+				  todoPutLink = 'api/todos/' + todoID;
+				}
 
 	return {
 		parent,

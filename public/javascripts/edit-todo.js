@@ -67,6 +67,8 @@ const applyEditTodoFunctionality = () => {
             async: true,
             send: `title=${todo.tree.titleText}&body=${todo.tree.bodyText}&priority=${todo.tree.priorityValue}&completed=true&completedDate=${timestamp}`,
             contentType: "application/x-www-form-urlencoded",
+            headerKey: "Authorization",
+            headerValue:`Bearer ${window.sessionStorage.accessToken}`,
             onSuccessResponse: location.reload()
           };
           ajaxCall(ajaxObject);
@@ -77,6 +79,8 @@ const applyEditTodoFunctionality = () => {
             async: true,
             send: `{\"title\":\"${todo.tree.titleText}\",\"body\":\"${todo.tree.bodyText}\",\"priority\":\"${todo.tree.priorityValue}\",\"completed\":false}`,
             contentType: "application/json",
+            headerKey: "Authorization",
+            headerValue: `Bearer ${window.sessionStorage.accessToken}`,
             onSuccessResponse: location.reload()
           };
           ajaxCall(ajaxObject);
@@ -131,6 +135,8 @@ const applyEditTodoFunctionality = () => {
           async: true,
           send: `title=${todo.tree.title.innerText}&body=${todo.tree.body.innerText}&priority=${todo.tree.priorityButton.value}`,
           contentType: "application/x-www-form-urlencoded",
+          headerKey: "Authorization",
+          headerValue: `Bearer ${window.sessionStorage.accessToken}`,
           onSuccessResponse: location.reload()
         };
         ajaxCall(ajaxObject);
@@ -181,106 +187,107 @@ const applyEditTodoFunctionality = () => {
   for(let i = 0, ideLen = indexDateElement.length; i < ideLen; i++ ) {
   	indexDateElement[i].innerHTML = '<em>'+formatDate(today)+'</em>';
   }
-
+  if (loginTodo){
 // function to remove the placeholder text when a user click in the field
 // and returns it if the user didn't enter any characters
-  function userPass(id) {
-  	let ele = document.getElementById(id);
-  	ele.addEventListener('click', function(e) {
-  		let check = ['Email','Password','Confirm Password'];
-  		if(this.innerText == check[0] || this.innerText == check[1] || this.innerText == check[2]) {
-  			var remember = this.innerText;
-  			this.innerText = '';
-  		}
-  		this.addEventListener('blur', (e) => {
-  			if(this.innerText === '') {
-  				this.innerText = remember;
-  			}
-  		});
-  	});
-  }
+    function userPass(id) {
+    	let ele = document.getElementById(id);
+    	ele.addEventListener('click', function(e) {
+    		let check = ['Email','Password','Confirm Password'];
+    		if(this.innerText == check[0] || this.innerText == check[1] || this.innerText == check[2]) {
+    			var remember = this.innerText;
+    			this.innerText = '';
+    		}
+    		this.addEventListener('blur', (e) => {
+    			if(this.innerText === '') {
+    				this.innerText = remember;
+    			}
+    		});
+    	});
+    }
 
-  function activateLogin(ele) {
-    ele.addEventListener('keyup', function(e) {
-      if (loginEmailField.innerText !== "Email" && loginEmailField.innerText !== "" &&
-          loginPassField.innerText !== "Password" && loginPassField.innerText !== "") {
-        loginUserBtn.classList.remove('inactive-todo-button');
-      } else {
-        loginUserBtn.classList.add('inactive-todo-button');
-      }
+    function activateLogin(ele) {
+      ele.addEventListener('keyup', function(e) {
+        if (loginEmailField.innerText !== "Email" && loginEmailField.innerText !== "" &&
+            loginPassField.innerText !== "Password" && loginPassField.innerText !== "") {
+          loginUserBtn.classList.remove('inactive-todo-button');
+        } else {
+          loginUserBtn.classList.add('inactive-todo-button');
+        }
+      });
+    }
+
+    function activateRegister(ele) {
+      ele.addEventListener('keyup', function(e) {
+        if (registerEmailField.innerText !== "Email" && registerEmailField.innerText !== "" &&
+            registerPassField.innerText !== "Password" && registerPassField.innerText !== "" &&
+            registerConfPassField.innerText !== "Confirm Password" && registerConfPassField.innerText !== "" &&
+            registerConfPassField.innerText === registerPassField.innerText) {
+          registerUserBtn.classList.remove('inactive-todo-button');
+        } else {
+          registerUserBtn.classList.add('inactive-todo-button');
+        }
+      });
+    }
+  //function to make login user btn active when fields are not blank
+    let loginArray = [loginEmailField, loginPassField],
+      registerArray = [registerEmailField, registerPassField, registerConfPassField];
+
+    loginArray.forEach((field) => {
+      activateLogin(field);
+    });
+    registerArray.forEach((field) => {
+      activateRegister(field);
+    });
+
+  // function to toggle between the login and register box
+    function logRegister(id1, id2) {
+      let btn1 = document.getElementById(id1),
+        btn2 = document.getElementById(id2),
+        prnt1 = btn1.parentElement.parentElement,
+        prnt2 = btn2.parentElement.parentElement;
+
+      btn1.addEventListener('click', function (e) {
+        if(prnt1.classList.contains('hidden')) {
+          prnt1.classList.remove('hidden');
+          prnt2.classList.add('hidden');
+        } else {
+          prnt1.classList.add('hidden');
+          prnt2.classList.remove('hidden');
+        }
+      });
+      btn2.addEventListener('click', function (e) {
+        if(prnt1.classList.contains('hidden')) {
+          prnt1.classList.remove('hidden');
+          prnt2.classList.add('hidden');
+        } else {
+          prnt1.classList.add('hidden');
+          prnt2.classList.remove('hidden');
+        }
+      });
+    }
+    logRegister('register-btn', 'login-btn');
+
+    if (loginTodo !== null) {
+    	const passArray = ['username','password','usernameR','passwordR','passwordConfR'];
+    	for (let i = 0, passLen = passArray.length; i < passLen; i++) {
+    		userPass(passArray[i]);
+    	}
+    }
+
+  // if email and pass are good send ajax call for loginTodo
+    loginUserBtn.addEventListener('click', function(e) {
+      let ajaxObject = {
+        method: "post",
+        url: "auth/signin",
+        async: true,
+        send: `username=${loginEmailField.innerText}&password=${loginPassField.innerText}`,
+        contentType: "application/x-www-form-urlencoded",
+        headerKey: "Authorization",
+        headerValue: `Bearer ${window.sessionStorage.accessToken}`,
+        onSuccessResponse: saveToken
+      };
+      ajaxCall(ajaxObject);
     });
   }
-
-  function activateRegister(ele) {
-    ele.addEventListener('keyup', function(e) {
-      if (registerEmailField.innerText !== "Email" && registerEmailField.innerText !== "" &&
-          registerPassField.innerText !== "Password" && registerPassField.innerText !== "" &&
-          registerConfPassField.innerText !== "Confirm Password" && registerConfPassField.innerText !== "" &&
-          registerConfPassField.innerText === registerPassField.innerText) {
-        registerUserBtn.classList.remove('inactive-todo-button');
-      } else {
-        registerUserBtn.classList.add('inactive-todo-button');
-      }
-    });
-  }
-//function to make login user btn active when fields are not blank
-  let loginArray = [loginEmailField, loginPassField],
-    registerArray = [registerEmailField, registerPassField, registerConfPassField];
-
-  loginArray.forEach((field) => {
-    activateLogin(field);
-  });
-  registerArray.forEach((field) => {
-    activateRegister(field);
-  });
-
-// function to toggle between the login and register box
-  function logRegister(id1, id2) {
-    let btn1 = document.getElementById(id1),
-      btn2 = document.getElementById(id2),
-      prnt1 = btn1.parentElement.parentElement,
-      prnt2 = btn2.parentElement.parentElement;
-
-    btn1.addEventListener('click', function (e) {
-      if(prnt1.classList.contains('hidden')) {
-        prnt1.classList.remove('hidden');
-        prnt2.classList.add('hidden');
-      } else {
-        prnt1.classList.add('hidden');
-        prnt2.classList.remove('hidden');
-      }
-    });
-    btn2.addEventListener('click', function (e) {
-      if(prnt1.classList.contains('hidden')) {
-        prnt1.classList.remove('hidden');
-        prnt2.classList.add('hidden');
-      } else {
-        prnt1.classList.add('hidden');
-        prnt2.classList.remove('hidden');
-      }
-    });
-  }
-  logRegister('register-btn', 'login-btn');
-
-  if (loginTodo !== null) {
-  	const passArray = ['username','password','usernameR','passwordR','passwordConfR'];
-  	for (let i = 0, passLen = passArray.length; i < passLen; i++) {
-  		userPass(passArray[i]);
-  	}
-  }
-
-// if email and pass are good send ajax call for loginTodo
-loginUserBtn.addEventListener('click', function(e) {
-  let ajaxObject = {
-    method: "post",
-    url: "auth/signin",
-    async: true,
-    send: `username=${loginEmailField.innerText}&password=${loginPassField.innerText}`,
-    contentType: "application/x-www-form-urlencoded",
-    onSuccessResponse: ""
-  };
-  ajaxCall(ajaxObject);
-});
-
-
 };

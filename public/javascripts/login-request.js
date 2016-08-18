@@ -4,10 +4,8 @@ const spinner = document.querySelector('.spinner-container'),
 
 const req = ajaxCall({
 	method: 'get',
-	url: '/api/todos',
+	url: '/api/universalTodos',
 	async: true,
-	headerKey: "Authorization",
-	headerValue: `Bearer ${window.sessionStorage.accessToken}`,
 	// send: 'name=tom&age=23',
 	onSuccessResponse: (req) => {
 		todoContainer.removeChild(spinner);
@@ -32,7 +30,7 @@ const req = ajaxCall({
 });
 
 function insertTodoIntoDOM(todo) {
-	const todoClasses = 'todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-' + todo.priority,
+	const todoClasses = 'login-page todo-box xs-11 sm-11 md-5 lg-3-5 xl-2-5 priority-' + todo.priority,
 		todoParent = `data-todo-parent="${todo._id}"`,
 		editable = !todo.completed,
 		disabled = (todo.completed) ? 'disabled' : '',

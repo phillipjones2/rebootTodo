@@ -5,6 +5,15 @@ const addTodoModal = getElById('add-todo-modal'),
 			newTodoSubmitButton = document.getElementById('accept-button'),
 			openCreateTodoModalButton = document.getElementById('add-button');
 
+	var	todoLink;
+
+			if (addTodoModal.classList.contains('login-page')) {
+				todoLink = 'api/universalTodos';
+			} else {
+				todoLink = 'api/todos';
+			}
+
+
 if (closeCreateTodoModalButton !== null) {
 	closeCreateTodoModalButton.addEventListener('click', (e) => {
 		addTodoModal.classList.add('hidden');
@@ -87,10 +96,12 @@ if (addTodoTitleInput !== null) {
 
 		let ajaxObject = {
 			method: "post",
-			url: "api/todos",
+			url: todoLink,
 			async: true,
 			send: `title=${title}&body=${body}&priority=${priority}`,
 			contentType: "application/x-www-form-urlencoded",
+			headerKey: "Authorization",
+			headerValue:`Bearer ${window.sessionStorage.accessToken}`,
 			onSuccessResponse: location.reload()
 		};
 		ajaxCall(ajaxObject);
