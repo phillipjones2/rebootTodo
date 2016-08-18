@@ -115,5 +115,3 @@ if (addTodoTitleInput !== null) {
 	  rotatePriorities(addTodoPriorityButton, addTodoO, 'text');
 	});
 }
-
-// MOVE LATER.. WORK FOR INDEX PAGE
