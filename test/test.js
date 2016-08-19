@@ -169,77 +169,44 @@ describe('Test User Login', function() {
     User.collection.drop();
     done();
   });
-  this.timeout(4000);
+  this.timeout(5000);
   //index
-  xit('should list ALL todos on / GET', function(done) {
+  it('should verify users that are not logged in cannot access / GET', function(done) {
     chai.request(server)
-      .get('/api/universalTodos')
+      .get('/api/users')
       .end(function(err, res) {
-        res.should.have.status(200);
-        res.should.be.json;
-        res.body.should.be.a('array');
-        res.body[0].should.have.property('_id');
-        res.body[0].should.have.property('title');
-        res.body[0].should.have.property('body');
-        res.body[0].should.have.property('priority');
-        res.body[0].should.have.property('completed');
-        res.body[0].title.should.equal(testTodo.title);
-        res.body[0].body.should.equal(testTodo.body);
-        res.body[0].priority.should.equal(testTodo.priority);
-        res.body[0].completed.should.equal(false);
+        res.should.have.status(401);
         done();
       });
   });
   // show
-  xit('should list a SINGLE todo on /universalTodos/<id> GET', function(done) {
-    var newTodo = new universalTodo({
-      title: 'Single TODO',
-      body: 'ID GET',
-      priority: 2
+  it('should verify users that are not logged in cannot access /users/<id> GET', function(done) {
+    var newUser = new User({
+      username: 'User in Test',
+      password: 'test'
     });
-    newTodo.save(function(err, data) {
+    newUser.save(function(err, data) {
       chai.request(server)
-        .get('/api/universalTodos/' + data._id)
+        .get('/api/users/' + data._id)
         .end(function(err, res) {
-          res.should.have.status(200);
-          res.should.be.json;
-          res.body.should.be.a('object');
-          res.body.should.have.property('_id');
-          res.body.should.have.property('title');
-          res.body.should.have.property('body');
-          res.body.should.have.property('priority');
-          res.body.should.have.property('completed');
-          res.body.title.should.equal(newTodo.title);
-          res.body.body.should.equal(newTodo.body);
-          res.body.priority.should.equal(newTodo.priority);
-          res.body.completed.should.equal(false);
-
+          res.should.have.status(401);
         done();
       });
     });
   });
   // create
-  xit('should add a SINGLE todo on /universalTodos POST', function(done){
+  it('should register a new user with /users POST', function(done){
     chai.request(server)
-      .post('/api/universalTodos')
+      .post('/api/users')
       .send({
-        'title' : 'automated test title',
-        'body' : 'automated test body',
-        'priority' : 2
+        username: 'User in Test',
+        password: 'test'
       })
       .end(function(err, res) {
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('object');
-        res.body.should.have.property('_id');
-        res.body.should.have.property('title');
-        res.body.should.have.property('body');
-        res.body.should.have.property('priority');
-        res.body.should.have.property('completed');
-        res.body.title.should.equal('automated test title');
-        res.body.body.should.equal('automated test body');
-        res.body.priority.should.equal(2);
-        res.body.completed.should.equal(false);
+        res.body.should.have.property('token');
         done();
       });
   });
