@@ -210,6 +210,24 @@ describe('Test User Login', function() {
         done();
       });
   });
+  xit('should not register a new user with duplicate username /users POST', function(done){
+    chai.request(server)
+      .post('/api/users')
+      .send({
+        'username' : 'Dylan Isthaman',
+        'password' : 'test123'
+      })
+      .end(function(err, res) {
+        chai.request(server)
+          .post('/api/users')
+          .send({
+            'username' : 'Dylan Isthaman',
+            'password' : 'test123'
+          })
+          res.should.have.status(500);
+          done();
+      });
+  });
   xit('should update a SINGLE todo on /universalTodos/<id> PUT', function(done) {
     chai.request(server)
       .get('/api/universalTodos')
@@ -217,9 +235,8 @@ describe('Test User Login', function() {
         chai.request(server)
           .put('/api/universalTodos/' + res.body[0]._id)
           .send({
-            'title': 'Updated TITLE',
-            'body' : res.body[0].body,
-            'priority' : res.body[0].priority
+            'username': 'Updated username',
+            'password' : res.body[0].body
           })
           .end(function(err, res) {
             res.should.have.status(200);
