@@ -60,7 +60,7 @@ describe('Test universalTodos', function() {
   });
   // show
   it('should list a SINGLE todo on /universalTodos/<id> GET', function(done) {
-    var newTodo = new Todo({
+    var newTodo = new universalTodo({
       title: 'Single TODO',
       body: 'ID GET',
       priority: 2
