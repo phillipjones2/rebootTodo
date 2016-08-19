@@ -5,6 +5,7 @@ const chai = require('chai'),
   mongoose = require('mongoose'),
   server = require('../bin/www'),
   Todo = require('../server/api/todo/todoModel'),
+  universalTodo = require('../server/api/universalTodo/universalTodoModel'),
   User = require('../server/api/user/userModel'),
   should = chai.should(),
   logger = require('../server/util/logger'),
@@ -23,24 +24,24 @@ const chai = require('chai'),
 
 chai.use(chaiHttp);
 
-describe('Test Todos', function() {
-  Todo.collection.drop();
+describe('Test universalTodos', function() {
+  universalTodo.collection.drop();
 
   beforeEach(function(done) {
-    var newTodo = new Todo(testTodo);
+    var newTodo = new universalTodo(testTodo);
     newTodo.save(function(err) {
       done();
     });
   });
   afterEach(function(done) {
-    Todo.collection.drop();
+    universalTodo.collection.drop();
     done();
   });
   this.timeout(4000);
   //index
   it('should list ALL todos on / GET', function(done) {
     chai.request(server)
-      .get('/api/todos')
+      .get('/api/universalTodos')
       .end(function(err, res) {
         res.should.have.status(200);
         res.should.be.json;
@@ -58,7 +59,7 @@ describe('Test Todos', function() {
       });
   });
   // show
-  it('should list a SINGLE todo on /todos/<id> GET', function(done) {
+  it('should list a SINGLE todo on /universalTodos/<id> GET', function(done) {
     var newTodo = new Todo({
       title: 'Single TODO',
       body: 'ID GET',
@@ -66,7 +67,7 @@ describe('Test Todos', function() {
     });
     newTodo.save(function(err, data) {
       chai.request(server)
-        .get('/api/todos/'+data.id)
+        .get('/api/universalTodos/' + data._id)
         .end(function(err, res) {
           res.should.have.status(200);
           res.should.be.json;
@@ -86,9 +87,9 @@ describe('Test Todos', function() {
     });
   });
   // create
-  it('should add a SINGLE todo on /users POST', function(done){
+  it('should add a SINGLE todo on /universalTodos POST', function(done){
     chai.request(server)
-      .post('/api/todos')
+      .post('/api/universalTodos')
       .send({
         'title' : 'automated test title',
         'body' : 'automated test body',
@@ -110,17 +111,17 @@ describe('Test Todos', function() {
         done();
       });
   });
-  it('should update a SINGLE todo on /todos/<id> PUT', function(done) {
+  it('should update a SINGLE todo on /universalTodos/<id> PUT', function(done) {
     chai.request(server)
-      .get('/api/todos')
+      .get('/api/universalTodos')
       .end(function(err, res) {
         chai.request(server)
-          .put('/api/todos/' + res.body[0]._id)
+          .put('/api/universalTodos/' + res.body[0]._id)
           .send({
             'title': 'Updated TITLE',
             'body' : res.body[0].body,
             'priority' : res.body[0].priority
-          }) 
+          })
           .end(function(err, res) {
             res.should.have.status(200);
             res.should.be.json;
@@ -135,12 +136,12 @@ describe('Test Todos', function() {
         });
     });
   });
-  it('should delete a SINGLE todo on /todos/<id> DELETE', function(done) {
+  it('should delete a SINGLE todo on /universalTodos/<id> DELETE', function(done) {
     chai.request(server)
-      .get('/api/todos')
+      .get('/api/universalTodos')
       .end(function(err, res) {
         chai.request(server)
-          .delete('/api/todos/' + res.body[0]._id)
+          .delete('/api/universalTodos/' + res.body[0]._id)
           .end(function(err, res) {
             res.should.have.status(200);
             res.should.be.json;
@@ -150,7 +151,6 @@ describe('Test Todos', function() {
       });
   });
 });
-
 
 // describe('Users', function() {
 //   Todo.collection.drop();

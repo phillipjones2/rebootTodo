@@ -1,10 +1,33 @@
 const applyEditTodoFunctionality = () => {
-  const timestamp = new Date();
+  const timestamp = new Date(),
+    completeButtons = document.getElementsByClassName('complete-btn'),
+    trashButtons = document.getElementsByClassName('trash-btn'),
+    discardButtons = document.getElementsByClassName('discard-btn'),
+    saveButtons = document.getElementsByClassName('save-btn'),
+    priorityButtons = document.getElementsByClassName('priority-btn'),
+    titles = document.getElementsByClassName('todo-title'),
+    maxTitleLength = 55,
+    bodies = document.getElementsByClassName('todo-body'),
+    maxBodyLength = 140,
+    indexDateElement = document.getElementsByClassName('indexDate'),
+    today = new Date(),
+    loginTodo = document.getElementById('login-todo'),
+    registerTodo = document.getElementById('register-todo'),
+  	loginContent= document.getElementById('login-todo-content'),
+    registerContent = document.getElementById('register-todo-content'),
+  	placerholder = document.getElementById('placerholder'),
+  	loginCloseButton = document.getElementById('login-close-button'),
+  	registerCloseButton = document.getElementById('register-close-button'),
+    loginEmailField = document.getElementById('username'),
+    loginPassField = document.getElementById('password'),
+    registerEmailField = document.getElementById('usernameR'),
+    registerPassField = document.getElementById('passwordR'),
+    registerConfPassField = document.getElementById('passwordConfR'),
+    loginUserBtn = document.getElementById('login-user-btn'),
+    registerUserBtn = document.getElementById('register-user-btn');
 
    //*****************************************************//
   //--- TITLE DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
-  const titles = document.getElementsByClassName('todo-title'),
-    maxTitleLength = 55;
   for (var i = 0, titlesLen = titles.length; i < titlesLen; i++) {
     const title = titles[i],
       todo = getParentTodo(title);
@@ -28,11 +51,8 @@ const applyEditTodoFunctionality = () => {
 
    //*****************************************************//
   //---  BODY DIFF FOR SAVE/DISCARD BUTTON ACTIVATION ---//
-  const bodies = document.getElementsByClassName('todo-body'),
-        maxBodyLength = 140;
-
   for (let i = 0, bodiesLen = bodies.length; i < bodiesLen; i++) {
-   const body = bodies[i],
+   let body = bodies[i],
      todo = getParentTodo(body);
 
     body.addEventListener('keyup', (e) => {
@@ -150,11 +170,6 @@ const applyEditTodoFunctionality = () => {
     });
   };
 
-  const completeButtons = document.getElementsByClassName('complete-btn'),
-    trashButtons = document.getElementsByClassName('trash-btn'),
-    discardButtons = document.getElementsByClassName('discard-btn'),
-    saveButtons = document.getElementsByClassName('save-btn'),
-    priorityButtons = document.getElementsByClassName('priority-btn');
   for (let i = 0, cmpBtnLen = completeButtons.length; i < cmpBtnLen; i++) {
     let editArray=[ completeButtons[i], trashButtons[i],
                     discardButtons[i], saveButtons[i], priorityButtons[i] ],
@@ -164,25 +179,6 @@ const applyEditTodoFunctionality = () => {
       editButtonFunction(editArray[i], todo);
     }
   }
-
-  const indexDateElement = document.getElementsByClassName('indexDate'),
-    today = new Date(),
-    loginTodo = document.getElementById('login-todo'),
-    registerTodo = document.getElementById('register-todo'),
-  	loginContent= document.getElementById('login-todo-content'),
-    registerContent = document.getElementById('register-todo-content'),
-    // loginElements = document.getElementsByClassName('login-elements'),
-    // registerElements = document.getElementsByClassName('register-elements'),
-  	placerholder = document.getElementById('placerholder'),
-  	loginCloseButton = document.getElementById('login-close-button'),
-  	registerCloseButton = document.getElementById('register-close-button'),
-    loginEmailField = document.getElementById('username'),
-    loginPassField = document.getElementById('password'),
-    registerEmailField = document.getElementById('usernameR'),
-    registerPassField = document.getElementById('passwordR'),
-    registerConfPassField = document.getElementById('passwordConfR'),
-    loginUserBtn = document.getElementById('login-user-btn'),
-    registerUserBtn = document.getElementById('register-user-btn');
 
   for(let i = 0, ideLen = indexDateElement.length; i < ideLen; i++ ) {
   	indexDateElement[i].innerHTML = '<em>'+formatDate(today)+'</em>';
@@ -288,6 +284,20 @@ const applyEditTodoFunctionality = () => {
         contentType: "application/x-www-form-urlencoded",
         headerKey: "Authorization",
         headerValue: `Bearer ${window.sessionStorage.accessToken}`,
+        onSuccessResponse: saveToken
+      };
+      ajaxCall(ajaxObject);
+    });
+
+    // if email and pass are good send ajax call for regTodo
+    registerUserBtn.addEventListener('click', function(e) {
+      if (registerUserBtn.classList.contains('inactive-todo-button')){ return; }
+      let ajaxObject = {
+        method: "post",
+        url: "auth/signin",
+        async: true,
+        send: `username=${loginEmailField.innerText}&password=${loginPassField.innerText}`,
+        contentType: "application/x-www-form-urlencoded",
         onSuccessResponse: saveToken
       };
       ajaxCall(ajaxObject);
