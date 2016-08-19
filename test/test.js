@@ -223,47 +223,9 @@ describe('Test User Login', function() {
           .send({
             'username' : 'Dylan Isthaman',
             'password' : 'test123'
-          })
+          });
           res.should.have.status(500);
           done();
-      });
-  });
-  xit('should update a SINGLE todo on /universalTodos/<id> PUT', function(done) {
-    chai.request(server)
-      .get('/api/universalTodos')
-      .end(function(err, res) {
-        chai.request(server)
-          .put('/api/universalTodos/' + res.body[0]._id)
-          .send({
-            'username': 'Updated username',
-            'password' : res.body[0].body
-          })
-          .end(function(err, res) {
-            res.should.have.status(200);
-            res.should.be.json;
-            res.body.should.be.a('object');
-            res.body.should.have.property('title');
-            res.body.should.have.property('body');
-            res.body.should.have.property('priority');
-            res.body.title.should.equal('Updated TITLE');
-            res.body.body.should.equal('automated test body');
-            res.body.priority.should.equal(2);
-            done();
-        });
-    });
-  });
-  xit('should delete a SINGLE todo on /universalTodos/<id> DELETE', function(done) {
-    chai.request(server)
-      .get('/api/universalTodos')
-      .end(function(err, res) {
-        chai.request(server)
-          .delete('/api/universalTodos/' + res.body[0]._id)
-          .end(function(err, res) {
-            res.should.have.status(200);
-            res.should.be.json;
-            res.body.should.be.a('object');
-            done();
-        });
       });
   });
 });
