@@ -9,13 +9,13 @@ const chai = require('chai'),
   User = require('../server/api/user/userModel'),
   should = chai.should(),
   logger = require('../server/util/logger'),
-  config = require('../server/config/config');
+  config = require('../server/config/config'),
 
   testTodo = {
     'title' : 'automated test title',
     'body' : 'automated test body',
     'priority' : 2
-  };
+  },
 
   testUser = {
     'username' : 'Dylan Isthaman',
@@ -151,6 +151,139 @@ describe('Test universalTodos', function() {
       });
   });
 });
+
+//************************************************************************
+// TEST USER CAN REGISTER
+//*************************************
+
+describe('Test User Login', function() {
+  User.collection.drop();
+
+  beforeEach(function(done) {
+    var newUser = new User(testUser);
+    newUser.save(function(err) {
+      done();
+    });
+  });
+  afterEach(function(done) {
+    User.collection.drop();
+    done();
+  });
+  this.timeout(4000);
+  //index
+  xit('should list ALL todos on / GET', function(done) {
+    chai.request(server)
+      .get('/api/universalTodos')
+      .end(function(err, res) {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('array');
+        res.body[0].should.have.property('_id');
+        res.body[0].should.have.property('title');
+        res.body[0].should.have.property('body');
+        res.body[0].should.have.property('priority');
+        res.body[0].should.have.property('completed');
+        res.body[0].title.should.equal(testTodo.title);
+        res.body[0].body.should.equal(testTodo.body);
+        res.body[0].priority.should.equal(testTodo.priority);
+        res.body[0].completed.should.equal(false);
+        done();
+      });
+  });
+  // show
+  xit('should list a SINGLE todo on /universalTodos/<id> GET', function(done) {
+    var newTodo = new universalTodo({
+      title: 'Single TODO',
+      body: 'ID GET',
+      priority: 2
+    });
+    newTodo.save(function(err, data) {
+      chai.request(server)
+        .get('/api/universalTodos/' + data._id)
+        .end(function(err, res) {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.have.property('_id');
+          res.body.should.have.property('title');
+          res.body.should.have.property('body');
+          res.body.should.have.property('priority');
+          res.body.should.have.property('completed');
+          res.body.title.should.equal(newTodo.title);
+          res.body.body.should.equal(newTodo.body);
+          res.body.priority.should.equal(newTodo.priority);
+          res.body.completed.should.equal(false);
+
+        done();
+      });
+    });
+  });
+  // create
+  xit('should add a SINGLE todo on /universalTodos POST', function(done){
+    chai.request(server)
+      .post('/api/universalTodos')
+      .send({
+        'title' : 'automated test title',
+        'body' : 'automated test body',
+        'priority' : 2
+      })
+      .end(function(err, res) {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('_id');
+        res.body.should.have.property('title');
+        res.body.should.have.property('body');
+        res.body.should.have.property('priority');
+        res.body.should.have.property('completed');
+        res.body.title.should.equal('automated test title');
+        res.body.body.should.equal('automated test body');
+        res.body.priority.should.equal(2);
+        res.body.completed.should.equal(false);
+        done();
+      });
+  });
+  xit('should update a SINGLE todo on /universalTodos/<id> PUT', function(done) {
+    chai.request(server)
+      .get('/api/universalTodos')
+      .end(function(err, res) {
+        chai.request(server)
+          .put('/api/universalTodos/' + res.body[0]._id)
+          .send({
+            'title': 'Updated TITLE',
+            'body' : res.body[0].body,
+            'priority' : res.body[0].priority
+          })
+          .end(function(err, res) {
+            res.should.have.status(200);
+            res.should.be.json;
+            res.body.should.be.a('object');
+            res.body.should.have.property('title');
+            res.body.should.have.property('body');
+            res.body.should.have.property('priority');
+            res.body.title.should.equal('Updated TITLE');
+            res.body.body.should.equal('automated test body');
+            res.body.priority.should.equal(2);
+            done();
+        });
+    });
+  });
+  xit('should delete a SINGLE todo on /universalTodos/<id> DELETE', function(done) {
+    chai.request(server)
+      .get('/api/universalTodos')
+      .end(function(err, res) {
+        chai.request(server)
+          .delete('/api/universalTodos/' + res.body[0]._id)
+          .end(function(err, res) {
+            res.should.have.status(200);
+            res.should.be.json;
+            res.body.should.be.a('object');
+            done();
+        });
+      });
+  });
+});
+
 
 // describe('Users', function() {
 //   Todo.collection.drop();
