@@ -13,6 +13,8 @@ exports.params = (req, res, next, id) => {
     .then((todo) => {
       if (!todo) {
         next (new Error('No todo with that id'));
+      } else if ( todo.user !== req.user._id ){
+        next (new Error('No todo with that id belongs to this user'));
       } else {
         req.todo = todo;
         next();

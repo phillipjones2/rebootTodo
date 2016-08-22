@@ -10,6 +10,7 @@ const chai = require('chai'),
   should = chai.should(),
   logger = require('../server/util/logger'),
   config = require('../server/config/config'),
+  auth = require('../server/auth/auth'),
 
   testTodo = {
     'title' : 'automated test title',
@@ -237,32 +238,41 @@ describe('Test User Login', function() {
 //******************************************************
 var token;
 describe('Test user specific Todos', function() {
-  universalTodo.collection.drop();
+  Todo.collection.drop();
 
   beforeEach(function(done) {
-    var newTodo = new universalTodo(testTodo);
-    newTodo.save(function(err) {
-      chai.request(server)
-        .post('/api/users')
-        .send({
-          username: 'User in Test',
-          password: 'test'
-        })
-        .end(function(err, res) {
-          token = `Bearer ${res.body.token}` ;
-          done();
-        });
+    chai.request(server)
+      .post('/api/users')
+      .send({
+        username: 'User in Test',
+        password: 'test'
+      })
+      .end(function(err, res) {
+        token = `Bearer ${res.body.token}`;
+        chai.request(server)
+          .post('/api/todos')
+          .set('Authorization', token)
+          .send({
+            title: 'test title',
+            body: 'test body',
+            priority: 2
+          })
+          .end(function(err, res) {
+        // newTodo = new Todo(testTodo);
+        // newTodo.save(function(err) {
+        done();
+      });
     });
   });
   afterEach(function(done) {
-    universalTodo.collection.drop();
+    Todo.collection.drop();
     done();
   });
   this.timeout(4000);
   //index
   it('should list ALL todos on / GET', function(done) {
     chai.request(server)
-      .get('/api/universalTodos')
+      .get('/api/todos')
       .set('Authorization', token)
       .end(function(err, res) {
         res.should.have.status(200);
@@ -360,12 +370,13 @@ describe('Test user specific Todos', function() {
         });
     });
   });
-  xit('should delete a SINGLE todo on /universalTodos/<id> DELETE', function(done) {
+  it('should delete a SINGLE todo on /universalTodos/<id> DELETE', function(done) {
     chai.request(server)
-      .get('/api/universalTodos')
+      .get('/api/todos')
+      .set('Authorization', token)
       .end(function(err, res) {
         chai.request(server)
-          .delete('/api/universalTodos/' + res.body[0]._id)
+          .delete('/api/todos/' + res.body[0]._id)
           .end(function(err, res) {
             res.should.have.status(200);
             res.should.be.json;
