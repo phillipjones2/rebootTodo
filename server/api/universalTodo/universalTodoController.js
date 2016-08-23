@@ -1,3 +1,5 @@
+'use strict';
+
 const UniversalTodo = require('./universalTodoModel'),
   _ = require('lodash'),
   formatDate = require('../../util/formatDate'),
