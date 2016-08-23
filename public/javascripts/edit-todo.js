@@ -13,9 +13,9 @@ const applyEditTodoFunctionality = () => {
     today = new Date(),
     loginTodo = document.getElementById('login-todo'),
     registerTodo = document.getElementById('register-todo'),
-  	loginContent= document.getElementById('login-todo-content'),
+    loginContent = document.getElementById('login-todo-content'),
     registerContent = document.getElementById('register-todo-content'),
-  	placerholder = document.getElementById('placerholder'),
+    placerholder = document.getElementById('placerholder'),
   	loginCloseButton = document.getElementById('login-close-button'),
   	registerCloseButton = document.getElementById('register-close-button'),
     loginEmailField = document.getElementById('username'),
@@ -132,9 +132,11 @@ const applyEditTodoFunctionality = () => {
             }
           }, 5000);
         }
-        // disguard button
+        // discard button
       } else if (button.classList.contains('todo-discard-button')) {
         if (button.classList.contains('inactive-todo-button')) return;
+        console.log(e);
+        console.log('discard');
         todo.tree.title.innerText = todo.tree.titleText;
         todo.tree.body.innerText = todo.tree.bodyText;
         todo.tree.priorityButton.value = todo.tree.priorityValue;
@@ -275,33 +277,33 @@ const applyEditTodoFunctionality = () => {
     	}
     }
   // if email and pass are good send ajax call for loginTodo
-    loginUserBtn.addEventListener('click', function(e) {
-      if (loginUserBtn.classList.contains('inactive-todo-button')){ return; }
+    loginUserBtn.addEventListener('click', function (e) {
+      if (loginUserBtn.classList.contains('inactive-todo-button')) { return }
       let ajaxObject = {
-        method: "post",
-        url: "auth/signin",
+        method: 'post',
+        url: 'auth/signin',
         async: true,
         send: `username=${loginEmailField.innerText}&password=${loginPassField.innerText}`,
-        contentType: "application/x-www-form-urlencoded",
-        headerKey: "Authorization",
+        contentType: 'application/x-www-form-urlencoded',
+        headerKey: 'Authorization',
         headerValue: `Bearer ${window.sessionStorage.accessToken}`,
         onSuccessResponse: saveToken
-      };
-      ajaxCall(ajaxObject);
-    });
+      }
+      ajaxCall(ajaxObject)
+    })
 
     // if email and pass are good send ajax call for regTodo
-    registerUserBtn.addEventListener('click', function(e) {
-      if (registerUserBtn.classList.contains('inactive-todo-button')){ return; }
+    registerUserBtn.addEventListener('click', function (e) {
+      if (registerUserBtn.classList.contains('inactive-todo-button')) { return }
       let ajaxObject = {
-        method: "post",
-        url: "api/users",
+        method: 'post',
+        url: 'api/users',
         async: true,
         send: `username=${loginEmailField.innerText}&password=${loginPassField.innerText}`,
-        contentType: "application/x-www-form-urlencoded",
+        contentType: 'application/x-www-form-urlencoded',
         onSuccessResponse: saveToken
-      };
-      ajaxCall(ajaxObject);
-    });
+      }
+      ajaxCall(ajaxObject)
+    })
   }
-};
+}
