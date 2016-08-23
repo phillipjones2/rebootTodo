@@ -35,7 +35,7 @@ function ajaxCall(obj){
 function saveToken(req){
 	let data  = JSON.parse(req.responseText);
 	window.sessionStorage.accessToken = data.token;
-	window.location.href = "/";
+	window.location.href = "/loggedin";
 
 }
 

@@ -17,8 +17,8 @@ app.use('/api', api);
 app.use('/auth', auth);
 
 // fix these: static routes...????
-app.use('/login', login);
-app.use('/', todos);
+app.use('/', login);
+app.use('/loggedin', todos);
 app.use('/about', routes);
 //*******************************
 
