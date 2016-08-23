@@ -122,6 +122,17 @@ const applyEditTodoFunctionality = () => {
       } else if (button.classList.contains('todo-delete-button')) {
         if (todo.tree.parent.classList.contains('deleted-todo')){
           // WHAT TO DO???
+          let ajaxObject = {
+            method: "delete",
+            url: todo.tree.todoPutLink,
+            async: true,
+            send: "",
+            contentType: "",
+            headerKey: "Authorization",
+            headerValue: `Bearer ${window.sessionStorage.accessToken}`,
+            onSuccessResponse: location.reload()
+          };
+          ajaxCall(ajaxObject);
         } else {
           todo.tree.parent.classList.add('deleted-todo');
           todo.tree.parent.classList.remove('completed-todo');
@@ -252,7 +263,7 @@ const applyEditTodoFunctionality = () => {
         ele.innerText = ele.getAttribute('data-original');
       }
     });
-    
+
     ele.addEventListener('keyup', function(e) {
       if (registerEmailField.innerText !== "Email" && registerEmailField.innerText !== "" &&
           registerPassField.innerText !== "Password" && registerPassField.innerText !== "" &&
