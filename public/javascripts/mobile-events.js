@@ -1,3 +1,13 @@
+const isMobileDevice = (() => {
+  const userAgent = navigator.userAgent;
+  if (userAgent.match(/Android|Blackberry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
+    return true;
+  } else { return false }
+})();
+
+alert(isMobileDevice);
+
+
  const mobileEvents = () => {
   const todos = getElsByClass('todo-box'),
     timestamp = new Date();
@@ -10,13 +20,13 @@
     // todo.originalClasses = `${todo.classList}`;
 
     todo.addEventListener('touchstart', (e) => {
-      if (document.body.clientWidth >= 766) { return; }
+      if (!isMobileDevice) { return; }
         touchStartX = e.touches[0].screenX;
         touchStartY = e.touches[0].screenY;
      }); // touchstart
 
     todo.addEventListener('touchend', (e) => {
-      if (document.body.clientWidth >= 766) { return; }
+      if (!isMobileDevice) { return; }
       const todo = validateTargetAsTodo(e),
         touchEndX = e.changedTouches[0].screenX,
         touchEndY = e.changedTouches[0].screenY,
