@@ -291,7 +291,7 @@ describe('Test user specific Todos', function() {
       });
   });
   // show
-  it('should list a SINGLE todo on /universalTodos/<id> GET', function(done) {
+  it('should list a SINGLE todo on /todos/<id> GET', function(done) {
     var newTodo = new Todo({
       title: 'Single TODO',
       body: 'ID GET',
@@ -319,7 +319,7 @@ describe('Test user specific Todos', function() {
     });
   });
   // create
-  it('should add a SINGLE todo on /universalTodos POST', function(done){
+  it('should add a SINGLE todo on /todos POST', function(done){
     chai.request(server)
       .post('/api/todos')
       .set('Authorization', token)
@@ -370,7 +370,7 @@ describe('Test user specific Todos', function() {
         });
     });
   });
-  it('should delete a SINGLE todo on /universalTodos/<id> DELETE', function(done) {
+  it('should delete a SINGLE todo on /todos/<id> DELETE', function(done) {
     chai.request(server)
       .get('/api/todos')
       .set('Authorization', token)

@@ -11,8 +11,6 @@ var today = new Date(),
 exports.params = (req, res, next, id) => {
   Todo.findById(id)
     .then((todo) => {
-      console.log(req.user);
-      console.log(todo);
       if (!todo) {
         next (new Error('No todo with that id'));
       } else {
@@ -26,43 +24,23 @@ exports.params = (req, res, next, id) => {
 
 // index.  ALL todos
 exports.get = (req, res, next) => {
-  if(!req.user) {
-    Todo.find({ user: { $exists: false }})
-      .populate('User')
-      .and([
-        { $or: [{'completed':false },
-        { 'completedDate': {$gte : yesterday}}] }
-        ])
-      .sort('completed')
-      .sort('-priority')
-      .exec()
-      .then((todos) => {
-        for (var todo of todos) {
-          todo.idString = todo._id.toString();
-        }
-      res.json(todos);
-    }, (err) => {
-      next(err);
-    });
-  } else {
-    Todo.find({user:req.user._id})
-      .populate('User')
-      .and([
-        { $or: [{'completed':false },
-        { 'completedDate': {$gte : yesterday}}] }
-        ])
-      .sort('completed')
-      .sort('-priority')
-      .exec()
-      .then((todos) => {
-        for (var todo of todos) {
-          todo.idString = todo._id.toString();
-        }
-      res.json(todos);
-    }, (err) => {
-      next(err);
-    });
-  }
+  Todo.find({user:req.user._id})
+    .populate('User')
+    .and([
+      { $or: [{'completed':false },
+      { 'completedDate': {$gte : yesterday}}] }
+      ])
+    .sort('completed')
+    .sort('-priority')
+    .exec()
+    .then((todos) => {
+      for (var todo of todos) {
+        todo.idString = todo._id.toString();
+      }
+    res.json(todos);
+  }, (err) => {
+    next(err);
+  });
 };
 
 // show. One todo
@@ -95,28 +73,16 @@ exports.put = (req, res, next) => {
 
 // create.
 exports.post = (req, res, next) => {
-  if(!req.user){
-    let newtodo = req.body;
-    newtodo.formattedCreate = formatDate.formatDate(new Date());
-    newtodo.formattedUpdate = formatDate.formatDate(new Date());
-    Todo.create(newtodo)
-      .then((todo) => {
-        res.json(todo);
-      }, (err) => {
-        next(err);
-      });
-  } else {
-    req.body.user = req.user._id;
-    newtodo = req.body;
-    newtodo.formattedCreate = formatDate.formatDate(new Date());
-    newtodo.formattedUpdate = formatDate.formatDate(new Date());
-    Todo.create(newtodo)
-      .then((todo) => {
-        res.json(todo);
-      }, (err) => {
-        next(err);
-      });
-  }
+  req.body.user = req.user._id;
+  let newtodo = req.body;
+  newtodo.formattedCreate = formatDate.formatDate(new Date());
+  newtodo.formattedUpdate = formatDate.formatDate(new Date());
+  Todo.create(newtodo)
+    .then((todo) => {
+      res.json(todo);
+    }, (err) => {
+      next(err);
+    });
 };
 
 // delete.
