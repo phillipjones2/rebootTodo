@@ -5,6 +5,14 @@ const Todo = require('./todoModel'),
   formatDate = require('../../util/formatDate'),
   logger = require('../../util/logger');
 
+function compareUserTodo(req, next, cb) {
+  if (req.user.id != req.todo.user){
+    next (new Error('No todo with this id belongs to this user.'));
+  } else {
+    cb();
+  }
+};
+
 var today = new Date(),
     yesterday = new Date(today.setDate(today.getDate() -1)),
     thisWeek = new Date(today.setDate(today.getDate() - 7));
@@ -47,16 +55,19 @@ exports.get = (req, res, next) => {
 
 // show. One todo
 exports.getOne = (req, res, next) => {
-  const todo = req.todo;
-  res.json(todo);
+  compareUserTodo(req, next, ()=> {
+    const todo = req.todo;
+    res.json(todo);
+  });
 };
 
 // update.
 exports.put = (req, res, next) => {
-  const todo = req.todo,
-    update = req.body;
-    logger.log(update);
-    update.formattedUpdate = formatDate.formatDate(new Date());
+  compareUserTodo(req, next, ()=> {
+    const todo = req.todo,
+      update = req.body;
+      logger.log(update);
+      update.formattedUpdate = formatDate.formatDate(new Date());
     if (update.completed){
       update.completed = true;
       update.completedDate = new Date();
@@ -71,6 +82,7 @@ exports.put = (req, res, next) => {
         res.json(saved);
       }
     });
+  });
 };
 
 // create.
@@ -89,11 +101,13 @@ exports.post = (req, res, next) => {
 
 // delete.
 exports.delete = (req, res, next) => {
-  req.todo.remove((err, removed) => {
-    if (err) {
-      next(err);
-    } else {
-      res.json(removed);
-    }
+  compareUserTodo(req, next, ()=> {
+    req.todo.remove((err, removed) => {
+      if (err) {
+        next(err);
+      } else {
+        res.json(removed);
+      }
+    });
   });
 };
