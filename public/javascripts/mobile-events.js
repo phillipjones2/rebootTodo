@@ -5,8 +5,6 @@ const isMobileDevice = (() => {
   } else { return false }
 })();
 
-alert(isMobileDevice);
-
 
  const mobileEvents = () => {
   const todos = getElsByClass('todo-box'),

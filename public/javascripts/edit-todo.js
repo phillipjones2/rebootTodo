@@ -77,6 +77,7 @@ const applyEditTodoFunctionality = () => {
 
   const  editButtonFunction = (button, todo) => {
     button.addEventListener('click', (e) => {
+      console.log(e);
       // complete button
       if (button.classList.contains('todo-complete-button')){
         if (!todo.tree.parent.hasAttribute('data-completed')){

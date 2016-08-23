@@ -62,7 +62,35 @@ function addTodoValidityCheck() {
 	}
 }
 if (addTodoTitleInput !== null) {
+	addTodoTitleInput.addEventListener('keydown', (e) => {
+		if (e.which == 13) {
+			e.preventDefault();
+
+			if (newTodoSubmitButton.classList.contains('inactive-todo-submit-button')) return;
+
+			const title = addTodoTitleInput.value,
+						body = addTodoBodyInput.value,
+						priority = addTodoPriorityBtn.value;
+
+			let ajaxObject = {
+				method: "post",
+				url: todoLink,
+				async: true,
+				send: `title=${title}&body=${body}&priority=${priority}`,
+				contentType: "application/x-www-form-urlencoded",
+				headerKey: "Authorization",
+				headerValue:`Bearer ${window.sessionStorage.accessToken}`,
+				onSuccessResponse: location.reload()
+			};
+			ajaxCall(ajaxObject);
+
+		}
+	});
+
 	addTodoTitleInput.addEventListener('keyup', (e) => {
+		e.preventDefault();
+		console.log(e.which);
+		return;
 		titleCharacterCount.innerText = maxTitleLength - addTodoTitleInput.value.trim().length;
 		titleCharacterCount.classList.remove('hidden');
 		addTodoValidityCheck();
