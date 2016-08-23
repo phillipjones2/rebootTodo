@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "sass --watch ./views/styles:./public/stylesheets & nodemon -e pug,js,html,css,scss --watch public --watch bin --watch routes --watch server --watch views bin/www.js & mongod",
-    "go": "sass --watch ./views/styles:./public/stylesheets & nodemon -e pug,js,html,css,scss --watch public --watch bin --watch routes --watch views bin/www.js",
+    "go": "node-sass --watch ./views/styles -o ./public/stylesheets & nodemon -e pug,js,html,css,scss --watch public --watch bin --watch routes --watch views bin/www.js",
     "test": "mocha ./test/test.js"
   },
   "dependencies": {
