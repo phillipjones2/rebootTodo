@@ -45,13 +45,13 @@ exports.get = (req, res, next) => {
 
 // show. One todo
 exports.getOne = (req, res, next) => {
-  var todo = req.todo;
+  const todo = req.todo;
   res.json(todo);
 };
 
 // update.
 exports.put = (req, res, next) => {
-  var todo = req.todo,
+  const todo = req.todo,
     update = req.body;
     logger.log(update);
     update.formattedUpdate = formatDate.formatDate(new Date());
@@ -74,7 +74,7 @@ exports.put = (req, res, next) => {
 // create.
 exports.post = (req, res, next) => {
   req.body.user = req.user._id;
-  let newtodo = req.body;
+  const newtodo = req.body;
   newtodo.formattedCreate = formatDate.formatDate(new Date());
   newtodo.formattedUpdate = formatDate.formatDate(new Date());
   Todo.create(newtodo)

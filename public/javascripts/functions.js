@@ -137,13 +137,14 @@ function getTodoTree(el) {
 				closeButtonBox = parent.querySelector('.close-todo-button-box'),
 				closeButton = parent.querySelector('.close-todo-button'),
 				keystrokes = 0,
-				parentClass = `${parent.classList}`;
-		var todoPutLink;
-				if (parent.classList.contains('login-page')) {
-					todoPutLink = 'api/universalTodos/' + todoID;
-				} else {
-				  todoPutLink = 'api/todos/' + todoID;
-				}
+				parentClass = `${parent.classList}`,
+		 		todoPutLink =  (() => {
+					if (parent.classList.contains('login-page')) {
+						return `api/universalTodos/${todoID}`;
+					} else {
+					  return `api/todos/${todoID}`;
+					}
+				})();
 
 	return {
 		parent,
