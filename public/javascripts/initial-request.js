@@ -18,8 +18,12 @@ const req = ajaxCall({
 					<h1>No todos to show.</h1>\
 				</div>
 			`;
+
+			mobileEvents();
+			applyEditTodoFunctionality();
 			return;
 		}
+
 		for (var i = 0, todosLen = todos.length; i < todosLen; i++) {
 			const todo = todos[i];
 
