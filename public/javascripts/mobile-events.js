@@ -28,15 +28,16 @@
         rightSwipe = (swipeXDifference < 0),
         validSwipe = (wavier < todoHeight && distance > todoWidth / 2),
         tap = (distance < 10 && wavier < 10);
+        // debugger;
 
 
     //| If touch event was an apparent tap on a todo, close all other
     //| open todos and open the one that was tapped.
     if (tap) {
       const otherTodoChildren = document
-              .querySelectorAll(`:not([data-todo-parent=${todo.tree.todoID}]`),
+              .querySelectorAll(`:not([data-todo-parent="${todo.tree.todoID}"])`),
             otherTodoCloseButtons = document
-              .querySelectorAll(`img[data-todo-parent]:not([todo-parent=${todo.tree.todoID}])`);
+              .querySelectorAll(`img[data-todo-parent]:not([todo-parent="${todo.tree.todoID}"])`);
 
       for (var i = 0, otherLen = otherTodoChildren.length; i < otherLen; i++) {
         const otherTodoChild = otherTodoChildren[i];

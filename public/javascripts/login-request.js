@@ -55,7 +55,7 @@ function insertTodoIntoDOM(todo) {
 				${todo.title}\
 			</h3>\
 
-			<div class="todo-title-character-count-box box all-12 justify-content-end">\
+			<div class="todo-title-character-count-box box all-12 justify-content-end" ${todoParent}>\
 				<input class="todo-title-character-count hidden" value=0 ${disabled} ${todoParent}/>\
 			</div>\
 
@@ -64,7 +64,7 @@ function insertTodoIntoDOM(todo) {
 					${todo.body}\
 				</p>\
 
-				<div class="todo-body-character-count-box box all-12 justify-content-end">\
+				<div class="todo-body-character-count-box box all-12 justify-content-end" ${todoParent}>\
 					<input class="todo-body-character-count hidden" value=0 ${disabled} ${todoParent}/>
 				</div>
 
