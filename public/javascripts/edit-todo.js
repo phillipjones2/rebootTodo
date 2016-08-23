@@ -259,22 +259,22 @@ const applyEditTodoFunctionality = () => {
 
   if (loginTodo){
     let loginArray = [loginEmailField, loginPassField],
-      registerArray = [registerEmailField, registerPassField, registerConfPassField];
+      registerArray = [registerEmailField, registerPassField, registerConfPassField]
 
     loginArray.forEach((field) => {
-      activateLogin(field);
-    });
+      activateLogin(field)
+    })
     registerArray.forEach((field) => {
-      activateRegister(field);
-    });
+      activateRegister(field)
+    })
 
-    logRegister('register-btn', 'login-btn');
+    logRegister('register-btn', 'login-btn')
 
     if (loginTodo !== null) {
-    	const passArray = ['username','password','usernameR','passwordR','passwordConfR'];
-    	for (let i = 0, passLen = passArray.length; i < passLen; i++) {
-    		userPass(passArray[i]);
-    	}
+      const passArray = ['username', 'password', 'usernameR', 'passwordR', 'passwordConfR']
+      for (let i = 0, passLen = passArray.length; i < passLen; i++) {
+    		userPass(passArray[i])
+    }
     }
   // if email and pass are good send ajax call for loginTodo
     loginUserBtn.addEventListener('click', function (e) {
