@@ -39,7 +39,6 @@ function saveToken(req){
 
 }
 
-
 // { method: string,
 // 	url: string,
 // 	async: bool,

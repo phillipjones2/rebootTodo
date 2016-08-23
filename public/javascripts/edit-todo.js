@@ -294,7 +294,7 @@ const applyEditTodoFunctionality = () => {
       if (registerUserBtn.classList.contains('inactive-todo-button')){ return; }
       let ajaxObject = {
         method: "post",
-        url: "auth/signin",
+        url: "api/users",
         async: true,
         send: `username=${loginEmailField.innerText}&password=${loginPassField.innerText}`,
         contentType: "application/x-www-form-urlencoded",

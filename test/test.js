@@ -283,9 +283,9 @@ describe('Test user specific Todos', function() {
         res.body[0].should.have.property('body');
         res.body[0].should.have.property('priority');
         res.body[0].should.have.property('completed');
-        res.body[0].title.should.equal(testTodo.title);
-        res.body[0].body.should.equal(testTodo.body);
-        res.body[0].priority.should.equal(testTodo.priority);
+        res.body[0].title.should.equal('test title');
+        res.body[0].body.should.equal('test body');
+        res.body[0].priority.should.equal(2);
         res.body[0].completed.should.equal(false);
         done();
       });

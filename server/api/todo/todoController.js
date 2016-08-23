@@ -11,10 +11,10 @@ var today = new Date(),
 exports.params = (req, res, next, id) => {
   Todo.findById(id)
     .then((todo) => {
+      console.log(req.user);
+      console.log(todo);
       if (!todo) {
         next (new Error('No todo with that id'));
-      } else if ( todo.user !== req.user._id ){
-        next (new Error('No todo with that id belongs to this user'));
       } else {
         req.todo = todo;
         next();
