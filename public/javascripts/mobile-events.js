@@ -10,13 +10,13 @@
     // todo.originalClasses = `${todo.classList}`;
 
     todo.addEventListener('touchstart', (e) => {
-      if (document.body.clientWidth >= 520) { return; }
+      if (document.body.clientWidth >= 766) { return; }
         touchStartX = e.touches[0].screenX;
         touchStartY = e.touches[0].screenY;
      }); // touchstart
 
     todo.addEventListener('touchend', (e) => {
-      if (document.body.clientWidth >= 520) { return; }
+      if (document.body.clientWidth >= 766) { return; }
       const todo = validateTargetAsTodo(e),
         touchEndX = e.changedTouches[0].screenX,
         touchEndY = e.changedTouches[0].screenY,
