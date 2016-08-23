@@ -147,6 +147,7 @@ function getTodoTree(el) {
 				})();
 
 	return {
+		// todoID,
 		parent,
 		parentClass,
 		children,
@@ -168,7 +169,7 @@ function getTodoTree(el) {
 		closeButton,
 		date,
 		todoPutLink,
-		keystrokes,
+		keystrokes
 	};
 }
 

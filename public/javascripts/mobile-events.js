@@ -29,6 +29,7 @@
         validSwipe = (wavier < todoHeight && distance > todoWidth / 2),
         tap = (distance < 10 && wavier < 10);
 
+
     //| If touch event was an apparent tap on a todo, close all other
     //| open todos and open the one that was tapped.
     if (tap) {
