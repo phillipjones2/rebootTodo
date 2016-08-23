@@ -79,7 +79,12 @@ button.btn-3 {
   opacity: 0.2;
 }
 
-#register-btn,#login-btn{
-  color: grey;
-  background-color: $color2;
+
+#register-btn, #login-btn {
+  padding: 5px 10px;
+}
+
+#register-btn.active, #login-btn.active {
+  background: #46ea61;
+  border-radius: 5px;
 }

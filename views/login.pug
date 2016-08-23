@@ -52,10 +52,10 @@ block content
 			div(id="login-todo-content" data-todo-parent="login-todo"
 					class="todo-content box-col login-elements hidden-todo-child ")
 				p(id="username" data-todo-parent="login-todo" contenteditable=true
-					spellcheck="false" class="todo-body login-elements ").
+					spellcheck="false" class="todo-body login-elements " data-original="Email").
 					Email
 				p(id="password" data-todo-parent="login-todo" contenteditable=true
-					spellcheck="false" class="todo-body login-elements ").
+					spellcheck="false" class="todo-body login-elements " data-original="Password" type="password").
 					Password
 				div(class="todo-body-character-count-box box all-12 justify-content-end hidden" data-todo-parent="login-todo")
 					input(class="todo-body-character-count hidden" value=0 disabled=true
@@ -88,13 +88,13 @@ block content
 			div(id="register-todo-content" data-todo-parent="register-todo"
 					class="todo-content box-col register-elements hidden-todo-child ")
 				p(id="usernameR" data-todo-parent="register-todo" contenteditable=true
-					spellcheck="false" class="todo-body register-elements ").
+					spellcheck="false" class="todo-body register-elements " data-original="Email").
 					Email
 				p(id="passwordR" data-todo-parent="register-todo" contenteditable=true
-					spellcheck="false" class="todo-body register-elements ").
+					spellcheck="false" class="todo-body register-elements " data-original="Password").
 					Password
 				p(id="passwordConfR" data-todo-parent="register-todo" contenteditable=true
-					spellcheck="false" class="todo-body register-elements ").
+					spellcheck="false" class="todo-body register-elements " data-original="Confirm Password").
 					Confirm Password
 
 				div(class="todo-body-character-count-box box all-12 justify-content-end hidden")

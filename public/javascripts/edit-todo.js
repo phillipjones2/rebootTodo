@@ -1,3 +1,11 @@
+const isMobileDevice = (() => {
+  const userAgent = navigator.userAgent;
+  if (userAgent.match(/Android|Blackberry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
+    return true;
+  } else { return false }
+})();
+
+
 const applyEditTodoFunctionality = () => {
   const timestamp = new Date(),
     completeButtons = document.getElementsByClassName('complete-btn'),
@@ -74,10 +82,10 @@ const applyEditTodoFunctionality = () => {
 //****************************************************************************//
 // todo edit buttons fuctionality:  discard, complete, trash, save, priority
 //***************************************************************************//
-
   const  editButtonFunction = (button, todo) => {
     button.addEventListener('click', (e) => {
       console.log(e);
+
       // complete button
       if (button.classList.contains('todo-complete-button')){
         if (!todo.tree.parent.hasAttribute('data-completed')){
@@ -92,7 +100,9 @@ const applyEditTodoFunctionality = () => {
             headerValue:`Bearer ${window.sessionStorage.accessToken}`,
             onSuccessResponse: location.reload()
           };
+
           ajaxCall(ajaxObject);
+
         } else {
           let ajaxObject = {
             method: "put",
@@ -104,7 +114,9 @@ const applyEditTodoFunctionality = () => {
             headerValue: `Bearer ${window.sessionStorage.accessToken}`,
             onSuccessResponse: location.reload()
           };
+
           ajaxCall(ajaxObject);
+
         }
         // trash can button
       } else if (button.classList.contains('todo-delete-button')) {
@@ -147,6 +159,7 @@ const applyEditTodoFunctionality = () => {
         todo.tree.titleCount.value = maxTitleLength - todo.tree.title.innerText.length;
         todo.tree.bodyCount.classList.add('hidden');
         todo.tree.titleCount.classList.add('hidden');
+        debugger;
         // save button
        } else if (button.classList.contains("todo-save-button")) {
         if (button.classList.contains('inactive-todo-button')) { return; }
@@ -205,6 +218,18 @@ const applyEditTodoFunctionality = () => {
 
   //function to make login user btn active when fields are not blank
   function activateLogin(ele) {
+    ele.addEventListener('focus', () => {
+      if (ele.innerText.length <= 0 || ele.innerText == ele.getAttribute('data-original')) {
+        ele.innerText = '';
+      }
+    });
+
+    ele.addEventListener('blur', () => {
+      if (ele.innerText <= 0) {
+        ele.innerText = ele.getAttribute('data-original');
+      }
+    });
+
     ele.addEventListener('keyup', function(e) {
       if (loginEmailField.innerText !== "Email" && loginEmailField.innerText !== "" &&
           loginPassField.innerText !== "Password" && loginPassField.innerText !== "") {
@@ -216,6 +241,18 @@ const applyEditTodoFunctionality = () => {
   }
 
   function activateRegister(ele) {
+    ele.addEventListener('focus', () => {
+      if (ele.innerText.length <= 0 || ele.innerText == ele.getAttribute('data-original')) {
+        ele.innerText = '';
+      }
+    });
+
+    ele.addEventListener('blur', () => {
+      if (ele.innerText <= 0) {
+        ele.innerText = ele.getAttribute('data-original');
+      }
+    });
+    
     ele.addEventListener('keyup', function(e) {
       if (registerEmailField.innerText !== "Email" && registerEmailField.innerText !== "" &&
           registerPassField.innerText !== "Password" && registerPassField.innerText !== "" &&
