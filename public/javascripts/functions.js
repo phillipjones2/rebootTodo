@@ -147,7 +147,7 @@ function getTodoTree(el) {
 				})();
 
 	return {
-		// todoID,
+		todoID,
 		parent,
 		parentClass,
 		children,

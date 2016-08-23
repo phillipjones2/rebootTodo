@@ -46,7 +46,7 @@ block content
 			h3(data-todo-parent="login-todo" class="todo-title" ) Login #[span.todo-title(id="register-btn") Register ]
 			//- button(data-todo-parent="login-todo" class="todo-title") Register
 
-			div(class="todo-title-character-count-box box all-12 justify-content-end hidden")
+			div(class="todo-title-character-count-box box all-12 justify-content-end hidden" data-todo-parent="login-todo")
 				input(class="todo-title-character-count hidden" value=0 disabled=true
 							data-todo-parent="login-todo")
 			div(id="login-todo-content" data-todo-parent="login-todo"
@@ -57,7 +57,7 @@ block content
 				p(id="password" data-todo-parent="login-todo" contenteditable=true
 					spellcheck="false" class="todo-body login-elements ").
 					Password
-				div(class="todo-body-character-count-box box all-12 justify-content-end hidden")
+				div(class="todo-body-character-count-box box all-12 justify-content-end hidden" data-todo-parent="login-todo")
 					input(class="todo-body-character-count hidden" value=0 disabled=true
 								data-todo-parent="login-todo")
 
