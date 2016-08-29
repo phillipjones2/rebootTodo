@@ -343,13 +343,14 @@ const applyEditTodoFunctionality = () => {
     });
 
     // if email and pass are good send ajax call for regTodo
+
     registerUserBtn.addEventListener('click', function(e) {
       if (registerUserBtn.classList.contains('inactive-todo-button')){ return; }
       let ajaxObject = {
         method: "post",
         url: "api/users",
         async: true,
-        send: `username=${loginEmailField.innerText}&password=${loginPassField.innerText}`,
+        send: `username=${registerEmailField.innerText}&password=${registerPassField.innerText}`,
         contentType: "application/x-www-form-urlencoded",
         onSuccessResponse: saveToken
       };
