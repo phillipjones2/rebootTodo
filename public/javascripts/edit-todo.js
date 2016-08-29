@@ -287,6 +287,8 @@ const applyEditTodoFunctionality = () => {
       if(prnt1.classList.contains('hidden')) {
         prnt1.classList.remove('hidden');
         prnt2.classList.add('hidden');
+        btn1.classList.add('active');
+        btn2.classList.remove('active');
       } else {
         prnt1.classList.add('hidden');
         prnt2.classList.remove('hidden');
@@ -296,6 +298,8 @@ const applyEditTodoFunctionality = () => {
       if(prnt1.classList.contains('hidden')) {
         prnt1.classList.remove('hidden');
         prnt2.classList.add('hidden');
+        btn2.classList.add('active');
+        btn1.classList.remove('active');
       } else {
         prnt1.classList.add('hidden');
         prnt2.classList.remove('hidden');
