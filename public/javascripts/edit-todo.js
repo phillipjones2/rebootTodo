@@ -342,6 +342,11 @@ const applyEditTodoFunctionality = () => {
       ajaxCall(ajaxObject);
     });
 
+
+    loginPassField.addEventListener('keyup', function (e) {
+      var password
+      
+    })
     // if email and pass are good send ajax call for regTodo
 
     registerUserBtn.addEventListener('click', function(e) {

@@ -5,23 +5,18 @@
 @font-face {
   font-family: GothamLight;
   src: url(../fonts/Gotham-Light.otf); }
-
 @font-face {
   font-family: GothamMedium;
   src: url(../fonts/Gotham-Medium.otf); }
-
 @font-face {
   font-family: GothamThin;
   src: url(../fonts/Gotham-Thin.otf); }
-
 @font-face {
   font-family: GothamBold;
   src: url(../fonts/Gotham-Bold.otf); }
-
 @font-face {
   font-family: GothamBook;
   src: url(../fonts/Gotham-Book.otf); }
-
 html, body, div, section, aside, header, nav,
 footer, ul, li, p, h1, h2, h3, h4, h5, h6, em,
 strong, small, form, input, button, ol, textarea {
@@ -171,7 +166,8 @@ nav {
   z-index: 99;
   padding-top: 50px; }
   #add-todo-modal input:not(:nth-of-type(2)) {
-    width: 70%;
+    width: 80%;
+    max-width: 500px;
     font-family: GothamLight;
     border: 3px solid black;
     padding: 13px 13px 10px;
@@ -180,7 +176,8 @@ nav {
     #add-todo-modal input:not(:nth-of-type(2))::-webkit-input-placeholder {
       font-size: 1.6rem; }
   #add-todo-modal textarea {
-    width: 70%;
+    width: 80%;
+    max-width: 500px;
     font-family: GothamLight;
     border: 3px solid black;
     padding: 13px 10px 10px;
@@ -190,7 +187,8 @@ nav {
       font-size: 1.6rem; }
 
 #add-todo-priority-button {
-  width: 70%;
+  width: 80%;
+  max-width: 500px;
   font-family: GothamBold;
   text-transform: uppercase;
   padding: 16px 13px 13px;
@@ -267,7 +265,6 @@ nav {
     box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0; }
   87.5% {
     box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em; } }
-
 @keyframes load4 {
   0%,
   100% {
@@ -286,7 +283,6 @@ nav {
     box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0; }
   87.5% {
     box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em; } }
-
 #todo-container {
   display: flex;
   flex-wrap: wrap;
@@ -326,9 +322,11 @@ nav {
 @media (max-width: 768px) {
   .todo {
     padding: 20px 8vw; }
+
   .todo-box {
     background: #f5efed;
     margin: 10px; }
+
   .todo-content {
     transition: all .5s; }
     .todo-content.hidden-todo-child {
@@ -350,7 +348,6 @@ nav {
       background: #adedd2; }
     .todo-content.aborted {
       background: white; } }
-
 .deleted-todo {
   background: #EF6F6C; }
 
@@ -735,17 +732,14 @@ button.todo-priority-button {
 @media (min-width: 1200px) {
   .xl-2-5 {
     width: 30%; } }
-
 @media (min-width: 891px) and (max-width: 1200px) {
   .lg-3-5 {
     width: 42%; } }
-
 @keyframes flash {
   from, 50%, to {
     opacity: 1; }
   25%, 75% {
     opacity: 0; } }
-
 .flash {
   animation-name: flash;
   animation-duration: .5s; }
@@ -830,24 +824,31 @@ button.todo-priority-button {
 @media (min-width: 500px) {
   #html5-logo {
     padding-left: 60px; }
+
   #es6-logo {
     padding-right: 60px; }
+
   #gitbox {
     height: 200px; }
+
   #git-logo {
     min-width: 140px;
     padding-left: 25px; }
+
   #github-logo {
     min-width: 50px; }
+
   #robomongo-logo {
     padding-left: 60px; }
+
   #nodemon-logo {
     padding-right: 60px; }
+
   #pug-logo {
     padding-left: 60px; }
+
   #sass-logo {
     padding-right: 60px; } }
-
 .color-box {
   height: 30px;
   margin: 0 10px; }
@@ -858,7 +859,6 @@ button.todo-priority-button {
   .color-box {
     width: 50px;
     height: 30px; } }
-
 .breaker {
   height: 5px;
   background: black;
@@ -879,3 +879,5 @@ button.todo-priority-button {
 
 .sect-head {
   margin-bottom: 25px; }
+
+/*# sourceMappingURL=main.css.map */

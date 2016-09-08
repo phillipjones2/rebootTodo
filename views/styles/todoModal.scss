@@ -8,7 +8,8 @@
 
 
 	input:not(:nth-of-type(2)) {
-		width: 70%;
+		width: 80%;
+		max-width: 500px;
 		font-family: GothamLight;
 		border: 3px solid black;
 		padding: 13px 13px 10px;
@@ -20,7 +21,8 @@
 		}
 	}
 	textarea {
-		width: 70%;
+		width: 80%;
+		max-width: 500px;
 		font-family: GothamLight;
 		border: 3px solid black;
 		padding: 13px 10px 10px;
@@ -35,7 +37,8 @@
 }
 
 #add-todo-priority-button {
-	width: 70%;
+	width: 80%;
+	max-width: 500px;
 	font-family: GothamBold;
 	text-transform: uppercase;
 	// border: 3px solid black;
